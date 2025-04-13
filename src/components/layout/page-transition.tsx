@@ -26,10 +26,10 @@ export function PageTransition({ children }: PageTransitionProps) {
 
   return (
     <div
-      className={`min-h-[calc(100vh-8rem)] ${
-        transitionStage === "fadeIn" ? "animate-fade-in" : "animate-fade-out"
+      className={`min-h-[calc(100vh-8rem)] transition-opacity duration-200 ${
+        transitionStage === "fadeIn" ? "opacity-100" : "opacity-0"
       }`}
-      onAnimationEnd={handleAnimationEnd}
+      onTransitionEnd={handleAnimationEnd}
     >
       {children}
     </div>

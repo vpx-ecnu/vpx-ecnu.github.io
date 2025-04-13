@@ -59,7 +59,7 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="container md:hidden py-4 animate-fade-in">
+        <div className="container md:hidden py-4">
           <nav className="flex flex-col space-y-4">
             {navItems.map((item) => (
               <Link
