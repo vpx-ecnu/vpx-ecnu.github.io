@@ -75,12 +75,4 @@
   body {
     @apply bg-background text-foreground antialiased;
   }
-
-  .page-transition {
-    @apply animate-fade-in;
-  }
-
-  .fade-in-content {
-    @apply animate-slide-in;
-  }
 }

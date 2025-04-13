@@ -9,27 +9,25 @@ interface PageTransitionProps {
 export function PageTransition({ children }: PageTransitionProps) {
   const location = useLocation();
   const [displayLocation, setDisplayLocation] = useState(location);
-  const [transitionStage, setTransitionStage] = useState("fadeIn");
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     if (location !== displayLocation) {
-      setTransitionStage("fadeOut");
+      setIsTransitioning(true);
+      const timeout = setTimeout(() => {
+        setDisplayLocation(location);
+        setIsTransitioning(false);
+      }, 200); // Short timeout for a quick transition
+      
+      return () => clearTimeout(timeout);
     }
   }, [location, displayLocation]);
 
-  const handleAnimationEnd = () => {
-    if (transitionStage === "fadeOut") {
-      setTransitionStage("fadeIn");
-      setDisplayLocation(location);
-    }
-  };
-
   return (
     <div
-      className={`min-h-[calc(100vh-8rem)] transition-opacity duration-200 ${
-        transitionStage === "fadeIn" ? "opacity-100" : "opacity-0"
+      className={`min-h-[calc(100vh-8rem)] transition-opacity duration-200 ease-in-out ${
+        isTransitioning ? "opacity-0" : "opacity-100"
       }`}
-      onTransitionEnd={handleAnimationEnd}
     >
       {children}
     </div>
