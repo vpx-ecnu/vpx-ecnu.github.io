@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
 
 const navItems = [
   { name: "About", path: "/about" },
@@ -24,7 +23,7 @@ export function Navbar() {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold">Research Group</span>
+            <span className="text-xl font-bold">VPX Group</span>
           </Link>
 
           <nav className="hidden md:flex gap-6">
@@ -45,7 +44,6 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
           <Button
             variant="ghost"
             size="icon"

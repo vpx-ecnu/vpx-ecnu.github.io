@@ -9,10 +9,12 @@ const Index = () => {
           <div className="flex flex-col items-center text-center space-y-8 md:space-y-12">
             <div className="space-y-4 max-w-3xl">
               <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">
-                Pioneering Research for the Future
+                Welcome to VPX Group @ ECNU
               </h1>
               <p className="text-muted-foreground md:text-xl">
-                Our interdisciplinary team tackles complex challenges at the frontier of science and technology.
+              Visual Perception + X (VPX) group's mission is to develop visual perception for cross-disciplinary research, particularly, in methods of extracting meaningful information and structural data from videos and raw streaming sources. 
+              Using the visual information further enables AI-based downstream application, including metaverse, AIGC and embodied intelligence. 
+              Currently, we are focusing on video analysis, controllable video & image generation, and manipulation with robotics.
               </p>
             </div>
             <div className="flex flex-wrap gap-4 justify-center">
@@ -66,7 +68,7 @@ const Index = () => {
               <div className="flex justify-center">
                 <BookOpen className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold">120+</h3>
+              <h3 className="text-3xl font-bold">30+</h3>
               <p className="text-muted-foreground">Publications</p>
             </div>
             <div className="space-y-2">

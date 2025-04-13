@@ -9,10 +9,10 @@ export function Footer() {
       <div className="container flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
         <div className="flex flex-col items-center md:items-start gap-1 text-center md:text-left">
           <Link to="/" className="text-lg font-semibold">
-            Research Group
+            VPX Group
           </Link>
           <p className="text-sm text-muted-foreground">
-            Advancing knowledge through collaborative research.
+            Advancing cross-disciplinary research through AI technology and collaboration.
           </p>
         </div>
 
@@ -38,7 +38,7 @@ export function Footer() {
         </div>
         
         <div className="text-sm text-muted-foreground">
-          © {year} Research Group. All rights reserved.
+          © {year} VPX Group. All rights reserved.
         </div>
       </div>
     </footer>
