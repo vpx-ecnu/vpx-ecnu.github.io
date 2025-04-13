@@ -1,11 +1,8 @@
-
 import { ArrowRight, BookOpen, Clock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-
 const Index = () => {
-  return (
-    <div className="page-transition">
+  return <div className="page-transition">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-b from-background to-muted pt-16 pb-24">
         <div className="container px-4 md:px-6">
@@ -43,12 +40,9 @@ const Index = () => {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
-                <div 
-                  key={i}
-                  className="flex flex-col p-6 bg-card rounded-lg border hover:shadow-md transition-shadow fade-in-content"
-                  style={{ animationDelay: `${i * 150}ms` }}
-                >
+              {[1, 2, 3].map(i => <div key={i} className="flex flex-col p-6 bg-card rounded-lg border hover:shadow-md transition-shadow fade-in-content" style={{
+              animationDelay: `${i * 150}ms`
+            }}>
                   <h3 className="text-xl font-semibold mb-2">
                     Research Project {i}
                   </h3>
@@ -58,15 +52,14 @@ const Index = () => {
                   <Button asChild variant="link" className="mt-4 ml-auto p-0">
                     <Link to="/projects">Learn more <ArrowRight className="h-4 w-4 ml-1" /></Link>
                   </Button>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
       </section>
 
       {/* Key Statistics */}
-      <section className="bg-muted py-16">
+      <section className="bg-muted my-[3px] py-[21px] mx-0 px-[36px] rounded-none">
         <div className="container px-4 md:px-6 fade-in-content">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div className="space-y-2">
@@ -107,12 +100,9 @@ const Index = () => {
               </p>
             </div>
             <div className="space-y-6">
-              {[1, 2, 3].map((i) => (
-                <div 
-                  key={i} 
-                  className="flex flex-col md:flex-row gap-4 fade-in-content"
-                  style={{ animationDelay: `${i * 150}ms` }}
-                >
+              {[1, 2, 3].map(i => <div key={i} className="flex flex-col md:flex-row gap-4 fade-in-content" style={{
+              animationDelay: `${i * 150}ms`
+            }}>
                   <div className="md:w-1/4 bg-muted rounded-lg h-40 flex items-center justify-center">
                     <span className="text-muted-foreground">Image {i}</span>
                   </div>
@@ -130,8 +120,7 @@ const Index = () => {
                       <Link to="/activities">Read more <ArrowRight className="h-4 w-4 ml-1" /></Link>
                     </Button>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
             <div className="text-center">
               <Button asChild>
@@ -141,8 +130,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
