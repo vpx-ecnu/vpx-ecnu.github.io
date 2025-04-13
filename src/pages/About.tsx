@@ -3,15 +3,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 const About = () => {
   return (
-    <div className="container py-12 px-4 md:px-6 space-y-12 page-transition">
-      <section className="space-y-4 text-center max-w-3xl mx-auto fade-in-content">
+    <div className="container py-12 px-4 md:px-6 space-y-12">
+      <section className="space-y-4 text-center max-w-3xl mx-auto">
         <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">About Our Research Group</h1>
         <p className="text-muted-foreground md:text-xl">
           Pushing the boundaries of knowledge through collaborative research and innovation.
         </p>
       </section>
 
-      <section className="grid gap-8 md:gap-12 fade-in-content" style={{ animationDelay: "100ms" }}>
+      <section className="grid gap-8 md:gap-12">
         <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Our Mission</h2>
         <div className="prose dark:prose-invert max-w-none">
           <p>
@@ -29,7 +29,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="grid gap-8 md:gap-12 fade-in-content" style={{ animationDelay: "200ms" }}>
+      <section className="grid gap-8 md:gap-12">
         <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Research Focus Areas</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
@@ -70,7 +70,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="grid gap-8 md:gap-12 fade-in-content" style={{ animationDelay: "300ms" }}>
+      <section className="grid gap-8 md:gap-12">
         <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Our History</h2>
         <div className="prose dark:prose-invert max-w-none">
           <p>
