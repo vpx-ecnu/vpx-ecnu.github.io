@@ -1,4 +1,3 @@
-
 import { ReactNode, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -9,19 +8,22 @@ interface PageTransitionProps {
 export function PageTransition({ children }: PageTransitionProps) {
   const location = useLocation();
   const [displayLocation, setDisplayLocation] = useState(location);
+  const [currentChildren, setCurrentChildren] = useState(children); // 存储当前显示的children
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     if (location !== displayLocation) {
       setIsTransitioning(true);
       const timeout = setTimeout(() => {
+        // 动画完成后更新显示内容和位置
         setDisplayLocation(location);
+        setCurrentChildren(children);
         setIsTransitioning(false);
-      }, 200); // Short timeout for a quick transition
-      
+      }, 200); // 确保这个时长与CSS过渡时间一致
+
       return () => clearTimeout(timeout);
     }
-  }, [location, displayLocation]);
+  }, [location, displayLocation, children]);
 
   return (
     <div
@@ -29,7 +31,7 @@ export function PageTransition({ children }: PageTransitionProps) {
         isTransitioning ? "opacity-0" : "opacity-100"
       }`}
     >
-      {children}
+      {currentChildren} {/* 渲染存储的children */}
     </div>
   );
 }
