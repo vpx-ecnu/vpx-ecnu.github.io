@@ -23,7 +23,11 @@ export function Navbar() {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold">VPX Group</span>
+            <img 
+              src="/lovable-uploads/c1c1ffb3-a447-43bc-b8cb-b2bba2dad10f.png" 
+              alt="VPX Lab Logo" 
+              className="h-10 w-auto"
+            />
           </Link>
 
           <nav className="hidden md:flex gap-6">
