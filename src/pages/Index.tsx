@@ -52,7 +52,7 @@ const Index = () => {
               </div>
             </div>
             <div className="flex-1 hidden md:block">
-              <img src="/lovable-uploads/df01f9fa-807f-433c-8c0e-cf1ed180c7b4.png" alt="VPX Lab Environment" className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-10 transition-transform duration-300" />
+              <img src="/lovable-uploads/df01f9fa-807f-433c-8c0e-cf1ed180c7b4.png" alt="VPX Lab Environment" className="w-25 h-auto rounded-lg shadow-lg object-cover hover:scale-10 transition-transform duration-300" />
             </div>
           </div>
         </div>
