@@ -1,169 +1,162 @@
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
-// Sample project data
-const projectsData = [
-  {
-    id: 1,
-    title: "Machine Learning for Climate Modeling",
-    description: "Utilizing advanced machine learning techniques to improve climate prediction models and understand long-term climate patterns.",
-    categories: ["AI", "Climate Science", "Current"],
-    image: "/placeholder.svg",
-    year: 2023
-  },
-  {
-    id: 2,
-    title: "Quantum Algorithm Development",
-    description: "Researching novel quantum algorithms with applications in cryptography, optimization, and simulation of physical systems.",
-    categories: ["Quantum Computing", "Algorithms", "Current"],
-    image: "/placeholder.svg",
-    year: 2023
-  },
-  {
-    id: 3,
-    title: "Integrated Biomedical Sensors",
-    description: "Developing non-invasive sensors for continuous health monitoring with applications in preventive medicine and chronic disease management.",
-    categories: ["Biomedical", "Sensors", "Current"],
-    image: "/placeholder.svg",
-    year: 2022
-  },
-  {
-    id: 4,
-    title: "Urban Mobility Analysis",
-    description: "Analyzing patterns in urban transportation and developing models for more efficient and sustainable city planning.",
-    categories: ["Data Science", "Urban Planning", "Completed"],
-    image: "/placeholder.svg",
-    year: 2021
-  },
-  {
-    id: 5,
-    title: "Language Model for Scientific Literature",
-    description: "Creating specialized language models for processing and summarizing academic research papers across disciplines.",
-    categories: ["NLP", "Scientific Computing", "Current"],
-    image: "/placeholder.svg",
-    year: 2022
-  },
-  {
-    id: 6,
-    title: "Sustainable Materials Engineering",
-    description: "Researching biodegradable alternatives to conventional materials with applications in packaging and construction.",
-    categories: ["Materials Science", "Sustainability", "Completed"],
-    image: "/placeholder.svg",
-    year: 2020
-  }
-];
-
-// Extract unique categories
-const allCategories = Array.from(
-  new Set(projectsData.flatMap(project => project.categories))
-);
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Projects = () => {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
-
-  // Filter projects based on selected categories and search term
-  const filteredProjects = projectsData.filter(project => {
-    const matchesCategories = selectedCategories.length === 0 || 
-      project.categories.some(category => selectedCategories.includes(category));
-    
-    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    return matchesCategories && matchesSearch;
-  });
-
-  // Toggle category selection
-  const toggleCategory = (category: string) => {
-    setSelectedCategories(prev => 
-      prev.includes(category)
-        ? prev.filter(c => c !== category)
-        : [...prev, category]
-    );
-  };
-
   return (
     <div className="container py-12 px-4 md:px-6 page-transition">
-      <section className="space-y-4 text-center max-w-3xl mx-auto mb-12 fade-in-content">
-        <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">Our Research Projects</h1>
-        <p className="text-muted-foreground md:text-xl">
-          Explore our diverse portfolio of research initiatives spanning multiple disciplines.
-        </p>
+      {/* Hero Section */}
+      <section className="py-16 px-6 bg-secondary/30">
+        <div className="container">
+          <h1 className="text-4xl font-bold mb-6">Research Projects</h1>
+          <p className="text-lg max-w-3xl">
+            Explore our diverse portfolio of ongoing and completed research initiatives spanning multiple disciplines and methodologies.
+          </p>
+        </div>
       </section>
 
-      <section className="mb-12 fade-in-content" style={{ animationDelay: "100ms" }}>
-        <div className="flex flex-col md:flex-row gap-4 mb-8">
-          <div className="flex-1">
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search projects..."
-              className="w-full p-2 border rounded-md bg-background"
-            />
-          </div>
-          <div className="flex-1 flex flex-wrap gap-2 items-center">
-            <span className="text-sm font-medium text-muted-foreground">Filter:</span>
-            {allCategories.map(category => (
-              <Button
-                key={category}
-                variant={selectedCategories.includes(category) ? "default" : "outline"}
-                size="sm"
-                onClick={() => toggleCategory(category)}
-                className="text-xs"
-              >
-                {category}
-              </Button>
-            ))}
-            {selectedCategories.length > 0 && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setSelectedCategories([])}
-                className="ml-auto text-xs"
-              >
-                Clear filters
-              </Button>
-            )}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <Card key={project.id} className="overflow-hidden hover:shadow-md transition-shadow">
-              <div className="aspect-video bg-muted flex items-center justify-center">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-12 h-12 text-muted-foreground"
-                />
+      {/* Projects Section */}
+      <section className="py-16 px-6">
+        <div className="container">
+          <Tabs defaultValue="ongoing" className="mb-12">
+            <TabsList className="grid w-full max-w-md grid-cols-2">
+              <TabsTrigger value="ongoing">Ongoing Projects</TabsTrigger>
+              <TabsTrigger value="completed">Completed Projects</TabsTrigger>
+            </TabsList>
+            <TabsContent value="ongoing" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Project Cards - Ongoing */}
+                {[
+                  {
+                    title: "AI for Climate Modeling",
+                    description: "Developing machine learning algorithms to improve climate change predictions and mitigation strategies.",
+                    lead: "Dr. Sarah Johnson",
+                    progress: 75,
+                    tags: ["AI/ML", "Climate Science", "Data Modeling"],
+                    timeframe: "2023-2025",
+                    status: "Active",
+                  },
+                  {
+                    title: "Quantum Computing Applications",
+                    description: "Exploring practical applications of quantum computing in cryptography and optimization problems.",
+                    lead: "Dr. Michael Chen",
+                    progress: 40,
+                    tags: ["Quantum Computing", "Cryptography", "Algorithms"],
+                    timeframe: "2022-2025",
+                    status: "Active",
+                  },
+                  {
+                    title: "Smart Urban Infrastructure",
+                    description: "Creating data-driven solutions for urban planning and infrastructure optimization.",
+                    lead: "Dr. Emma Rodriguez",
+                    progress: 60,
+                    tags: ["Urban Planning", "IoT", "Smart Cities"],
+                    timeframe: "2023-2026",
+                    status: "Active",
+                  },
+                  {
+                    title: "Sustainable Materials Research",
+                    description: "Developing eco-friendly materials for construction and consumer products.",
+                    lead: "Dr. Thomas Wilson",
+                    progress: 30,
+                    tags: ["Materials Science", "Sustainability", "Engineering"],
+                    timeframe: "2024-2027",
+                    status: "Active",
+                  },
+                ].map((project, index) => (
+                  <Card key={index} className="h-full flex flex-col">
+                    <CardHeader>
+                      <div className="flex justify-between items-start">
+                        <CardTitle>{project.title}</CardTitle>
+                        <Badge variant={project.status === "Active" ? "default" : "secondary"}>
+                          {project.status}
+                        </Badge>
+                      </div>
+                      <CardDescription>{project.timeframe}</CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex-1">
+                      <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span>Progress</span>
+                          <span>{project.progress}%</span>
+                        </div>
+                        <Progress value={project.progress} />
+                      </div>
+                      <div className="mt-4">
+                        <p className="text-sm font-medium">Lead Researcher:</p>
+                        <p className="text-sm text-muted-foreground">{project.lead}</p>
+                      </div>
+                    </CardContent>
+                    <CardFooter>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.map((tag, i) => (
+                          <Badge key={i} variant="outline">{tag}</Badge>
+                        ))}
+                      </div>
+                    </CardFooter>
+                  </Card>
+                ))}
               </div>
-              <CardHeader>
-                <CardTitle>{project.title}</CardTitle>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {project.categories.map(category => (
-                    <Badge key={category} variant="secondary" className="text-xs">
-                      {category}
-                    </Badge>
-                  ))}
-                </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-sm">
-                  {project.description}
-                </CardDescription>
-              </CardContent>
-              <CardFooter className="flex justify-between border-t p-4 text-sm text-muted-foreground">
-                <span>Year: {project.year}</span>
-                <Button variant="link" size="sm" className="p-0">
-                  Learn more
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+            </TabsContent>
+            <TabsContent value="completed" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Project Cards - Completed */}
+                {[
+                  {
+                    title: "Renewable Energy Grid Integration",
+                    description: "Optimizing integration of renewable energy sources into existing power grids.",
+                    lead: "Dr. James Patterson",
+                    tags: ["Energy Systems", "Renewables", "Optimization"],
+                    timeframe: "2020-2023",
+                    status: "Completed",
+                  },
+                  {
+                    title: "Healthcare Data Analytics",
+                    description: "Using big data to improve patient outcomes and healthcare delivery systems.",
+                    lead: "Dr. Lisa Thompson",
+                    tags: ["Healthcare", "Data Analytics", "Patient Care"],
+                    timeframe: "2019-2022",
+                    status: "Completed",
+                  },
+                  {
+                    title: "Natural Language Processing for Legal Documents",
+                    description: "Developing NLP tools to analyze and categorize legal texts and precedents.",
+                    lead: "Dr. Robert Garcia",
+                    tags: ["NLP", "Legal Tech", "AI"],
+                    timeframe: "2018-2022",
+                    status: "Completed",
+                  },
+                ].map((project, index) => (
+                  <Card key={index}>
+                    <CardHeader>
+                      <div className="flex justify-between items-start">
+                        <CardTitle>{project.title}</CardTitle>
+                        <Badge variant="secondary">{project.status}</Badge>
+                      </div>
+                      <CardDescription>{project.timeframe}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
+                      <div>
+                        <p className="text-sm font-medium">Lead Researcher:</p>
+                        <p className="text-sm text-muted-foreground">{project.lead}</p>
+                      </div>
+                    </CardContent>
+                    <CardFooter>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.map((tag, i) => (
+                          <Badge key={i} variant="outline">{tag}</Badge>
+                        ))}
+                      </div>
+                    </CardFooter>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </section>
     </div>

@@ -29,6 +29,30 @@ const Index = () => {
         </div>
       </section>
 
+      <section className="py-20 px-6 md:px-12 lg:px-24 bg-secondary/30">
+        <div className="container">
+          <div className="max-w-3xl">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+              Advancing Research Through Collaborative Innovation
+            </h1>
+            <p className="text-xl mb-8 text-muted-foreground">
+              Pioneering academic research at the intersection of science, technology, and society.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Button asChild size="lg">
+                <Link to="/projects">
+                  Explore Our Research
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <Link to="/join-us">Join Our Team</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Research */}
       <section className="py-16 md:py-24">
         <div className="container px-4 md:px-6">

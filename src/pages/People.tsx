@@ -1,6 +1,9 @@
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { ExternalLink, Mail } from "lucide-react";
 
 // Sample people data
 const peopleData = {
@@ -116,124 +119,259 @@ const peopleData = {
 const People = () => {
   return (
     <div className="container py-12 px-4 md:px-6 page-transition">
-      <section className="space-y-4 text-center max-w-3xl mx-auto mb-12 fade-in-content">
-        <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">Our Team</h1>
-        <p className="text-muted-foreground md:text-xl">
-          Meet the dedicated researchers, faculty, and students who make our work possible.
-        </p>
+      {/* Hero Section */}
+      <section className="py-16 px-6 bg-secondary/30">
+        <div className="container">
+          <h1 className="text-4xl font-bold mb-6">Our Team</h1>
+          <p className="text-lg max-w-3xl">
+            Meet the diverse group of researchers, faculty, and staff who contribute to our research initiatives and academic mission.
+          </p>
+        </div>
       </section>
 
-      <section className="fade-in-content" style={{ animationDelay: "100ms" }}>
-        <Tabs defaultValue="faculty" className="w-full">
-          <TabsList className="grid grid-cols-4 mb-8">
-            <TabsTrigger value="faculty">Faculty</TabsTrigger>
-            <TabsTrigger value="postdocs">Postdocs</TabsTrigger>
-            <TabsTrigger value="phd">PhD Students</TabsTrigger>
-            <TabsTrigger value="alumni">Alumni</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="faculty" className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {peopleData.faculty.map((person, index) => (
-                <Card key={person.id} className="overflow-hidden hover:shadow-md transition-shadow fade-in-content" style={{ animationDelay: `${index * 100}ms` }}>
-                  <div className="aspect-square bg-muted flex items-center justify-center">
-                    <img 
-                      src={person.image} 
-                      alt={person.name} 
-                      className="w-16 h-16 text-muted-foreground"
-                    />
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold">{person.name}</h3>
-                    <p className="text-primary font-medium">{person.title}</p>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      <span className="font-medium">Research:</span> {person.research}
-                    </p>
-                    <p className="text-sm mt-4">{person.bio}</p>
-                    <p className="text-sm text-primary mt-4">{person.email}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="postdocs" className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {peopleData.postdocs.map((person, index) => (
-                <Card key={person.id} className="overflow-hidden hover:shadow-md transition-shadow fade-in-content" style={{ animationDelay: `${index * 100}ms` }}>
-                  <div className="aspect-square bg-muted flex items-center justify-center">
-                    <img 
-                      src={person.image} 
-                      alt={person.name} 
-                      className="w-16 h-16 text-muted-foreground"
-                    />
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold">{person.name}</h3>
-                    <p className="text-primary font-medium">{person.title}</p>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      <span className="font-medium">Research:</span> {person.research}
-                    </p>
-                    <p className="text-sm mt-4">{person.bio}</p>
-                    <p className="text-sm text-primary mt-4">{person.email}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="phd" className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {peopleData.phd.map((person, index) => (
-                <Card key={person.id} className="overflow-hidden hover:shadow-md transition-shadow fade-in-content" style={{ animationDelay: `${index * 100}ms` }}>
-                  <div className="aspect-square bg-muted flex items-center justify-center">
-                    <img 
-                      src={person.image} 
-                      alt={person.name} 
-                      className="w-16 h-16 text-muted-foreground"
-                    />
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold">{person.name}</h3>
-                    <p className="text-primary font-medium">{person.title}</p>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      <span className="font-medium">Research:</span> {person.research}
-                    </p>
-                    <p className="text-sm mt-4">{person.bio}</p>
-                    <p className="text-sm text-primary mt-4">{person.email}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="alumni" className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {peopleData.alumni.map((person, index) => (
-                <Card key={person.id} className="overflow-hidden hover:shadow-md transition-shadow fade-in-content" style={{ animationDelay: `${index * 100}ms` }}>
-                  <div className="aspect-square bg-muted flex items-center justify-center">
-                    <img 
-                      src={person.image} 
-                      alt={person.name} 
-                      className="w-16 h-16 text-muted-foreground"
-                    />
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold">{person.name}</h3>
-                    <p className="text-primary font-medium">{person.title}</p>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      <span className="font-medium">Research:</span> {person.research}
-                    </p>
-                    <p className="text-sm mt-4">{person.bio}</p>
-                    <p className="text-sm text-primary mt-4">{person.email}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-        </Tabs>
+      {/* Team Members Section */}
+      <section className="py-16 px-6">
+        <div className="container">
+          <Tabs defaultValue="faculty" className="mb-12">
+            <TabsList className="flex flex-wrap justify-center gap-2 mb-6">
+              <TabsTrigger value="faculty">Faculty</TabsTrigger>
+              <TabsTrigger value="postdocs">Post-Doctoral Researchers</TabsTrigger>
+              <TabsTrigger value="students">Graduate Students</TabsTrigger>
+              <TabsTrigger value="staff">Staff</TabsTrigger>
+              <TabsTrigger value="alumni">Alumni</TabsTrigger>
+              
+            </TabsList>
+            <TabsContent value="faculty" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  {
+                    name: "Dr. Sarah Johnson",
+                    title: "Director & Professor of Data Science",
+                    bio: "Leading expert in AI applications for climate modeling with over 15 years of research experience.",
+                    image: "",
+                    email: "sjohnson@radiantresearch.edu",
+                    website: "#",
+                    research: ["AI/ML", "Climate Science", "Data Modeling"],
+                  },
+                  {
+                    name: "Dr. Michael Chen",
+                    title: "Associate Professor of Quantum Computing",
+                    bio: "Specializes in quantum algorithms and their applications in cryptography and optimization problems.",
+                    image: "",
+                    email: "mchen@radiantresearch.edu",
+                    website: "#",
+                    research: ["Quantum Computing", "Algorithms", "Cryptography"],
+                  },
+                  {
+                    name: "Dr. Emma Rodriguez",
+                    title: "Associate Professor of Urban Planning",
+                    bio: "Focuses on data-driven approaches to urban infrastructure and smart city technologies.",
+                    image: "",
+                    email: "erodriguez@radiantresearch.edu",
+                    website: "#",
+                    research: ["Urban Planning", "Smart Cities", "Infrastructure"],
+                  },
+                  {
+                    name: "Dr. Thomas Wilson",
+                    title: "Professor of Materials Science",
+                    bio: "Researches sustainable materials and their applications in various industries.",
+                    image: "",
+                    email: "twilson@radiantresearch.edu",
+                    website: "#",
+                    research: ["Materials Science", "Sustainability", "Engineering"],
+                  },
+                ].map((member, index) => (
+                  <PeopleCard key={index} member={member} />
+                ))}
+              </div>
+            </TabsContent>
+            <TabsContent value="postdocs" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  {
+                    name: "Dr. Jennifer Park",
+                    title: "Post-Doctoral Research Associate",
+                    bio: "Researching machine learning applications in healthcare analytics and medical imaging.",
+                    image: "",
+                    email: "jpark@radiantresearch.edu",
+                    website: "#",
+                    research: ["Machine Learning", "Healthcare", "Medical Imaging"],
+                  },
+                  {
+                    name: "Dr. Raj Patel",
+                    title: "Post-Doctoral Research Associate",
+                    bio: "Working on quantum computing algorithms for optimization problems in logistics.",
+                    image: "",
+                    email: "rpatel@radiantresearch.edu",
+                    website: "#",
+                    research: ["Quantum Computing", "Optimization", "Logistics"],
+                  },
+                  {
+                    name: "Dr. Sophia Lee",
+                    title: "Post-Doctoral Research Associate",
+                    bio: "Developing new methods for sustainable urban planning using geospatial data.",
+                    image: "",
+                    email: "slee@radiantresearch.edu",
+                    website: "#",
+                    research: ["Urban Planning", "Sustainability", "GIS"],
+                  },
+                ].map((member, index) => (
+                  <PeopleCard key={index} member={member} />
+                ))}
+              </div>
+            </TabsContent>
+            <TabsContent value="students" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  {
+                    name: "Alex Thompson",
+                    title: "PhD Candidate",
+                    bio: "Researching neural networks for climate prediction models.",
+                    image: "",
+                    email: "athompson@radiantresearch.edu",
+                    research: ["Neural Networks", "Climate Science", "Prediction Models"],
+                  },
+                  {
+                    name: "Maria Garcia",
+                    title: "PhD Candidate",
+                    bio: "Studying the applications of quantum computing in materials science.",
+                    image: "",
+                    email: "mgarcia@radiantresearch.edu",
+                    research: ["Quantum Computing", "Materials Science", "Modeling"],
+                  },
+                  {
+                    name: "David Kim",
+                    title: "PhD Student",
+                    bio: "Working on sustainable urban infrastructure models using AI.",
+                    image: "",
+                    email: "dkim@radiantresearch.edu",
+                    research: ["Urban Planning", "Sustainability", "AI"],
+                  },
+                  {
+                    name: "Priya Singh",
+                    title: "PhD Student",
+                    bio: "Developing new algorithms for renewable energy optimization.",
+                    image: "",
+                    email: "psingh@radiantresearch.edu",
+                    research: ["Algorithms", "Renewable Energy", "Optimization"],
+                  },
+                ].map((member, index) => (
+                  <PeopleCard key={index} member={member} />
+                ))}
+              </div>
+            </TabsContent>
+            <TabsContent value="staff" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  {
+                    name: "Robert Taylor",
+                    title: "Research Administrator",
+                    bio: "Manages research grants, budgets, and administrative processes.",
+                    image: "",
+                    email: "rtaylor@radiantresearch.edu",
+                  },
+                  {
+                    name: "Linda Martinez",
+                    title: "Communications Coordinator",
+                    bio: "Handles public relations, website management, and research dissemination.",
+                    image: "",
+                    email: "lmartinez@radiantresearch.edu",
+                  },
+                  {
+                    name: "James Wilson",
+                    title: "Laboratory Manager",
+                    bio: "Oversees research equipment, lab safety, and technical support.",
+                    image: "",
+                    email: "jwilson@radiantresearch.edu",
+                  },
+                ].map((member, index) => (
+                  <PeopleCard key={index} member={member} />
+                ))}
+              </div>
+            </TabsContent>
+            <TabsContent value="alumni" className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {peopleData.alumni.map((person, index) => (
+                  <Card key={person.id} className="overflow-hidden hover:shadow-md transition-shadow fade-in-content" style={{ animationDelay: `${index * 100}ms` }}>
+                    
+                    <CardContent className="p-6">
+                      <h3 className="text-xl font-semibold">{person.name}</h3>
+                      <p className="text-primary font-medium">{person.title}</p>
+                      <p className="text-sm text-muted-foreground mt-2">
+                        <span className="font-medium">Research:</span> {person.research}
+                      </p>
+                      <p className="text-sm mt-4">{person.bio}</p>
+                      <p className="text-sm text-primary mt-4">{person.email}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
       </section>
     </div>
+  );
+};
+
+interface PeopleCardProps {
+  member: {
+    name: string;
+    title: string;
+    bio: string;
+    image: string;
+    email: string;
+    website?: string;
+    research?: string[];
+  };
+}
+
+const PeopleCard = ({ member }: PeopleCardProps) => {
+  const initials = member.name
+    .split(" ")
+    .map((n) => n[0])
+    .join("");
+
+  return (
+    <Card className="h-full flex flex-col">
+      <CardHeader className="flex flex-col items-center text-center">
+        <Avatar className="w-44 h-44">
+          <AvatarImage src={member.image} />
+          <AvatarFallback className="text-lg">{initials}</AvatarFallback>
+        </Avatar>
+        <CardTitle className="mt-4">{member.name}</CardTitle>
+        <CardDescription>{member.title}</CardDescription>
+      </CardHeader>
+      <CardContent className="flex-1">
+        <p className="text-sm text-muted-foreground text-center">{member.bio}</p>
+        {member.research && (
+          <div className="mt-4">
+            <p className="text-sm font-medium text-center">Research Areas</p>
+            <ul className="mt-2 text-sm text-muted-foreground space-y-1">
+              {member.research.map((area, i) => (
+                <li key={i} className="text-center">{area}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </CardContent>
+      <CardFooter className="flex justify-center gap-2">
+        <Button size="sm" variant="outline" asChild>
+          <a href={`mailto:${member.email}`}>
+            <Mail className="h-4 w-4 mr-2" />
+            Email
+          </a>
+        </Button>
+        {member.website && (
+          <Button size="sm" variant="outline" asChild>
+            <a href={member.website} target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="h-4 w-4 mr-2" />
+              Website
+            </a>
+          </Button>
+        )}
+      </CardFooter>
+    </Card>
   );
 };
 

@@ -148,7 +148,17 @@ const Publications = () => {
               <CardContent className="p-6">
                 <div className="grid gap-3">
                   <h3 className="text-lg font-semibold">{publication.title}</h3>
-                  <p className="text-sm text-muted-foreground">{publication.authors}</p>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {publication.tags.map(tag => (
+                      <span 
+                        key={tag} 
+                        className="bg-muted text-muted-foreground text-xs px-2 py-1 rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <h3 className="text-lg text-muted-foreground">{publication.authors}</h3>
                   <div className="flex items-center justify-between">
                     <span className="text-sm">
                       <span className="font-medium">{publication.journal}</span>, {publication.year}
@@ -167,16 +177,7 @@ const Publications = () => {
                       </Button>
                     </div>
                   </div>
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {publication.tags.map(tag => (
-                      <span 
-                        key={tag} 
-                        className="bg-muted text-muted-foreground text-xs px-2 py-1 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                
                 </div>
               </CardContent>
             </Card>
