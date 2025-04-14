@@ -1,6 +1,7 @@
 import { ArrowRight, BookOpen, Clock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+
 const Index = () => {
   return <div className="page-transition">
       {/* Hero Section */}
@@ -31,23 +32,32 @@ const Index = () => {
 
       <section className="py-20 px-6 md:px-12 lg:px-24 bg-secondary/30">
         <div className="container">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-              Advancing Research Through Collaborative Innovation
-            </h1>
-            <p className="text-xl mb-8 text-muted-foreground">
-              Pioneering academic research at the intersection of science, technology, and society.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Button asChild size="lg">
-                <Link to="/projects">
-                  Explore Our Research
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" asChild>
-                <Link to="/join-us">Join Our Team</Link>
-              </Button>
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="max-w-3xl flex-1">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+                Advancing Research Through Collaborative Innovation
+              </h1>
+              <p className="text-xl mb-8 text-muted-foreground">
+                Pioneering academic research at the intersection of science, technology, and society.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Button asChild size="lg">
+                  <Link to="/projects">
+                    Explore Our Research
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button variant="outline" size="lg" asChild>
+                  <Link to="/join-us">Join Our Team</Link>
+                </Button>
+              </div>
+            </div>
+            <div className="flex-1 hidden md:block">
+              <img 
+                src="/lovable-uploads/df01f9fa-807f-433c-8c0e-cf1ed180c7b4.png" 
+                alt="VPX Lab Environment" 
+                className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
+              />
             </div>
           </div>
         </div>
