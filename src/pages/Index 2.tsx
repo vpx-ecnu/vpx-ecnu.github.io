@@ -1,12 +1,10 @@
-
-import PageTransition from "@/components/ui/page-transition";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, BookOpen, Users, FlaskConical, Calendar } from "lucide-react";
 
 const Index = () => {
   return (
-    <PageTransition>
+    <div className="page-transition">
       {/* Hero Section */}
       <section className="py-20 px-6 md:px-12 lg:px-24 bg-secondary/30">
         <div className="container">
@@ -127,7 +125,7 @@ const Index = () => {
           </Button>
         </div>
       </section>
-    </PageTransition>
+    </div>
   );
 };
 

@@ -1,4 +1,5 @@
 // theme-provider.tsx 修改后的核心逻辑
+import { Sun, Moon } from "lucide-react";
 import { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "dark" | "light";
