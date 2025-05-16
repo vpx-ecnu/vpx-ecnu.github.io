@@ -17,8 +17,9 @@ const Join = () => {
       <section className="max-w-3xl mx-auto space-y-6 fade-in-content" style={{ animationDelay: "100ms" }}>
         <p>
           We're always looking for talented and motivated individuals who are passionate about research and innovation. 
-          Our group provides a collaborative environment where you can contribute to important scientific advancements 
-          while developing your skills and expertise.
+          Welcome to all students interested in next-generation artificial intelligence, computer vision, computer graphics, and robotic perception to join our Visual Perception and Frontier Technology Group, VPX (Visual Perception + X Group). If you're interested in our group, feel free to follow us on 
+          <a href="https://space.bilibili.com/487404760?spm_id_from=333.337.0.0" target="_blank" style={{ textDecoration: 'underline' }}> Bilibili</a> and 
+          <a href="https://github.com/vpx-ecnu" target="_blank" style={{ textDecoration: 'underline' }}> GitHub</a>.
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6">
@@ -50,10 +51,11 @@ const Join = () => {
 
       <section className="fade-in-content" style={{ animationDelay: "200ms" }}>
         <Tabs defaultValue="phd" className="w-full">
-          <TabsList className="grid grid-cols-4 mb-8">
+          <TabsList className="grid grid-cols-3 mb-8">
             <TabsTrigger value="phd">PhD Positions</TabsTrigger>
-            <TabsTrigger value="postdoc">Postdoc Positions</TabsTrigger>
-            <TabsTrigger value="visiting">Visiting Researchers</TabsTrigger>
+            {/* <TabsTrigger value="postdoc">Postdoc Positions</TabsTrigger>
+            <TabsTrigger value="visiting">Visiting Researchers</TabsTrigger> */}
+            <TabsTrigger value="master">Master's Positions</TabsTrigger>
             <TabsTrigger value="undergrad">Undergraduate</TabsTrigger>
           </TabsList>
           
@@ -66,7 +68,7 @@ const Join = () => {
               <CardContent className="space-y-4">
                 <p>
                   We are recruiting PhD students with strong backgrounds in relevant fields who are interested in pursuing 
-                  cutting-edge research. Our PhD program typically takes 4-5 years to complete and includes both coursework 
+                  cutting-edge research. Our PhD program typically takes 5-7 years to complete and includes both coursework 
                   and research components.
                 </p>
                 
@@ -74,30 +76,35 @@ const Join = () => {
                 <div className="space-y-4">
                   {[
                     {
-                      title: "PhD Position in Quantum Computing",
-                      deadline: "May 15, 2023",
-                      description: "Research focus on quantum algorithms for optimization problems."
+                      title: "Next-Generation Rendering Engine:",
+                      // deadline: "May 15, 2023",
+                      description: "Focused on NeRF and 3D Gaussian Splatting (3DGS), this research explores virtual humans, lighting reconstruction, 3D reconstruction, and stylization of 3D scenes. It requires knowledge in computer graphics (CG) and machine learning (ML). Relevant skills include experience with VR/MR, Unreal Engine 5 (UE5), CUDA, shaders, and PyTorch."
                     },
                     {
-                      title: "PhD Position in AI for Climate Science",
-                      deadline: "April 30, 2023",
-                      description: "Developing machine learning approaches for climate prediction and modeling."
+                      title: "Metaverse Content Generation:",
+                      // deadline: "April 30, 2023",
+                      description: "Centered around AIGC and diffusion models, this research investigates controllable image, video, and 3D mesh generation. It requires knowledge in deep learning (DL) and machine learning (ML). Relevant skills include experience with Photoshop, ComfyUI, WebUI, and PyTorch."
                     },
                     {
-                      title: "PhD Position in Sustainable Materials",
-                      deadline: "June 1, 2023",
-                      description: "Research on biodegradable materials with applications in packaging and consumer products."
+                      title: "Video Analysis and Large Model Applications:",
+                      // deadline: "June 1, 2023",
+                      description: "With a focus on tracking, SAM, and large vision models (LVM), this direction covers live content generation, soccer commentary, and virtual geofencing. It requires knowledge in computer vision (CV) and large language models (LLM). Relevant skills include SAM, LLaVA, ChatGPT, YOLO, and C++."
+                    },
+                    {
+                      title: "Embodied Intelligence Robots:",
+                      // deadline: "June 1, 2023",
+                      description: "Focused on reinforcement learning (RL) and vision-language-action (VLA) models, this research explores tasks such as large model-based household robotics and automated chemical experiments. It requires knowledge in robotics and large language models (LLM). Relevant skills include hardware development, ROS, LVM, PPO, and PyTorch."
                     }
                   ].map((position, index) => (
                     <div key={index} className="bg-muted p-4 rounded-lg">
                       <h4 className="font-medium">{position.title}</h4>
-                      <div className="flex items-center text-sm text-muted-foreground mt-1">
+                      {/* <div className="flex items-center text-sm text-muted-foreground mt-1">
                         <Clock className="h-4 w-4 mr-1" /> Application Deadline: {position.deadline}
-                      </div>
+                      </div> */}
                       <p className="text-sm mt-2">{position.description}</p>
-                      <Button className="mt-4" size="sm">
+                      {/* <Button className="mt-4" size="sm">
                         Apply Now <ArrowRight className="h-4 w-4 ml-1" />
-                      </Button>
+                      </Button> */}
                     </div>
                   ))}
                 </div>
@@ -105,8 +112,9 @@ const Join = () => {
                 <h3 className="text-lg font-semibold mt-6">Application Process</h3>
                 <ol className="list-decimal list-inside space-y-2">
                   <li>Review our research areas and identify potential supervisors</li>
-                  <li>Prepare your CV, academic transcripts, and research statement</li>
-                  <li>Submit your application through the university's graduate admissions portal</li>
+                  <li>We have a PhD recruitment plan for next year. Students interested in direct PhD admission are encouraged to indicate this clearly in their email.</li>
+                  <li>Regular PhD applicants must have top-tier publications (or submissions with reviewer comments) in CV, CG, or ML.</li>
+                  <li>If you are interested in applying, please send your CV along with the research direction you are interested in to yli@cs.ecnu.edu.cn.</li>
                   <li>Selected candidates will be invited for interviews</li>
                 </ol>
                 
@@ -116,11 +124,85 @@ const Join = () => {
                   PhD candidates. Additional fellowship opportunities are available through the university and external sources.
                 </p>
                 
-                <div className="flex justify-center mt-6">
+                {/* <div className="flex justify-center mt-6">
                   <Button className="flex items-center gap-2">
                     View All PhD Opportunities <ExternalLink className="h-4 w-4" />
                   </Button>
+                </div> */}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="master" className="space-y-8">
+            <Card>
+              <CardHeader>
+                <CardTitle>Master's Student Opportunities</CardTitle>
+                <CardDescription>Full-time master's positions in our research group</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p>
+                  We are recruiting Master's students with strong backgrounds in relevant fields who are interested in pursuing 
+                  cutting-edge research. Our Master's program typically takes 3 years to complete and includes both coursework 
+                  and research components.
+                </p>
+                
+                <h3 className="text-lg font-semibold mt-6">Current Openings</h3>
+                <div className="space-y-4">
+                  {[
+                    {
+                      title: "Next-Generation Rendering Engine:",
+                      // deadline: "May 15, 2023",
+                      description: "Focused on NeRF and 3D Gaussian Splatting (3DGS), this research explores virtual humans, lighting reconstruction, 3D reconstruction, and stylization of 3D scenes. It requires knowledge in computer graphics (CG) and machine learning (ML). Relevant skills include experience with VR/MR, Unreal Engine 5 (UE5), CUDA, shaders, and PyTorch."
+                    },
+                    {
+                      title: "Metaverse Content Generation:",
+                      // deadline: "April 30, 2023",
+                      description: "Centered around AIGC and diffusion models, this research investigates controllable image, video, and 3D mesh generation. It requires knowledge in deep learning (DL) and machine learning (ML). Relevant skills include experience with Photoshop, ComfyUI, WebUI, and PyTorch."
+                    },
+                    {
+                      title: "Video Analysis and Large Model Applications:",
+                      // deadline: "June 1, 2023",
+                      description: "With a focus on tracking, SAM, and large vision models (LVM), this direction covers live content generation, soccer commentary, and virtual geofencing. It requires knowledge in computer vision (CV) and large language models (LLM). Relevant skills include SAM, LLaVA, ChatGPT, YOLO, and C++."
+                    },
+                    {
+                      title: "Embodied Intelligence Robots:",
+                      // deadline: "June 1, 2023",
+                      description: "Focused on reinforcement learning (RL) and vision-language-action (VLA) models, this research explores tasks such as large model-based household robotics and automated chemical experiments. It requires knowledge in robotics and large language models (LLM). Relevant skills include hardware development, ROS, LVM, PPO, and PyTorch."
+                    }
+                  ].map((position, index) => (
+                    <div key={index} className="bg-muted p-4 rounded-lg">
+                      <h4 className="font-medium">{position.title}</h4>
+                      {/* <div className="flex items-center text-sm text-muted-foreground mt-1">
+                        <Clock className="h-4 w-4 mr-1" /> Application Deadline: {position.deadline}
+                      </div> */}
+                      <p className="text-sm mt-2">{position.description}</p>
+                      {/* <Button className="mt-4" size="sm">
+                        Apply Now <ArrowRight className="h-4 w-4 ml-1" />
+                      </Button> */}
+                    </div>
+                  ))}
                 </div>
+                
+                <h3 className="text-lg font-semibold mt-6">Application Process</h3>
+                <ol className="list-decimal list-inside space-y-2">
+                  <li>Review our research areas and identify potential supervisors</li>
+                  {/* <li>We have a PhD recruitment plan for next year. Students interested in direct PhD admission are encouraged to indicate this clearly in their email.</li>
+                  <li>Regular PhD applicants must have top-tier publications (or submissions with reviewer comments) in CV, CG, or ML.</li> */}
+                  <li>If you are interested in applying, please send your CV along with the research direction you are interested in to yli@cs.ecnu.edu.cn.</li>
+                  <li>Selected candidates will be invited for interviews</li>
+                </ol>
+                
+                <h3 className="text-lg font-semibold mt-6">Funding</h3>
+                <p>
+                  Full funding packages including tuition, stipend, and conference travel are available for qualified 
+                  Master's candidates. Additional fellowship opportunities are available through the university and external sources.
+                </p>
+                
+                {/* <div className="flex justify-center mt-6">
+                  <Button className="flex items-center gap-2">
+                    View All PhD Opportunities <ExternalLink className="h-4 w-4" />
+                  </Button>
+                </div> */}
               </CardContent>
             </Card>
           </TabsContent>
@@ -248,34 +330,44 @@ const Join = () => {
                 <div className="space-y-4">
                   {[
                     {
-                      title: "Summer Research Internship",
-                      deadline: "March 1, 2023",
-                      description: "10-week paid research experience working directly with faculty and graduate students."
+                      title: "Next-Generation Rendering Engine:",
+                      // deadline: "May 15, 2023",
+                      description: "Focused on NeRF and 3D Gaussian Splatting (3DGS), this research explores virtual humans, lighting reconstruction, 3D reconstruction, and stylization of 3D scenes. It requires knowledge in computer graphics (CG) and machine learning (ML). Relevant skills include experience with VR/MR, Unreal Engine 5 (UE5), CUDA, shaders, and PyTorch."
                     },
                     {
-                      title: "Undergraduate Research Assistant Positions",
-                      deadline: "Ongoing",
-                      description: "Part-time research positions during the academic year."
+                      title: "Metaverse Content Generation:",
+                      // deadline: "April 30, 2023",
+                      description: "Centered around AIGC and diffusion models, this research investigates controllable image, video, and 3D mesh generation. It requires knowledge in deep learning (DL) and machine learning (ML). Relevant skills include experience with Photoshop, ComfyUI, WebUI, and PyTorch."
                     },
                     {
-                      title: "Honors Thesis Supervision",
-                      deadline: "By arrangement",
-                      description: "Faculty supervision for undergraduate thesis projects in relevant fields."
+                      title: "Video Analysis and Large Model Applications:",
+                      // deadline: "June 1, 2023",
+                      description: "With a focus on tracking, SAM, and large vision models (LVM), this direction covers live content generation, soccer commentary, and virtual geofencing. It requires knowledge in computer vision (CV) and large language models (LLM). Relevant skills include SAM, LLaVA, ChatGPT, YOLO, and C++."
+                    },
+                    {
+                      title: "Embodied Intelligence Robots:",
+                      // deadline: "June 1, 2023",
+                      description: "Focused on reinforcement learning (RL) and vision-language-action (VLA) models, this research explores tasks such as large model-based household robotics and automated chemical experiments. It requires knowledge in robotics and large language models (LLM). Relevant skills include hardware development, ROS, LVM, PPO, and PyTorch."
                     }
                   ].map((program, index) => (
                     <div key={index} className="bg-muted p-4 rounded-lg">
                       <h4 className="font-medium">{program.title}</h4>
-                      <div className="flex items-center text-sm text-muted-foreground mt-1">
+                      {/* <div className="flex items-center text-sm text-muted-foreground mt-1">
                         <Clock className="h-4 w-4 mr-1" /> Application Deadline: {program.deadline}
-                      </div>
+                      </div> */}
                       <p className="text-sm mt-2">{program.description}</p>
-                      <Button className="mt-4" size="sm">
+                      {/* <Button className="mt-4" size="sm">
                         Learn More <ArrowRight className="h-4 w-4 ml-1" />
-                      </Button>
+                      </Button> */}
                     </div>
                   ))}
                 </div>
                 
+                <h3 className="text-lg font-semibold mt-6">Application Process</h3>
+                <ol className="list-decimal list-inside space-y-2">
+                  If you're interested in joining one of our research projects, feel free to send an email or drop by the office. Please be prepared to briefly introduce yourself, including relevant coursework or project experience.
+                </ol>
+
                 <h3 className="text-lg font-semibold mt-6">Eligibility</h3>
                 <p>
                   Undergraduate research opportunities are open to students in relevant majors with strong academic 
@@ -283,11 +375,11 @@ const Join = () => {
                   learn are essential.
                 </p>
                 
-                <div className="flex justify-center mt-6">
+                {/* <div className="flex justify-center mt-6">
                   <Button className="flex items-center gap-2">
                     Explore Undergraduate Opportunities <ExternalLink className="h-4 w-4" />
                   </Button>
-                </div>
+                </div> */}
               </CardContent>
             </Card>
           </TabsContent>

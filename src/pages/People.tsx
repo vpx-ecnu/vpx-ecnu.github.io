@@ -4,6 +4,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Mail } from "lucide-react";
+import { useEffect, useState } from "react";
+import faculty from "../../public/people/faculty.json";
+import phdStudents from "../../public/people/phd.json";
+import gradStudents from "../../public/people/graduate.json";
+import undergraduate from "../../public/people/Undergraduate.json";
+import alumni from "../../public/people/alumni.json";
 
 // Sample people data
 const peopleData = {
@@ -132,7 +138,7 @@ const People = () => {
       {/* Team Members Section */}
       <section className="py-16 px-6">
         <div className="container">
-          <Tabs defaultValue="faculty" className="mb-12">
+          {/* <Tabs defaultValue="faculty" className="mb-12">
             <TabsList className="flex flex-wrap justify-center gap-2 mb-6">
               <TabsTrigger value="faculty">Faculty</TabsTrigger>
               <TabsTrigger value="postdocs">Post-Doctoral Researchers</TabsTrigger>
@@ -307,6 +313,55 @@ const People = () => {
                 ))}
               </div>
             </TabsContent>
+          </Tabs> */}
+          <Tabs defaultValue="faculty">
+            <TabsList className="flex flex-wrap justify-center gap-2 mb-6">
+              <TabsTrigger value="faculty">Faculty</TabsTrigger>
+              <TabsTrigger value="phd">PhD Students</TabsTrigger>
+              <TabsTrigger value="grad">Graduate Students</TabsTrigger>
+              <TabsTrigger value="undergrad">Undergraduate Student</TabsTrigger>
+              <TabsTrigger value="alumni">Alumni</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="faculty" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {faculty.map((member, index) => (
+                  <PeopleCard key={index} member={member} />
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="phd" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {phdStudents.map((member, index) => (
+                  <PeopleCard key={index} member={member} />
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="grad" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {gradStudents.map((member, index) => (
+                  <PeopleCard key={index} member={member} />
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="undergrad" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {undergraduate.map((member, index) => (
+                  <PeopleCard key={index} member={member} />
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="alumni" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {alumni.map((member, index) => (
+                  <PeopleCard key={index} member={member} />
+                ))}
+              </div>
+            </TabsContent>
           </Tabs>
         </div>
       </section>
@@ -336,7 +391,7 @@ const PeopleCard = ({ member }: PeopleCardProps) => {
     <Card className="h-full flex flex-col">
       <CardHeader className="flex flex-col items-center text-center">
         <Avatar className="w-44 h-44">
-          <AvatarImage src={member.image} />
+          <AvatarImage src={member.image} className="object-cover"/>
           <AvatarFallback className="text-lg">{initials}</AvatarFallback>
         </Avatar>
         <CardTitle className="mt-4">{member.name}</CardTitle>

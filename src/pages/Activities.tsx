@@ -1,109 +1,109 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar, Cpu, GraduationCap, Users } from "lucide-react";
+import { activitiesData } from "@/data/activities";
 
 // Sample activities data
-const activitiesData = {
-  news: [
-    {
-      id: 1,
-      title: "Research Team Secures $2M Grant for Climate AI Project",
-      date: "2023-04-10",
-      description: "Our team has been awarded a significant grant to develop AI solutions for climate modeling and prediction.",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 2,
-      title: "New Publication in Nature on Quantum Computing Advancements",
-      date: "2023-03-22",
-      description: "Dr. Johnson and team published groundbreaking research on quantum algorithm optimization in Nature.",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 3,
-      title: "Research Group Welcomes Three New PhD Students",
-      date: "2023-02-15",
-      description: "We're excited to expand our team with talented new doctoral researchers focusing on AI ethics, sustainable materials, and biomedical sensors.",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 4,
-      title: "Collaboration Established with International Research Institute",
-      date: "2023-01-30",
-      description: "A new partnership with the Global Science Institute will expand our research capabilities and international impact.",
-      image: "/placeholder.svg"
-    }
-  ],
-  seminars: [
-    {
-      id: 5,
-      title: "Frontiers in Quantum Machine Learning",
-      speaker: "Dr. Lisa Zhang, Quantum AI Institute",
-      date: "2023-04-20",
-      time: "14:00 - 15:30",
-      location: "Science Building, Room 305",
-      description: "Exploring recent advances in applying quantum computing to machine learning challenges."
-    },
-    {
-      id: 6,
-      title: "Ethical Considerations in Scientific Research",
-      speaker: "Prof. Marcus Rivera, Ethics Department",
-      date: "2023-04-13",
-      time: "11:00 - 12:30",
-      location: "Virtual Seminar",
-      description: "Discussing the ethical dimensions of modern scientific research across disciplines."
-    },
-    {
-      id: 7,
-      title: "Sustainable Materials Engineering: Progress and Challenges",
-      speaker: "Dr. Olivia Thompson, Materials Science Lab",
-      date: "2023-04-06",
-      time: "15:00 - 16:30",
-      location: "Engineering Hall, Room 202",
-      description: "Reviewing recent developments in sustainable materials with focus on biodegradable alternatives."
-    }
-  ],
-  conferences: [
-    {
-      id: 8,
-      title: "International Conference on AI and Climate Science",
-      date: "2023-06-15",
-      location: "Paris, France",
-      involvement: "Dr. Johnson will deliver a keynote speech; three team members presenting papers",
-      description: "A major gathering of researchers working at the intersection of artificial intelligence and climate science."
-    },
-    {
-      id: 9,
-      title: "Biomedical Engineering Symposium",
-      date: "2023-05-22",
-      location: "Boston, USA",
-      involvement: "Dr. Williams chairing a session; PhD student presenting poster",
-      description: "Annual symposium showcasing the latest advances in biomedical engineering and healthcare technologies."
-    }
-  ],
-  workshops: [
-    {
-      id: 10,
-      title: "Quantum Computing for Beginners Workshop",
-      date: "2023-04-29",
-      time: "09:00 - 16:00",
-      location: "Computing Lab, Room 101",
-      instructor: "Dr. Michael Chen and PhD students",
-      description: "A hands-on introduction to quantum computing concepts and programming for students and researchers."
-    },
-    {
-      id: 11,
-      title: "Data Visualization for Scientific Research",
-      date: "2023-04-15",
-      time: "13:00 - 17:00",
-      location: "Science Library, Computer Lab",
-      instructor: "Dr. Sarah Williams",
-      description: "Learn effective techniques for visualizing complex scientific data to communicate research findings."
-    }
-  ]
-};
+// const activitiesData = {
+//   news: [
+//     {
+//       id: 1,
+//       title: "Robotic Arm Heart-Drawing Achievement Complete! Soon to be Featured in School Promotional Video!",
+//       date: "2023-04-27",
+//       description: "We successfully programmed a robotic arm to trace a heart shape (using Cartesian equations).",
+//       image: "/lovable-uploads/activity.jpeg"
+//     },
+//     {
+//       id: 2,
+//       title: "New Publication in Nature on Quantum Computing Advancements",
+//       date: "2023-03-22",
+//       description: "Dr. Johnson and team published groundbreaking research on quantum algorithm optimization in Nature.",
+//       image: "/placeholder.svg"
+//     },
+//     {
+//       id: 3,
+//       title: "Research Group Welcomes Three New PhD Students",
+//       date: "2023-02-15",
+//       description: "We're excited to expand our team with talented new doctoral researchers focusing on AI ethics, sustainable materials, and biomedical sensors.",
+//       image: "/placeholder.svg"
+//     },
+//     {
+//       id: 4,
+//       title: "Collaboration Established with International Research Institute",
+//       date: "2023-01-30",
+//       description: "A new partnership with the Global Science Institute will expand our research capabilities and international impact.",
+//       image: "/placeholder.svg"
+//     }
+//   ],
+//   seminars: [
+//     {
+//       id: 5,
+//       title: "Frontiers in Quantum Machine Learning",
+//       speaker: "Dr. Lisa Zhang, Quantum AI Institute",
+//       date: "2023-04-20",
+//       time: "14:00 - 15:30",
+//       location: "Science Building, Room 305",
+//       description: "Exploring recent advances in applying quantum computing to machine learning challenges."
+//     },
+//     {
+//       id: 6,
+//       title: "Ethical Considerations in Scientific Research",
+//       speaker: "Prof. Marcus Rivera, Ethics Department",
+//       date: "2023-04-13",
+//       time: "11:00 - 12:30",
+//       location: "Virtual Seminar",
+//       description: "Discussing the ethical dimensions of modern scientific research across disciplines."
+//     },
+//     {
+//       id: 7,
+//       title: "Sustainable Materials Engineering: Progress and Challenges",
+//       speaker: "Dr. Olivia Thompson, Materials Science Lab",
+//       date: "2023-04-06",
+//       time: "15:00 - 16:30",
+//       location: "Engineering Hall, Room 202",
+//       description: "Reviewing recent developments in sustainable materials with focus on biodegradable alternatives."
+//     }
+//   ],
+//   conferences: [
+//     {
+//       id: 8,
+//       title: "International Conference on AI and Climate Science",
+//       date: "2023-06-15",
+//       location: "Paris, France",
+//       involvement: "Dr. Johnson will deliver a keynote speech; three team members presenting papers",
+//       description: "A major gathering of researchers working at the intersection of artificial intelligence and climate science."
+//     },
+//     {
+//       id: 9,
+//       title: "Biomedical Engineering Symposium",
+//       date: "2023-05-22",
+//       location: "Boston, USA",
+//       involvement: "Dr. Williams chairing a session; PhD student presenting poster",
+//       description: "Annual symposium showcasing the latest advances in biomedical engineering and healthcare technologies."
+//     }
+//   ],
+//   workshops: [
+//     {
+//       id: 10,
+//       title: "Quantum Computing for Beginners Workshop",
+//       date: "2023-04-29",
+//       time: "09:00 - 16:00",
+//       location: "Computing Lab, Room 101",
+//       instructor: "Dr. Michael Chen and PhD students",
+//       description: "A hands-on introduction to quantum computing concepts and programming for students and researchers."
+//     },
+//     {
+//       id: 11,
+//       title: "Data Visualization for Scientific Research",
+//       date: "2023-04-15",
+//       time: "13:00 - 17:00",
+//       location: "Science Library, Computer Lab",
+//       instructor: "Dr. Sarah Williams",
+//       description: "Learn effective techniques for visualizing complex scientific data to communicate research findings."
+//     }
+//   ]
+// };
 
 const Activities = () => {
   const [newsFilter, setNewsFilter] = useState("all");
@@ -132,19 +132,19 @@ const Activities = () => {
 
       <section className="fade-in-content" style={{ animationDelay: "100ms" }}>
         <Tabs defaultValue="news" className="w-full">
-          <TabsList className="grid grid-cols-4 mb-8">
+          <TabsList className="grid grid-cols-3 mb-8">
             <TabsTrigger value="news" className="flex items-center gap-2">
-              <Cpu className="h-4 w-4" /> News
+              <Cpu className="h-4 w-4" /> Activities & News
             </TabsTrigger>
             <TabsTrigger value="seminars" className="flex items-center gap-2">
-              <GraduationCap className="h-4 w-4" /> Seminars
+              <GraduationCap className="h-4 w-4" /> VPX Reading Club
             </TabsTrigger>
             <TabsTrigger value="conferences" className="flex items-center gap-2">
               <Users className="h-4 w-4" /> Conferences
             </TabsTrigger>
-            <TabsTrigger value="workshops" className="flex items-center gap-2">
+            {/* <TabsTrigger value="workshops" className="flex items-center gap-2">
               <Calendar className="h-4 w-4" /> Workshops
-            </TabsTrigger>
+            </TabsTrigger> */}
           </TabsList>
           
           <TabsContent value="news" className="space-y-8">
@@ -178,7 +178,7 @@ const Activities = () => {
                     <img 
                       src={item.image} 
                       alt={item.title} 
-                      className="w-12 h-12 text-muted-foreground"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="md:w-2/3">
@@ -243,7 +243,7 @@ const Activities = () => {
             ))}
           </TabsContent>
           
-          <TabsContent value="workshops" className="space-y-6">
+          {/* <TabsContent value="workshops" className="space-y-6">
             {activitiesData.workshops.map((workshop, index) => (
               <Card key={workshop.id} className="fade-in-content" style={{ animationDelay: `${index * 100}ms` }}>
                 <CardHeader>
@@ -267,7 +267,7 @@ const Activities = () => {
                 </CardContent>
               </Card>
             ))}
-          </TabsContent>
+          </TabsContent> */}
         </Tabs>
       </section>
     </div>

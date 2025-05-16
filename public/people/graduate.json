@@ -1,0 +1,67 @@
+[
+    {
+      "name": "Junwei Shu",
+      "title": "Master's Student",
+      "bio": "Exploring NLP in legal document processing.",
+      "image": "/placeholder.svg",
+      "email": "mgarcia@university.edu",
+      "research": ["NLP", "Legal Tech"]
+    },
+    {
+        "name": "Wenjie Liu",
+        "title": "Master's Student",
+        "bio": "Exploring NLP in legal document processing.",
+        "image": "/placeholder.svg",
+        "email": "mgarcia@university.edu",
+        "research": ["NLP", "Legal Tech"]
+    },
+    {
+        "name": "Ling You",
+        "title": "Master's Student",
+        "bio": "Exploring NLP in legal document processing.",
+        "image": "/placeholder.svg",
+        "email": "mgarcia@university.edu",
+        "research": ["NLP", "Legal Tech"]
+    },
+    {
+        "name": "Zehui Guo",
+        "title": "Master's Student",
+        "bio": "Exploring NLP in legal document processing.",
+        "image": "/placeholder.svg",
+        "email": "mgarcia@university.edu",
+        "research": ["NLP", "Legal Tech"]
+    },
+    {
+        "name": "Yu Zhang",
+        "title": "Master's Student",
+        "bio": "Exploring NLP in legal document processing.",
+        "image": "/placeholder.svg",
+        "email": "mgarcia@university.edu",
+        "research": ["NLP", "Legal Tech"]
+    },
+    {
+        "name": "Yijing Wa",
+        "title": "Master's Student",
+        "bio": "Exploring NLP in legal document processing.",
+        "image": "/placeholder.svg",
+        "email": "mgarcia@university.edu",
+        "research": ["NLP", "Legal Tech"]
+    },
+    {
+        "name": "Wenzhi He",
+        "title": "Master's Student",
+        "bio": "Exploring NLP in legal document processing.",
+        "image": "/placeholder.svg",
+        "email": "mgarcia@university.edu",
+        "research": ["NLP", "Legal Tech"]
+    },
+    {
+        "name": "Chenxi Shao",
+        "title": "Master's Student",
+        "bio": "Exploring NLP in legal document processing.",
+        "image": "/placeholder.svg",
+        "email": "mgarcia@university.edu",
+        "research": ["NLP", "Legal Tech"]
+    }
+
+  ]

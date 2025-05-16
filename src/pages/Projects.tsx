@@ -4,7 +4,21 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import React, { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+
+// const markdownFilePath = '/content/completed-projects.json';
+
 const Projects = () => {
+  const [completedProjects, setCompletedProjects] = useState([]);
+
+  useEffect(() => {
+    fetch("/content/completed-projects.json")
+      .then((res) => res.json())
+      .then((data) => setCompletedProjects(data));
+  }, []);
+
+// const Projects = () => {
   return (
     <div className="container py-12 px-4 md:px-6 page-transition">
       {/* Hero Section */}
@@ -30,39 +44,39 @@ const Projects = () => {
                 {/* Project Cards - Ongoing */}
                 {[
                   {
-                    title: "AI for Climate Modeling",
-                    description: "Developing machine learning algorithms to improve climate change predictions and mitigation strategies.",
-                    lead: "Dr. Sarah Johnson",
+                    title: "Embodied Intelligence",
+                    description: "Integrating perception, reasoning, and action to enable intelligent agents that interact with the physical world.",
+                    lead: "Libing Yang",
                     progress: 75,
-                    tags: ["AI/ML", "Climate Science", "Data Modeling"],
-                    timeframe: "2023-2025",
-                    status: "Active",
-                  },
-                  {
-                    title: "Quantum Computing Applications",
-                    description: "Exploring practical applications of quantum computing in cryptography and optimization problems.",
-                    lead: "Dr. Michael Chen",
-                    progress: 40,
-                    tags: ["Quantum Computing", "Cryptography", "Algorithms"],
-                    timeframe: "2022-2025",
-                    status: "Active",
-                  },
-                  {
-                    title: "Smart Urban Infrastructure",
-                    description: "Creating data-driven solutions for urban planning and infrastructure optimization.",
-                    lead: "Dr. Emma Rodriguez",
-                    progress: 60,
-                    tags: ["Urban Planning", "IoT", "Smart Cities"],
+                    tags: ["AI/ML", "RL", "LLM-for-VLA"],
                     timeframe: "2023-2026",
                     status: "Active",
                   },
                   {
-                    title: "Sustainable Materials Research",
-                    description: "Developing eco-friendly materials for construction and consumer products.",
-                    lead: "Dr. Thomas Wilson",
-                    progress: 30,
-                    tags: ["Materials Science", "Sustainability", "Engineering"],
-                    timeframe: "2024-2027",
+                    title: "AI-Generated Content (AIGC)",
+                    description: "Pioneering generative AI models for text, image, and video creation across multimodal creative applications.",
+                    lead: "Changgu Chen",
+                    progress: 75,
+                    tags: ["Diffusion", "Video Generation", "Digital Human","Image Editing"],
+                    timeframe: "2023-2026",
+                    status: "Active",
+                  },
+                  {
+                    title: "3D Rendering & Graphics",
+                    description: "Advancing real-time neural rendering, Gaussian splatting, and immersive 3D experiences for next-generation visual computing.",
+                    lead: "Wenjie Liu",
+                    progress: 75,
+                    tags: ["3DGS", "Style Transfer", "Rendering"],
+                    timeframe: "2023-2026",
+                    status: "Active",
+                  },
+                  {
+                    title: "Video Understanding",
+                    description: "Developing models for temporal segmentation, object tracking, and multimodal video analysis to unlock insights from dynamic visual data.",
+                    lead: "Ling You",
+                    progress: 75,
+                    tags: ["MLLM", "Tracking", "Video Analysis"],
+                    timeframe: "2023-2026",
                     status: "Active",
                   },
                 ].map((project, index) => (
@@ -101,61 +115,40 @@ const Projects = () => {
                 ))}
               </div>
             </TabsContent>
-            <TabsContent value="completed" className="mt-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Project Cards - Completed */}
-                {[
-                  {
-                    title: "Renewable Energy Grid Integration",
-                    description: "Optimizing integration of renewable energy sources into existing power grids.",
-                    lead: "Dr. James Patterson",
-                    tags: ["Energy Systems", "Renewables", "Optimization"],
-                    timeframe: "2020-2023",
-                    status: "Completed",
-                  },
-                  {
-                    title: "Healthcare Data Analytics",
-                    description: "Using big data to improve patient outcomes and healthcare delivery systems.",
-                    lead: "Dr. Lisa Thompson",
-                    tags: ["Healthcare", "Data Analytics", "Patient Care"],
-                    timeframe: "2019-2022",
-                    status: "Completed",
-                  },
-                  {
-                    title: "Natural Language Processing for Legal Documents",
-                    description: "Developing NLP tools to analyze and categorize legal texts and precedents.",
-                    lead: "Dr. Robert Garcia",
-                    tags: ["NLP", "Legal Tech", "AI"],
-                    timeframe: "2018-2022",
-                    status: "Completed",
-                  },
-                ].map((project, index) => (
-                  <Card key={index}>
-                    <CardHeader>
-                      <div className="flex justify-between items-start">
-                        <CardTitle>{project.title}</CardTitle>
-                        <Badge variant="secondary">{project.status}</Badge>
-                      </div>
-                      <CardDescription>{project.timeframe}</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
-                      <div>
-                        <p className="text-sm font-medium">Lead Researcher:</p>
-                        <p className="text-sm text-muted-foreground">{project.lead}</p>
-                      </div>
-                    </CardContent>
-                    <CardFooter>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag, i) => (
-                          <Badge key={i} variant="outline">{tag}</Badge>
-                        ))}
-                      </div>
-                    </CardFooter>
-                  </Card>
-                ))}
-              </div>
-            </TabsContent>
+            {/* <TabsContent value="completed" className="mt-6">
+            <div className="prose max-w-none dark:prose-invert">
+              <ReactMarkdown>{completedMarkdown}</ReactMarkdown>
+            </div>
+          </TabsContent> */}
+          <TabsContent value="completed" className="mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {completedProjects.map((project, index) => (
+                <Card key={index}>
+                  <CardHeader>
+                    <div className="flex justify-between items-start">
+                      <CardTitle>{project.title}</CardTitle>
+                      <Badge variant="secondary">{project.status}</Badge>
+                    </div>
+                    <CardDescription>{project.timeframe}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
+                    <div>
+                      <p className="text-sm font-medium">Lead Researcher:</p>
+                      <p className="text-sm text-muted-foreground">{project.lead}</p>
+                    </div>
+                  </CardContent>
+                  <CardFooter>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag, i) => (
+                        <Badge key={i} variant="outline">{tag}</Badge>
+                      ))}
+                    </div>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
           </Tabs>
         </div>
       </section>

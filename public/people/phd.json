@@ -1,0 +1,27 @@
+[
+    {
+      "name": "Changgu Chen",
+      "title": "PhD Candidate",
+      "bio": "Working on quantum algorithms for cryptography.",
+      "image": "/placeholder.svg",
+      "email": "arodriguez@university.edu",
+      "research": ["Quantum Computing", "Cryptography"]
+    },
+    {
+        "name": "Xiangyi Wei",
+        "title": "PhD Candidate",
+        "bio": "Working on quantum algorithms for cryptography.",
+        "image": "/placeholder.svg",
+        "email": "arodriguez@university.edu",
+        "research": ["Quantum Computing", "Cryptography"]
+    },
+    {
+        "name": "Sardor Mamarasulov",
+        "title": "PhD Candidate",
+        "bio": "Working on quantum algorithms for cryptography.",
+        "image": "/placeholder.svg",
+        "email": "arodriguez@university.edu",
+        "research": ["Quantum Computing", "Cryptography"]
+    }
+  ]
+  

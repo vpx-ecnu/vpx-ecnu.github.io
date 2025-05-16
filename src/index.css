@@ -76,3 +76,20 @@
     @apply bg-background text-foreground antialiased;
   }
 }
+
+.swiper-button-prev {
+  left: -10px !important;
+  z-index: 20 !important;
+}
+.swiper-button-next {
+  right: -10px !important;
+  z-index: 20 !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  width: 40px;
+  height: 40px;
+  color: hsl(var(--primary));
+  cursor: pointer;
+}

@@ -7,14 +7,23 @@ const About = () => {
       {/* Hero Section */}
       <section className="py-16 px-6 bg-secondary/30">
         <div className="container">
-          <h1 className="text-4xl font-bold mb-6">About RadiantResearch</h1>
+          <h1 className="text-4xl font-bold mb-6">About VPX-Lab</h1>
           <div className="max-w-3xl">
             <p className="text-lg mb-6">
-              Founded in 2010, the RadiantResearch Group is an interdisciplinary research unit dedicated to advancing knowledge across multiple domains through innovative methodologies and collaborative approaches.
+            Welcome to our "Visual Perception + X" (VPX) group. X means anything that attracts your eyes or anything that needs perception.
+            We are aiming at applying computer vision technologies to other fields.
             </p>
             <p className="text-lg">
-              Our team consists of leading researchers, post-doctoral fellows, graduate students, and support staff committed to excellence in research and education.
+              In general, our research area includes:
             </p>
+            <ul className="text-lg list-disc pl-6 space-y-1">
+              <li>Computer Vision</li>
+              <li>Machine Learning</li>
+              <li>Computer Graphics (Neural Rendering)</li>
+              <li>Robotics (Visual Perception)</li>
+              <li>X</li>
+            </ul>
+
           </div>
         </div>
       </section>
@@ -26,19 +35,43 @@ const About = () => {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <Target className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold">Our Mission</h2>
+                <h2 className="text-2xl font-bold">VPX Mission</h2>
               </div>
               <p className="text-muted-foreground">
-                To produce cutting-edge research that addresses complex societal challenges through interdisciplinary collaboration and innovative methodologies, while training the next generation of researchers and thought leaders.
+                {/* To produce cutting-edge research that addresses complex societal challenges through interdisciplinary collaboration and innovative methodologies, while training the next generation of researchers and thought leaders. */}
+                To cultivate outstanding ECNUers who can take full responsibility - mastering the art of continuous improvement in all endeavors!
               </p>
             </div>
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <GraduationCap className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold">Our Vision</h2>
+                <h2 className="text-2xl font-bold">VPX pratical methods</h2>
               </div>
               <p className="text-muted-foreground">
-                To be globally recognized as a leader in transformative research that bridges disciplines and creates meaningful impact for communities worldwide through scientific inquiry and knowledge dissemination.
+              <ul className="list-disc pl-6 space-y-2 text-lg text-gray-800 dark:text-gray-200">
+              {/* 保持原有li结构，移除text-primary-foreground */}
+              <li className="text-muted-foreground">
+                <span className="font-semibold">Making our future better through VPX!</span> 
+              </li>
+              <li className="text-muted-foreground">
+                <span className="font-semibold">Be efficient!</span> 
+              </li>
+              <li className="text-muted-foreground">
+                <span className="font-semibold">Be professional!</span> 
+              </li>
+              <li className="text-muted-foreground">
+                <span className="font-semibold">Be logical!</span> 
+              </li >
+              <li className="text-muted-foreground">
+                <span className="font-semibold">Be happy with our life!</span> 
+              </li>
+              <li className="text-muted-foreground">
+                <span className="font-semibold">Finishing is the first priority!</span> 
+              </li>
+              <li className="text-muted-foreground">
+                <span className="font-semibold">Think as a reviewer</span>
+              </li>
+            </ul>
               </p>
             </div>
           </div>
@@ -82,29 +115,45 @@ const About = () => {
         <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Research Focus Areas</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
+            // {
+            //   title: "Artificial Intelligence",
+            //   description: "Developing advanced AI techniques and exploring their applications across domains."
+            // },
+            // {
+            //   title: "Data Science",
+            //   description: "Extracting meaningful insights from complex datasets to address scientific and societal challenges."
+            // },
+            // {
+            //   title: "Complex Systems",
+            //   description: "Understanding emergent behaviors in interconnected systems across multiple scales."
+            // },
+            // {
+            //   title: "Computational Biology",
+            //   description: "Applying computational methods to understand biological processes and advance healthcare."
+            // },
+            // {
+            //   title: "Sustainable Technologies",
+            //   description: "Researching solutions that address environmental challenges and promote sustainability."
+            // },
+            // {
+            //   title: "Human-Computer Interaction",
+            //   description: "Designing intuitive interfaces and studying the relationship between humans and technology."
+            // }
             {
-              title: "Artificial Intelligence",
-              description: "Developing advanced AI techniques and exploring their applications across domains."
+              title: "Embodied Intelligence",
+              description: "Integrating perception, reasoning, and action to enable intelligent agents that interact with the physical world."
             },
             {
-              title: "Data Science",
-              description: "Extracting meaningful insights from complex datasets to address scientific and societal challenges."
+              title: "AI-Generated Content (AIGC)",
+              description: "Pioneering generative AI models for text, image, and video creation across multimodal creative applications."
             },
             {
-              title: "Complex Systems",
-              description: "Understanding emergent behaviors in interconnected systems across multiple scales."
+              title: "3D Rendering & Graphics",
+              description: "Advancing real-time neural rendering, Gaussian splatting, and immersive 3D experiences for next-generation visual computing."
             },
             {
-              title: "Computational Biology",
-              description: "Applying computational methods to understand biological processes and advance healthcare."
-            },
-            {
-              title: "Sustainable Technologies",
-              description: "Researching solutions that address environmental challenges and promote sustainability."
-            },
-            {
-              title: "Human-Computer Interaction",
-              description: "Designing intuitive interfaces and studying the relationship between humans and technology."
+              title: "Video Understanding",
+              description: "Developing models for temporal segmentation, object tracking, and multimodal video analysis to unlock insights from dynamic visual data."
             }
           ].map((area, index) => (
             <Card key={index}>
@@ -126,29 +175,49 @@ const About = () => {
           <div className="space-y-12 max-w-3xl mx-auto">
             {[
               {
-                year: "2010",
-                title: "Founding of RadiantResearch",
+                year: "2020.10",
+                title: "VPX-Lab Established",
                 description: "Established with a focus on interdisciplinary research across digital humanities and data science.",
               },
               {
-                year: "2015",
-                title: "Expansion of Research Areas",
-                description: "Added new focus areas in sustainable technologies and public policy research.",
+                year: "2021.11",
+                title: "Receive First Corporate Funds",
+                description: "xxxxx.",
               },
               {
-                year: "2019",
-                title: "International Collaboration Network",
-                description: "Established partnerships with leading research institutions across Europe, Asia, and North America.",
+                year: "2022.01",
+                title: "Receive First State Funds",
+                description: "xxxxx.",
               },
               {
-                year: "2022",
-                title: "Launch of Innovation Lab",
-                description: "Created a dedicated space for experimental research and prototype development.",
+                year: "2023.02",
+                title: "First Paper Accepted",
+                description: "The paper was accepted by ICCASP2023.",
               },
               {
-                year: "2024",
-                title: "Current Focus",
-                description: "Expanding our impact through open-access research and community engagement initiatives.",
+                year: "2023.03",
+                title: "Laboratory 814 Opened for Use",
+                description: "xxxxx.",
+              },
+              {
+                year: "2023.06",
+                title: "First Graduate Student to Graduate",
+                description: "xxxxx.",
+              },
+              {
+                year: "2024.04",
+                title: "Successfully Published the First CCF Class A Paper",
+                description: "xxxxx.",
+              },
+              {
+                year: "2024.04",
+                title: "Successfully Published the First CCF Class A Paper",
+                description: "This paper was accepted by the conference IJCAI 2024.",
+              },
+              {
+                year: "2024.05",
+                title: "5 Research Teams Established",
+                description: "xxxxxx.",
               },
             ].map((milestone, index) => (
               <div key={index} className="flex gap-4">
@@ -156,7 +225,7 @@ const About = () => {
                   <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">
                     {index + 1}
                   </div>
-                  {index < 4 && <div className="w-0.5 h-full bg-border mt-2"></div>}
+                  {index < 8 && <div className="w-0.5 h-full bg-border mt-2"></div>}
                 </div>
                 <div className="flex-1 pb-4">
                   <div className="text-sm font-bold text-muted-foreground mb-1">{milestone.year}</div>

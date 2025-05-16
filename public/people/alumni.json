@@ -1,0 +1,34 @@
+[
+    {
+      "name": "Libing Yang",
+      "title": "Former Master's Student",
+      "bio": "Graduated in 2021, now working on scientific LLMs.",
+      "image": "/placeholder.svg",
+      "email": "jwilson@techuniversity.edu",
+      "research": ["Scientific NLP", "Knowledge Graph"]
+    },
+    {
+        "name": "Xiaoyan Yang",
+        "title": "Former Master's Student",
+        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "image": "/placeholder.svg",
+        "email": "jwilson@techuniversity.edu",
+        "research": ["Scientific NLP", "Knowledge Graph"]
+    },
+    {
+        "name": "Dingbo Lu",
+        "title": "Former Master's Student",
+        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "image": "/placeholder.svg",
+        "email": "jwilson@techuniversity.edu",
+        "research": ["Scientific NLP", "Knowledge Graph"]
+    },
+    {
+        "name": "Ziqing Li",
+        "title": "Former Master's Student",
+        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "image": "/placeholder.svg",
+        "email": "jwilson@techuniversity.edu",
+        "research": ["Scientific NLP", "Knowledge Graph"]
+    }
+  ]

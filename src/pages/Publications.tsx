@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Download, ExternalLink } from "lucide-react";
@@ -84,19 +84,61 @@ const publicationsData = [
 const years = Array.from(new Set(publicationsData.map(pub => pub.year))).sort((a, b) => b - a);
 
 const Publications = () => {
+  // const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  // const [searchTerm, setSearchTerm] = useState("");
+  const [publications, setPublications] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
 
+  // useEffect(() => {
+  //   fetch("http://127.0.0.1:8001/api/publications")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setPublications(data);
+  //       setLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       console.error("Failed to fetch publications:", err);
+  //       setLoading(false);
+  //     });
+  // }, []);
+  useEffect(() => {
+    fetch("/publications.json")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Loaded from JSON:", data);
+        setPublications(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to load publications:", err);
+        setLoading(false);
+      });
+  }, []);
   // Filter publications based on selected year and search term
-  const filteredPublications = publicationsData.filter(pub => {
-    const matchesYear = selectedYear === null || pub.year === selectedYear;
+  // const filteredPublications = publicationsData.filter(pub => {
+  //   const matchesYear = selectedYear === null || pub.year === selectedYear;
     
-    const matchesSearch = 
+  //   const matchesSearch = 
+  //     pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     pub.authors.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     pub.journal.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     pub.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+    
+  //   return matchesYear && matchesSearch;
+  // });
+  const filteredPublications = publications.filter(pub => {
+    const matchesYear = selectedYear === null || pub.year === selectedYear;
+  
+    const matchesSearch =
       pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       pub.authors.toLowerCase().includes(searchTerm.toLowerCase()) ||
       pub.journal.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      pub.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    
+      (pub.tags || []).some(tag =>
+        tag.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+  
     return matchesYear && matchesSearch;
   });
 
@@ -148,7 +190,7 @@ const Publications = () => {
               <CardContent className="p-6">
                 <div className="grid gap-3">
                   <h3 className="text-lg font-semibold">{publication.title}</h3>
-                  <div className="flex flex-wrap gap-2 mt-2">
+                  {/* <div className="flex flex-wrap gap-2 mt-2">
                     {publication.tags.map(tag => (
                       <span 
                         key={tag} 
@@ -157,24 +199,26 @@ const Publications = () => {
                         {tag}
                       </span>
                     ))}
-                  </div>
+                  </div> */}
                   <h3 className="text-lg text-muted-foreground">{publication.authors}</h3>
                   <div className="flex items-center justify-between">
                     <span className="text-sm">
-                      <span className="font-medium">{publication.journal}</span>, {publication.year}
+                      {/* <span className="font-medium">{publication.journal}</span>,  */}
+                      {publication.year}
                     </span>
                     <div className="flex items-center gap-2">
                       <Button 
                         variant="outline" 
                         size="sm" 
                         className="text-xs"
-                        onClick={() => window.open(`https://doi.org/${publication.doi}`, '_blank')}
+                        // onClick={() => window.open(`https://doi.org/${publication.doi}`, '_blank')}
+                        onClick={() => window.open(`${publication.doi}`, '_blank')}
                       >
                         <ExternalLink className="h-3 w-3 mr-1" /> DOI
                       </Button>
-                      <Button variant="outline" size="sm" className="text-xs">
+                      {/* <Button variant="outline" size="sm" className="text-xs">
                         <Download className="h-3 w-3 mr-1" /> PDF
-                      </Button>
+                      </Button> */}
                     </div>
                   </div>
                 

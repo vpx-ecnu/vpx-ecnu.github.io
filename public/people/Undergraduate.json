@@ -1,0 +1,18 @@
+[
+    {
+      "name": "Zhongliang Liu",
+      "title": "Undergraduate Student",
+      "bio": "Working on quantum algorithms for cryptography.",
+      "image": "/placeholder.svg",
+      "email": "arodriguez@university.edu",
+      "research": ["Quantum Computing", "Cryptography"]
+    },
+    {
+        "name": "Yu Zhang",
+        "title": "Undergraduate Student",
+        "bio": "Working on quantum algorithms for cryptography.",
+        "image": "/placeholder.svg",
+        "email": "arodriguez@university.edu",
+        "research": ["Quantum Computing", "Cryptography"]
+    }
+]
