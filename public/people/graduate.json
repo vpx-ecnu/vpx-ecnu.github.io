@@ -26,10 +26,10 @@
     {
         "name": "Zehui Guo",
         "title": "Master's Student",
-        "bio": "Exploring NLP in legal document processing.",
-        "image": "/placeholder.svg",
-        "email": "mgarcia@university.edu",
-        "research": ["NLP", "Legal Tech"]
+        "bio": "Exploring diffusion.",
+        "image": "/people/people_image/master/gzh.jpg",
+        "email": "1360733921@qq.com",
+        "research": ["image editing", "AIGC"]
     },
     {
         "name": "Yu Zhang",
@@ -58,10 +58,10 @@
     {
         "name": "Chenxi Shao",
         "title": "Master's Student",
-        "bio": "Exploring NLP in legal document processing.",
-        "image": "/placeholder.svg",
-        "email": "mgarcia@university.edu",
-        "research": ["NLP", "Legal Tech"]
+        "bio": "Exploring multimodal video understanding.",
+        "image": "/people/people_image/master/scx.jpg",
+        "email": "2011848311@qq.com",
+        "research": ["Multimodal LLMs", "Video Analytics"]
     },
     {
         "name": "Kaiyuan Shen",
