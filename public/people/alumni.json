@@ -30,5 +30,45 @@
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
         "research": ["Scientific NLP", "Knowledge Graph"]
+    },
+    {
+        "name": "Yiming Sun",
+        "title": "Former Undergraduate",
+        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "image": "/placeholder.svg",
+        "email": "jwilson@techuniversity.edu",
+        "research": ["Scientific NLP", "Knowledge Graph"]
+    },
+    {
+        "name": "Fan Yu",
+        "title": "Former Undergraduate",
+        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "image": "/placeholder.svg",
+        "email": "jwilson@techuniversity.edu",
+        "research": ["Scientific NLP", "Knowledge Graph"]
+    },
+    {
+        "name": "Junwei Huang",
+        "title": "Former Undergraduate",
+        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "image": "/placeholder.svg",
+        "email": "jwilson@techuniversity.edu",
+        "research": ["Scientific NLP", "Knowledge Graph"]
+    },
+    {
+        "name": "Pengfei Jiang",
+        "title": "Former Part-Time Student",
+        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "image": "/placeholder.svg",
+        "email": "jwilson@techuniversity.edu",
+        "research": ["Scientific NLP", "Knowledge Graph"]
+    },
+    {
+        "name": "Jincheng Weng",
+        "title": "Former Part-Time Student",
+        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "image": "/placeholder.svg",
+        "email": "jwilson@techuniversity.edu",
+        "research": ["Scientific NLP", "Knowledge Graph"]
     }
   ]

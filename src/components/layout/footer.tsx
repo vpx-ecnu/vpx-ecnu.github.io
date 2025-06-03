@@ -33,12 +33,12 @@ export function Footer() {
           >
             Join Us
           </Link>
-          <Link
+          {/* <Link
             to="/intranet"
             className="transition-colors hover:text-foreground"
           >
             Intranet
-          </Link>
+          </Link> */}
         </div>
         
         <div className="text-sm text-muted-foreground">

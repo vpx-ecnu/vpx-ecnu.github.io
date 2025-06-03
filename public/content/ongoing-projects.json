@@ -1,0 +1,40 @@
+[
+  {
+    "title": "Embodied Intelligence",
+    "description": "Integrating perception, reasoning, and action to enable intelligent agents that interact with the physical world.",
+    "details":"xxxxxxxx",
+    "lead": "Libing Yang",
+    "progress": 75,
+    "tags": ["AI/ML", "RL", "LLM-for-VLA"],
+    "timeframe": "2023-2026",
+    "status": "Active",
+    "image":"public/content/ongoing_image/robot.jpeg"
+  },
+  {
+    "title": "AI-Generated Content (AIGC)",
+    "description": "Pioneering generative AI models for text, image, and video creation across multimodal creative applications.",
+    "lead": "Changgu Chen",
+    "progress": 75,
+    "tags": ["Diffusion", "Video Generation", "Digital Human", "Image Editing"],
+    "timeframe": "2023-2026",
+    "status": "Active"
+  },
+  {
+    "title": "3D Rendering & Graphics",
+    "description": "Advancing real-time neural rendering, Gaussian splatting, and immersive 3D experiences for next-generation visual computing.",
+    "lead": "Wenjie Liu",
+    "progress": 75,
+    "tags": ["3DGS", "Style Transfer", "Rendering"],
+    "timeframe": "2023-2026",
+    "status": "Active"
+  },
+  {
+    "title": "Video Understanding",
+    "description": "Developing models for temporal segmentation, object tracking, and multimodal video analysis to unlock insights from dynamic visual data.",
+    "lead": "Ling You",
+    "progress": 75,
+    "tags": ["MLLM", "Tracking", "Video Analysis"],
+    "timeframe": "2023-2026",
+    "status": "Active"
+  }
+]

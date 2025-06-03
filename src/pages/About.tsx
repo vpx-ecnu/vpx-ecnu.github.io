@@ -5,7 +5,7 @@ const About = () => {
   return (
 <div className="container py-12 px-4 md:px-6 space-y-12">
       {/* Hero Section */}
-      <section className="py-16 px-6 bg-secondary/30">
+      {/* <section className="py-16 px-6 bg-secondary/30">
         <div className="container">
           <h1 className="text-4xl font-bold mb-6">About VPX-Lab</h1>
           <div className="max-w-3xl">
@@ -26,57 +26,109 @@ const About = () => {
 
           </div>
         </div>
+      </section> */}
+      <section className="py-16 px-1 bg-secondary/30">
+        <div className="container max-w-screen-2xl max-w-screen-xl mx-auto flex flex-col lg:flex-row items-center gap-8">
+          {/* Text Content */}
+          <div className="flex-1">
+            <h1 className="text-4xl font-bold mb-6">About VPX-Lab</h1>
+            {/* <p className="text-lg mb-6">
+              Welcome to our "Visual Perception + X" (VPX) group. X means anything that attracts your eyes or anything that needs perception.
+              We are aiming at applying computer vision technologies to other fields.
+            </p> */}
+            <p className="text-lg mb-6">
+  Welcome to our "Visual Perception + X" (VPX) group. X means anything that attracts your eyes or anything that needs perception.
+  We are aiming at applying computer vision technologies to other fields.
+  <br />
+  <span className="mt-2 inline-block">
+    For more information, check out our{" "}
+    <a
+      href="https://space.bilibili.com/487404760?spm_id_from=333.337.0.0"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-primary underline hover:opacity-80"
+    >
+      Bilibili
+    </a>{" "}
+    and{" "}
+    <a
+      href="https://github.com/vpx-ecnu"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-primary underline hover:opacity-80"
+    >
+      GitHub
+    </a>
+    .
+  </span>
+</p>
+            <p className="text-lg mb-4">In general, our research area includes:</p>
+            <ul className="text-lg list-disc pl-6 space-y-1">
+              <li>Computer Vision</li>
+              <li>Machine Learning</li>
+              <li>Computer Graphics (Neural Rendering)</li>
+              <li>Robotics (Visual Perception)</li>
+              <li>X</li>
+            </ul>
+          </div>
+
+          {/* Image */}
+          <div className="flex-1">
+            <img
+              src="/lovable-uploads/vpx_things.jpg" // 替换为实际路径
+              alt="About VPX"
+              className="w-full h-auto rounded-lg shadow"
+            />
+          </div>
+        </div>
       </section>
 
       {/* Mission & Vision */}
       <section className="py-16 px-6">
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <Target className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold">VPX Mission</h2>
-              </div>
-              <p className="text-muted-foreground">
-                {/* To produce cutting-edge research that addresses complex societal challenges through interdisciplinary collaboration and innovative methodologies, while training the next generation of researchers and thought leaders. */}
-                To cultivate outstanding ECNUers who can take full responsibility - mastering the art of continuous improvement in all endeavors!
-              </p>
-            </div>
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <GraduationCap className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold">VPX pratical methods</h2>
-              </div>
-              <p className="text-muted-foreground">
-              <ul className="list-disc pl-6 space-y-2 text-lg text-gray-800 dark:text-gray-200">
-              {/* 保持原有li结构，移除text-primary-foreground */}
-              <li className="text-muted-foreground">
-                <span className="font-semibold">Making our future better through VPX!</span> 
-              </li>
-              <li className="text-muted-foreground">
-                <span className="font-semibold">Be efficient!</span> 
-              </li>
-              <li className="text-muted-foreground">
-                <span className="font-semibold">Be professional!</span> 
-              </li>
-              <li className="text-muted-foreground">
-                <span className="font-semibold">Be logical!</span> 
-              </li >
-              <li className="text-muted-foreground">
-                <span className="font-semibold">Be happy with our life!</span> 
-              </li>
-              <li className="text-muted-foreground">
-                <span className="font-semibold">Finishing is the first priority!</span> 
-              </li>
-              <li className="text-muted-foreground">
-                <span className="font-semibold">Think as a reviewer</span>
-              </li>
-            </ul>
-              </p>
-            </div>
+  <div className="container max-w-screen-xl mx-auto">
+    <div className="flex flex-col lg:flex-row gap-12 items-start">
+      
+      {/* 左边：文字内容 */}
+      <div className="flex-1 space-y-12">
+        <div>
+          <div className="flex items-center gap-3 mb-4">
+            <Target className="h-6 w-6 text-primary" />
+            <h2 className="text-2xl font-bold">VPX Mission</h2>
           </div>
+          <p className="text-muted-foreground">
+            To cultivate outstanding ECNUers who can take full responsibility – mastering the art of continuous improvement in all endeavors!
+          </p>
         </div>
-      </section>
+
+        <div>
+          <div className="flex items-center gap-3 mb-4">
+            <GraduationCap className="h-6 w-6 text-primary" />
+            <h2 className="text-2xl font-bold">VPX Practical Methods</h2>
+          </div>
+          <ul className="list-disc pl-6 space-y-2 text-lg text-muted-foreground">
+            <li><span className="font-semibold">Making our future better through VPX!</span></li>
+            <li><span className="font-semibold">Be efficient!</span></li>
+            <li><span className="font-semibold">Be professional!</span></li>
+            <li><span className="font-semibold">Be logical!</span></li>
+            <li><span className="font-semibold">Be happy with our life!</span></li>
+            <li><span className="font-semibold">Finishing is the first priority!</span></li>
+            <li><span className="font-semibold">Think as a reviewer</span></li>
+          </ul>
+        </div>
+      </div>
+
+      {/* 右边：四张图 */}
+      <div className="flex-1 grid grid-cols-2 gap-4">
+        <img src="/lovable-uploads/about_1.png" alt="img1" className="w-full h-auto rounded-lg shadow" />
+        <img src="/lovable-uploads/about_2.png" alt="img2" className="w-full h-auto rounded-lg shadow" />
+        <img src="/lovable-uploads/about_3.png" alt="img3" className="w-full h-auto rounded-lg shadow" />
+        <img src="/lovable-uploads/about_4.png" alt="img4" className="w-full h-auto rounded-lg shadow" />
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
       {/* Core Values */}
       <section className="py-16 px-6 bg-secondary/30">

@@ -17,7 +17,7 @@
     },
     {
         "title": "Motion-zero: Zero-shot moving object control framework for diffusion-based video generation",
-        "link": "https://arxiv.org/abs/2401.10150",
+        "link": "https://vpx-ecnu.github.io/MotionZero-website/",
         "lead": "Changgu Chen, Junwei Shu, Gaoqi He, Changbo Wang, Yang Li",
         "tags": ["Diffusion", "Motion control"],
         "timeframe": "2024",
@@ -25,7 +25,7 @@
     },
     {
         "title": "ClothPPO: A Proximal Policy Optimization Enhancing Framework for Robotic Cloth Manipulation with Observation-Aligned Action Spaces",
-        "link": "https://arxiv.org/abs/2405.04549",
+        "link": "https://github.com/ElcarimQAQ/ClothPPO?tab=readme-ov-file",
         "lead": "Libing Yang, Yang Li, Long Chen",
         "tags": ["Robotic Cloth Manipulation", "PPO"],
         "timeframe": "2024",
@@ -57,7 +57,7 @@
     },
     {
         "title": "FIND: Fine-tuning Initial Noise Distribution with Policy Optimization for Diffusion Models",
-        "link": "https://dl.acm.org/doi/abs/10.1145/3664647.3681047",
+        "link": "https://vpx-ecnu.github.io/FIND-website/",
         "lead": "Changgu Chen, Libing Yang, Xiaoyan Yang, Lianggangxu Chen, Gaoqi He, Changbo Wang, Yang Li",
         "tags": ["RL","Diffusion"],
         "timeframe": "2024",
@@ -77,6 +77,14 @@
         "lead": "Yiming Sun, Fan Yu, Shaoxiang Chen, Yu Zhang, Junwei Huang, Yang Li, Chenhui Li, Changbo Wang",
         "tags": ["LLM","Tracking"],
         "timeframe": "2024",
+        "status": "Completed"
+    },
+    {
+        "title": "ABC-GS: Alignment-Based Controllable Style Transfer for 3D Gaussian Splatting",
+        "link": "https://github.com/vpx-ecnu/ABC-GS",
+        "lead": "Wenjie Liu, Zhongliang Liu, Xiaoyan Yang, Man Sha, Yang Li",
+        "tags": ["Style Transfer","3D Gaussian Splatting","Controllable","Feature Alignment"],
+        "timeframe": "2025",
         "status": "Completed"
     }
 

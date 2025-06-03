@@ -1,6 +1,6 @@
 [
     {
-      "name": "Changgu Chen",
+      "name": "XXXX",
       "title": "PhD Candidate",
       "bio": "Working on quantum algorithms for cryptography.",
       "image": "/placeholder.svg",
@@ -10,18 +10,26 @@
     {
         "name": "Xiangyi Wei",
         "title": "PhD Candidate",
-        "bio": "Working on quantum algorithms for cryptography.",
-        "image": "/placeholder.svg",
-        "email": "arodriguez@university.edu",
-        "research": ["Quantum Computing", "Cryptography"]
+        "bio": "Working on Embodied Intelligence.",
+        "image": "/people/people_image/phd/wxy.jpg",
+        "email": "52285901014@stu.ecnu.edu.cn",
+        "research": ["Multi-modal", "VLA"]
     },
     {
         "name": "Sardor Mamarasulov",
         "title": "PhD Candidate",
-        "bio": "Working on quantum algorithms for cryptography.",
-        "image": "/placeholder.svg",
-        "email": "arodriguez@university.edu",
-        "research": ["Quantum Computing", "Cryptography"]
+        "bio": "Working on Anti-spoofing systems, Deepfake detections, Data augmentations.",
+        "image": "/people/people_image/phd/Sardor.jpg",
+        "email": "mamarasulovsardor@gmail.com ",
+        "research": ["Computer Vision", "Data Science "]
+    },
+    {
+        "name": "Xiaoyuan Wang",
+        "title": "PhD Candidate",
+        "bio": "xxx.",
+        "image": "",
+        "email": "mamarasulovsardor@gmail.com ",
+        "research": ["Computer Vision", "Data Science "]
     }
   ]
   

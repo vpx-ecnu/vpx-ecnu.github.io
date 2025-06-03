@@ -11,7 +11,7 @@ const navItems = [
   { name: "People", path: "/people" },
   { name: "Activities", path: "/activities" },
   { name: "Join Us", path: "/join" },
-  { name: "Intranet", path: "/intranet" },
+  // { name: "Intranet", path: "/intranet" },
 ];
 
 export function Navbar() {

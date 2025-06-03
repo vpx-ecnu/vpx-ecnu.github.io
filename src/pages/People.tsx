@@ -10,6 +10,7 @@ import phdStudents from "../../public/people/phd.json";
 import gradStudents from "../../public/people/graduate.json";
 import undergraduate from "../../public/people/Undergraduate.json";
 import alumni from "../../public/people/alumni.json";
+import part_time from "../../public/people/part-time.json";
 
 // Sample people data
 const peopleData = {
@@ -319,6 +320,7 @@ const People = () => {
               <TabsTrigger value="faculty">Faculty</TabsTrigger>
               <TabsTrigger value="phd">PhD Students</TabsTrigger>
               <TabsTrigger value="grad">Graduate Students</TabsTrigger>
+              <TabsTrigger value="part">Part-time Students</TabsTrigger>
               <TabsTrigger value="undergrad">Undergraduate Student</TabsTrigger>
               <TabsTrigger value="alumni">Alumni</TabsTrigger>
             </TabsList>
@@ -347,6 +349,14 @@ const People = () => {
               </div>
             </TabsContent>
 
+            <TabsContent value="part" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {part_time.map((member, index) => (
+                  <PeopleCard key={index} member={member} />
+                ))}
+              </div>
+            </TabsContent>
+
             <TabsContent value="undergrad" className="mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {undergraduate.map((member, index) => (
@@ -358,7 +368,7 @@ const People = () => {
             <TabsContent value="alumni" className="mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {alumni.map((member, index) => (
-                  <PeopleCard key={index} member={member} />
+                  <PeopleCard key={index} member={member} isAlumni/>
                 ))}
               </div>
             </TabsContent>
@@ -379,9 +389,10 @@ interface PeopleCardProps {
     website?: string;
     research?: string[];
   };
+  isAlumni?: boolean;
 }
 
-const PeopleCard = ({ member }: PeopleCardProps) => {
+const PeopleCard = ({ member, isAlumni = false }: PeopleCardProps) => {
   const initials = member.name
     .split(" ")
     .map((n) => n[0])
@@ -390,10 +401,12 @@ const PeopleCard = ({ member }: PeopleCardProps) => {
   return (
     <Card className="h-full flex flex-col">
       <CardHeader className="flex flex-col items-center text-center">
-        <Avatar className="w-44 h-44">
-          <AvatarImage src={member.image} className="object-cover"/>
-          <AvatarFallback className="text-lg">{initials}</AvatarFallback>
-        </Avatar>
+        {!isAlumni && (
+          <Avatar className="w-44 h-44">
+            <AvatarImage src={member.image} className="object-cover" />
+            <AvatarFallback className="text-lg">{initials}</AvatarFallback>
+          </Avatar>
+        )}
         <CardTitle className="mt-4">{member.name}</CardTitle>
         <CardDescription>{member.title}</CardDescription>
       </CardHeader>

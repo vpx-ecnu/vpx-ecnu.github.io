@@ -48,20 +48,20 @@ const Index = () => {
       <div className="flex flex-col md:flex-row items-center gap-8">
         <div className="max-w-3xl flex-1">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-            Advancing Research Through Collaborative Innovation
+            Embodied Intelligence: Robots That See, Think, and Act
           </h1>
           <p className="text-xl mb-8 text-muted-foreground">
-            Building the Future of AI: Perception, Interaction, and Generation
+            Empowering robots with reinforcement learning and LLMs to perform tasks from household chores to automated chemistry experiments.
           </p>
           <div className="flex flex-wrap gap-4">
             <Button asChild size="lg">
               <Link to="/projects">
-                Explore Our Research
+                Explore Robot Research
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link to="/join-us">Join Our Team</Link>
+              <Link to="/join">Join Our Team</Link>
             </Button>
           </div>
         </div>
@@ -80,23 +80,23 @@ const Index = () => {
       <div className="flex flex-col md:flex-row items-center gap-8">
         <div className="max-w-3xl flex-1">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-            Enabling Creativity Through Generative Intelligence
+            Creative Intelligence: Generating for the Metaverse
           </h1>
           <p className="text-xl mb-8 text-muted-foreground">
-            Explore how AI models are reshaping the landscape of video, image, and text generation across disciplines.
+            Leveraging diffusion models for controllable image, video, and 3D mesh generation in immersive digital environments.
           </p>
           <div className="flex flex-wrap gap-4">
             <Button asChild size="lg">
-              <Link to="/projects#aigc">Explore AIGC</Link>
+              <Link to="/projects#aigc">Explore AIGC Research</Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link to="/about">About Us</Link>
+              <Link to="/join">Join Our Team</Link>
             </Button>
           </div>
         </div>
         <div className="flex-1 hidden md:block">
           <img
-            src="/lovable-uploads/robot.jpeg"
+            src="/lovable-uploads/via.png"
             alt="Generative AI Showcase"
             className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
           />
@@ -109,23 +109,50 @@ const Index = () => {
       <div className="flex flex-col md:flex-row items-center gap-8">
         <div className="max-w-3xl flex-1">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-            Robotics Meets Vision
+            Reimagining Visual Realism: Next-Gen Rendering
           </h1>
           <p className="text-xl mb-8 text-muted-foreground">
-            Integrating visual perception with embodied intelligence to empower next-gen robots.
+            Exploring NeRF and 3DGS for virtual humans, lighting reconstruction, 3D scene stylization, and realistic rendering.
           </p>
           <div className="flex flex-wrap gap-4">
             <Button asChild size="lg">
-              <Link to="/projects#embodied-ai">View Robotics Research</Link>
+              <Link to="/projects#embodied-ai">View 3D Research</Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link to="/join-us">Collaborate with Us</Link>
+              <Link to="/join">Join Our Team</Link>
             </Button>
           </div>
         </div>
         <div className="flex-1 hidden md:block">
           <img
-            src="/lovable-uploads/robot.jpeg"
+            src="/lovable-uploads/sun.png"
+            alt="Embodied AI Robot"
+            className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+      </div>
+    </SwiperSlide>
+    <SwiperSlide>
+      <div className="flex flex-col md:flex-row items-center gap-8">
+        <div className="max-w-3xl flex-1">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+            Vision Meets Language: Intelligent Video Understanding
+          </h1>
+          <p className="text-xl mb-8 text-muted-foreground">
+            Combining tracking, segmentation, and large language models for applications like live content generation and sports commentary.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Button asChild size="lg">
+              <Link to="/projects#embodied-ai">View VLM Research</Link>
+            </Button>
+            <Button variant="outline" size="lg" asChild>
+              <Link to="/join">Join Our Team</Link>
+            </Button>
+          </div>
+        </div>
+        <div className="flex-1 hidden md:block">
+          <img
+            src="/lovable-uploads/soccer-application.png"
             alt="Embodied AI Robot"
             className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
           />

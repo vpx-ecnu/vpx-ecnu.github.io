@@ -23,7 +23,7 @@ const Index = () => {
                 </Link>
               </Button>
               <Button variant="outline" size="lg" asChild>
-                <Link to="/join-us">Join Our Team</Link>
+                <Link to="/join">Join Our Team</Link>
               </Button>
             </div>
           </div>
@@ -121,7 +121,7 @@ const Index = () => {
             We're always looking for passionate researchers and collaborators to join our team.
           </p>
           <Button size="lg" asChild>
-            <Link to="/join-us">Learn About Opportunities</Link>
+            <Link to="/join">Learn About Opportunities</Link>
           </Button>
         </div>
       </section>

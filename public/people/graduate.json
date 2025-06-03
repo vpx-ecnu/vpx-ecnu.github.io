@@ -18,10 +18,10 @@
     {
         "name": "Ling You",
         "title": "Master's Student",
-        "bio": "Exploring NLP in legal document processing.",
-        "image": "/placeholder.svg",
-        "email": "mgarcia@university.edu",
-        "research": ["NLP", "Legal Tech"]
+        "bio": "Exploring multimodal large language models and video understanding.",
+        "image": "/people/people_image/master/u0.jpg",
+        "email": "51265901023@stu.ecnu.edu.cn",
+        "research": ["Multimodal LLMs", "Sports Video Analytics"]
     },
     {
         "name": "Zehui Guo",
@@ -34,18 +34,18 @@
     {
         "name": "Yu Zhang",
         "title": "Master's Student",
-        "bio": "Exploring NLP in legal document processing.",
-        "image": "/placeholder.svg",
-        "email": "mgarcia@university.edu",
-        "research": ["NLP", "Legal Tech"]
+        "bio": "Exploring virtual human video generation.",
+        "image": "/people/people_image/master/zy.jpg",
+        "email": "51275900029@stu.ecnu.edu.cn",
+        "research": ["Virtual Avatar", "Diffusion"]
     },
     {
         "name": "Yijing Wa",
         "title": "Master's Student",
-        "bio": "Exploring NLP in legal document processing.",
-        "image": "/placeholder.svg",
-        "email": "mgarcia@university.edu",
-        "research": ["NLP", "Legal Tech"]
+        "bio": "Exploring relighting in virtual reality.",
+        "image": "/people/people_image/master/wyj.jpg",
+        "email": "748628335@qq.com",
+        "research": ["relighting", "virtual shooting"]
     },
     {
         "name": "Wenzhi He",
@@ -62,6 +62,14 @@
         "image": "/placeholder.svg",
         "email": "mgarcia@university.edu",
         "research": ["NLP", "Legal Tech"]
+    },
+    {
+        "name": "Kaiyuan Shen",
+        "title": "Master's Student",
+        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
+        "image": "/people/people_image/master/sky.jpg",
+        "email": "zjut_sky@163.com",
+        "research": ["Computer Graphics", "3D Vision"]
     }
 
   ]

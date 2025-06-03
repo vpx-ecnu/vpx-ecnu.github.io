@@ -15,7 +15,11 @@ export default {
 			center: true,
 			padding: '2rem',
 			screens: {
-				'2xl': '1400px'
+				sm: '100%',
+				md: '100%',
+				lg: '1024px',
+				xl: '1280px',
+				'2xl': '1400px' // ✅ 你原来的保留没问题
 			}
 		},
 		extend: {

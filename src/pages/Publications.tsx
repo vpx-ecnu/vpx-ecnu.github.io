@@ -142,6 +142,7 @@ const Publications = () => {
     return matchesYear && matchesSearch;
   });
 
+  filteredPublications.sort((a, b) => b.year - a.year);
   return (
     <div className="container py-12 px-4 md:px-6 page-transition">
       <section className="space-y-4 text-center max-w-3xl mx-auto mb-12 fade-in-content">
