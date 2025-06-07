@@ -33,43 +33,43 @@ export const activitiesData = {
     seminars: [
       {
         id: 5,
+        title: "Novel Demonstration Generation with Gaussian Splatting Enables Robust One-Shot Manipulation",
+        speaker: "Wenzhi He",
+        date: "2025-05-28",
+        time: "16:00 - 17:00",
+        location: "Science Building, Room 523",
+        description: "Discussing the robust one-shot manipulation with gaussian splatting.",
+        link:"https://www.bilibili.com/video/BV1aVTjzPEdb/?spm_id_from=333.1387.collection.video_card.click&vd_source=cbaa42c58bd1e73b92b3bb61748b641b"
+      },
+      {
+        id: 6,
         title: "Breaking Performance Shackles of Full Fine-Tuning on Visual Recognition Tasks",
         speaker: "Chenxi Shao",
         date: "2025-04-30",
         time: "16:00 - 17:00",
         location: "Online Meeting",
         description: "Discussing the fine-tuning of visual models.",
-        link:"xxxx"
-      },
-      {
-        id: 6,
-        title: "Unify Multimodal Understanding and Generation",
-        speaker: "Wenjie Liu",
-        date: "2023-04-16",
-        time: "16:00 - 17:00",
-        location: "Science Building, Room 523",
-        description: "Analyzing the possible technical methods behind GPT-4o's image generation.",
-        link:"xxxx"
+        link:"https://www.bilibili.com/video/BV1itVozqEMS/?spm_id_from=333.1387.collection.video_card.click&vd_source=cbaa42c58bd1e73b92b3bb61748b641b"
       },
       {
         id: 7,
         title: "Neural Gaffer: Relighting Any Object via Diffusion (NIPS 2024)",
         speaker: "Junwei Shu",
-        date: "2023-04-09",
+        date: "2025-04-09",
         time: "16:00 - 17:00",
         location: "Science Building, Room 523",
         description: "Neural Gaffer is an end-to-end 2D diffusion model that relights single images under arbitrary environmental lighting without explicit scene decomposition, leveraging a pretrained diffusion model fine-tuned on synthetic data for high-quality, generalizable results across diverse scenes and enabling downstream 2D/3D applications.",
-        link:"xxxx"
+        link:"https://www.bilibili.com/video/BV1LmLozrEJg/?spm_id_from=333.1387.collection.video_card.click&vd_source=cbaa42c58bd1e73b92b3bb61748b641b"
       },
       {
         id: 8,
-        title: "Octo: An Open-Source Generalist Robot Policy and OpenVLA: An Open-Source Vision-Language-Action Model",
-        speaker: "Yu Zhang",
-        date: "2023-04-02",
+        title: "Towards Universal Soccer Video Understanding",
+        speaker: "Ling You",
+        date: "2025-03-05",
         time: "16:00 - 17:00",
         location: "Science Building, Room 523",
-        description: "Octo presents an open-source generalist robot policy for broad task learning, while OpenVLA introduces an open-source vision-language-action model for multimodal robotic control, both advancing accessible and versatile robotic learning frameworks.",
-        link:"xxxx"
+        description: "This paper presents a comprehensive multi-modal framework for soccer video understanding, introducing the large-scale SoccerReplay-1988 dataset and the MatchVision visual encoder, which achieves state-of-the-art results across multiple tasks.",
+        link:"https://www.bilibili.com/video/BV1mXJFz1ESm/?spm_id_from=333.1387.collection.video_card.click&vd_source=cbaa42c58bd1e73b92b3bb61748b641b"
       }
     ],
     conferences: [

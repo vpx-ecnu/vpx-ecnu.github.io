@@ -10,18 +10,18 @@
     {
         "name": "Wenjie Liu",
         "title": "Master's Student",
-        "bio": "Exploring NLP in legal document processing.",
-        "image": "/placeholder.svg",
-        "email": "mgarcia@university.edu",
-        "research": ["NLP", "Legal Tech"]
+        "bio": "Exploring Neural Rendering and AIGC (image and 3D editing).",
+        "image": "/people/people_image/master/lwj.jpg",
+        "email": "362449104@qq.com",
+        "research": ["Style Transfer", "3DGS","diffusion"]
     },
     {
         "name": "Ling You",
         "title": "Master's Student",
-        "bio": "Exploring multimodal large language models and video understanding.",
+        "bio": "Exploring MLLMs and video understanding.",
         "image": "/people/people_image/master/u0.jpg",
         "email": "51265901023@stu.ecnu.edu.cn",
-        "research": ["Multimodal LLMs", "Sports Video Analytics"]
+        "research": ["MLLMs", "Sports Video Analytics"]
     },
     {
         "name": "Zehui Guo",
@@ -50,10 +50,10 @@
     {
         "name": "Wenzhi He",
         "title": "Master's Student",
-        "bio": "Exploring NLP in legal document processing.",
-        "image": "/placeholder.svg",
-        "email": "mgarcia@university.edu",
-        "research": ["NLP", "Legal Tech"]
+        "bio": "Focusing on bridging the Sim-to-Real gap in robotic manipulation using gaussian splatting.",
+        "image": "/people/people_image/master/hwz.jpg",
+        "email": "1524186933@qq.com",
+        "research": ["Embodied Intelligence", "Gaussian Splatting"]
     },
     {
         "name": "Chenxi Shao",

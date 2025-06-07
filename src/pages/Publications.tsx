@@ -104,7 +104,7 @@ const Publications = () => {
   //     });
   // }, []);
   useEffect(() => {
-    fetch("/publications.json")
+    fetch("/public/publications/publication_updated.json")
       .then((res) => res.json())
       .then((data) => {
         console.log("Loaded from JSON:", data);
@@ -204,8 +204,8 @@ const Publications = () => {
                   <h3 className="text-lg text-muted-foreground">{publication.authors}</h3>
                   <div className="flex items-center justify-between">
                     <span className="text-sm">
-                      {/* <span className="font-medium">{publication.journal}</span>,  */}
-                      {publication.year}
+                      <span className="font-medium">{publication.journal}</span>
+                      {publication.journal ? ", " : ""}{publication.year}
                     </span>
                     <div className="flex items-center gap-2">
                       <Button 

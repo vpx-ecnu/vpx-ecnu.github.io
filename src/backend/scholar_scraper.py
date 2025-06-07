@@ -32,7 +32,7 @@ def get_publications():
             result.append({
                 "title": bib.get("title", ""),
                 "authors": bib.get("author", ""),
-                "journal": bib.get("venue", ""),
+                "journal": bib.get("conference", ""),
                 "year": int(bib.get("pub_year", 0)) if bib.get("pub_year") else 0,
                 "doi": filled_pub.get("pub_url", ""),  # Google Scholar 不提供 DOI，只能用 pub_url
                 "tags": bib.get("abstract", "").split()[:3]  # 用摘要中前几个词作标签（可改进）

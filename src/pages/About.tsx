@@ -75,7 +75,7 @@ const About = () => {
           {/* Image */}
           <div className="flex-1">
             <img
-              src="/lovable-uploads/vpx_things.jpg" // 替换为实际路径
+              src="/lovable-uploads/about/vpx_things.jpg" // 替换为实际路径
               alt="About VPX"
               className="w-full h-auto rounded-lg shadow"
             />
@@ -119,10 +119,10 @@ const About = () => {
 
       {/* 右边：四张图 */}
       <div className="flex-1 grid grid-cols-2 gap-4">
-        <img src="/lovable-uploads/about_1.png" alt="img1" className="w-full h-auto rounded-lg shadow" />
-        <img src="/lovable-uploads/about_2.png" alt="img2" className="w-full h-auto rounded-lg shadow" />
-        <img src="/lovable-uploads/about_3.png" alt="img3" className="w-full h-auto rounded-lg shadow" />
-        <img src="/lovable-uploads/about_4.png" alt="img4" className="w-full h-auto rounded-lg shadow" />
+        <img src="/lovable-uploads/about/about_1.png" alt="img1" className="w-full h-auto rounded-lg shadow" />
+        <img src="/lovable-uploads/about/about_2.png" alt="img2" className="w-full h-auto rounded-lg shadow" />
+        <img src="/lovable-uploads/about/about_3.png" alt="img3" className="w-full h-auto rounded-lg shadow" />
+        <img src="/lovable-uploads/about/about_4.png" alt="img4" className="w-full h-auto rounded-lg shadow" />
       </div>
 
     </div>

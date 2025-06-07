@@ -2,39 +2,39 @@
     {
       "name": "Libing Yang",
       "title": "Former Master's Student",
-      "bio": "Graduated in 2021, now working on scientific LLMs.",
+      "bio": "Graduated in 2025, now working on robotic-related LLMs.",
       "image": "/placeholder.svg",
       "email": "jwilson@techuniversity.edu",
-      "research": ["Scientific NLP", "Knowledge Graph"]
+      "research": ["Embodied Intelligence", "VLA"]
     },
     {
         "name": "Xiaoyan Yang",
         "title": "Former Master's Student",
-        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "bio": "Graduated in 2024, now working on AIGC.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
-        "research": ["Scientific NLP", "Knowledge Graph"]
+        "research": ["Diffusion", "NeRF"]
     },
     {
         "name": "Dingbo Lu",
         "title": "Former Master's Student",
-        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "bio": "Graduated in 2024, now working on NeRF and 3DGS.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
-        "research": ["Scientific NLP", "Knowledge Graph"]
+        "research": ["NeRF", "3DGS"]
     },
     {
         "name": "Ziqing Li",
         "title": "Former Master's Student",
-        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "bio": "Graduated in 2024, now working on SMPL-related action research.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
-        "research": ["Scientific NLP", "Knowledge Graph"]
+        "research": ["SMPL"]
     },
     {
         "name": "Yiming Sun",
         "title": "Former Undergraduate",
-        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "bio": "Graduated in 2024, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
         "research": ["Scientific NLP", "Knowledge Graph"]
@@ -42,7 +42,7 @@
     {
         "name": "Fan Yu",
         "title": "Former Undergraduate",
-        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "bio": "Graduated in 2025, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
         "research": ["Scientific NLP", "Knowledge Graph"]
@@ -50,7 +50,7 @@
     {
         "name": "Junwei Huang",
         "title": "Former Undergraduate",
-        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "bio": "Graduated in 2025, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
         "research": ["Scientific NLP", "Knowledge Graph"]
@@ -58,7 +58,7 @@
     {
         "name": "Pengfei Jiang",
         "title": "Former Part-Time Student",
-        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "bio": "Graduated in 2024, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
         "research": ["Scientific NLP", "Knowledge Graph"]
@@ -66,7 +66,7 @@
     {
         "name": "Jincheng Weng",
         "title": "Former Part-Time Student",
-        "bio": "Graduated in 2021, now working on scientific LLMs.",
+        "bio": "Graduated in 2024, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
         "research": ["Scientific NLP", "Knowledge Graph"]

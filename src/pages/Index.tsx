@@ -67,7 +67,7 @@ const Index = () => {
         </div>
         <div className="flex-1 hidden md:block">
           <img
-            src="/lovable-uploads/robot.jpeg"
+            src="/lovable-uploads/home/robot.jpeg"
             alt="VPX Lab Environment"
             className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
           />
@@ -96,7 +96,7 @@ const Index = () => {
         </div>
         <div className="flex-1 hidden md:block">
           <img
-            src="/lovable-uploads/via.png"
+            src="/lovable-uploads/home/via.png"
             alt="Generative AI Showcase"
             className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
           />
@@ -125,7 +125,7 @@ const Index = () => {
         </div>
         <div className="flex-1 hidden md:block">
           <img
-            src="/lovable-uploads/sun.png"
+            src="/lovable-uploads/home/sun.png"
             alt="Embodied AI Robot"
             className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
           />
@@ -152,7 +152,7 @@ const Index = () => {
         </div>
         <div className="flex-1 hidden md:block">
           <img
-            src="/lovable-uploads/soccer-application.png"
+            src="/lovable-uploads/home/soccer-application.png"
             alt="Embodied AI Robot"
             className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
           />

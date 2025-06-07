@@ -424,12 +424,12 @@ const PeopleCard = ({ member, isAlumni = false }: PeopleCardProps) => {
         )}
       </CardContent>
       <CardFooter className="flex justify-center gap-2">
-        <Button size="sm" variant="outline" asChild>
+        {!isAlumni && (<Button size="sm" variant="outline" asChild>
           <a href={`mailto:${member.email}`}>
             <Mail className="h-4 w-4 mr-2" />
             Email
           </a>
-        </Button>
+        </Button>)}
         {member.website && (
           <Button size="sm" variant="outline" asChild>
             <a href={member.website} target="_blank" rel="noopener noreferrer">
