@@ -70,5 +70,13 @@
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
         "research": ["Scientific NLP", "Knowledge Graph"]
+    }，
+    {
+        "name": "Kaibo Yin",
+        "title": "Former Undergraduate",
+        "bio": "Working on functions and systems necessary for artificially-intelligent robots that can act within the space of human society.",
+        "image": "/people/people_image/part_time/ykb.jpg",
+        "email": "a1021524866@gmail.com",
+        "research": ["Robotics", "Embodied Intelligence"]
     }
   ]
