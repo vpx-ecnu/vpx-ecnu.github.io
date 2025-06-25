@@ -6,21 +6,5 @@
       "image": "/people/people_image/part_time/yj.jpg",
       "email": "71255901065@stu.ecnu.edu.cn",
       "research": ["generative AI", "talking virtual avatars"]
-    },
-    {
-        "name": "kaibo Yin",
-        "title": "Part-Time Student",
-        "bio": "Working on functions and systems necessary for artificially-intelligent robots that can act within the space of human society.",
-        "image": "/people/people_image/part_time/ykb.jpg",
-        "email": "a1021524866@gmail.com",
-        "research": ["Robotics", "Embodied Intelligence"]
-    },
-    {
-        "name": "xxx",
-        "title": "Part-Time Student",
-        "bio": "Working on quantum algorithms for cryptography.",
-        "image": "/placeholder.svg",
-        "email": "arodriguez@university.edu",
-        "research": ["Quantum Computing", "Cryptography"]
     }
   ]
