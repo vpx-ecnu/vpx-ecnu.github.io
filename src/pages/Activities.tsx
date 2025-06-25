@@ -24,7 +24,7 @@ const Activities = () => {
   return (
     <div className="container py-12 px-4 md:px-6 space-y-12 page-transition">
       <section className="space-y-4 text-center max-w-3xl mx-auto fade-in-content">
-        <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">Activities & News</h1>
+        <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">News & Activities</h1>
         <p className="text-muted-foreground md:text-xl">
           Stay updated with the latest happenings, events, and achievements in our research group.
         </p>
@@ -34,13 +34,13 @@ const Activities = () => {
         <Tabs defaultValue="news" className="w-full">
           <TabsList className="grid grid-cols-3 mb-8">
             <TabsTrigger value="news" className="flex items-center gap-2">
-              <Cpu className="h-4 w-4" /> Activities & News
+              <Cpu className="h-4 w-4" /> News
             </TabsTrigger>
             <TabsTrigger value="seminars" className="flex items-center gap-2">
               <GraduationCap className="h-4 w-4" /> VPX Reading Club
             </TabsTrigger>
             <TabsTrigger value="conferences" className="flex items-center gap-2">
-              <Users className="h-4 w-4" /> Conferences
+              <Users className="h-4 w-4" /> Activities
             </TabsTrigger>
           </TabsList>
 
