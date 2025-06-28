@@ -104,7 +104,7 @@ const Publications = () => {
   //     });
   // }, []);
   useEffect(() => {
-    fetch("public/publications/publication_updated.json")
+    fetch("/publications/publication_updated.json")
       .then((res) => res.json())
       .then((data) => {
         console.log("Loaded from JSON:", data);
