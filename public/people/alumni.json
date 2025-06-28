@@ -5,7 +5,7 @@
       "bio": "Graduated in 2025, now working on robotic-related LLMs.",
       "image": "/placeholder.svg",
       "email": "jwilson@techuniversity.edu",
-      "research": ["Embodied Intelligence", "VLA"]
+      "research": ["HUAWEI"]
     },
     {
         "name": "Xiaoyan Yang",
@@ -13,7 +13,7 @@
         "bio": "Graduated in 2024, now working on AIGC.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
-        "research": ["Diffusion", "NeRF"]
+        "research": ["xxx"]
     },
     {
         "name": "Dingbo Lu",
@@ -21,7 +21,7 @@
         "bio": "Graduated in 2024, now working on NeRF and 3DGS.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
-        "research": ["NeRF", "3DGS"]
+        "research": ["NIO"]
     },
     {
         "name": "Ziqing Li",
@@ -29,7 +29,7 @@
         "bio": "Graduated in 2024, now working on SMPL-related action research.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
-        "research": ["SMPL"]
+        "research": ["xxx"]
     },
     {
         "name": "Yiming Sun",
@@ -37,7 +37,7 @@
         "bio": "Graduated in 2024, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
-        "research": ["Scientific NLP", "Knowledge Graph"]
+        "research": ["Pursuing a graduate degree at Fudan University"]
     },
     {
         "name": "Fan Yu",
@@ -45,7 +45,7 @@
         "bio": "Graduated in 2025, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
-        "research": ["Scientific NLP", "Knowledge Graph"]
+        "research": ["Pursuing a graduate degree at Shanghai Jiao Tong University"]
     },
     {
         "name": "Junwei Huang",
@@ -53,7 +53,7 @@
         "bio": "Graduated in 2025, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
-        "research": ["Scientific NLP", "Knowledge Graph"]
+        "research": ["xxxx"]
     },
     {
         "name": "Pengfei Jiang",
@@ -61,7 +61,7 @@
         "bio": "Graduated in 2024, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
-        "research": ["Scientific NLP", "Knowledge Graph"]
+        "research": ["HUAWEI"]
     },
     {
         "name": "Jincheng Weng",
@@ -77,6 +77,6 @@
         "bio": "Working on functions and systems necessary for artificially-intelligent robots that can act within the space of human society.",
         "image": "/people/people_image/part_time/ykb.jpg",
         "email": "a1021524866@gmail.com",
-        "research": ["Robotics", "Embodied Intelligence"]
+        "research": ["xxx"]
     }
   ]

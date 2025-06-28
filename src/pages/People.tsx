@@ -400,46 +400,52 @@ const PeopleCard = ({ member, isAlumni = false }: PeopleCardProps) => {
 
   return (
     <Card className="h-full flex flex-col">
-      <CardHeader className="flex flex-col items-center text-center">
-        {!isAlumni && (
-          <Avatar className="w-44 h-44">
-            <AvatarImage src={member.image} className="object-cover" />
-            <AvatarFallback className="text-lg">{initials}</AvatarFallback>
-          </Avatar>
-        )}
-        <CardTitle className="mt-4">{member.name}</CardTitle>
-        <CardDescription>{member.title}</CardDescription>
-      </CardHeader>
-      <CardContent className="flex-1">
-        <p className="text-sm text-muted-foreground text-center">{member.bio}</p>
-        {member.research && (
-          <div className="mt-4">
-            <p className="text-sm font-medium text-center">Research Areas</p>
-            <ul className="mt-2 text-sm text-muted-foreground space-y-1">
-              {member.research.map((area, i) => (
-                <li key={i} className="text-center">{area}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </CardContent>
-      <CardFooter className="flex justify-center gap-2">
-        {!isAlumni && (<Button size="sm" variant="outline" asChild>
-          <a href={`mailto:${member.email}`}>
-            <Mail className="h-4 w-4 mr-2" />
-            Email
-          </a>
-        </Button>)}
-        {member.website && (
-          <Button size="sm" variant="outline" asChild>
-            <a href={member.website} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="h-4 w-4 mr-2" />
-              Website
-            </a>
-          </Button>
-        )}
-      </CardFooter>
-    </Card>
+  <CardHeader className={`flex flex-col ${isAlumni ? "items-start text-left" : "items-center text-center"}`}>
+    {!isAlumni && (
+      <Avatar className="w-44 h-44">
+        <AvatarImage src={member.image} className="object-cover" />
+        <AvatarFallback className="text-lg">{initials}</AvatarFallback>
+      </Avatar>
+    )}
+    <CardTitle className={isAlumni ? "mt-0" : "mt-4"}>{member.name}</CardTitle>
+    <CardDescription className={isAlumni ? "text-blue-600" : ""}>
+  {member.title}
+</CardDescription>
+  </CardHeader>
+  <CardContent className="flex-1">
+    <p className={`text-sm text-muted-foreground ${isAlumni ? "" : "text-center"}`}>{member.bio}</p>
+    {member.research && (
+      <div className="mt-4">
+        <p className={`text-sm font-medium ${isAlumni ? "" : "text-center"}`}>
+  {isAlumni ? "Alumni Placement" : "Research Areas"}
+</p>
+        <ul className={`mt-2 text-sm text-muted-foreground space-y-1 ${isAlumni ? "" : "text-center"}`}>
+          {member.research.map((area, i) => (
+            <li key={i}>{area}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </CardContent>
+  <CardFooter className={`flex ${isAlumni ? "justify-start" : "justify-center"} gap-2`}>
+    {!isAlumni && (
+      <Button size="sm" variant="outline" asChild>
+        <a href={`mailto:${member.email}`}>
+          <Mail className="h-4 w-4 mr-2" />
+          Email
+        </a>
+      </Button>
+    )}
+    {member.website && (
+      <Button size="sm" variant="outline" asChild>
+        <a href={member.website} target="_blank" rel="noopener noreferrer">
+          <ExternalLink className="h-4 w-4 mr-2" />
+          Website
+        </a>
+      </Button>
+    )}
+  </CardFooter>
+</Card>
   );
 };
 
