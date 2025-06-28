@@ -6,7 +6,7 @@ export const activitiesData = {
         date: "2025-04-27",
         sub_title:"We successfully programmed a robotic arm to trace a heart shape (using Cartesian equations). to see what happens if title is very very long Robotic Arm Heart-Drawing Achievement Complete! Soon to be Featured in School Promotional Video!",
         description: "also what's the difference between sub title and description here. We successfully programmed a robotic arm to trace a heart shape (using Cartesian equations). to see what happens if title is very very long Robotic Arm Heart-Drawing Achievement Complete! Soon to be Featured in School Promotional Video!",
-        image: "/lovable-uploads/activity.jpeg"
+        image: "public/lovable-uploads/activity/activity.jpeg"
       },
       // {
       //   id: 2,
