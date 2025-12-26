@@ -1,13 +1,42 @@
 export const activitiesData = {
     news: [
       {
-        id: 1,
+        id: "news-1",
         title: "Robotic Arm Heart-Drawing Achievement Complete! Soon to be Featured in School Promotional Video! to see what happens if title is very very long Robotic Arm Heart-Drawing Achievement Complete! Soon to be Featured in School Promotional Video!",
         date: "2025-04-27",
         sub_title:"We successfully programmed a robotic arm to trace a heart shape (using Cartesian equations). to see what happens if title is very very long Robotic Arm Heart-Drawing Achievement Complete! Soon to be Featured in School Promotional Video!",
         description: "also what's the difference between sub title and description here. We successfully programmed a robotic arm to trace a heart shape (using Cartesian equations). to see what happens if title is very very long Robotic Arm Heart-Drawing Achievement Complete! Soon to be Featured in School Promotional Video!",
-        image: "/lovable-uploads/activity/activity.jpeg"
+        image: "/lovable-uploads/activity/activity.jpeg",
+        url: "https://www.xiaohongshu.com/explore/xxxxxxxxxxxx",
+        source: "xhs",
       },
+      {
+      id: "news-2",
+      title: "VPX demo at Shanghai Education Expo",
+      description: "Over 1,000 on-site trials showcased the practicality of intelligent sandplay assessment.",
+      date: "2025-05-10",
+      image: "/lovable-uploads/activity/activity.jpeg",
+      url: "https://www.xiaohongshu.com/explore/xxxxxxxxxxxx",
+      source: "xhs",
+    },
+    {
+      id: "news-3",
+      title: "New preprint released on robotic titration",
+      description: "Real-time pH feedback enables accurate and repeatable acid–base titration.",
+      date: "2025-04-02",
+      image: "/lovable-uploads/activity/activity.jpeg",
+      url: "https://arxiv.org/abs/xxxx.xxxxx",
+      source: "website",
+    },
+    {
+      id: "news-4",
+      title: "Project highlight thread",
+      description: "A short thread introducing our latest AIGC virtual human demos.",
+      date: "2025-03-20",
+      image: "/lovable-uploads/activity/activity.jpeg",
+      url: "https://twitter.com/xxx/status/xxxxxxxx",
+      source: "twitter",
+    },
       // {
       //   id: 2,
       //   title: "New Publication in Nature on Quantum Computing Advancements",

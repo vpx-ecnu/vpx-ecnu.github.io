@@ -1,40 +1,69 @@
 [
   {
-    "title": "Embodied Intelligence",
-    "description": "Integrating perception, reasoning, and action to enable intelligent agents that interact with the physical world.",
-    "details":"xxxxxxxx",
-    "lead": "Libing Yang",
-    "progress": 75,
-    "tags": ["AI/ML", "RL", "LLM-for-VLA"],
-    "timeframe": "2023-2026",
+    "title": "Embodied Intelligence for Automated Chemical Titration",
+    "description": "An automated titration framework that combines robotic liquid handling and real-time pH feedback to deliver accurate, repeatable, and safe chemical experiments.",
+    "details": "## Overview\nThis project presents an embodied intelligence–based approach to automated acid–base titration, replacing traditional burettes with low-cost droppers precisely controlled by a robotic platform. The method achieves high-precision titration performance comparable to trained laboratory personnel while significantly simplifying experimental procedures.\n## Key Contributions\nThe robot performs stable and repeatable liquid dispensing with real-time pH sensing, enabling accurate titration curve generation and reliable equivalence-point detection. By minimizing human intervention, the approach reduces operational errors and enhances laboratory safety, offering a cost-effective and scalable solution for scientific research and education.",
+    "lead": "Xiangyi Wei",
+    "tags": ["AI/ML", "RL", "Embodied Intelligence", "Robotics"],
+    "timeframe": "2023–2026",
     "status": "Active",
-    "image":"public/content/ongoing_image/robot.jpeg"
+
+    "thumbnail": "/content/ongoing_image/project1_1.jpg",
+    "images": [
+      "/content/ongoing_image/project1_1.jpg",
+      "/content/ongoing_image/project1_2.jpg"
+    ],
+    
+    "video": {
+      "type": "bilibili",
+      "embedUrl": "https://player.bilibili.com/player.html?bvid=BV1vWBeBEEQ2&autoplay=0"
+    }
   },
+
   {
-    "title": "AI-Generated Content (AIGC)",
-    "description": "Pioneering generative AI models for text, image, and video creation across multimodal creative applications.",
-    "lead": "Changgu Chen",
-    "progress": 75,
-    "tags": ["Diffusion", "Video Generation", "Digital Human", "Image Editing"],
-    "timeframe": "2023-2026",
-    "status": "Active"
+    "title": "AI-Powered Virtual Human Video Generation",
+    "description": "Automatically generating expressive, speaker-driven presentation videos from portraits, slides, scripts, and backgrounds, enabling fast, scalable, and personalized content creation.",
+    "details": "## Overview\nThis project explores an AI-driven approach to virtual human video creation, transforming simple inputs such as portrait images, presentation slides, and written scripts into expressive, speaker-led videos with synchronized audio and visuals.\n## Impact\nBy eliminating the need for professional filming and complex production pipelines, the approach enables fast, scalable, and personalized video creation, making high-quality presentation videos as accessible and efficient as preparing slides.",
+    "lead": "Yu Zhang",
+    "tags": ["AIGC", "Diffusion", "Video Generation", "Digital Human"],
+    "timeframe": "2023–2026",
+    "status": "Active",
+
+    "thumbnail": "/content/ongoing_image/project2_1.png",
+    "images": [
+      "/content/ongoing_image/project2_1.png"
+    ]
   },
+
   {
     "title": "3D Rendering & Graphics",
     "description": "Advancing real-time neural rendering, Gaussian splatting, and immersive 3D experiences for next-generation visual computing.",
+    "details": "xxxxxxxx",
     "lead": "Wenjie Liu",
-    "progress": 75,
-    "tags": ["3DGS", "Style Transfer", "Rendering"],
-    "timeframe": "2023-2026",
-    "status": "Active"
+    "tags": ["3DGS", "Neural Rendering", "Graphics", "Style Transfer"],
+    "timeframe": "2023–2026",
+    "status": "Active",
+
+    "thumbnail": "/content/ongoing_image/project1_1.jpg",
+    "images": [
+      "/content/ongoing_image/3d_rendering.jpg"
+    ]
   },
+
   {
-    "title": "Video Understanding",
-    "description": "Developing models for temporal segmentation, object tracking, and multimodal video analysis to unlock insights from dynamic visual data.",
-    "lead": "Ling You",
-    "progress": 75,
-    "tags": ["MLLM", "Tracking", "Video Analysis"],
-    "timeframe": "2023-2026",
-    "status": "Active"
+    "title": "Intelligent Sandplay for Psychological Assessment",
+    "description": "Leveraging comprehensive data capture and AI-driven analysis to enhance the reliability, scalability, and safety of sandplay-based psychological evaluation in educational settings.",
+    "details": "## Overview\nThis project addresses key limitations of traditional psychological sandplay assessment, including incomplete data recording, subjective analysis, and privacy concerns, by introducing an intelligent, data-driven workflow aligned with mental health and AI initiatives.\n## Outcomes\nThrough comprehensive data capture and AI-assisted analysis, the project supports human–machine collaborative diagnosis, providing counselors with reliable decision support and students with personalized psychological assessment, significantly improving the quality and efficiency of psychological intervention.",
+    "lead": "Chenxi Shao",
+    "tags": ["MLLM", "Tracking", "Video Analysis", "Mental Health"],
+    "timeframe": "2023–2026",
+    "status": "Active",
+
+    "thumbnail": "/content/ongoing_image/project4_1.png",
+    "images": [
+      "/content/ongoing_image/project4_1.png",
+      "/content/ongoing_image/project4_2.jpg",
+      "/content/ongoing_image/project4_3.jpg"
+    ]
   }
 ]

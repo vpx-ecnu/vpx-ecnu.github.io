@@ -1,0 +1,91 @@
+[
+    {
+      "title": "Multi-source templates learning for real-time aerial tracking",
+      "link": "https://ieeexplore.ieee.org/abstract/document/10094642",
+      "lead": "Yiming Sun, Yang Li, Changbo Wang",
+      "tags": ["Aerial tracking", "UAV tracking", "Multi-source Template"],
+      "timeframe": "2023",
+      "status": "Completed"
+    },
+    {
+      "title": "RAGT: learning robust features for occluded human pose and shape estimation with attention-guided transformer",
+      "link": "https://dl.acm.org/doi/10.1007/978-981-99-9666-7_22",
+      "lead": "Ziqing Li, Yang Li, Shaohui Lin",
+      "tags": ["3D human pose", "SMPL"],
+      "timeframe": "2023",
+      "status": "Completed"
+    },
+    {
+        "title": "Motion-zero: Zero-shot moving object control framework for diffusion-based video generation",
+        "link": "https://vpx-ecnu.github.io/MotionZero-website/",
+        "lead": "Changgu Chen, Junwei Shu, Gaoqi He, Changbo Wang, Yang Li",
+        "tags": ["Diffusion", "Motion control"],
+        "timeframe": "2024",
+        "status": "Completed"
+    },
+    {
+        "title": "ClothPPO: A Proximal Policy Optimization Enhancing Framework for Robotic Cloth Manipulation with Observation-Aligned Action Spaces",
+        "link": "https://github.com/ElcarimQAQ/ClothPPO?tab=readme-ov-file",
+        "lead": "Libing Yang, Yang Li, Long Chen",
+        "tags": ["Robotic Cloth Manipulation", "PPO"],
+        "timeframe": "2024",
+        "status": "Completed"
+    },
+    {
+        "title": "Generative Data Augmentation with Liveness Information Preserving for Face Anti-Spoofing",
+        "link": "https://dl.acm.org/doi/abs/10.1145/3652583.3658078",
+        "lead": "Changgu Chen, Yang Li, Jian Zhang, Jiali Liu, Changbo Wang",
+        "tags": ["Data Augmentation", "Anti-Spoofing"],
+        "timeframe": "2024",
+        "status": "Completed"
+    },
+    {
+        "title": "HeRF: A Hierarchical Framework for Efficient and Extendable New View Synthesis",
+        "link": "https://ieeexplore.ieee.org/abstract/document/10650631",
+        "lead": "Xiaoyan Yang, Dingbo Lu, Wenjie Liu, Ling You, Yang Li, Changbo Wang",
+        "tags": ["NeRF", "Neural Rendering"],
+        "timeframe": "2024",
+        "status": "Completed"
+    },
+    {
+        "title": "Channel Robust Strategies with Data Augmentation for Audio Anti-spoofing",
+        "link": "https://link.springer.com/chapter/10.1007/978-3-031-75764-8_7",
+        "lead": "Sardor Mamarasulov, Yang Li, Changbo Wang",
+        "tags": ["Anti-spoofing"],
+        "timeframe": "2024",
+        "status": "Completed"
+    },
+    {
+        "title": "FIND: Fine-tuning Initial Noise Distribution with Policy Optimization for Diffusion Models",
+        "link": "https://vpx-ecnu.github.io/FIND-website/",
+        "lead": "Changgu Chen, Libing Yang, Xiaoyan Yang, Lianggangxu Chen, Gaoqi He, Changbo Wang, Yang Li",
+        "tags": ["RL","Diffusion"],
+        "timeframe": "2024",
+        "status": "Completed"
+    },
+    {
+        "title": "Data augmentation with attention framework for robust deepfake detection",
+        "link": "https://link.springer.com/article/10.1007/s00371-024-03690-y",
+        "lead": "Sardor Mamarasulov, Lianggangxu Chen, Changgu Chen, Yang Li, Changbo Wang",
+        "tags": ["Data Augmentation","Deepfake"],
+        "timeframe": "2024",
+        "status": "Completed"
+    },
+    {
+        "title": "Chattracker: Enhancing visual tracking performance via chatting with multimodal large language model",
+        "link": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/458567910b6d21f438f22aa20c036723-Abstract-Conference.html",
+        "lead": "Yiming Sun, Fan Yu, Shaoxiang Chen, Yu Zhang, Junwei Huang, Yang Li, Chenhui Li, Changbo Wang",
+        "tags": ["LLM","Tracking"],
+        "timeframe": "2024",
+        "status": "Completed"
+    },
+    {
+        "title": "ABC-GS: Alignment-Based Controllable Style Transfer for 3D Gaussian Splatting",
+        "link": "https://github.com/vpx-ecnu/ABC-GS",
+        "lead": "Wenjie Liu, Zhongliang Liu, Xiaoyan Yang, Man Sha, Yang Li",
+        "tags": ["Style Transfer","3D Gaussian Splatting","Controllable","Feature Alignment"],
+        "timeframe": "2025",
+        "status": "Completed"
+    }
+
+]

@@ -10,7 +10,7 @@ import { Navigation } from 'swiper/modules';
 const Index = () => {
   return <div className="page-transition">
       <section
-  className="relative pt-36 pb-40 bg-cover bg-center"
+  className="relative pt-32 pb-32 bg-cover bg-center"
   style={{
     backgroundImage: "url('/lovable-uploads/home/home_robot.gif')",
   }}
@@ -229,6 +229,35 @@ const Index = () => {
   </div>
 </section>
 
+{/* Key Statistics */}
+      <section className="bg-muted my-[3px] py-[21px] mx-0 px-[36px] rounded-none">
+        <div className="container px-4 md:px-6 fade-in-content">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div className="space-y-2">
+              <div className="flex justify-center">
+                <BookOpen className="h-8 w-8 text-primary" />
+              </div>
+              <h3 className="text-3xl font-bold">20+</h3>
+              <p className="text-muted-foreground">Publications</p>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-center">
+                <Users className="h-8 w-8 text-primary" />
+              </div>
+              <h3 className="text-3xl font-bold">30+</h3>
+              <p className="text-muted-foreground">Researchers</p>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-center">
+                <Clock className="h-8 w-8 text-primary" />
+              </div>
+              <h3 className="text-3xl font-bold">5</h3>
+              <p className="text-muted-foreground">Years of Research</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
 {/* Recent Publications */}
 <section className="py-10 md:py-14">
   <div className="container px-4 md:px-6">
@@ -359,35 +388,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Key Statistics */}
-      <section className="bg-muted my-[3px] py-[21px] mx-0 px-[36px] rounded-none">
-        <div className="container px-4 md:px-6 fade-in-content">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="space-y-2">
-              <div className="flex justify-center">
-                <BookOpen className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-3xl font-bold">20+</h3>
-              <p className="text-muted-foreground">Publications</p>
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-center">
-                <Users className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-3xl font-bold">30+</h3>
-              <p className="text-muted-foreground">Researchers</p>
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-center">
-                <Clock className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-3xl font-bold">5</h3>
-              <p className="text-muted-foreground">Years of Research</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Latest News/Activities */}
       {/* <section className="py-16 md:py-24">
         <div className="container px-4 md:px-6">
@@ -431,57 +431,95 @@ const Index = () => {
           </div>
         </div>
       </section> */}
-      {/* Latest News/Activities */}
-      <section className="py-16 md:py-24">
-        <div className="container px-4 md:px-6">
-          <div className="grid gap-8 md:gap-12">
-            <div className="fade-in-content flex flex-col gap-2 md:gap-4">
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">
-                Latest News & Activities
-              </h2>
-              <p className="text-muted-foreground md:text-lg">
-                Stay updated with our recent events, discoveries, and achievements.
-              </p>
-            </div>
-            <div className="space-y-6">
-              {activitiesData.news.slice(0, 3).map((item, index) => (
-                <div 
-                  key={item.id} 
-                  className="flex flex-col md:flex-row gap-4 fade-in-content" 
-                  style={{ animationDelay: `${index * 150}ms` }}
-                >
-                  <div className="md:w-1/4 bg-muted rounded-lg h-40 flex items-center justify-center overflow-hidden">
-                    <img 
-                      src={item.image} 
-                      alt={item.title} 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="md:w-3/4">
-                    <div className="text-sm text-muted-foreground mb-2">
-                      {new Date(item.date).toLocaleDateString()}
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-muted-foreground mb-4">
-                      {item.description}
-                    </p>
-                    <Button asChild variant="link" className="p-0">
-                      <Link to="/activities">Read more <ArrowRight className="h-4 w-4 ml-1" /></Link>
-                    </Button>
-                  </div>
+
+
+      {/* Latest News Wall in a scrollable window */}
+<section className="pt-6 pb-10 md:pt-8 md:pb-14">
+  <div className="container px-4 md:px-6">
+    <div className="flex items-end justify-between gap-6 mb-6">
+      <div className="space-y-2">
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">
+          Latest News & Activities
+        </h2>
+        <p className="text-muted-foreground md:text-lg">
+          A feed-style wall of recent updates.
+        </p>
+      </div>
+    </div>
+
+    {/* 窗口外框 */}
+    <div className="border bg-card">
+      {/* 窗口标题栏（可选） */}
+      <div className="flex items-center justify-between px-5 py-3 border-b bg-muted/30">
+        <div className="text-sm font-medium">Updates</div>
+        <a
+          href="/activities"
+          className="text-sm font-medium text-violet-600 hover:underline"
+        >
+          View all
+        </a>
+      </div>
+
+      {/* 可滚动区域 */}
+      <div className="h-[520px] overflow-y-auto p-5">
+        {/* 瀑布流：列布局 */}
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
+          {activitiesData.news.slice(0, 12).map((item) => (
+            <a
+              key={item.id}
+              href={item.url}
+              target="_blank"
+              rel="noreferrer"
+              className="mb-5 block break-inside-avoid border bg-card hover:shadow-md transition-shadow"
+            >
+              {/* 图片 */}
+              <div className="w-full overflow-hidden bg-muted">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* 文本 */}
+              <div className="p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  {item.source && (
+                    <span className="text-xs px-2 py-1 border bg-muted">
+                      {item.source === "xhs"
+                        ? "Xiaohongshu"
+                        : item.source === "twitter"
+                        ? "Twitter / X"
+                        : "Website"}
+                    </span>
+                  )}
+                  <span className="text-xs text-muted-foreground">
+                    {new Date(item.date).toLocaleDateString()}
+                  </span>
                 </div>
-              ))}
-            </div>
-            <div className="text-center">
-              <Button asChild>
-                <Link to="/activities">View All Activities</Link>
-              </Button>
-            </div>
-          </div>
+
+                <h3 className="text-base font-semibold leading-snug">
+                  {item.title}
+                </h3>
+
+                {item.description && (
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                    {item.description}
+                  </p>
+                )}
+
+                <div className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-violet-600">
+                  Open <ArrowRight className="h-4 w-4" />
+                </div>
+              </div>
+            </a>
+          ))}
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
 
     </div>;
 };
