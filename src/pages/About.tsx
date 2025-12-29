@@ -1,90 +1,178 @@
+import { labLifeData } from "@/data/labLife";
 import { Award, BookOpen, GraduationCap, Heart, Target } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const About = () => {
   return (
-<div className="container py-12 px-4 md:px-6 space-y-12">
+<div className="relative container py-12 px-4 md:px-6 space-y-12">
+  {/* 柔和光晕（不影响内容） */}
+  <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-violet-600/20 blur-3xl" />
+    <div className="absolute top-40 -left-24 h-[420px] w-[420px] rounded-full bg-cyan-500/15 blur-3xl" />
+    <div className="absolute bottom-0 right-0 h-[520px] w-[520px] rounded-full bg-indigo-500/15 blur-3xl" />
+  </div>
       {/* Hero Section */}
-      {/* <section className="py-16 px-6 bg-secondary/30">
-        <div className="container">
-          <h1 className="text-4xl font-bold mb-6">About VPX-Lab</h1>
-          <div className="max-w-3xl">
-            <p className="text-lg mb-6">
-            Welcome to our "Visual Perception + X" (VPX) group. X means anything that attracts your eyes or anything that needs perception.
-            We are aiming at applying computer vision technologies to other fields.
-            </p>
-            <p className="text-lg">
-              In general, our research area includes:
-            </p>
-            <ul className="text-lg list-disc pl-6 space-y-1">
-              <li>Computer Vision</li>
-              <li>Machine Learning</li>
-              <li>Computer Graphics (Neural Rendering)</li>
-              <li>Robotics (Visual Perception)</li>
-              <li>X</li>
-            </ul>
+      <section className="py-6 md:py-10 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-[0_0_0_1px_rgba(255,255,255,0.04)]">
+  <div className="container max-w-screen-xl mx-auto">
 
-          </div>
-        </div>
-      </section> */}
-      <section className="py-16 px-1 bg-secondary/30">
-        <div className="container max-w-screen-2xl max-w-screen-xl mx-auto flex flex-col lg:flex-row items-center gap-8">
-          {/* Text Content */}
-          <div className="flex-1">
-            <h1 className="text-4xl font-bold mb-6">About VPX-Lab</h1>
-            {/* <p className="text-lg mb-6">
-              Welcome to our "Visual Perception + X" (VPX) group. X means anything that attracts your eyes or anything that needs perception.
-              We are aiming at applying computer vision technologies to other fields.
-            </p> */}
-            <p className="text-lg mb-6">
-  Welcome to our "Visual Perception + X" (VPX) group. X means anything that attracts your eyes or anything that needs perception.
-  We are aiming at applying computer vision technologies to other fields.
-  <br />
-  <span className="mt-2 inline-block">
-    For more information, check out our{" "}
-    <a
-      href="https://space.bilibili.com/487404760?spm_id_from=333.337.0.0"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-primary underline hover:opacity-80"
-    >
-      Bilibili
-    </a>{" "}
-    and{" "}
-    <a
-      href="https://github.com/vpx-ecnu"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-primary underline hover:opacity-80"
-    >
-      GitHub
-    </a>
-    .
-  </span>
-</p>
-            <p className="text-lg mb-4">In general, our research area includes:</p>
-            <ul className="text-lg list-disc pl-6 space-y-1">
-              <li>Computer Vision</li>
-              <li>Machine Learning</li>
-              <li>Computer Graphics (Neural Rendering)</li>
-              <li>Robotics (Visual Perception)</li>
-              <li>X</li>
-            </ul>
-          </div>
+    <h1 className="text-4xl font-bold mb-8">
+      About VPX-Lab
+    </h1>
 
-          {/* Image */}
-          <div className="flex-1">
-            <img
-              src="/lovable-uploads/about/vpx_things.jpg" // 替换为实际路径
-              alt="About VPX"
-              className="w-full h-auto rounded-lg shadow"
-            />
-          </div>
-        </div>
-      </section>
+    <div className="flex flex-col lg:flex-row gap-10 items-start">
+
+      {/* Left: Text (70%) */}
+      <div className="lg:w-[70%]">
+        <p className="text-lg mb-6 leading-relaxed text-muted-foreground">
+          The{" "}
+          <span className="font-semibold text-violet-700">
+            Visual Perception + X (VPX) Lab
+          </span>{" "}
+          is a research group led by{" "}
+          <span className="font-semibold text-black">
+            Prof. Yang Li
+          </span>{" "}
+          within the{" "}
+          <span className="font-semibold text-black">
+            School of Computer Science and Technology
+          </span>{" "}
+          at{" "}
+          <span className="font-semibold text-black">
+            East China Normal University (ECNU)
+          </span>
+          .
+        </p>
+
+        <p className="text-lg mb-6 leading-relaxed text-muted-foreground">
+          Founded over{" "}
+          <span className="font-semibold text-black">five years</span>{" "}
+          ago, VPX Lab has grown into a vibrant research group with more than{" "}
+          <span className="font-semibold text-violet-700">30 members</span>{" "}
+          and over{" "}
+          <span className="font-semibold text-violet-700">20 publications</span>{" "}
+          in leading conferences and journals.
+        </p>
+
+        <p className="text-lg mb-6 leading-relaxed text-muted-foreground">
+          Our mission is to advance visual perception for cross-disciplinary
+          research, focusing on extracting meaningful information and structured
+          data from videos and raw streaming sources.
+        </p>
+
+        <p className="text-lg leading-relaxed text-muted-foreground">
+          Currently, VPX focuses on video analysis, controllable image and video
+          generation, and non-rigid object manipulation in robotics, enabling
+          applications in the metaverse, AIGC, and embodied intelligence.
+        </p>
+
+        <p className="text-lg mt-6">
+          For more information, please visit our{" "}
+          <a
+            href="https://space.bilibili.com/487404760"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-violet-700 underline hover:opacity-80"
+          >
+            Bilibili
+          </a>{" "}
+          and{" "}
+          <a
+            href="https://github.com/vpx-ecnu"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-violet-700 underline hover:opacity-80"
+          >
+            GitHub
+          </a>
+          .
+        </p>
+      </div>
+
+      {/* Right: Image (30%) */}
+      <div className="lg:w-[40%] w-full">
+        <img
+          src="/lovable-uploads/about/about_about_vpx.jpg"
+          alt="About VPX"
+          className="w-full h-auto rounded-lg shadow"
+        />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{/* Lab Life */}
+<section className="pt-6 pb-10 md:pt-8 md:pb-14 rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.03] backdrop-blur-md">
+  <div className="container max-w-screen-xl mx-auto px-4 md:px-6">
+    <div className="flex items-end justify-between gap-6 mb-6">
+      <div className="space-y-2">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
+          Lab Life
+        </h2>
+        <p className="text-muted-foreground md:text-lg">
+          Moments from our daily research, demos, meetings, and events.
+        </p>
+      </div>
+
+      {/* 可选按钮（你需要就打开） */}
+      {/* <Button asChild variant="outline">
+        <Link to="/lab-life">View All</Link>
+      </Button> */}
+    </div>
+
+    {/* 可滚动窗口 */}
+    <div className="h-[520px] md:h-[640px] overflow-y-auto pr-2 rounded-xl border border-white/10 bg-black/20">
+      {/* 图片墙 */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
+        {labLifeData.map((item) => {
+          const Wrapper: any = item.link ? "a" : "div";
+          return (
+            <Wrapper
+              key={item.id}
+              {...(item.link
+                ? {
+                    href: item.link,
+                    target: "_blank",
+                    rel: "noreferrer",
+                  }
+                : {})}
+              className="group block overflow-hidden bg-card border hover:shadow-md transition-shadow"
+            >
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
+                <img
+                  src={item.image}
+                  alt={item.title || "Lab life"}
+                  loading="lazy"
+                  className="h-full w-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                />
+
+                {/* 悬浮信息层 */}
+                {/* <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute inset-0 bg-black/35" />
+                  <div className="absolute left-4 right-4 bottom-4 text-white">
+                    {item.title ? (
+                      <div className="font-semibold leading-snug">
+                        {item.title}
+                      </div>
+                    ) : null}
+                    {item.date ? (
+                      <div className="mt-1 text-xs text-white/90">
+                        {new Date(item.date).toLocaleDateString()}
+                      </div>
+                    ) : null}
+                  </div>
+                </div> */}
+              </div>
+            </Wrapper>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Mission & Vision */}
-      <section className="py-16 px-6">
+      <section className="container py-12 px-4 md:px-6 space-y-12">
   <div className="container max-w-screen-xl mx-auto">
     <div className="flex flex-col lg:flex-row gap-12 items-start">
       
@@ -153,7 +241,7 @@ const About = () => {
               },
             ].map((value, index) => (
               <div key={index} className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm">
-                <div className="mb-4 p-2 rounded-full bg-primary/10 inline-block">{value.icon}</div>
+                <div className="mb-4 p-2 rounded-full bg-violet-500/15 text-violet-200 inline-block">{value.icon}</div>
                 <h3 className="text-xl font-medium mb-2">{value.title}</h3>
                 <p className="text-sm text-muted-foreground">{value.description}</p>
               </div>
@@ -165,7 +253,7 @@ const About = () => {
 
       <section className="grid gap-8 md:gap-12">
         <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Research Focus Areas</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             // {
             //   title: "Artificial Intelligence",
@@ -221,7 +309,7 @@ const About = () => {
       </section>
 
       {/* History Timeline */}
-      <section className="py-16 px-6">
+      {/* <section className="py-16 px-6">
         <div className="container">
           <h2 className="text-3xl font-bold mb-12 text-center">Our Journey</h2>
           <div className="space-y-12 max-w-3xl mx-auto">
@@ -288,7 +376,7 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
