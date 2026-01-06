@@ -75,7 +75,7 @@ const Projects = () => {
   }, [selectedProject]);
 
   return (
-    <div className="relative w-full overflow-hidden bg-white">
+    <div className="relative w-full overflow-hidden bg-background text-foreground">
   {/* 柔和光晕（不影响内容） */}
   <div className="pointer-events-none absolute inset-0 overflow-hidden">
     <div className="absolute -top-40 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-violet-600/20 blur-3xl" />
