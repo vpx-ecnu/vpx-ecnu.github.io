@@ -1,234 +1,231 @@
-
-import { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Download, ExternalLink } from "lucide-react";
+import { ExternalLink, FileText } from "lucide-react";
 
-// Sample publications data
-const publicationsData = [
-  {
-    id: 1,
-    title: "Advancements in Quantum Machine Learning Algorithms for Material Science Applications",
-    authors: "J. Smith, A. Johnson, L. Williams",
-    journal: "Journal of Quantum Computing",
-    year: 2023,
-    doi: "10.1000/xyz123",
-    tags: ["Quantum Computing", "Machine Learning", "Material Science"]
-  },
-  {
-    id: 2,
-    title: "Neural Network Approaches to Climate Modeling: A Comparative Analysis",
-    authors: "R. Miller, S. Davis, T. Wilson",
-    journal: "Nature Climate Science",
-    year: 2023,
-    doi: "10.1000/abc456",
-    tags: ["Climate Science", "Neural Networks", "Modeling"]
-  },
-  {
-    id: 3,
-    title: "Sustainable Urban Planning through Data-Driven Decision Making",
-    authors: "E. Brown, C. Taylor, H. Moore",
-    journal: "Urban Studies Journal",
-    year: 2022,
-    doi: "10.1000/def789",
-    tags: ["Urban Planning", "Data Science", "Sustainability"]
-  },
-  {
-    id: 4,
-    title: "Novel Biomedical Sensors for Remote Patient Monitoring",
-    authors: "K. Anderson, M. Thomas, P. Garcia",
-    journal: "IEEE Transactions on Biomedical Engineering",
-    year: 2022,
-    doi: "10.1000/ghi012",
-    tags: ["Biomedical Engineering", "Sensors", "Remote Monitoring"]
-  },
-  {
-    id: 5,
-    title: "Ethical Considerations in Artificial Intelligence Development",
-    authors: "N. White, V. Martin, D. Lewis",
-    journal: "AI Ethics Journal",
-    year: 2021,
-    doi: "10.1000/jkl345",
-    tags: ["AI Ethics", "Philosophy", "Technology"]
-  },
-  {
-    id: 6,
-    title: "Biodegradable Materials for Sustainable Packaging Solutions",
-    authors: "F. Clark, O. Rodriguez, S. Lee",
-    journal: "Journal of Materials Engineering",
-    year: 2021,
-    doi: "10.1000/mno678",
-    tags: ["Materials Science", "Sustainability", "Manufacturing"]
-  },
-  {
-    id: 7,
-    title: "Optimizing Energy Consumption in Smart Buildings Using Reinforcement Learning",
-    authors: "G. Hill, J. Perez, B. Adams",
-    journal: "Energy and Buildings",
-    year: 2020,
-    doi: "10.1000/pqr901",
-    tags: ["Energy", "Reinforcement Learning", "Smart Buildings"]
-  },
-  {
-    id: 8,
-    title: "Privacy-Preserving Federated Learning for Healthcare Applications",
-    authors: "I. Cook, Y. Chen, Z. Wang",
-    journal: "Medical AI Research",
-    year: 2020,
-    doi: "10.1000/stu234",
-    tags: ["Federated Learning", "Healthcare", "Privacy"]
-  }
-];
-
-// Extract unique years for filtering
-const years = Array.from(new Set(publicationsData.map(pub => pub.year))).sort((a, b) => b - a);
+type Publication = {
+  title: string;
+  authors: string;
+  journal: string; // 你现在的 json 里已经是类似 "AAAI 2026"
+  year: number;
+  doi: string; // paper 链接（arxiv/ieee/pdf/...）
+  project_webpage?: string; // ✅ 新增：Project Webpage 链接
+  tags?: string[];
+};
 
 const Publications = () => {
-  // const [selectedYear, setSelectedYear] = useState<number | null>(null);
-  // const [searchTerm, setSearchTerm] = useState("");
-  const [publications, setPublications] = useState([]);
+  const [publications, setPublications] = useState<Publication[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // useEffect(() => {
-  //   fetch("http://127.0.0.1:8001/api/publications")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setPublications(data);
-  //       setLoading(false);
-  //     })
-  //     .catch((err) => {
-  //       console.error("Failed to fetch publications:", err);
-  //       setLoading(false);
-  //     });
-  // }, []);
   useEffect(() => {
     fetch("/publications/publication_updated.json")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Loaded from JSON:", data);
-        setPublications(data);
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data: Publication[]) => {
+        setPublications(Array.isArray(data) ? data : []);
         setLoading(false);
       })
       .catch((err) => {
         console.error("Failed to load publications:", err);
+        setPublications([]);
         setLoading(false);
       });
   }, []);
-  // Filter publications based on selected year and search term
-  // const filteredPublications = publicationsData.filter(pub => {
-  //   const matchesYear = selectedYear === null || pub.year === selectedYear;
-    
-  //   const matchesSearch = 
-  //     pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //     pub.authors.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //     pub.journal.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //     pub.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    
-  //   return matchesYear && matchesSearch;
-  // });
-  const filteredPublications = publications.filter(pub => {
-    const matchesYear = selectedYear === null || pub.year === selectedYear;
-  
-    const matchesSearch =
-      pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      pub.authors.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      pub.journal.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (pub.tags || []).some(tag =>
-        tag.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-  
-    return matchesYear && matchesSearch;
-  });
 
-  filteredPublications.sort((a, b) => b.year - a.year);
+  // ✅ 年份按钮：从真实 publications 动态生成
+  const years = useMemo(() => {
+    const ys = Array.from(
+      new Set(publications.map((p) => Number(p.year)).filter(Boolean))
+    );
+    ys.sort((a, b) => b - a);
+    return ys;
+  }, [publications]);
+
+  // ✅ 搜索 + 年份过滤 + 年份倒序
+  const filteredPublications = useMemo(() => {
+    const q = searchTerm.trim().toLowerCase();
+
+    const result = publications.filter((pub) => {
+      const matchesYear = selectedYear === null || pub.year === selectedYear;
+
+      const matchesSearch =
+        !q ||
+        (pub.title || "").toLowerCase().includes(q) ||
+        (pub.authors || "").toLowerCase().includes(q) ||
+        (pub.journal || "").toLowerCase().includes(q) ||
+        (pub.tags || []).some((t) => (t || "").toLowerCase().includes(q));
+
+      return matchesYear && matchesSearch;
+    });
+
+    result.sort((a, b) => (b.year || 0) - (a.year || 0));
+    return result;
+  }, [publications, selectedYear, searchTerm]);
+
+  const openLink = (url?: string) => {
+    if (!url) return;
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <div className="container py-12 px-4 md:px-6 page-transition">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div className="absolute -top-40 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-violet-600/20 blur-3xl" />
+    <div className="absolute top-40 -left-24 h-[180px] w-[320px] rounded-full bg-emerald-400/15 blur-2xl" />
+    <div className="absolute -top-40 right-24 h-[320px] w-[320px] rounded-full bg-cyan-500/15 blur-2xl" />
+  </div>
+      {/* Header */}
       <section className="space-y-4 text-center max-w-3xl mx-auto mb-12 fade-in-content">
-        <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">Publications</h1>
+        <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">
+          Publications
+        </h1>
         <p className="text-muted-foreground md:text-xl">
           Our research outputs in peer-reviewed journals and conference proceedings.
         </p>
       </section>
 
-      <section className="mb-12 fade-in-content" style={{ animationDelay: "100ms" }}>
-        <div className="flex flex-col md:flex-row gap-4 mb-8">
+      {/* Filters */}
+      <section className="mb-10 fade-in-content" style={{ animationDelay: "100ms" }}>
+        <div className="flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
+          {/* Search */}
           <div className="flex-1">
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search publications..."
-              className="w-full p-2 border rounded-md bg-background"
+              placeholder="Search by title / authors / venue..."
+              className="w-full h-10 px-3 border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-violet-500/30"
             />
           </div>
+
+          {/* Year buttons */}
           <div className="flex flex-wrap gap-2 items-center">
             <span className="text-sm font-medium text-muted-foreground">Year:</span>
+
             <Button
               variant={selectedYear === null ? "default" : "outline"}
               size="sm"
               onClick={() => setSelectedYear(null)}
+              className={
+                selectedYear === null
+                  ? "bg-violet-600 hover:bg-violet-600/90 text-white"
+                  : "border-white/15 hover:bg-white/5"
+              }
             >
               All
             </Button>
-            {years.map(year => (
+
+            {years.map((year) => (
               <Button
                 key={year}
                 variant={selectedYear === year ? "default" : "outline"}
                 size="sm"
                 onClick={() => setSelectedYear(year)}
+                className={
+                  selectedYear === year
+                    ? "bg-violet-600 hover:bg-violet-600/90 text-white"
+                    : "border-white/15 hover:bg-white/5"
+                }
               >
                 {year}
               </Button>
             ))}
           </div>
         </div>
+      </section>
 
-        <div className="space-y-4">
-          {filteredPublications.map((publication, index) => (
-            <Card key={publication.id} className="fade-in-content" style={{ animationDelay: `${index * 50}ms` }}>
+      {/* List */}
+      {loading ? (
+        <div className="text-sm text-muted-foreground">Loading...</div>
+      ) : filteredPublications.length === 0 ? (
+        <div className="text-sm text-muted-foreground">No publications found.</div>
+      ) : (
+        <section className="space-y-4">
+          {filteredPublications.map((pub, index) => (
+            <Card
+              key={`${pub.title}-${pub.year}-${index}`}
+              className="fade-in-content
+    border border-white/15
+    bg-white/5
+    backdrop-blur-md
+    hover:bg-white/8
+    hover:border-white/25
+    transition-all"
+              style={{ animationDelay: `${index * 50}ms` }}
+            >
               <CardContent className="p-6">
                 <div className="grid gap-3">
-                  <h3 className="text-lg font-semibold">{publication.title}</h3>
-                  {/* <div className="flex flex-wrap gap-2 mt-2">
-                    {publication.tags.map(tag => (
-                      <span 
-                        key={tag} 
-                        className="bg-muted text-muted-foreground text-xs px-2 py-1 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div> */}
-                  <h3 className="text-lg text-muted-foreground">{publication.authors}</h3>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">
-                      <span className="font-medium">{publication.journal}</span>
-                      {publication.journal ? ", " : ""}{publication.year}
-                    </span>
+                  {/* Title */}
+                  <h3 className="text-lg font-semibold leading-snug">
+                    {pub.title}
+                  </h3>
+
+                  {/* Authors */}
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {pub.authors}
+                  </p>
+
+                  {/* Meta + Actions */}
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pt-1">
+                    {/* Venue tag */}
+                    <div className="flex items-center gap-2 flex-wrap">
+                      {pub.journal ? (
+                        <Badge className="bg-violet-500/15 text-violet-700 border border-violet-500/20">
+                          {pub.journal}
+                        </Badge>
+                      ) : (
+                        <Badge variant="secondary">Unknown Venue</Badge>
+                      )}
+                    </div>
+
+                    {/* Buttons */}
                     <div className="flex items-center gap-2">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="text-xs"
-                        // onClick={() => window.open(`https://doi.org/${publication.doi}`, '_blank')}
-                        onClick={() => window.open(`${publication.doi}`, '_blank')}
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="h-9 border-white/15 bg-white/5 hover:bg-white/10"
+                        onClick={() => openLink(pub.doi)}
+                        disabled={!pub.doi}
                       >
-                        <ExternalLink className="h-3 w-3 mr-1" /> DOI
+                        <FileText className="h-4 w-4 mr-2" />
+                        Paper
                       </Button>
-                      {/* <Button variant="outline" size="sm" className="text-xs">
-                        <Download className="h-3 w-3 mr-1" /> PDF
-                      </Button> */}
+
+                      {pub.project_webpage ? (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="h-9 border-white/15 bg-white/5 hover:bg-white/10"
+                          onClick={() => openLink(pub.project_webpage)}
+                        >
+                          <ExternalLink className="h-4 w-4 mr-2" />
+                          Project WebPage
+                        </Button>
+                      ) : null}
                     </div>
                   </div>
-                
+
+                  {/* Optional tags（你以后要用再打开） */}
+                  {/* {(pub.tags || []).length ? (
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {(pub.tags || []).slice(0, 6).map((t) => (
+                        <Badge key={`${pub.title}-${pub.year}-${t}`} variant="secondary">
+                          {t}
+                        </Badge>
+                      ))}
+                    </div>
+                  ) : null} */}
                 </div>
               </CardContent>
             </Card>
           ))}
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 };

@@ -4,7 +4,7 @@ import requests
 from pathlib import Path
 
 # 1. 调用你自己 FastAPI 的接口获取新抓取数据
-response = requests.get("http://localhost:8000/api/publications")
+response = requests.get("http://localhost:8001/api/publications")
 new_data = response.json()
 
 current_file = Path(__file__).resolve()

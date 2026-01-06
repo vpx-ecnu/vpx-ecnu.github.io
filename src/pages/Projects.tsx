@@ -75,7 +75,16 @@ const Projects = () => {
   }, [selectedProject]);
 
   return (
-    <div className="container py-12 px-4 md:px-6 page-transition">
+    <div className="relative w-full overflow-hidden bg-white">
+  {/* 柔和光晕（不影响内容） */}
+  <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div className="absolute -top-40 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-violet-600/20 blur-3xl" />
+    <div className="absolute top-40 -left-24 h-[320px] w-[320px] rounded-full bg-cyan-500/15 blur-3xl" />
+    <div className="absolute -top-40 right-24 h-[320px] w-[320px] rounded-full bg-emerald-400/15 blur-2xl" />
+    <div className="absolute bottom-80 left-50 h-[320px] w-[320px] rounded-full bg-cyan-500/15 blur-3xl" />
+    <div className="absolute bottom-0 right-0 h-[320px] w-[320px] rounded-full bg-indigo-500/15 blur-3xl" />
+  </div>
+    <div className="container py-12 px-4 md:px-6">
       {/* Hero */}
       <section className="py-12 md:py-14 px-0 bg-secondary/30">
         <div className="container px-4 md:px-6">
@@ -387,6 +396,7 @@ const Projects = () => {
           )}
         </div>
       </section>
+      </div>
     </div>
   );
 };

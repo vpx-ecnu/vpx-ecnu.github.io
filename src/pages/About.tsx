@@ -4,15 +4,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 const About = () => {
   return (
-<div className="relative container py-12 px-4 md:px-6 space-y-12">
+<div className="relative w-full overflow-hidden bg-white">
   {/* 柔和光晕（不影响内容） */}
   <div className="pointer-events-none absolute inset-0 overflow-hidden">
     <div className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-violet-600/20 blur-3xl" />
     <div className="absolute top-40 -left-24 h-[420px] w-[420px] rounded-full bg-cyan-500/15 blur-3xl" />
+    <div className="absolute bottom-80 left-50 h-[320px] w-[320px] rounded-full bg-cyan-500/15 blur-3xl" />
     <div className="absolute bottom-0 right-0 h-[520px] w-[520px] rounded-full bg-indigo-500/15 blur-3xl" />
   </div>
       {/* Hero Section */}
-      <section className="py-6 md:py-10 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-[0_0_0_1px_rgba(255,255,255,0.04)]">
+  <div className="container py-12 px-4 md:px-6 space-y-24">
+      <section className="py-6 md:py-10">
   <div className="container max-w-screen-xl mx-auto">
 
     <h1 className="text-4xl font-bold mb-8">
@@ -136,7 +138,7 @@ const About = () => {
                     rel: "noreferrer",
                   }
                 : {})}
-              className="group block overflow-hidden bg-card border hover:shadow-md transition-shadow"
+              className="group block overflow-hidden bg-transparent hover:shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
                 <img
@@ -219,7 +221,7 @@ const About = () => {
 
 
       {/* Core Values */}
-      <section className="py-16 px-6 bg-secondary/30">
+      <section className="py-16 px-6 bg-transparent">
         <div className="container">
           <h2 className="text-3xl font-bold mb-12 text-center">Our Core Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -377,6 +379,7 @@ const About = () => {
           </div>
         </div>
       </section> */}
+      </div>
     </div>
   );
 };
