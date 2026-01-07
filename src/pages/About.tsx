@@ -31,15 +31,15 @@ const About = () => {
             Visual Perception + X (VPX) Lab
           </span>{" "}
           is a research group led by{" "}
-          <span className="font-semibold text-black">
+          <span className="font-semibold text-violet-700">
             Prof. Yang Li
           </span>{" "}
           within the{" "}
-          <span className="font-semibold text-black">
+          <span className="font-semibold text-violet-700">
             School of Computer Science and Technology
           </span>{" "}
           at{" "}
-          <span className="font-semibold text-black">
+          <span className="font-semibold text-violet-700">
             East China Normal University (ECNU)
           </span>
           .
@@ -47,7 +47,7 @@ const About = () => {
 
         <p className="text-lg mb-6 leading-relaxed text-muted-foreground">
           Founded over{" "}
-          <span className="font-semibold text-black">five years</span>{" "}
+          <span className="font-semibold text-violet-700">five years</span>{" "}
           ago, VPX Lab has grown into a vibrant research group with more than{" "}
           <span className="font-semibold text-violet-700">30 members</span>{" "}
           and over{" "}
