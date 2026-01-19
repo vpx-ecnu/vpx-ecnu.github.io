@@ -24,6 +24,22 @@
         "research": ["Computer Vision", "Data Science "]
     },
     {
+      "name": "Junwei Shu",
+      "title": "PhD Candidate",
+      "bio": "Exploring NLP in legal document processing.",
+      "image": "/placeholder.svg",
+      "email": "mgarcia@university.edu",
+      "research": ["NLP", "Legal Tech"]
+    },
+    {
+      "name": "Mingjie Han",
+      "title": "PhD Candidate",
+      "bio": "Exploring NLP in legal document processing.",
+      "image": "/placeholder.svg",
+      "email": "mgarcia@university.edu",
+      "research": ["NLP", "Legal Tech"]
+    },
+    {
         "name": "Xiaoyuan Wang",
         "title": "PhD Candidate",
         "bio": "xxx.",

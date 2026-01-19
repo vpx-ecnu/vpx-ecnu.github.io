@@ -1,13 +1,5 @@
 [
     {
-      "name": "Junwei Shu",
-      "title": "Master's Student",
-      "bio": "Exploring NLP in legal document processing.",
-      "image": "/placeholder.svg",
-      "email": "mgarcia@university.edu",
-      "research": ["NLP", "Legal Tech"]
-    },
-    {
         "name": "Wenjie Liu",
         "title": "Master's Student",
         "bio": "Exploring Neural Rendering and AIGC (image and 3D editing).",
@@ -48,6 +40,22 @@
         "research": ["relighting", "virtual shooting"]
     },
     {
+        "name": "Zhechao Huang",
+        "title": "Master's Student",
+        "bio": "Exploring Neural Rendering.",
+        "image": "xx",
+        "email": "xxx",
+        "research": ["Style Transfer", "3DGS","diffusion"]
+    },
+    {
+        "name": "Wenzheng Song",
+        "title": "Master's Student",
+        "bio": "Exploring Neural Rendering.",
+        "image": "xx",
+        "email": "xxx",
+        "research": ["Style Transfer", "3DGS","diffusion"]
+    },
+    {
         "name": "Wenzhi He",
         "title": "Master's Student",
         "bio": "Focusing on bridging the Sim-to-Real gap in robotic manipulation using gaussian splatting.",
@@ -70,6 +78,55 @@
         "image": "/people/people_image/master/sky.jpg",
         "email": "zjut_sky@163.com",
         "research": ["Computer Graphics", "3D Vision"]
+    },
+    {
+        "name": "Tieshi Zhong",
+        "title": "Master's Student",
+        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
+        "image": "xxx",
+        "email": "zjut_sky@163.com",
+        "research": ["Computer Graphics", "3D Vision"]
+    },
+    {
+        "name": "Tieshi Zhong",
+        "title": "Master's Student",
+        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
+        "image": "xxx",
+        "email": "zjut_sky@163.com",
+        "research": ["Computer Graphics", "3D Vision"]
+    },
+    {
+        "name": "Mingyang Yuan",
+        "title": "Master's Student",
+        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
+        "image": "xxx",
+        "email": "zjut_sky@163.com",
+        "research": ["Computer Graphics", "3D Vision"]
+    },
+    {
+        "name": "Hanzhe Yao",
+        "title": "Master's Student",
+        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
+        "image": "xxx",
+        "email": "zjut_sky@163.com",
+        "research": ["Computer Graphics", "3D Vision"]
+    },
+    {
+        "name": "Qijie Yu",
+        "title": "Master's Student",
+        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
+        "image": "xxx",
+        "email": "zjut_sky@163.com",
+        "research": ["Computer Graphics", "3D Vision"]
+    },
+    {
+        "name": "Mingyang Yin",
+        "title": "Master's Student",
+        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
+        "image": "xxx",
+        "email": "zjut_sky@163.com",
+        "research": ["Computer Graphics", "3D Vision"]
     }
+
 
   ]
