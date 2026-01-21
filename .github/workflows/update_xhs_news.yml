@@ -1,60 +1,61 @@
-name: Update XHS News JSON
+name: Update XHS news.json
 
 on:
+  workflow_dispatch:
   schedule:
-    # 每天 02:30 UTC（北京时间 +8 是 10:30）
-    - cron: "30 2 * * *"
-  workflow_dispatch: {}
+    # 每天 03:15 UTC（北京时间 11:15）
+    - cron: "15 3 * * *"
 
 permissions:
   contents: write
 
 concurrency:
-  group: xhs-news-update
-  cancel-in-progress: true
+  group: update-xhs-news
+  cancel-in-progress: false
 
 jobs:
-  update-news:
+  update:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
-      - name: Install dependencies
+      - name: Install deps (Spider_XHS)
         run: |
           python -m pip install --upgrade pip
           pip install -r Spider_XHS/requirements.txt
+          pip install pandas openpyxl
 
-      # 如果你的 Spider_XHS 依赖 .env / cookies（很常见），就用 secret 写进去
-      # 下面这一段你可以先留着，等你确认需要再启用
-      - name: Write Spider_XHS .env from secret (optional)
+      - name: Write Spider_XHS/.env from Secret
         if: ${{ secrets.SPIDER_XHS_ENV != '' }}
         run: |
           echo "${{ secrets.SPIDER_XHS_ENV }}" > Spider_XHS/.env
+          # 可选：避免换行符/回车问题（Windows CRLF）
+          sed -i 's/\r$//' Spider_XHS/.env
 
       - name: Run pipeline
         run: |
-          python run_xhs_pipeline.py
+          python Spider_XHS/run_xhs_pipeline.py
 
       - name: Commit & push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add src/server/data/news.json
+          git add src/server/data/news.json || true
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
 
-          git commit -m "chore: update news.json"
+          git commit -m "chore: update news.json (XHS)"
           git push
