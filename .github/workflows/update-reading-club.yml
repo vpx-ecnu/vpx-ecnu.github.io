@@ -1,0 +1,48 @@
+name: Update VPX Reading Club (data + covers)
+
+on:
+  schedule:
+    # 每天 02:30 UTC 运行（中国/沙特是 +8/+3，对应上午/清晨）
+    - cron: "30 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-reading-club
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # 需要完整历史不一定，但设为 0 更稳
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run update script
+        run: |
+          python scripts/update_reading_club.py
+
+      - name: Commit changes (if any)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add src/data/readingClub.json public/reading_club_covers
+
+          # 没有变更就不提交
+          git diff --cached --quiet && echo "No changes to commit." || git commit -m "chore: update reading club data & covers"
+
+      - name: Push
+        run: |
+          git push
