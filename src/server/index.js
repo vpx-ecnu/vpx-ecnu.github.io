@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const fs = require("fs");
+const path = require("path");
 
 // node-fetch 在 Node 18+ 不需要装也能用（自带 fetch）
 // 你是 Node v24，直接用 global fetch 就行
@@ -86,6 +88,21 @@ app.get("/api/img", async (req, res) => {
     res.send(buf);
   } catch (e) {
     res.status(500).send(String(e));
+  }
+});
+
+
+app.get("/api/vpx-news", (req, res) => {
+  try {
+    const filePath = path.resolve(process.cwd(), "data", "news.json");
+    const raw = fs.readFileSync(filePath, "utf-8");
+    const json = JSON.parse(raw);
+    res.json({ news: Array.isArray(json.news) ? json.news : [] });
+  } catch (e) {
+    res.status(500).json({
+      news: [],
+      error: e?.message || "Failed to read news.json",
+    });
   }
 });
 

@@ -9,7 +9,7 @@ const navItems = [
   { name: "Projects", path: "/projects" },
   { name: "Publications", path: "/publications" },
   { name: "People", path: "/people" },
-  { name: "Activities", path: "/activities" },
+  { name: "Updates", path: "/activities" },
   { name: "Join Us", path: "/join" },
   // { name: "Intranet", path: "/intranet" },
 ];

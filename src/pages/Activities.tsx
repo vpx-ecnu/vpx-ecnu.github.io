@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar, Cpu, GraduationCap, Users } from "lucide-react";
-import { activitiesData } from "@/data/activities";
 
 import {
   Dialog,
@@ -16,6 +15,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+
+import readingClub from "@/data/readingClub.json";
 
 type ReadingVideo = {
   bvid: string;
@@ -25,6 +26,18 @@ type ReadingVideo = {
   publishedAt: string | null;
 };
 
+type NewsItem = {
+  id: string;
+  title: string;
+  date: string; // ISO
+  image?: string; // 封面（兼容旧数据）
+  images?: string[]; // 全部图片（拼贴）
+  sub_title?: string;
+  description?: string;
+  source?: string;
+  source_url?: string;
+};
+
 function formatDate(iso: string | null) {
   if (!iso) return "—";
   const d = new Date(iso);
@@ -32,23 +45,56 @@ function formatDate(iso: string | null) {
   return d.toLocaleDateString();
 }
 
-const DEFAULT_READING_CLUB_API =
-  (import.meta as any).env?.VITE_READING_CLUB_API ||
-  "http://localhost:3001/api/vpx-reading-club";
+const DEFAULT_NEWS_API =
+  (import.meta as any).env?.VITE_NEWS_API || "http://localhost:3001/api/vpx-news";
 
 const PAGE_SIZE = 20;
 
 const Activities = () => {
   // ----------------------
-  // News states (keep your original logic)
+  // News states (API based)
   // ----------------------
   const [newsFilter, setNewsFilter] = useState<"all" | "recent" | "older">("all");
-  const [selectedNews, setSelectedNews] = useState<any>(null);
+  const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
+
+  const [newsList, setNewsList] = useState<NewsItem[]>([]);
+  const [loadingNews, setLoadingNews] = useState(false);
+  const [newsError, setNewsError] = useState<string>("");
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadNews = async () => {
+      setLoadingNews(true);
+      setNewsError("");
+
+      try {
+        const r = await fetch(DEFAULT_NEWS_API);
+        const data = await r.json();
+
+        if (cancelled) return;
+
+        const arr = Array.isArray(data?.news) ? data.news : [];
+        setNewsList(arr);
+      } catch (e: any) {
+        if (cancelled) return;
+        setNewsList([]);
+        setNewsError(e?.message || "Failed to load news");
+      } finally {
+        if (!cancelled) setLoadingNews(false);
+      }
+    };
+
+    loadNews();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const filteredNews =
     newsFilter === "all"
-      ? activitiesData.news
-      : activitiesData.news.filter((item: any) => {
+      ? newsList
+      : newsList.filter((item) => {
           const itemDate = new Date(item.date);
           const currentDate = new Date();
           const threeMonthsAgo = new Date();
@@ -60,46 +106,15 @@ const Activities = () => {
         });
 
   // ----------------------
-  // Reading Club states (updated)
+  // Reading Club (static JSON)
   // ----------------------
-  const [videos, setVideos] = useState<ReadingVideo[]>([]);
-  const [loadingVideos, setLoadingVideos] = useState(false);
+  const videos: ReadingVideo[] = (readingClub as any)?.videos || [];
+
   const [videoQuery, setVideoQuery] = useState("");
   const [activeVideo, setActiveVideo] = useState<ReadingVideo | null>(null);
-  const [videoError, setVideoError] = useState<string>("");
 
   // Pagination states
   const [page, setPage] = useState(1);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const load = async () => {
-      setLoadingVideos(true);
-      setVideoError("");
-
-      try {
-        const r = await fetch(DEFAULT_READING_CLUB_API);
-        const data = await r.json();
-
-        if (cancelled) return;
-
-        const arr = Array.isArray(data?.videos) ? data.videos : [];
-        setVideos(arr);
-      } catch (e: any) {
-        if (cancelled) return;
-        setVideos([]);
-        setVideoError(e?.message || "Failed to load videos");
-      } finally {
-        if (!cancelled) setLoadingVideos(false);
-      }
-    };
-
-    load();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   const filteredVideos = useMemo(() => {
     const q = videoQuery.trim().toLowerCase();
@@ -132,7 +147,6 @@ const Activities = () => {
   };
 
   const pageNumbers = useMemo(() => {
-    // Simple compact pagination: show up to 7 numbers around current page
     const maxButtons = 7;
     if (totalPages <= maxButtons) {
       return Array.from({ length: totalPages }, (_, i) => i + 1);
@@ -147,17 +161,18 @@ const Activities = () => {
   }, [page, totalPages]);
 
   return (
-    <div className="container py-12 px-4 md:px-6 space-y-12 page-transition">
-      {/* Header */}
+    <div className="container py-12 px-4 md:px-6 space-y-12 page-transition relative">
+      {/* Background glow */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-violet-600/15 blur-3xl" />
         <div className="absolute top-40 -left-24 h-[320px] w-[320px] rounded-full bg-cyan-500/10 blur-3xl" />
         <div className="absolute -top-40 right-24 h-[320px] w-[320px] rounded-full bg-emerald-400/10 blur-2xl" />
       </div>
 
-      <section className="space-y-4 text-center max-w-3xl mx-auto fade-in-content">
+      {/* Header */}
+      <section className="relative space-y-4 text-center max-w-3xl mx-auto fade-in-content">
         <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">
-          News & Activities
+          Updates
         </h1>
         <p className="text-muted-foreground md:text-xl">
           Stay updated with the latest news, events, and academic activities in our research group.
@@ -165,7 +180,7 @@ const Activities = () => {
       </section>
 
       {/* Tabs */}
-      <section className="fade-in-content" style={{ animationDelay: "100ms" }}>
+      <section className="relative fade-in-content" style={{ animationDelay: "100ms" }}>
         <Tabs defaultValue="news" className="w-full">
           <TabsList className="grid grid-cols-2 mb-8">
             <TabsTrigger value="news" className="flex items-center gap-2">
@@ -178,8 +193,25 @@ const Activities = () => {
             </TabsTrigger>
           </TabsList>
 
-          {/* ---------------- News Tab (your original) ---------------- */}
+          {/* ---------------- News Tab ---------------- */}
           <TabsContent value="news" className="space-y-8">
+            {newsError ? (
+              <div className="rounded-md border p-4 text-sm text-muted-foreground">
+                <div className="font-medium text-foreground mb-1">
+                  Failed to load news
+                </div>
+                <div className="break-words">{newsError}</div>
+                <div className="mt-2 text-xs">
+                  Tip: make sure your server is running at{" "}
+                  <span className="font-mono">{DEFAULT_NEWS_API}</span>
+                </div>
+              </div>
+            ) : null}
+
+            {loadingNews ? (
+              <div className="text-sm text-muted-foreground">Loading news…</div>
+            ) : null}
+
             {selectedNews ? (
               <div className="animate-fade-in">
                 <button
@@ -194,89 +226,169 @@ const Activities = () => {
                   {new Date(selectedNews.date).toLocaleDateString()}
                 </p>
 
-                {selectedNews.image && (
+                {/* Images collage: 优先 images[]，否则用封面 image */}
+                {Array.isArray(selectedNews.images) && selectedNews.images.length > 0 ? (
+                  <div className="mb-6">
+                    <div className="columns-2 sm:columns-3 gap-3 [column-fill:_balance]">
+                      {selectedNews.images.map((url, idx) => (
+                        <a
+                          key={`${selectedNews.id}-img-${idx}`}
+                          href={url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mb-3 block break-inside-avoid"
+                          title="Open image"
+                        >
+                          <img
+                            src={url}
+                            alt={`${selectedNews.title} - ${idx + 1}`}
+                            className="w-full h-auto rounded-lg border bg-muted object-cover hover:opacity-95 transition"
+                            loading="lazy"
+                          />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ) : selectedNews.image ? (
                   <img
                     src={selectedNews.image}
                     alt={selectedNews.title}
                     className="w-full max-w-3xl rounded-lg shadow mb-6"
+                    loading="lazy"
                   />
-                )}
+                ) : null}
 
-                <div className="prose dark:prose-invert max-w-none">
-                  <p>{selectedNews.description}</p>
+                <div className="prose dark:prose-invert max-w-none space-y-4">
+                  {selectedNews.description ? (
+                    <p>{selectedNews.description}</p>
+                  ) : (
+                    <p className="text-muted-foreground">—</p>
+                  )}
+
+                  {selectedNews.source_url ? (
+                    <p>
+                      <a
+                        href={selectedNews.source_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-primary underline"
+                      >
+                        View on Xiaohongshu
+                      </a>
+                    </p>
+                  ) : null}
                 </div>
               </div>
             ) : (
               <>
-                {/* Filter */}
-                <div className="flex justify-end mb-4">
-                  <div className="flex gap-2">
-                    {(["all", "recent", "older"] as const).map((filter) => (
-                      <button
-                        key={filter}
-                        className={`px-3 py-1 text-sm rounded-md ${
-                          newsFilter === filter
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-muted text-muted-foreground"
-                        }`}
-                        onClick={() => setNewsFilter(filter)}
-                      >
-                        {filter.charAt(0).toUpperCase() + filter.slice(1)}
-                      </button>
-                    ))}
+                {/* News Wall (scrollable masonry) */}
+                <div className="border bg-card">
+                  {/* title bar */}
+                  <div className="flex items-center justify-between px-5 py-3 border-b bg-muted/30">
+                    <div className="text-sm font-medium">Updates</div>
+
+                    {/* filter buttons */}
+                    <div className="flex gap-2">
+                      {(["all", "recent", "older"] as const).map((filter) => (
+                        <button
+                          key={filter}
+                          className={`px-3 py-1 text-sm rounded-md ${
+                            newsFilter === filter
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-muted text-muted-foreground"
+                          }`}
+                          onClick={() => setNewsFilter(filter)}
+                        >
+                          {filter.charAt(0).toUpperCase() + filter.slice(1)}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                {/* News List */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {filteredNews.map((item: any, index: number) => (
-                    <Card
-                      key={item.id}
-                      className="flex overflow-hidden cursor-pointer fade-in-content"
-                      style={{ animationDelay: `${index * 100}ms` }}
-                      onClick={() => setSelectedNews(item)}
-                    >
-                      <div className="md:w-1/3 bg-muted">
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+                  {/* scroll area */}
+                  <div className="h-[720px] overflow-y-auto p-5">
+                    <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
+                      {filteredNews.map((item) => (
+                        <button
+                          key={item.id}
+                          type="button"
+                          onClick={() => setSelectedNews(item)}
+                          className="mb-5 block w-full text-left break-inside-avoid border bg-card hover:shadow-md transition-shadow"
+                        >
+                          {/* image */}
+                          <div className="w-full overflow-hidden bg-muted">
+                            {item.image ? (
+                              <img
+                                src={item.image}
+                                alt={item.title}
+                                className="w-full h-auto object-cover"
+                                loading="lazy"
+                              />
+                            ) : null}
+                          </div>
 
-                      <div className="md:w-2/3">
-                        <CardHeader className="p-4 pb-2">
-                          <CardTitle className="text-lg">{item.title}</CardTitle>
-                          <CardDescription>
-                            {new Date(item.date).toLocaleDateString()}
-                          </CardDescription>
-                        </CardHeader>
-                        <CardContent className="p-4 pt-0">
-                          <p className="text-sm text-muted-foreground">
-                            {item.sub_title}
-                          </p>
-                        </CardContent>
-                      </div>
-                    </Card>
-                  ))}
+                          {/* text */}
+                          <div className="p-4">
+                            <div className="flex items-center gap-2 mb-2">
+                              {item.source ? (
+                                <span className="text-xs px-2 py-1 border bg-muted">
+                                  {item.source === "xhs"
+                                    ? "Xiaohongshu"
+                                    : item.source === "twitter"
+                                    ? "Twitter / X"
+                                    : "Website"}
+                                </span>
+                              ) : null}
+
+                              <span className="text-xs text-muted-foreground">
+                                {new Date(item.date).toLocaleDateString()}
+                              </span>
+                            </div>
+
+                            <h3 className="text-base font-semibold leading-snug">
+                              {item.title}
+                            </h3>
+
+                            {item.description ? (
+                              <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-4">
+                                {item.description}
+                              </p>
+                            ) : null}
+
+                            <div className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-violet-600">
+                              Open
+                            </div>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+
+                    {!loadingNews && !newsError && filteredNews.length === 0 ? (
+                      <div className="text-sm text-muted-foreground">No news found.</div>
+                    ) : null}
+                  </div>
                 </div>
               </>
             )}
           </TabsContent>
 
-          {/* ---------------- VPX Reading Club Tab (UPDATED) ---------------- */}
+          {/* ---------------- VPX Reading Club Tab ---------------- */}
           <TabsContent value="seminars" className="space-y-6">
-            {/* Top controls: remove "Recent (3 months)" & "All" toggle, keep search only */}
+            {/* Top controls */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
               <div className="text-sm text-muted-foreground">
-                Total: <span className="text-foreground font-medium">{filteredVideos.length}</span>
+                Total:{" "}
+                <span className="text-foreground font-medium">
+                  {filteredVideos.length}
+                </span>
                 {filteredVideos.length > 0 ? (
                   <>
                     {" "}
                     · Page{" "}
                     <span className="text-foreground font-medium">{page}</span>/
-                    <span className="text-foreground font-medium">{totalPages}</span>
-                    {" "}
+                    <span className="text-foreground font-medium">
+                      {totalPages}
+                    </span>{" "}
                     · Showing{" "}
                     <span className="text-foreground font-medium">
                       {(page - 1) * PAGE_SIZE + 1}
@@ -297,149 +409,124 @@ const Activities = () => {
               />
             </div>
 
-            {/* status */}
-            {videoError ? (
-              <div className="rounded-md border p-4 text-sm text-muted-foreground">
-                <div className="font-medium text-foreground mb-1">
-                  Failed to load videos
+            {/* Videos grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+              {pagedVideos.map((v) => (
+                <Card
+                  key={v.bvid}
+                  className="overflow-hidden cursor-pointer hover:shadow-md transition-shadow"
+                  onClick={() => setActiveVideo(v)}
+                >
+                  {/* Cover (static) */}
+                  <div className="relative aspect-video bg-muted">
+                    {v.cover ? (
+                      <img
+                        src={v.cover}
+                        alt={v.title}
+                        className="absolute inset-0 h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    ) : null}
+                  </div>
+
+                  <CardHeader className="p-4 pb-2">
+                    <CardTitle className="text-base leading-snug line-clamp-2">
+                      {v.title}
+                    </CardTitle>
+                    <CardDescription className="flex items-center gap-2">
+                      <Calendar className="h-4 w-4 text-muted-foreground" />
+                      <span>{formatDate(v.publishedAt)}</span>
+                    </CardDescription>
+                  </CardHeader>
+
+                  <CardContent className="p-4 pt-0">
+                    <p className="text-sm text-muted-foreground line-clamp-3">
+                      {v.description || "—"}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {filteredVideos.length > PAGE_SIZE ? (
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+                <div className="flex items-center gap-2">
+                  <button
+                    className="px-3 py-1 text-sm rounded-md bg-muted text-muted-foreground disabled:opacity-50"
+                    onClick={() => goToPage(page - 1)}
+                    disabled={page <= 1}
+                  >
+                    Prev
+                  </button>
+
+                  {pageNumbers[0] > 1 ? (
+                    <>
+                      <button
+                        className="px-3 py-1 text-sm rounded-md bg-muted text-muted-foreground"
+                        onClick={() => goToPage(1)}
+                      >
+                        1
+                      </button>
+                      <span className="text-muted-foreground text-sm">…</span>
+                    </>
+                  ) : null}
+
+                  {pageNumbers.map((p) => (
+                    <button
+                      key={p}
+                      className={`px-3 py-1 text-sm rounded-md ${
+                        p === page
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted text-muted-foreground"
+                      }`}
+                      onClick={() => goToPage(p)}
+                    >
+                      {p}
+                    </button>
+                  ))}
+
+                  {pageNumbers[pageNumbers.length - 1] < totalPages ? (
+                    <>
+                      <span className="text-muted-foreground text-sm">…</span>
+                      <button
+                        className="px-3 py-1 text-sm rounded-md bg-muted text-muted-foreground"
+                        onClick={() => goToPage(totalPages)}
+                      >
+                        {totalPages}
+                      </button>
+                    </>
+                  ) : null}
+
+                  <button
+                    className="px-3 py-1 text-sm rounded-md bg-muted text-muted-foreground disabled:opacity-50"
+                    onClick={() => goToPage(page + 1)}
+                    disabled={page >= totalPages}
+                  >
+                    Next
+                  </button>
                 </div>
-                <div className="break-words">{videoError}</div>
-                <div className="mt-2 text-xs">
-                  Tip: make sure your server is running at{" "}
-                  <span className="font-mono">{DEFAULT_READING_CLUB_API}</span>
+
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <span>Go to</span>
+                  <input
+                    value={String(page)}
+                    onChange={(e) => {
+                      const raw = e.target.value.replace(/[^\d]/g, "");
+                      const num = raw ? parseInt(raw, 10) : 1;
+                      setPage(num);
+                    }}
+                    onBlur={() => goToPage(page)}
+                    className="h-9 w-20 rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
+                  />
+                  <span>/ {totalPages}</span>
                 </div>
               </div>
             ) : null}
 
-            {loadingVideos ? (
-              <div className="text-sm text-muted-foreground">Loading videos…</div>
-            ) : (
-              <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                  {pagedVideos.map((v) => (
-                    <Card
-                      key={v.bvid}
-                      className="overflow-hidden cursor-pointer hover:shadow-md transition-shadow"
-                      onClick={() => setActiveVideo(v)}
-                    >
-                      {/* Cover */}
-                      <div className="relative aspect-video bg-muted">
-                        {v.cover ? (
-                          <img
-                            src={`http://localhost:3001/api/img?url=${encodeURIComponent(
-                              v.cover
-                            )}`}
-                            alt={v.title}
-                            className="absolute inset-0 h-full w-full object-cover"
-                            loading="lazy"
-                          />
-                        ) : null}
-                      </div>
-
-                      <CardHeader className="p-4 pb-2">
-                        <CardTitle className="text-base leading-snug line-clamp-2">
-                          {v.title}
-                        </CardTitle>
-                        <CardDescription className="flex items-center gap-2">
-                          <Calendar className="h-4 w-4 text-muted-foreground" />
-                          <span>{formatDate(v.publishedAt)}</span>
-                        </CardDescription>
-                      </CardHeader>
-
-                      <CardContent className="p-4 pt-0">
-                        <p className="text-sm text-muted-foreground line-clamp-3">
-                          {v.description || "—"}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-
-                {/* Pagination */}
-                {filteredVideos.length > PAGE_SIZE ? (
-                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-                    <div className="flex items-center gap-2">
-                      <button
-                        className="px-3 py-1 text-sm rounded-md bg-muted text-muted-foreground disabled:opacity-50"
-                        onClick={() => goToPage(page - 1)}
-                        disabled={page <= 1}
-                      >
-                        Prev
-                      </button>
-
-                      {/* Optional leading ellipsis */}
-                      {pageNumbers[0] > 1 ? (
-                        <>
-                          <button
-                            className="px-3 py-1 text-sm rounded-md bg-muted text-muted-foreground"
-                            onClick={() => goToPage(1)}
-                          >
-                            1
-                          </button>
-                          <span className="text-muted-foreground text-sm">…</span>
-                        </>
-                      ) : null}
-
-                      {pageNumbers.map((p) => (
-                        <button
-                          key={p}
-                          className={`px-3 py-1 text-sm rounded-md ${
-                            p === page
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-muted text-muted-foreground"
-                          }`}
-                          onClick={() => goToPage(p)}
-                        >
-                          {p}
-                        </button>
-                      ))}
-
-                      {/* Optional trailing ellipsis */}
-                      {pageNumbers[pageNumbers.length - 1] < totalPages ? (
-                        <>
-                          <span className="text-muted-foreground text-sm">…</span>
-                          <button
-                            className="px-3 py-1 text-sm rounded-md bg-muted text-muted-foreground"
-                            onClick={() => goToPage(totalPages)}
-                          >
-                            {totalPages}
-                          </button>
-                        </>
-                      ) : null}
-
-                      <button
-                        className="px-3 py-1 text-sm rounded-md bg-muted text-muted-foreground disabled:opacity-50"
-                        onClick={() => goToPage(page + 1)}
-                        disabled={page >= totalPages}
-                      >
-                        Next
-                      </button>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <span>Go to</span>
-                      <input
-                        value={String(page)}
-                        onChange={(e) => {
-                          const raw = e.target.value.replace(/[^\d]/g, "");
-                          const num = raw ? parseInt(raw, 10) : 1;
-                          setPage(num);
-                        }}
-                        onBlur={() => goToPage(page)}
-                        className="h-9 w-20 rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
-                      />
-                      <span>/ {totalPages}</span>
-                    </div>
-                  </div>
-                ) : null}
-
-                {filteredVideos.length === 0 ? (
-                  <div className="text-sm text-muted-foreground">
-                    No videos found.
-                  </div>
-                ) : null}
-              </>
-            )}
+            {filteredVideos.length === 0 ? (
+              <div className="text-sm text-muted-foreground">No videos found.</div>
+            ) : null}
 
             {/* Player dialog */}
             <Dialog
