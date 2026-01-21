@@ -42,7 +42,7 @@ jobs:
 
       - name: Run pipeline
         run: |
-          python Spider_XHS/run_xhs_pipeline.py
+          python run_xhs_pipeline.py
 
       - name: Commit & push if changed
         run: |
