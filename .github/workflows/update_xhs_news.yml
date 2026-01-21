@@ -35,7 +35,6 @@ jobs:
           pip install pandas openpyxl
 
       - name: Write Spider_XHS/.env from Secret
-        if: ${{ secrets.SPIDER_XHS_ENV != '' }}
         run: |
           echo "${{ secrets.SPIDER_XHS_ENV }}" > Spider_XHS/.env
           # 可选：避免换行符/回车问题（Windows CRLF）
