@@ -1,0 +1,60 @@
+name: Update XHS News JSON
+
+on:
+  schedule:
+    # 每天 02:30 UTC（北京时间 +8 是 10:30）
+    - cron: "30 2 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: xhs-news-update
+  cancel-in-progress: true
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r Spider_XHS/requirements.txt
+
+      # 如果你的 Spider_XHS 依赖 .env / cookies（很常见），就用 secret 写进去
+      # 下面这一段你可以先留着，等你确认需要再启用
+      - name: Write Spider_XHS .env from secret (optional)
+        if: ${{ secrets.SPIDER_XHS_ENV != '' }}
+        run: |
+          echo "${{ secrets.SPIDER_XHS_ENV }}" > Spider_XHS/.env
+
+      - name: Run pipeline
+        run: |
+          python run_xhs_pipeline.py
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add src/server/data/news.json
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: update news.json"
+          git push
