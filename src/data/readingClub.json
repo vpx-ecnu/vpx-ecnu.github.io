@@ -1,11 +1,29 @@
 {
-  "updatedAt": "2026-01-23T03:53:22.700057+00:00",
+  "updatedAt": "2026-01-24T03:47:23.405935+00:00",
   "source": {
     "mid": 487404760,
     "series_id": 3793757,
     "api": "x/series/archives"
   },
   "videos": [
+    {
+      "bvid": "BV163zKB2E5p",
+      "title": "VPX研讨会 48 | 【CVPR 2025】ScribbleLight: Single Image Indoor Relighting... 论文讲解！",
+      "description": "",
+      "cover": "/reading_club_covers/BV163zKB2E5p_f355d4a3c3_VPX研讨会_48_CVPR_2025_ScribbleLight_Single_Image_Indoor_Relighting..._论文讲解.jpg",
+      "cover_remote": "http://i1.hdslb.com/bfs/archive/024b77696ea8521aa0232b6d6183390087025091.jpg",
+      "publishedAt": "2026-01-23T06:44:16+00:00",
+      "url": "https://www.bilibili.com/video/BV163zKB2E5p"
+    },
+    {
+      "bvid": "BV1QLi1BiELB",
+      "title": "VPX研讨会 47 | 【CVPR 2024】Deformable 3D Gaussians for High-Fidelity... 论文讲解！",
+      "description": "",
+      "cover": "/reading_club_covers/BV1QLi1BiELB_84a4f336ae_VPX研讨会_47_CVPR_2024_Deformable_3D_Gaussians_for_High-Fidelity..._论文讲解.jpg",
+      "cover_remote": "http://i1.hdslb.com/bfs/archive/59af81608d1e43138ab280d10f3d6278e3bb7735.jpg",
+      "publishedAt": "2026-01-07T14:27:54+00:00",
+      "url": "https://www.bilibili.com/video/BV1QLi1BiELB"
+    },
     {
       "bvid": "BV1vWBeBEEQ2",
       "title": "VPX研讨会 46 | 【CVPR 2025】SPMTrack: Spatio-Temporal Parameter-Efficient... 论文讲解！",
