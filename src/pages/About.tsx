@@ -13,7 +13,7 @@ const About = () => {
     <div className="absolute bottom-0 right-0 h-[520px] w-[520px] rounded-full bg-indigo-500/15 blur-3xl" />
   </div>
       {/* Hero Section */}
-  <div className="container py-12 px-4 md:px-6 space-y-24">
+  <div className="container py-12 px-4 md:px-6 space-y-16">
       <section className="py-6 md:py-10">
   <div className="container max-w-screen-xl mx-auto">
 
@@ -174,8 +174,8 @@ const About = () => {
 </section>
 
       {/* Mission & Vision */}
-      <section className="container py-12 px-4 md:px-6 space-y-12">
-  <div className="container max-w-screen-xl mx-auto">
+      <section className="py-10 md:py-12">
+  <div className="container max-w-screen-xl mx-auto px-4 md:px-6">
     <div className="flex flex-col lg:flex-row gap-12 items-start">
       
       {/* 左边：文字内容 */}
@@ -218,10 +218,8 @@ const About = () => {
     </div>
   </div>
 </section>
-
-
       {/* Core Values */}
-      <section className="py-16 px-6 bg-transparent">
+      <section className="py-10 px-6 bg-transparent">
         <div className="container">
           <h2 className="text-3xl font-bold mb-12 text-center">Our Core Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

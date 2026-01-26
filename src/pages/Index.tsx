@@ -19,9 +19,6 @@ type NewsItem = {
   source_url?: string;
 };
 
-const DEFAULT_NEWS_API =
-  (import.meta as any).env?.VITE_NEWS_API || "http://localhost:3001/api/vpx-news";
-
 const Index = () => {
   // ----------------------
   // News (API based) - for home page latest 6
@@ -38,7 +35,7 @@ const Index = () => {
       setNewsError("");
 
       try {
-        const r = await fetch(DEFAULT_NEWS_API);
+        const r = await fetch("/news.json");
         const data = await r.json();
         if (cancelled) return;
 
@@ -353,7 +350,7 @@ const Index = () => {
             <div className="fade-in-content flex flex-col gap-2 md:gap-4">
               <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Ongoing Research</h2>
               <p className="text-muted-foreground md:text-lg">
-                Our current projects span multiple disciplines and real-world applications.
+                Our current researchs span multiple disciplines and real-world applications.
               </p>
             </div>
 
@@ -421,11 +418,7 @@ const Index = () => {
               {newsError ? (
                 <div className="rounded-md border p-4 text-sm text-muted-foreground">
                   <div className="font-medium text-foreground mb-1">Failed to load news</div>
-                  <div className="break-words">{newsError}</div>
-                  <div className="mt-2 text-xs">
-                    Tip: make sure your server is running at{" "}
-                    <span className="font-mono">{DEFAULT_NEWS_API}</span>
-                  </div>
+                  <div className="break-words">{newsError}</div>s
                 </div>
               ) : null}
 

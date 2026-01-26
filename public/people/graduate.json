@@ -40,7 +40,7 @@
         "research": ["relighting", "virtual shooting"]
     },
     {
-        "name": "Zhechao Huang",
+        "name": "Zhichao Huang",
         "title": "Master's Student",
         "bio": "Exploring Neural Rendering.",
         "image": "xx",
@@ -80,22 +80,6 @@
         "research": ["Computer Graphics", "3D Vision"]
     },
     {
-        "name": "Tieshi Zhong",
-        "title": "Master's Student",
-        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
-        "image": "xxx",
-        "email": "zjut_sky@163.com",
-        "research": ["Computer Graphics", "3D Vision"]
-    },
-    {
-        "name": "Tieshi Zhong",
-        "title": "Master's Student",
-        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
-        "image": "xxx",
-        "email": "zjut_sky@163.com",
-        "research": ["Computer Graphics", "3D Vision"]
-    },
-    {
         "name": "Mingyang Yuan",
         "title": "Master's Student",
         "bio": "Exploring 3D Gaussian splatting-based virtual human.",
@@ -121,6 +105,14 @@
     },
     {
         "name": "Mingyang Yin",
+        "title": "Master's Student",
+        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
+        "image": "xxx",
+        "email": "zjut_sky@163.com",
+        "research": ["Computer Graphics", "3D Vision"]
+    },
+    {
+        "name": "Tieshi Zhong",
         "title": "Master's Student",
         "bio": "Exploring 3D Gaussian splatting-based virtual human.",
         "image": "xxx",

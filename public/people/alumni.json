@@ -13,7 +13,7 @@
         "bio": "Graduated in 2024, now working on AIGC.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
-        "research": ["xxx"]
+        "research": ["TeleAI"]
     },
     {
         "name": "Dingbo Lu",
@@ -29,7 +29,7 @@
         "bio": "Graduated in 2024, now working on SMPL-related action research.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
-        "research": ["xxx"]
+        "research": ["ABC"]
     },
     {
         "name": "Yiming Sun",
@@ -77,6 +77,6 @@
         "bio": "Working on functions and systems necessary for artificially-intelligent robots that can act within the space of human society.",
         "image": "/people/people_image/part_time/ykb.jpg",
         "email": "a1021524866@gmail.com",
-        "research": ["xxx"]
+        "research": ["Pursuing a graduate degree at The University of Tokyo"]
     }
   ]

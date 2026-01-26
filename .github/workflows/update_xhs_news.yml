@@ -49,12 +49,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add src/server/data/news.json || true
+          git add public/news.json public/xhs_news_images || true
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
 
-          git commit -m "chore: update news.json (XHS)"
+          git commit -m "chore: update XHS news + images"
           git push

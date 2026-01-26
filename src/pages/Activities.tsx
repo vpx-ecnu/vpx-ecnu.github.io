@@ -45,9 +45,6 @@ function formatDate(iso: string | null) {
   return d.toLocaleDateString();
 }
 
-const DEFAULT_NEWS_API =
-  (import.meta as any).env?.VITE_NEWS_API || "http://localhost:3001/api/vpx-news";
-
 const PAGE_SIZE = 20;
 
 const Activities = () => {
@@ -69,7 +66,7 @@ const Activities = () => {
       setNewsError("");
 
       try {
-        const r = await fetch(DEFAULT_NEWS_API);
+        const r = await fetch("/news.json");;
         const data = await r.json();
 
         if (cancelled) return;
@@ -201,10 +198,6 @@ const Activities = () => {
                   Failed to load news
                 </div>
                 <div className="break-words">{newsError}</div>
-                <div className="mt-2 text-xs">
-                  Tip: make sure your server is running at{" "}
-                  <span className="font-mono">{DEFAULT_NEWS_API}</span>
-                </div>
               </div>
             ) : null}
 

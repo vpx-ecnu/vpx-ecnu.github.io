@@ -134,7 +134,7 @@ if __name__ == '__main__':
     # data_spider.spider_some_note(notes, cookies_str, base_path, 'all', 'test')
 
     # 2 爬取用户的所有笔记信息 用户链接 如下所示 注意此url会过期！
-    user_url = 'https://www.xiaohongshu.com/user/profile/5c615e71000000001a023286?xsec_token=AB2pHFktAsBD7W8aIwKWpjdHud_PqLT2IYRO6tLfi8vx4=&xsec_source=pc_note'
+    user_url = 'https://www.xiaohongshu.com/user/profile/63428cc7000000001901f9a4?xsec_token=AB8RNeYlAREyZ3WQep6a0yKUhuN29oBf3c_GG5c1tvoP8=&xsec_source=pc_note'
     data_spider.spider_user_all_note(user_url, cookies_str, base_path, 'all')
 
     # 3 搜索指定关键词的笔记

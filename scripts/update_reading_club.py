@@ -1,16 +1,21 @@
+# scripts/update_reading_club.py
 import json
 import os
 import re
 import hashlib
 from datetime import datetime, timezone
 from urllib.request import Request, urlopen
+from urllib.parse import urlencode
 
 MID = 487404760
 SERIES_ID = 3793757
+
 PS = 50
+MAX_PAGES = 10  # 安全上限：一般 1-3 页就够了
 
 OUT_JSON = "src/data/readingClub.json"
 COVER_DIR = "public/reading_club_covers"  # 本地封面目录
+
 
 def fetch_json(url: str):
     req = Request(
@@ -23,6 +28,7 @@ def fetch_json(url: str):
     with urlopen(req, timeout=30) as resp:
         return json.loads(resp.read().decode("utf-8"))
 
+
 def normalize_cover(pic: str) -> str:
     if not pic:
         return ""
@@ -30,9 +36,11 @@ def normalize_cover(pic: str) -> str:
         return "https:" + pic
     return pic
 
+
 def safe_filename(name: str) -> str:
     name = re.sub(r"[^\w\-\.\u4e00-\u9fff]+", "_", name).strip("_")
     return name[:80] if len(name) > 80 else name
+
 
 def download_cover(url: str, bvid: str, title: str) -> str:
     """
@@ -69,14 +77,67 @@ def download_cover(url: str, bvid: str, title: str) -> str:
 
     return f"/reading_club_covers/{filename}"
 
+
 def iso_from_pubdate(pubdate: int) -> str:
     dt = datetime.fromtimestamp(pubdate, tz=timezone.utc)
     return dt.isoformat()
 
+
+def build_api_url(pn: int, ps: int) -> str:
+    base = "https://api.bilibili.com/x/series/archives"
+    qs = urlencode({"mid": MID, "series_id": SERIES_ID, "pn": pn, "ps": ps})
+    return f"{base}?{qs}"
+
+
+def fetch_all_archives():
+    """
+    分页拉取 series archives，直到没有数据或达到 MAX_PAGES。
+    返回：(archives_list, total_from_api)
+    """
+    all_archives = []
+    seen = set()
+    total = None
+
+    for pn in range(1, MAX_PAGES + 1):
+        url = build_api_url(pn, PS)
+        data = fetch_json(url)
+
+        # B站标准返回：code=0 才成功
+        if data.get("code") != 0:
+            raise RuntimeError(f"Bili API error: code={data.get('code')} msg={data.get('message')} url={url}")
+
+        d = data.get("data") or {}
+        if total is None:
+            # 有的返回是 total，有的可能叫 total_count；这里做兼容
+            total = d.get("total") or d.get("total_count")
+
+        archives = d.get("archives") or []
+        if not archives:
+            break
+
+        # 去重（按 bvid）
+        added_this_page = 0
+        for v in archives:
+            bvid = v.get("bvid")
+            if not bvid or bvid in seen:
+                continue
+            seen.add(bvid)
+            all_archives.append(v)
+            added_this_page += 1
+
+        # 如果这一页一个都没新增，说明后面也不会有了（防止接口偶发重复）
+        if added_this_page == 0:
+            break
+
+        # 如果我们已经达到 total（有 total 的情况下）
+        if isinstance(total, int) and len(all_archives) >= total:
+            break
+
+    return all_archives, total
+
+
 def main():
-    url = f"https://api.bilibili.com/x/series/archives?mid={MID}&series_id={SERIES_ID}&pn=1&ps={PS}"
-    data = fetch_json(url)
-    archives = (data.get("data") or {}).get("archives") or []
+    archives, total = fetch_all_archives()
 
     videos = []
     for v in archives:
@@ -85,22 +146,28 @@ def main():
         desc = v.get("description", "") or ""
         cover_remote = normalize_cover(v.get("pic", ""))
 
-        # 关键：下载到本地，cover 写成站内路径
         cover_local = download_cover(cover_remote, bvid, title)
 
         videos.append({
             "bvid": bvid,
             "title": title,
             "description": desc,
-            "cover": cover_local,             # ✅ 本地路径
-            "cover_remote": cover_remote,     # 可选：保留远程地址便于排查
+            "cover": cover_local,             # 本地路径
+            "cover_remote": cover_remote,     # 远程地址（排查用）
             "publishedAt": iso_from_pubdate(v["pubdate"]) if v.get("pubdate") else None,
             "url": f"https://www.bilibili.com/video/{bvid}" if bvid else "",
         })
 
     payload = {
         "updatedAt": datetime.now(timezone.utc).isoformat(),
-        "source": {"mid": MID, "series_id": SERIES_ID, "api": "x/series/archives"},
+        "source": {
+            "mid": MID,
+            "series_id": SERIES_ID,
+            "api": "x/series/archives",
+            "ps": PS,
+            "max_pages": MAX_PAGES,
+            "total_from_api": total,
+        },
         "videos": videos,
     }
 
@@ -110,6 +177,9 @@ def main():
 
     print(f"Wrote {len(videos)} videos to {OUT_JSON}")
     print(f"Covers saved to {COVER_DIR}")
+    if isinstance(total, int):
+        print(f"API total={total}, fetched={len(videos)}, missing={max(0, total - len(videos))}")
+
 
 if __name__ == "__main__":
     main()
