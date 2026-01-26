@@ -16,36 +16,28 @@
         "research": ["Multi-modal", "VLA"]
     },
     {
-        "name": "Sardor Mamarasulov",
-        "title": "PhD Candidate",
-        "bio": "Working on Anti-spoofing systems, Deepfake detections, Data augmentations.",
-        "image": "/people/people_image/phd/Sardor.jpg",
-        "email": "mamarasulovsardor@gmail.com ",
-        "research": ["Computer Vision", "Data Science "]
-    },
-    {
       "name": "Junwei Shu",
       "title": "PhD Candidate",
-      "bio": "Exploring NLP in legal document processing.",
-      "image": "/placeholder.svg",
-      "email": "mgarcia@university.edu",
-      "research": ["NLP", "Legal Tech"]
+      "bio": "Exploring diffusion and computer graphics.",
+      "image": "/people/people_image/phd/sjw.jpg",
+      "email": "51265901091@stu.ecnu.edu.cn",
+      "research": ["diffusion", "computer graphics"]
     },
     {
       "name": "Mingjie Han",
       "title": "PhD Candidate",
-      "bio": "Exploring NLP in legal document processing.",
-      "image": "/placeholder.svg",
-      "email": "mgarcia@university.edu",
-      "research": ["NLP", "Legal Tech"]
+      "bio": "Exploring MLLM and spatial intelligence.",
+      "image": "/people/people_image/phd/hmj.jpg",
+      "email": "mingjiehan@stu.ecnu.edu.cn",
+      "research": ["MLLM", "spatial intelligence"]
     },
     {
         "name": "Xiaoyuan Wang",
         "title": "PhD Candidate",
-        "bio": "xxx.",
-        "image": "",
-        "email": "mamarasulovsardor@gmail.com ",
-        "research": ["Computer Vision", "Data Science "]
+        "bio": "Exploring natural human–object interaction understanding and generation.",
+        "image": "/people/people_image/phd/xiaoyuanwang.jpg",
+        "email": "xiaoyuan.wang@irisa.fr",
+        "research": ["Human–Object Interaction", "Spatial Intelligence"]
     }
   ]
   

@@ -210,11 +210,10 @@ const Index = () => {
               <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="max-w-3xl flex-1">
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-                    Reimagining Visual Realism: Next-Gen Rendering
+                    Toward Intelligent Cinematic Virtual Production
                   </h1>
                   <p className="text-xl mb-8 text-muted-foreground">
-                    Exploring NeRF and 3DGS for virtual humans, lighting reconstruction, 3D scene stylization, and
-                    realistic rendering.
+                    We build an intelligent filming environment where cameras, lighting, and virtual scenes collaborate automatically to achieve highly realistic and efficient virtual production.
                   </p>
                   <div className="flex flex-wrap gap-4">
                     <Button asChild size="lg">
@@ -227,7 +226,7 @@ const Index = () => {
                 </div>
                 <div className="flex-1 hidden md:block">
                   <img
-                    src="/lovable-uploads/home/home_shapan.png"
+                    src="/lovable-uploads/home/home_filming.png"
                     alt="Embodied AI Robot"
                     className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
                   />

@@ -42,18 +42,18 @@
     {
         "name": "Zhichao Huang",
         "title": "Master's Student",
-        "bio": "Exploring Neural Rendering.",
-        "image": "xx",
-        "email": "xxx",
-        "research": ["Style Transfer", "3DGS","diffusion"]
+        "bio": "Exploring wearable device and Human–Computer Interaction.",
+        "image": "/people/people_image/master/hzc.jpg",
+        "email": "51275901117@stu.ecnu.edu.cn",
+        "research": ["Wearable device", "Human–Computer Interaction"]
     },
     {
         "name": "Wenzheng Song",
         "title": "Master's Student",
-        "bio": "Exploring Neural Rendering.",
-        "image": "xx",
-        "email": "xxx",
-        "research": ["Style Transfer", "3DGS","diffusion"]
+        "bio": "Exploring advanced rendering techniques.",
+        "image": "/people/people_image/master/swz.jpg",
+        "email": "244198756@qq.com",
+        "research": ["3DGS", "VDB"]
     },
     {
         "name": "Wenzhi He",
@@ -82,42 +82,42 @@
     {
         "name": "Mingyang Yuan",
         "title": "Master's Student",
-        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
-        "image": "xxx",
-        "email": "zjut_sky@163.com",
-        "research": ["Computer Graphics", "3D Vision"]
+        "bio": "Exploring unified diffusion models for understanding and generation.",
+        "image": "/people/people_image/master/ymy.jpg",
+        "email": "51285900034@stu.ecnu.edu.cn",
+        "research": ["diffusion"]
     },
     {
         "name": "Hanzhe Yao",
         "title": "Master's Student",
-        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
-        "image": "xxx",
-        "email": "zjut_sky@163.com",
-        "research": ["Computer Graphics", "3D Vision"]
+        "bio": "Exploring multimodal in-context learning.",
+        "image": "/people/people_image/master/yhz.jpg",
+        "email": "3061794854@qq.com",
+        "research": ["MLLMs", "ICL"]
     },
     {
         "name": "Qijie Yu",
         "title": "Master's Student",
-        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
-        "image": "xxx",
-        "email": "zjut_sky@163.com",
-        "research": ["Computer Graphics", "3D Vision"]
+        "bio": "Exploring virtual reality.",
+        "image": "/people/people_image/master/yqj.jpg",
+        "email": "1753843107@qq.com",
+        "research": ["Robotic Teleoperation", "XR Development"]
     },
     {
         "name": "Mingyang Yin",
         "title": "Master's Student",
-        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
-        "image": "xxx",
-        "email": "zjut_sky@163.com",
-        "research": ["Computer Graphics", "3D Vision"]
+        "bio": "Exploring vision–language navigation agents.",
+        "image": "/people/people_image/master/mingyangyin.jpg",
+        "email": "51285901113@stu.ecnu.edu.cn",
+        "research": ["VLN", "Embodied Intelligence"]
     },
     {
         "name": "Tieshi Zhong",
         "title": "Master's Student",
-        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
-        "image": "xxx",
-        "email": "zjut_sky@163.com",
-        "research": ["Computer Graphics", "3D Vision"]
+        "bio": "Exploring 3D Reconstruction.",
+        "image": "/people/people_image/master/zts.jpg",
+        "email": "h528014081@163.com",
+        "research": ["Neural Rendering", "3D Computer Vision"]
     }
 
 

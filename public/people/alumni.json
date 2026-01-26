@@ -8,6 +8,14 @@
       "research": ["HUAWEI"]
     },
     {
+      "name": "Sardor Mamarasulov",
+      "title": "Former PhD Candidate",
+      "bio": "Graduated in 2025, now working on Anti-spoofing systems, Deepfake detections, Data augmentations.",
+      "image": "/placeholder.svg",
+      "email": "mamarasulovsardor@gmail.com",
+      "research": ["XXX"]
+    },
+    {
         "name": "Xiaoyan Yang",
         "title": "Former Master's Student",
         "bio": "Graduated in 2024, now working on AIGC.",
@@ -53,7 +61,7 @@
         "bio": "Graduated in 2025, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "jwilson@techuniversity.edu",
-        "research": ["xxxx"]
+        "research": ["Nippon Steel"]
     },
     {
         "name": "Pengfei Jiang",

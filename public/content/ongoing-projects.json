@@ -36,19 +36,22 @@
   },
 
   {
-    "title": "3D Rendering & Graphics",
-    "description": "Advancing real-time neural rendering, Gaussian splatting, and immersive 3D experiences for next-generation visual computing.",
-    "details": "xxxxxxxx",
-    "lead": "Wenjie Liu",
-    "tags": ["3DGS", "Neural Rendering", "Graphics", "Style Transfer"],
-    "timeframe": "2023–2026",
+    "title": "Intelligent Virtual Production with Camera and Lighting Co-Design",
+    "description": "A next-generation virtual production platform that tightly synchronizes real and virtual cameras, and enables intelligent camera movement and adaptive lighting through real-time capture and AI-assisted control.",
+    "details": "## Overview\nThis project focuses on building an intelligent virtual production system for smart studios, integrating real-time optical motion capture, precise virtual–physical alignment, automated camera control, and adaptive lighting.\n\nBy capturing the real camera’s pose using a multi-camera motion capture setup and synchronizing it with the virtual camera, the system ensures strict consistency in viewpoint, motion, and spatial relationships between real footage and virtual scenes.\n\nOn the lighting side, the system adopts a hybrid background–foreground lighting architecture, combining LED walls for environmental illumination with programmable LED and DMX-controlled lights for foreground and character lighting. An intelligent lighting control model analyzes virtual scene illumination and dynamically adjusts real foreground lighting to achieve real-time relighting of performers.\n\nIn addition, the project explores AI-driven camera movement generation, where natural language shot instructions are parsed into cinematic camera trajectories that can be directly executed by a high-precision robotic camera arm.\n## Impact\nBy enabling automatic coordination between camera motion, lighting, and virtual environments, this system significantly reduces manual setup and operational complexity in virtual production. It paves the way toward director-intent-driven filming workflows, improving efficiency, visual consistency, and creative flexibility for real-time content creation and virtual filmmaking.",
+    "lead": "Yijing Wa",
+    "tags": ["Virtual Production", "Intelligent Filmmaking", "Camera Control", "Adaptive Lighting", "Motion Capture"],
+    "timeframe": "2024–2026",
     "status": "Active",
-
-    "thumbnail": "/content/ongoing_image/project1_1.jpg",
+    "thumbnail": "/content/ongoing_image/project3_1.png",
     "images": [
-      "/content/ongoing_image/3d_rendering.jpg"
+      "/content/ongoing_image/project3_3.JPEG",
+      "/content/ongoing_image/project3_1.png",
+      "/content/ongoing_image/project3_2.png",
+      "/content/ongoing_image/project3_3.png",
+      "/content/ongoing_image/project3_4.png"
     ]
-  },
+    },
 
   {
     "title": "Intelligent Sandplay for Psychological Assessment",
