@@ -1,9 +1,12 @@
 {
-  "updatedAt": "2026-01-26T04:07:43.581451+00:00",
+  "updatedAt": "2026-01-27T03:57:36.816496+00:00",
   "source": {
     "mid": 487404760,
     "series_id": 3793757,
-    "api": "x/series/archives"
+    "api": "x/series/archives",
+    "ps": 50,
+    "max_pages": 10,
+    "total_from_api": null
   },
   "videos": [
     {
