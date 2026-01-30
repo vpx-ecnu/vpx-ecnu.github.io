@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 type NewsItem = {
   id: string;
@@ -76,69 +77,117 @@ const Index = () => {
   return (
     <div className="page-transition">
       <section
-        className="relative pt-32 pb-32 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/lovable-uploads/home/home_robot.gif')",
-        }}
-      >
-        {/* 半透明遮罩 */}
-        <div className="absolute inset-0 bg-background/20 backdrop-blur-sm" />
+  className="relative isolate overflow-hidden pt-20 pb-20 md:pt-24 md:pb-24 bg-cover bg-center"
+  style={{ backgroundImage: "url('/lovable-uploads/home/home_robot.gif')" }}
+>
+  {/* 多层遮罩：保证动态图不抢文字、同时更“学术” */}
+  <div className="absolute inset-0 -z-10">
+    {/* 暗化 + 冷色渐变，提升可读性 */}
+    <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-950/55 to-slate-950/75" />
+    <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/25 via-violet-900/25 to-fuchsia-900/15" />
+    {/* 轻微磨砂（比你原来的更克制） */}
+    <div className="absolute inset-0 backdrop-blur-[2px]" />
+    {/* 顶部/底部暗角，让视觉聚焦在中间内容 */}
+    <div className="absolute inset-0 [mask-image:radial-gradient(70%_60%_at_50%_35%,black,transparent)] bg-black/25" />
+  </div>
 
-        {/* 内容 */}
-        <div className="relative z-10 container px-4 md:px-6">
-          <div className="flex flex-col items-center text-center space-y-8 md:space-y-12">
-            <div className="space-y-6 max-w-4xl text-lg md:text-xl">
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tight md:whitespace-nowrap text-white">
-                Welcome to <span className="text-violet-800">VPX Group</span> @ ECNU
-              </h1>
-            </div>
+  {/* 柔和光晕点缀（不抢主视觉） */}
+  <div className="pointer-events-none absolute inset-0 -z-10">
+    <div className="absolute left-1/2 top-10 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-violet-500/20 blur-3xl" />
+    <div className="absolute -left-20 top-48 h-[420px] w-[420px] rounded-full bg-cyan-400/15 blur-3xl" />
+    <div className="absolute right-0 bottom-0 h-[460px] w-[460px] rounded-full bg-fuchsia-400/10 blur-3xl" />
+  </div>
 
-            <div className="w-full max-w-7xl bg-gradient-to-r from-blue-900/40 to-violet-900/40 backdrop-blur-md border border-white/10 px-10 py-6 text-left">
-              <div className="space-y-5 text-lg md:text-2xl leading-relaxed tracking-wide text-white/90">
-                <p>
-                  <span className="font-semibold text-white">Visual Perception + X (VPX)</span>{" "}
-                  develops visual perception for{" "}
-                  <span className="font-semibold text-cyan-300">cross-disciplinary research</span>,
-                  focusing on extracting{" "}
-                  <span className="font-semibold text-cyan-300">meaningful information</span> and{" "}
-                  <span className="font-semibold text-cyan-300">structured data</span> from videos and
-                  raw streaming sources.
-                </p>
+  <div className="relative z-10 container px-4 md:px-6">
+    <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
+      {/* 顶部小标签：更像实验室官网 */}
+      <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm md:text-base text-white/85 backdrop-blur-md mb-2">
+        <span className="h-1.5 w-1.5 rounded-full bg-cyan-300/90" />
+        Visual Perception + X • ECNU
+      </div>
 
-                <p>
-                  We leverage visual information to enable AI-based downstream applications, including{" "}
-                  <span className="font-semibold text-amber-300">metaverse</span>,{" "}
-                  <span className="font-semibold text-amber-300">AIGC</span>, and{" "}
-                  <span className="font-semibold text-amber-300">embodied intelligence</span>.
-                </p>
+      <div className="mt-5 space-y-4">
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
+          Welcome to{" "}
+          <span className="bg-gradient-to-r from-violet-200 via-white to-cyan-200 bg-clip-text text-transparent">
+            VPX Group
+          </span>{" "}
+          @ ECNU
+        </h1>
 
-                <p>
-                  Our current focus includes{" "}
-                  <span className="font-semibold text-emerald-300">video analysis</span>,{" "}
-                  <span className="font-semibold text-emerald-300">
-                    controllable image & video generation
-                  </span>
-                  , and <span className="font-semibold text-emerald-300">robotic manipulation</span>.
-                </p>
-              </div>
-            </div>
+        {/* <p className="mx-auto max-w-3xl text-base md:text-xl leading-relaxed text-white/80">
+          We build visual perception systems for cross-disciplinary research, turning
+          videos and streaming signals into meaningful, structured understanding.
+        </p> */}
+      </div>
 
-            <div className="flex flex-wrap gap-6 justify-center">
-              <Button asChild className="px-10 py-7 text-xl bg-violet-600 hover:bg-violet-700 text-white">
-                <Link to="/about">Learn About Us</Link>
-              </Button>
+      {/* 主信息卡：更干净的“玻璃卡片” + 更像学术站点 */}
+      {/* ===== 玻璃卡片（真正更宽 + 字体适中放大） ===== */}
+<div className="mt-7 w-full">
+  <div className="mx-auto w-full max-w-[96rem] rounded-2xl border border-white/12 bg-white/[0.06] backdrop-blur-xl shadow-[0_20px_80px_-40px_rgba(0,0,0,0.8)]">
+    {/* 顶部细亮边 */}
+    <div className="h-px w-full bg-gradient-to-r from-transparent via-white/25 to-transparent" />
 
-              <Button
-                asChild
-                variant="outline"
-                className="px-10 py-7 text-xl border border-white/40 text-violet-900 hover:bg-white/10"
-              >
-                <Link to="/projects">View Our Projects</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+    <div className="px-8 py-9 md:px-14 md:py-11 text-left">
+      <div className="space-y-6 text-lg md:text-xl leading-relaxed text-white/85">
+
+        <p>
+          <span className="font-semibold text-white">
+            Visual Perception + X (VPX)
+          </span>{" "}
+          develops visual perception for{" "}
+          <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
+            cross-disciplinary research
+          </span>
+          , focusing on extracting{" "}
+          <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
+            meaningful information
+          </span>{" "}
+          and{" "}
+          <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
+            structured representations
+          </span>{" "}
+          from videos and raw streaming sources.
+        </p>
+
+        <p>
+          Our research explores visual intelligence from perception to generation and
+          interaction, with a focus on{" "}
+          <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
+            Embodied AI, AIGC, 3D Computer Graphics, and Video Analysis
+          </span>
+          .
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      {/* CTA 按钮：更统一的配色与 hover（第二个按钮文字别用深紫，否则在暗背景不稳） */}
+      <div className="mt-10 flex flex-wrap gap-4 justify-center">
+        <Button
+          asChild
+          className="px-9 py-7 text-lg md:text-xl text-white shadow-lg shadow-violet-600/25
+                     bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500"
+        >
+          <Link to="/about">Learn About Us</Link>
+        </Button>
+
+        <Button
+          asChild
+          variant="outline"
+          className="px-9 py-7 text-lg md:text-xl text-white
+                     border-white/30 bg-white/5 hover:bg-white/10 hover:border-white/40"
+        >
+          <Link to="/projects">View Our Projects</Link>
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       <section className="py-20 px-6 md:px-12 lg:px-24 bg-secondary/30">
         <div className="relative overflow-visible">
@@ -147,7 +196,7 @@ const Index = () => {
             <SwiperSlide>
               <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="max-w-3xl flex-1">
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
                     Embodied Intelligence for Automated Chemical Titration
                   </h1>
                   <p className="text-xl mb-8 text-muted-foreground">
@@ -155,11 +204,21 @@ const Index = () => {
                     deliver accurate, repeatable, and safe chemical experiments.
                   </p>
                   <div className="flex flex-wrap gap-4">
-                    <Button asChild size="lg">
-                      <Link to="/projects">
-                        Explore Robot Research <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
+                    <Button
+                        asChild
+                        size="lg"
+                        className="
+                          bg-gradient-to-r from-violet-600 to-fuchsia-600
+                          hover:from-violet-500 hover:to-fuchsia-500
+                          text-white
+                          shadow-lg shadow-violet-600/30
+                          transition-all
+                        "
+                      >
+                    <Link to="/projects">
+                      Explore Robot Research <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
                     <Button variant="outline" size="lg" asChild>
                       <Link to="/join">Join Our Team</Link>
                     </Button>
@@ -167,7 +226,7 @@ const Index = () => {
                 </div>
                 <div className="flex-1 hidden md:block">
                   <img
-                    src="/lovable-uploads/home/robot2.jpg"
+                    src="/lovable-uploads/home/home_robot.jpg"
                     alt="VPX Lab Environment"
                     className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
                   />
@@ -179,7 +238,7 @@ const Index = () => {
             <SwiperSlide>
               <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="max-w-3xl flex-1">
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
                     AI-Powered Virtual Human Video Generation
                   </h1>
                   <p className="text-xl mb-8 text-muted-foreground">
@@ -187,7 +246,17 @@ const Index = () => {
                     scripts, and backgrounds, enabling fast, scalable, and personalized content creation.
                   </p>
                   <div className="flex flex-wrap gap-4">
-                    <Button asChild size="lg">
+                    <Button
+                        asChild
+                        size="lg"
+                        className="
+                          bg-gradient-to-r from-violet-600 to-fuchsia-600
+                          hover:from-violet-500 hover:to-fuchsia-500
+                          text-white
+                          shadow-lg shadow-violet-600/30
+                          transition-all
+                        "
+                      >
                       <Link to="/projects#aigc">Explore AIGC Research</Link>
                     </Button>
                     <Button variant="outline" size="lg" asChild>
@@ -209,14 +278,24 @@ const Index = () => {
             <SwiperSlide>
               <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="max-w-3xl flex-1">
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
                     Toward Intelligent Cinematic Virtual Production
                   </h1>
                   <p className="text-xl mb-8 text-muted-foreground">
                     We build an intelligent filming environment where cameras, lighting, and virtual scenes collaborate automatically to achieve highly realistic and efficient virtual production.
                   </p>
                   <div className="flex flex-wrap gap-4">
-                    <Button asChild size="lg">
+                    <Button
+                        asChild
+                        size="lg"
+                        className="
+                          bg-gradient-to-r from-violet-600 to-fuchsia-600
+                          hover:from-violet-500 hover:to-fuchsia-500
+                          text-white
+                          shadow-lg shadow-violet-600/30
+                          transition-all
+                        "
+                      >
                       <Link to="/projects#embodied-ai">View 3D Research</Link>
                     </Button>
                     <Button variant="outline" size="lg" asChild>
@@ -237,7 +316,7 @@ const Index = () => {
             <SwiperSlide>
               <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="max-w-3xl flex-1">
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
                     Intelligent Sandplay for Psychological Assessment
                   </h1>
                   <p className="text-xl mb-8 text-muted-foreground">
@@ -245,7 +324,17 @@ const Index = () => {
                     scalability, and safety of sandplay-based psychological evaluation in educational settings.
                   </p>
                   <div className="flex flex-wrap gap-4">
-                    <Button asChild size="lg">
+                    <Button
+                        asChild
+                        size="lg"
+                        className="
+                          bg-gradient-to-r from-violet-600 to-fuchsia-600
+                          hover:from-violet-500 hover:to-fuchsia-500
+                          text-white
+                          shadow-lg shadow-violet-600/30
+                          transition-all
+                        "
+                      >
                       <Link to="/projects#embodied-ai">View VLM Research</Link>
                     </Button>
                     <Button variant="outline" size="lg" asChild>
@@ -344,56 +433,71 @@ const Index = () => {
 
       {/* Featured Research */}
       <section className="pt-4 pb-16 md:pt-10 md:pb-20">
-        <div className="container px-4 md:px-6">
-          <div className="grid gap-8 md:gap-12">
-            <div className="fade-in-content flex flex-col gap-2 md:gap-4">
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Ongoing Research</h2>
-              <p className="text-muted-foreground md:text-lg">
-                Our current researchs span multiple disciplines and real-world applications.
-              </p>
-            </div>
+  <div className="container px-4 md:px-6">
+    <div className="grid gap-8 md:gap-12">
+      <div className="fade-in-content flex flex-col gap-2 md:gap-4">
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Core Research Areas</h2>
+        <p className="text-muted-foreground md:text-lg">
+          Our current research spans multiple disciplines and real-world applications.
+        </p>
+      </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                {
-                  title: "Embodied AI",
-                  description:
-                    "Developing intelligent agents that perceive, learn, and interact with physical environments through robotics and simulation platforms.",
-                },
-                {
-                  title: "AIGC",
-                  description:
-                    "Pioneering AI-generated content technologies for text, image, video and multimodal creation using cutting-edge generative models.",
-                },
-                {
-                  title: "3D Computer Graphics",
-                  description:
-                    "Advancing neural rendering, 3D Gaussian splatting, virtual reality (VR), and ray tracing technologies to power next-generation immersive visual experiences.",
-                },
-                {
-                  title: "Video Analysis",
-                  description:
-                    "Pioneering video understanding, object tracking, video action analysis, and multimodal large language models (LLMs) to build next-generation intelligent video systems.",
-                },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="flex flex-col p-6 bg-card rounded-lg border hover:shadow-md transition-shadow fade-in-content"
-                  style={{ animationDelay: `${i * 150}ms` }}
-                >
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground flex-1">{item.description}</p>
-                  <Button asChild variant="link" className="mt-4 ml-auto p-0">
-                    <Link to={`/projects#${item.title.toLowerCase().replace(/\s+/g, "-")}`}>
-                      Learn more <ArrowRight className="h-4 w-4 ml-1" />
-                    </Link>
-                  </Button>
-                </div>
-              ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          {
+            title: "Embodied AI",
+            description:
+              "Developing intelligent agents that perceive, learn, and interact with physical environments through robotics and simulation platforms.",
+            leaderName: "Xiangyi Wei",
+            leaderId: "xiangyi-wei",
+          },
+          {
+            title: "AIGC",
+            description:
+              "Pioneering AI-generated content technologies for text, image, video and multimodal creation using cutting-edge generative models.",
+            leaderName: "Yu Zhang",
+            leaderId: "yu-zhang",
+          },
+          {
+            title: "3D Computer Graphics",
+            description:
+              "Advancing neural rendering, 3D Gaussian splatting, virtual reality (VR), and ray tracing technologies to power next-generation immersive visual experiences.",
+            leaderName: "Yijing Wa",
+            leaderId: "yijing-wa",
+          },
+          {
+            title: "Video Analysis",
+            description:
+              "Pioneering video understanding, object tracking, video action analysis, and multimodal large language models (LLMs) to build next-generation intelligent video systems.",
+            leaderName: "Chenxi Shao",
+            leaderId: "chenxi-shao",
+          },
+        ].map((item, i) => (
+          <div
+            key={i}
+            className="flex flex-col p-6 bg-card rounded-lg border hover:shadow-md transition-shadow fade-in-content"
+            style={{ animationDelay: `${i * 150}ms` }}
+          >
+            <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+            <p className="text-muted-foreground flex-1">{item.description}</p>
+
+            {/* ✅ 这里是替换 Learn more 的部分 */}
+            <div className="mt-4 ml-auto text-sm text-muted-foreground">
+              Leader:{" "}
+              <Link
+                to={`/people#${item.leaderId}`}
+                className="font-medium text-violet-600 hover:text-violet-700 transition-colors"
+              >
+                {item.leaderName}
+              </Link>
             </div>
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* Latest News Wall in a scrollable window */}
       <section className="pt-6 pb-10 md:pt-8 md:pb-14">
@@ -413,7 +517,7 @@ const Index = () => {
               </Link>
             </div>
 
-            <div className="h-[520px] overflow-y-auto p-5">
+            <div className="h-[680px] overflow-y-auto p-5">
               {newsError ? (
                 <div className="rounded-md border p-4 text-sm text-muted-foreground">
                   <div className="font-medium text-foreground mb-1">Failed to load news</div>
@@ -427,7 +531,7 @@ const Index = () => {
                 <div className="text-sm text-muted-foreground">No news found.</div>
               ) : null}
 
-              <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
+              <div className="columns-1 sm:columns-2 lg:columns-4 gap-5 [column-fill:_balance]">
                 {latest6News.map((item) => (
                   <a
                     key={item.id}
@@ -444,7 +548,7 @@ const Index = () => {
 
                     <div className="p-4">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="text-xs px-2 py-1 border bg-muted">{sourceLabel(item.source)}</span>
+                        {/* <span className="text-xs px-2 py-1 border bg-muted">{sourceLabel(item.source)}</span> */}
                         <span className="text-xs text-muted-foreground">
                           {new Date(item.date).toLocaleDateString()}
                         </span>

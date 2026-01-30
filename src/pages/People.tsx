@@ -10,6 +10,9 @@ import gradStudents from "../../public/people/graduate.json";
 import undergraduate from "../../public/people/Undergraduate.json";
 import alumni from "../../public/people/alumni.json";
 
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
 type Person = {
   name: string;
   title: string;
@@ -23,12 +26,49 @@ type Person = {
 
 const getWebsite = (p: Person) => p.personalWebsite || p.website;
 
+const slugifyName = (name: string) =>
+  name
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-");
 const People = () => {
   const facultyList = faculty as Person[];
   const phdList = phdStudents as Person[];
   const gradList = gradStudents as Person[];
   const ugList = undergraduate as Person[];
   const alumniList = alumni as Person[];
+
+const location = useLocation();
+
+useEffect(() => {
+  const hash = location.hash;
+  if (!hash) return;
+
+  const id = decodeURIComponent(hash.slice(1));
+
+  // 多次尝试：解决“初次进入时 DOM/图片还没渲染导致找不到元素”的问题
+  let tries = 0;
+  const maxTries = 30; // 约 30 帧 ≈ 0.5 秒
+
+  const tick = () => {
+    const el = document.getElementById(id);
+    if (el) {
+      // 先滚到元素
+      el.scrollIntoView({ block: "start" });
+
+      // 再根据你的顶部导航栏高度做微调（这里你可以改成 -64 / -80 / -96）
+      window.scrollBy(0, -80);
+      return;
+    }
+
+    tries += 1;
+    if (tries < maxTries) requestAnimationFrame(tick);
+  };
+
+  requestAnimationFrame(tick);
+}, [location.key, location.hash]);
+
 
   return (
     <div className="relative w-full page-transition">
@@ -44,7 +84,7 @@ const People = () => {
         {/* Hero */}
         <header className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Our Team</h1>
-          <p className="text-base text-muted-foreground mt-2 max-w-3xl leading-relaxed">
+          <p className="text-base text-muted-foreground mt-2 max-w-4xl leading-relaxed">
             Meet the researchers, faculty, and students who contribute to our research initiatives and academic mission.
           </p>
         </header>
@@ -62,7 +102,9 @@ const People = () => {
           <Group id="phd" title="PhD Students">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {phdList.map((m, i) => (
-                <PeopleCardCompact key={`phd-${i}`} member={m} />
+                <div key={`phd-${i}`} id={slugifyName(m.name)} className="scroll-mt-24">
+                  <PeopleCardCompact member={m} />
+                </div>
               ))}
             </div>
           </Group>
@@ -70,7 +112,9 @@ const People = () => {
           <Group id="grad" title="Graduate Students">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {gradList.map((m, i) => (
-                <PeopleCardCompact key={`grad-${i}`} member={m} />
+                <div key={`grad-${i}`} id={slugifyName(m.name)} className="scroll-mt-24">
+                  <PeopleCardCompact member={m} />
+                </div>
               ))}
             </div>
           </Group>
@@ -78,7 +122,9 @@ const People = () => {
           <Group id="undergrad" title="Undergraduate Students">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {ugList.map((m, i) => (
-                <PeopleCardCompact key={`undergrad-${i}`} member={m} />
+                <div key={`undergrad-${i}`} id={slugifyName(m.name)} className="scroll-mt-24">
+                <PeopleCardCompact member={m} />
+                </div>
               ))}
             </div>
           </Group>
