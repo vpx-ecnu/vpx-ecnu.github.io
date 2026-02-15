@@ -13,11 +13,19 @@ import {
   CheckCircle2,
   Link as LinkIcon,
   FileText,
+  MapPin,
 } from "lucide-react";
 
 const YLI_EMAIL = "yli@cs.ecnu.edu.cn";
 const ZULIP_INVITE =
   "https://vpx-ecnu.zulipchat.com/join/hskqkiyqkq4z537uzxcfhbqp/";
+const LAB_ADDRESS = "Science Building, East China Normal University, 3663 Zhongshan North Road, Putuo District, Shanghai";
+const LAB_LAT = 31.227861;
+const LAB_LNG = 121.403694;
+const LAB_MAP_LINK =
+  `https://www.google.com/maps/search/?api=1&query=${LAB_LAT},${LAB_LNG}`;
+const LAB_MAP_EMBED =
+  `https://www.google.com/maps?q=${LAB_LAT},${LAB_LNG}(Science%20Building)&z=19&output=embed`;
 
 const Join = () => {
   const commonTracks = [
@@ -368,6 +376,41 @@ const Join = () => {
           </CardContent>
         </Card>
       </section> */}
+
+      {/* LAB LOCATION */}
+      <section className="max-w-5xl mx-auto fade-in-content" style={{ animationDelay: "300ms" }}>
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <MapPin className="h-5 w-5 text-primary" />
+              Lab Location
+            </CardTitle>
+            <CardDescription>
+              Our lab is based at ECNU (Putuo Campus), Shanghai.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-sm text-muted-foreground">
+              {LAB_ADDRESS}
+            </p>
+            <div className="overflow-hidden rounded-lg border bg-muted">
+              <iframe
+                title="VPX Lab Location Map"
+                src={LAB_MAP_EMBED}
+                className="h-64 w-full md:h-72"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+            <Button asChild variant="secondary" className="gap-2 w-fit">
+              <a href={LAB_MAP_LINK} target="_blank" rel="noreferrer">
+                <ExternalLink className="h-4 w-4" />
+                Open in Google Maps
+              </a>
+            </Button>
+          </CardContent>
+        </Card>
+      </section>
     </div>
     </div>
   );

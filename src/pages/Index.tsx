@@ -27,6 +27,8 @@ const Index = () => {
   const [newsList, setNewsList] = useState<NewsItem[]>([]);
   const [loadingNews, setLoadingNews] = useState(false);
   const [newsError, setNewsError] = useState<string>("");
+  const [publicationCount, setPublicationCount] = useState<number | null>(null);
+  const [researcherCount, setResearcherCount] = useState<number | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -55,6 +57,71 @@ const Index = () => {
     return () => {
       cancelled = true;
     };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const peopleFiles = [
+      "/people/faculty.json",
+      "/people/phd.json",
+      "/people/graduate.json",
+      "/people/part-time.json",
+      "/people/Undergraduate.json",
+      "/people/alumni.json",
+    ];
+
+    const countPeople = (payload: unknown): number => {
+      if (Array.isArray(payload)) return payload.length;
+      if (payload && typeof payload === "object") {
+        const obj = payload as Record<string, unknown>;
+        if (Array.isArray(obj.people)) return obj.people.length;
+      }
+      return 0;
+    };
+
+    const loadStats = async () => {
+      try {
+        const pubResp = await fetch("/publications/publication_updated.json");
+        const pubJson = await pubResp.json();
+        if (!cancelled) {
+          setPublicationCount(Array.isArray(pubJson) ? pubJson.length : 0);
+        }
+      } catch {
+        if (!cancelled) setPublicationCount(0);
+      }
+
+      try {
+        const peopleResults = await Promise.allSettled(
+          peopleFiles.map(async (path) => {
+            const r = await fetch(path);
+            if (!r.ok) return 0;
+            const data = await r.json();
+            return countPeople(data);
+          })
+        );
+
+        const total = peopleResults.reduce((sum, result) => {
+          if (result.status === "fulfilled") return sum + result.value;
+          return sum;
+        }, 0);
+
+        if (!cancelled) setResearcherCount(total);
+      } catch {
+        if (!cancelled) setResearcherCount(0);
+      }
+    };
+
+    loadStats();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const yearsOfResearch = useMemo(() => {
+    const startYear = 2020;
+    const currentYear = new Date().getFullYear();
+    return Math.max(1, currentYear - startYear + 1);
   }, []);
 
   const latest6News = useMemo(() => {
@@ -363,21 +430,21 @@ const Index = () => {
               <div className="flex justify-center">
                 <BookOpen className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold">20+</h3>
+              <h3 className="text-3xl font-bold">{publicationCount ?? "..."}</h3>
               <p className="text-muted-foreground">Publications</p>
             </div>
             <div className="space-y-2">
               <div className="flex justify-center">
                 <Users className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold">30+</h3>
+              <h3 className="text-3xl font-bold">{researcherCount ?? "..."}</h3>
               <p className="text-muted-foreground">Researchers</p>
             </div>
             <div className="space-y-2">
               <div className="flex justify-center">
                 <Clock className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold">5</h3>
+              <h3 className="text-3xl font-bold">{yearsOfResearch}</h3>
               <p className="text-muted-foreground">Years of Research</p>
             </div>
           </div>

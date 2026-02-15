@@ -42,6 +42,14 @@ def safe_filename(name: str) -> str:
     return name[:80] if len(name) > 80 else name
 
 
+def clean_title(title: str) -> str:
+    # 统一去掉标题中的“研讨会”
+    t = (title or "").replace("研讨会", "")
+    # 清理多余空白，避免出现连续空格
+    t = re.sub(r"\s{2,}", " ", t).strip()
+    return t
+
+
 def download_cover(url: str, bvid: str, title: str) -> str:
     """
     下载封面到 public/reading_club_covers
@@ -142,7 +150,7 @@ def main():
     videos = []
     for v in archives:
         bvid = v.get("bvid")
-        title = v.get("title", "")
+        title = clean_title(v.get("title", ""))
         desc = v.get("description", "") or ""
         cover_remote = normalize_cover(v.get("pic", ""))
 

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { ExternalLink, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
 
 type Publication = {
   title: string;
@@ -10,7 +10,6 @@ type Publication = {
   journal: string; // 你现在的 json 里已经是类似 "AAAI 2026"
   year: number;
   doi: string; // paper 链接（arxiv/ieee/pdf/...）
-  project_webpage?: string; // ✅ 新增：Project Webpage 链接
   tags?: string[];
 };
 
@@ -165,14 +164,11 @@ const Publications = () => {
                     {pub.title}
                   </h3>
 
-                  {/* Authors */}
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {pub.authors}
-                  </p>
-
-                  {/* Meta + Actions */}
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pt-1">
-                    {/* Venue tag */}
+                  {/* Authors + Venue */}
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {pub.authors}
+                    </p>
                     <div className="flex items-center gap-2 flex-wrap">
                       {pub.journal ? (
                         <Badge className="bg-violet-500/15 text-violet-700 border border-violet-500/20">
@@ -182,7 +178,10 @@ const Publications = () => {
                         <Badge variant="secondary">Unknown Venue</Badge>
                       )}
                     </div>
+                  </div>
 
+                  {/* Meta + Actions */}
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-end gap-4 pt-1">
                     {/* Buttons */}
                     <div className="flex items-center gap-2">
                       <Button
@@ -195,18 +194,6 @@ const Publications = () => {
                         <FileText className="h-4 w-4 mr-2" />
                         Paper
                       </Button>
-
-                      {pub.project_webpage ? (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="h-9 border-white/15 bg-white/5 hover:bg-white/10"
-                          onClick={() => openLink(pub.project_webpage)}
-                        >
-                          <ExternalLink className="h-4 w-4 mr-2" />
-                          Project WebPage
-                        </Button>
-                      ) : null}
                     </div>
                   </div>
 
