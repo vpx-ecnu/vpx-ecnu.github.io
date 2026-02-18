@@ -1,0 +1,96 @@
+{
+  "updatedAt": "2026-02-18T06:22:47.425160Z",
+  "publications": [
+    {
+      "id": "project-pub-1",
+      "title": "GT²-GS: Geometry-aware Texture Transfer for Gaussian Splatting",
+      "venue": "AAAI 2026",
+      "url": "https://vpx-ecnu.github.io/GT2-GS-website/",
+      "image": "/publications/recent_images/34be40ff81f4.png"
+    },
+    {
+      "id": "project-pub-2",
+      "title": "Audio-VLA: Adding Contact Audio Perception to Vision-Language-Action Model for Robotic Manipulation",
+      "venue": "ICRA 2026",
+      "url": "https://wxone.github.io/AudioVLA/",
+      "image": "/publications/recent_images/d4ec03d496d4.jpg"
+    },
+    {
+      "id": "project-pub-3",
+      "title": "TimeSoccer: An End-to-End Multimodal Large Language Model for Soccer Commentary Generation",
+      "venue": "ACM MM 2025",
+      "url": "https://vpx-ecnu.github.io/TimeSoccer-Website/",
+      "image": "/publications/recent_images/5ccdb8732073.gif"
+    },
+    {
+      "id": "project-pub-4",
+      "title": "Open-World Reinforcement Learning over Long Short-Term Imagination",
+      "venue": "ICLR 2025",
+      "url": "https://qiwang067.github.io/ls-imagine",
+      "image": "/publications/recent_images/5778720394e2.png"
+    },
+    {
+      "id": "project-pub-5",
+      "title": "Motion-Zero: A Zero-Shot Trajectory Control Framework of Moving Object for Diffusion-Based Video Generation",
+      "venue": "AAAI 2025",
+      "url": "https://vpx-ecnu.github.io/MotionZero-website",
+      "image": "/publications/recent_images/29ef01fd4e62.jpg"
+    },
+    {
+      "id": "project-pub-6",
+      "title": "ABC-GS: Alignment-Based Controllable Style Transfer for 3D Gaussian Splatting",
+      "venue": "IEEE International Conference on Multimedia and Expo (ICME) 2025",
+      "url": "https://vpx-ecnu.github.io/ABC-GS-website",
+      "image": "/publications/recent_images/e70a4369ef75.png"
+    },
+    {
+      "id": "project-pub-7",
+      "title": "FIND: Fine-tuning Initial Noise Distribution with Policy Optimization for Diffusion Models",
+      "venue": "ACM Multimedia 2024",
+      "url": "https://vpx-ecnu.github.io/FIND-website/",
+      "image": "/publications/recent_images/9376fd765619.jpg"
+    },
+    {
+      "id": "project-pub-8",
+      "title": "ClothPPO: A Proximal Policy Optimization Enhancing Framework for Robotic Cloth Manipulation with Observation-Aligned Action Spaces",
+      "venue": "International Joint Conference on Artificial Intelligence 2024",
+      "url": "https://vpx-ecnu.github.io/ClothPPO-website",
+      "image": "/publications/recent_images/285e96ab12b2.png"
+    },
+    {
+      "id": "project-pub-9",
+      "title": "ChatTracker: Enhancing Visual Tracking Performance via Chatting with Multimodal Large Language Model",
+      "venue": "NeurIPS 2024",
+      "url": "https://vpx-ecnu.github.io/ChatTracker_website",
+      "image": "/publications/recent_images/6b67f74232d6.png"
+    },
+    {
+      "id": "project-pub-10",
+      "title": "Homography Decomposition Networks for Planar Object Tracking",
+      "venue": "The Conference on Association for the Advancement of Artificial Intelligence (AAAI) 2022",
+      "url": "https://zhanxinrui.github.io/HDN-homepage/",
+      "image": "/placeholder.svg"
+    },
+    {
+      "id": "project-pub-11",
+      "title": "SuPer Deep: A Surgical Perception Framework for Robotic Tissue Manipulation using Deep Learning for Feature Extraction",
+      "venue": "IEEE Conference on Robotics and Automation (ICRA) 2021",
+      "url": "https://sites.google.com/ucsd.edu/super-framework",
+      "image": "/publications/recent_images/fd28bc593a8f.png"
+    },
+    {
+      "id": "project-pub-12",
+      "title": "SuPer: A Surgical Perception Framework for Endoscopic Tissue Manipulation with Surgical Robotics",
+      "venue": "IEEE Robotics and Automation Letters 2020",
+      "url": "https://sites.google.com/ucsd.edu/super-framework",
+      "image": "/publications/recent_images/fd28bc593a8f.png"
+    },
+    {
+      "id": "project-pub-13",
+      "title": "Robust Estimation of Similarity Transformation for Visual Object Tracking",
+      "venue": "The Conference on Association for the Advancement of Artificial Intelligence (AAAI) 2019",
+      "url": "https://sites.google.com/view/ldestracker",
+      "image": "/placeholder.svg"
+    }
+  ]
+}

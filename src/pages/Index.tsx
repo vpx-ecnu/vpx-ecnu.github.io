@@ -1,7 +1,6 @@
 import { ArrowRight, BookOpen, Clock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { publicationsData } from "@/data/publications";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -20,6 +19,14 @@ type NewsItem = {
   source_url?: string;
 };
 
+type RecentPublication = {
+  id: string;
+  title: string;
+  venue: string;
+  url: string;
+  image: string;
+};
+
 const Index = () => {
   // ----------------------
   // News (API based) - for home page latest 6
@@ -29,6 +36,7 @@ const Index = () => {
   const [newsError, setNewsError] = useState<string>("");
   const [publicationCount, setPublicationCount] = useState<number | null>(null);
   const [researcherCount, setResearcherCount] = useState<number | null>(null);
+  const [recentPublications, setRecentPublications] = useState<RecentPublication[]>([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -54,6 +62,27 @@ const Index = () => {
     };
 
     loadNews();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadRecentPublications = async () => {
+      try {
+        const r = await fetch("/publications/recent_publications.json");
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const data = await r.json();
+        const pubs = Array.isArray(data?.publications) ? data.publications : [];
+        if (!cancelled) setRecentPublications(pubs.slice(0, 6));
+      } catch {
+        if (!cancelled) setRecentPublications([]);
+      }
+    };
+
+    loadRecentPublications();
     return () => {
       cancelled = true;
     };
@@ -457,15 +486,15 @@ const Index = () => {
           <div className="flex items-end justify-between gap-6 mb-6">
             <div className="space-y-2">
               <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">Recent Publications</h2>
-              <p className="text-muted-foreground md:text-lg">Selected recent papers with arXiv links.</p>
+              <p className="text-muted-foreground md:text-lg">Selected recent papers with project webpages.</p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {publicationsData.slice(0, 6).map((pub) => (
+            {recentPublications.map((pub) => (
               <a
                 key={pub.id}
-                href={pub.arxivUrl}
+                href={pub.url}
                 target="_blank"
                 rel="noreferrer"
                 className="group block border bg-card overflow-hidden hover:shadow-md transition-shadow"

@@ -28,11 +28,16 @@ jobs:
       - name: Update publications
         run: |
           python src/backend/update_publications_from_ihpdep.py
+          python src/backend/update_recent_publications_cards.py
+          python src/backend/update_project_publications_cards.py
 
       - name: Commit & push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add public/publications/publication_updated.json
+          git add public/publications/recent_publications.json
+          git add public/publications/project_publications.json
+          git add public/publications/recent_images || true
           git commit -m "chore: update publications" || echo "No changes"
           git push

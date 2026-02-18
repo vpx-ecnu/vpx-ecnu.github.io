@@ -1,0 +1,47 @@
+{
+  "updatedAt": "2026-02-18T04:29:05.567022Z",
+  "publications": [
+    {
+      "id": "recent-1",
+      "title": "GT²-GS: Geometry-aware Texture Transfer for Gaussian Splatting",
+      "venue": "AAAI 2026",
+      "url": "https://vpx-ecnu.github.io/GT2-GS-website/",
+      "image": "/publications/recent_images/34be40ff81f4.png"
+    },
+    {
+      "id": "recent-2",
+      "title": "Audio-VLA: Adding Contact Audio Perception to Vision-Language-Action Model for Robotic Manipulation",
+      "venue": "ICRA 2026",
+      "url": "https://wxone.github.io/AudioVLA/",
+      "image": "/publications/recent_images/d4ec03d496d4.jpg"
+    },
+    {
+      "id": "recent-3",
+      "title": "TimeSoccer: An End-to-End Multimodal Large Language Model for Soccer Commentary Generation",
+      "venue": "ACM MM 2025",
+      "url": "https://vpx-ecnu.github.io/TimeSoccer-Website/",
+      "image": "/publications/recent_images/5ccdb8732073.gif"
+    },
+    {
+      "id": "recent-4",
+      "title": "Open-World Reinforcement Learning over Long Short-Term Imagination",
+      "venue": "ICLR 2025",
+      "url": "https://qiwang067.github.io/ls-imagine",
+      "image": "/publications/recent_images/5778720394e2.png"
+    },
+    {
+      "id": "recent-5",
+      "title": "Motion-Zero: A Zero-Shot Trajectory Control Framework of Moving Object for Diffusion-Based Video Generation",
+      "venue": "AAAI 2025",
+      "url": "https://vpx-ecnu.github.io/MotionZero-website",
+      "image": "/publications/recent_images/29ef01fd4e62.jpg"
+    },
+    {
+      "id": "recent-6",
+      "title": "ABC-GS: Alignment-Based Controllable Style Transfer for 3D Gaussian Splatting",
+      "venue": "IEEE International Conference on Multimedia and Expo (ICME) 2025",
+      "url": "https://vpx-ecnu.github.io/ABC-GS-website",
+      "image": "/publications/recent_images/e70a4369ef75.png"
+    }
+  ]
+}

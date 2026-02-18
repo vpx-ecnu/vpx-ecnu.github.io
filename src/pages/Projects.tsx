@@ -42,6 +42,14 @@ type Project = {
   link?: string;
 };
 
+type ProjectPublication = {
+  id: string;
+  title: string;
+  venue: string;
+  url: string;
+  image: string;
+};
+
 const getThumbnail = (p: Project) => {
   // 优先 thumbnail；否则 images[0]；否则旧的 image
   return p.thumbnail || p.images?.[0] || p.image || "";
@@ -50,6 +58,7 @@ const getThumbnail = (p: Project) => {
 const Projects = () => {
   const [completedProjects, setCompletedProjects] = useState<Project[]>([]);
   const [ongoingProjects, setOngoingProjects] = useState<Project[]>([]);
+  const [projectPublications, setProjectPublications] = useState<ProjectPublication[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   useEffect(() => {
@@ -62,6 +71,14 @@ const Projects = () => {
       .then((res) => res.json())
       .then((data) => setOngoingProjects(data))
       .catch(() => setOngoingProjects([]));
+
+    fetch("/publications/project_publications.json")
+      .then((res) => res.json())
+      .then((data) => {
+        const pubs = Array.isArray(data?.publications) ? data.publications : [];
+        setProjectPublications(pubs);
+      })
+      .catch(() => setProjectPublications([]));
   }, []);
 
   const selectedImages = useMemo(() => {
@@ -222,9 +239,10 @@ const Projects = () => {
             </div>
           ) : (
             <Tabs defaultValue="ongoing" className="mb-12">
-              <TabsList className="grid w-full max-w-md grid-cols-2">
+              <TabsList className="grid w-full max-w-2xl grid-cols-3">
                 <TabsTrigger value="ongoing">Ongoing Projects</TabsTrigger>
                 <TabsTrigger value="completed">Completed Projects</TabsTrigger>
+                <TabsTrigger value="publications">Publications</TabsTrigger>
               </TabsList>
 
               {/* Ongoing */}
@@ -391,6 +409,49 @@ const Projects = () => {
                     );
                   })}
                 </div>
+              </TabsContent>
+
+              {/* Publications */}
+              <TabsContent value="publications" className="mt-6">
+                {projectPublications.length === 0 ? (
+                  <div className="text-sm text-muted-foreground">
+                    No project-publication cards available.
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {projectPublications.map((pub) => (
+                      <a
+                        key={pub.id}
+                        href={pub.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="group block border bg-card overflow-hidden hover:shadow-md transition-shadow"
+                      >
+                        <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
+                          <img
+                            src={pub.image || "/placeholder.svg"}
+                            alt={pub.title}
+                            className="h-full w-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                            loading="lazy"
+                          />
+                          <div className="absolute top-3 left-3">
+                            <span className="px-3 py-1 text-xs font-medium bg-black/70 text-white backdrop-blur-sm border border-white/10">
+                              {pub.venue || "Unknown Venue"}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="p-5">
+                          <h3 className="text-base md:text-lg font-semibold leading-snug group-hover:underline">
+                            {pub.title}
+                          </h3>
+                          <div className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-violet-600">
+                            View on web →
+                          </div>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                )}
               </TabsContent>
             </Tabs>
           )}

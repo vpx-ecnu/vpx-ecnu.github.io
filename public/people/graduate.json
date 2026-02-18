@@ -118,6 +118,14 @@
         "image": "/people/people_image/master/zts.jpg",
         "email": "h528014081@163.com",
         "research": ["Neural Rendering", "3D Computer Vision"]
+    },
+    {
+        "name": "Shaobo Wang",
+        "title": "Master's Student",
+        "bio": "Exploring multimodal fusion for human pose estimation.",
+        "image": "/people/people_image/master/sbw.jpg",
+        "email": "13093278778@163.com",
+        "research": ["Multimodal", "RL"]
     }
 
 

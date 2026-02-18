@@ -16,7 +16,7 @@
     
     "video": {
       "type": "bilibili",
-      "embedUrl": "https://player.bilibili.com/player.html?bvid=BV1vWBeBEEQ2&autoplay=0"
+      "embedUrl": "https://player.bilibili.com/player.html?bvid=BV1azZtBkEvz&autoplay=0"
     }
   },
 
@@ -32,7 +32,11 @@
     "thumbnail": "/content/ongoing_image/project2_1.png",
     "images": [
       "/content/ongoing_image/project2_1.png"
-    ]
+    ],
+    "video": {
+      "type": "bilibili",
+      "embedUrl": "https://player.bilibili.com/player.html?bvid=BV1mDZtBNEK4&autoplay=0"
+    }
   },
 
   {
@@ -48,9 +52,12 @@
       "/content/ongoing_image/project3_3.JPEG",
       "/content/ongoing_image/project3_1.png",
       "/content/ongoing_image/project3_2.png",
-      "/content/ongoing_image/project3_3.png",
       "/content/ongoing_image/project3_4.png"
-    ]
+    ],
+    "video": {
+      "type": "bilibili",
+      "embedUrl": "https://player.bilibili.com/player.html?bvid=BV1YiZtByELX&autoplay=0"
+    }
     },
 
   {
