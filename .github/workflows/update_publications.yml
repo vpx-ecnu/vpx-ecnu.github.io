@@ -27,9 +27,27 @@ jobs:
 
       - name: Update publications
         run: |
-          python src/backend/update_publications_from_ihpdep.py
-          python src/backend/update_recent_publications_cards.py
-          python src/backend/update_project_publications_cards.py
+          set -e
+          backup_dir="/tmp/publications_backup"
+          rm -rf "${backup_dir}"
+
+          if [ -d public/publications ]; then
+            cp -a public/publications "${backup_dir}"
+          fi
+
+          if \
+            python src/backend/update_publications_from_ihpdep.py && \
+            python src/backend/update_recent_publications_cards.py && \
+            python src/backend/update_project_publications_cards.py; then
+            echo "Publications update succeeded."
+          else
+            echo "Publications update failed, restoring backups."
+            if [ -d "${backup_dir}" ]; then
+              rm -rf public/publications
+              cp -a "${backup_dir}" public/publications
+            fi
+            exit 0
+          fi
 
       - name: Commit & push if changed
         run: |

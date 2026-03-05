@@ -629,11 +629,9 @@ const Index = () => {
 
               <div className="columns-1 sm:columns-2 lg:columns-4 gap-5 [column-fill:_balance]">
                 {latest6News.map((item) => (
-                  <a
+                  <Link
                     key={item.id}
-                    href={item.source_url || "#"}
-                    target="_blank"
-                    rel="noreferrer"
+                    to={`/activities?newsId=${encodeURIComponent(String(item.id || ""))}`}
                     className="mb-5 block break-inside-avoid border bg-card hover:shadow-md transition-shadow"
                   >
                     <div className="w-full overflow-hidden bg-muted">
@@ -662,7 +660,7 @@ const Index = () => {
                         Open <ArrowRight className="h-4 w-4" />
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>

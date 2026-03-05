@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -32,6 +33,8 @@ type NewsItem = {
   date: string; // ISO
   image?: string; // 封面（兼容旧数据）
   images?: string[]; // 全部图片（拼贴）
+  video?: string; // 单个视频（兼容）
+  videos?: string[]; // 全部视频
   sub_title?: string;
   description?: string;
   source?: string;
@@ -48,6 +51,7 @@ function formatDate(iso: string | null) {
 const PAGE_SIZE = 20;
 
 const Activities = () => {
+  const location = useLocation();
   // ----------------------
   // News states (API based)
   // ----------------------
@@ -87,6 +91,19 @@ const Activities = () => {
       cancelled = true;
     };
   }, []);
+
+  useEffect(() => {
+    if (!newsList.length) return;
+    const params = new URLSearchParams(location.search);
+    const newsId = params.get("newsId");
+    if (!newsId) return;
+
+    const target = newsList.find((item) => String(item.id) === newsId);
+    if (target) {
+      setNewsFilter("all");
+      setSelectedNews(target);
+    }
+  }, [location.search, newsList]);
 
   const filteredNews =
     newsFilter === "all"
@@ -208,7 +225,7 @@ const Activities = () => {
             {selectedNews ? (
               <div className="animate-fade-in">
                 <button
-                  className="mb-6 px-4 py-2 bg-primary text-primary-foreground rounded"
+                  className="mb-6 px-4 py-2 rounded text-white shadow-lg shadow-violet-600/25 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 transition-colors"
                   onClick={() => setSelectedNews(null)}
                 >
                   ← Back to All News
@@ -218,38 +235,75 @@ const Activities = () => {
                 <p className="text-sm text-muted-foreground mb-4">
                   {new Date(selectedNews.date).toLocaleDateString()}
                 </p>
+                {(() => {
+                  const hasVideos =
+                    (Array.isArray(selectedNews.videos) && selectedNews.videos.length > 0) ||
+                    Boolean(selectedNews.video);
+                  const imageCount = Array.isArray(selectedNews.images)
+                    ? selectedNews.images.length
+                    : (selectedNews.image ? 1 : 0);
+                  const hideImageForVideoOnly = hasVideos && imageCount <= 1;
 
-                {/* Images collage: 优先 images[]，否则用封面 image */}
-                {Array.isArray(selectedNews.images) && selectedNews.images.length > 0 ? (
-                  <div className="mb-6">
-                    <div className="columns-2 sm:columns-3 gap-3 [column-fill:_balance]">
-                      {selectedNews.images.map((url, idx) => (
-                        <a
-                          key={`${selectedNews.id}-img-${idx}`}
-                          href={url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="mb-3 block break-inside-avoid"
-                          title="Open image"
-                        >
+                  return (
+                    <>
+                      {/* Videos: 优先 videos[]，否则用单个 video */}
+                      {Array.isArray(selectedNews.videos) && selectedNews.videos.length > 0 ? (
+                        <div className="mb-6 space-y-4">
+                          {selectedNews.videos.map((url, idx) => (
+                            <video
+                              key={`${selectedNews.id}-video-${idx}`}
+                              src={url}
+                              controls
+                              preload="metadata"
+                              className="w-full max-w-3xl rounded-lg border bg-black"
+                            />
+                          ))}
+                        </div>
+                      ) : selectedNews.video ? (
+                        <video
+                          src={selectedNews.video}
+                          controls
+                          preload="metadata"
+                          className="w-full max-w-3xl rounded-lg border bg-black mb-6"
+                        />
+                      ) : null}
+
+                      {/* Images collage: 视频-only 帖子隐藏封面图 */}
+                      {!hideImageForVideoOnly ? (
+                        Array.isArray(selectedNews.images) && selectedNews.images.length > 0 ? (
+                          <div className="mb-6">
+                            <div className="columns-2 sm:columns-3 gap-3 [column-fill:_balance]">
+                              {selectedNews.images.map((url, idx) => (
+                                <a
+                                  key={`${selectedNews.id}-img-${idx}`}
+                                  href={url}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="mb-3 block break-inside-avoid"
+                                  title="Open image"
+                                >
+                                  <img
+                                    src={url}
+                                    alt={`${selectedNews.title} - ${idx + 1}`}
+                                    className="w-full h-auto rounded-lg border bg-muted object-cover hover:opacity-95 transition"
+                                    loading="lazy"
+                                  />
+                                </a>
+                              ))}
+                            </div>
+                          </div>
+                        ) : selectedNews.image ? (
                           <img
-                            src={url}
-                            alt={`${selectedNews.title} - ${idx + 1}`}
-                            className="w-full h-auto rounded-lg border bg-muted object-cover hover:opacity-95 transition"
+                            src={selectedNews.image}
+                            alt={selectedNews.title}
+                            className="w-full max-w-3xl rounded-lg shadow mb-6"
                             loading="lazy"
                           />
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                ) : selectedNews.image ? (
-                  <img
-                    src={selectedNews.image}
-                    alt={selectedNews.title}
-                    className="w-full max-w-3xl rounded-lg shadow mb-6"
-                    loading="lazy"
-                  />
-                ) : null}
+                        ) : null
+                      ) : null}
+                    </>
+                  );
+                })()}
 
                 <div className="prose dark:prose-invert max-w-none space-y-4">
                   {selectedNews.description ? (
@@ -323,16 +377,6 @@ const Activities = () => {
                           {/* text */}
                           <div className="p-4">
                             <div className="flex items-center gap-2 mb-2">
-                              {item.source ? (
-                                <span className="text-xs px-2 py-1 border bg-muted">
-                                  {item.source === "xhs"
-                                    ? "Xiaohongshu"
-                                    : item.source === "twitter"
-                                    ? "Twitter / X"
-                                    : "Website"}
-                                </span>
-                              ) : null}
-
                               <span className="text-xs text-muted-foreground">
                                 {new Date(item.date).toLocaleDateString()}
                               </span>

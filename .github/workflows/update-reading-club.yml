@@ -31,7 +31,31 @@ jobs:
 
       - name: Run update script
         run: |
-          python scripts/update_reading_club.py
+          set -e
+          backup_dir="/tmp/reading_club_backup"
+          rm -rf "${backup_dir}"
+          mkdir -p "${backup_dir}"
+
+          if [ -f src/data/readingClub.json ]; then
+            cp src/data/readingClub.json "${backup_dir}/readingClub.json.bak"
+          fi
+          if [ -d public/reading_club_covers ]; then
+            cp -a public/reading_club_covers "${backup_dir}/reading_club_covers.bak"
+          fi
+
+          if python scripts/update_reading_club.py; then
+            echo "Reading club update succeeded."
+          else
+            echo "Reading club update failed, restoring backups."
+            if [ -f "${backup_dir}/readingClub.json.bak" ]; then
+              cp "${backup_dir}/readingClub.json.bak" src/data/readingClub.json
+            fi
+            if [ -d "${backup_dir}/reading_club_covers.bak" ]; then
+              rm -rf public/reading_club_covers
+              cp -a "${backup_dir}/reading_club_covers.bak" public/reading_club_covers
+            fi
+            exit 0
+          fi
 
       - name: Commit changes (if any)
         run: |

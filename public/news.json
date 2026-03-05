@@ -1,3 +1,171 @@
 {
-  "news": []
+  "news": [
+    {
+      "id": "69817aa4000000000d00b427",
+      "title": "News for 2026! 1 ICRA and 1 CVM papers accepted!",
+      "date": "2026-02-03T04:33:40Z",
+      "image": "/xhs_news_images/69817aa4000000000d00b427_0_e5fb989eea.jpg",
+      "images": [
+        "/xhs_news_images/69817aa4000000000d00b427_0_e5fb989eea.jpg"
+      ],
+      "sub_title": "",
+      "description": "",
+      "source": "xhs",
+      "source_url": "https://www.xiaohongshu.com/explore/69817aa4000000000d00b427?xsec_token=ABySOJUodXt7EPUh6mvqkMR5Y8BO1qVId1fBH5GvTH7y8=&xsec_source=pc_search",
+      "video": "",
+      "videos": []
+    },
+    {
+      "id": "697c50d9000000002801d2b1",
+      "title": "Demo for Vfx and VDB",
+      "date": "2026-01-30T06:34:01Z",
+      "image": "/xhs_news_images/697c50d9000000002801d2b1_0_e90be00198.jpg",
+      "images": [
+        "/xhs_news_images/697c50d9000000002801d2b1_0_e90be00198.jpg"
+      ],
+      "sub_title": "",
+      "description": "",
+      "source": "xhs",
+      "source_url": "https://www.xiaohongshu.com/explore/697c50d9000000002801d2b1?xsec_token=ABTlY3rhx3CQs4yiyWtNKeY2ynVcby0rIn5lZN33vTfAQ=&xsec_source=pc_search",
+      "video": "/xhs_news_videos/697c50d9000000002801d2b1_0_639bf03ea5.mp4",
+      "videos": [
+        "/xhs_news_videos/697c50d9000000002801d2b1_0_639bf03ea5.mp4"
+      ]
+    },
+    {
+      "id": "69664398000000001a02ae4e",
+      "title": "",
+      "date": "2026-01-13T13:07:36Z",
+      "image": "/xhs_news_images/69664398000000001a02ae4e_0_95b46439ad.jpg",
+      "images": [
+        "/xhs_news_images/69664398000000001a02ae4e_0_95b46439ad.jpg"
+      ],
+      "sub_title": "",
+      "description": "",
+      "source": "xhs",
+      "source_url": "https://www.xiaohongshu.com/explore/69664398000000001a02ae4e?xsec_token=ABZtaAtXsRAsORD8GkSJs6rhHrxDygSGTUeWijrA2gbug=&xsec_source=pc_search",
+      "video": "",
+      "videos": []
+    },
+    {
+      "id": "69663e4a000000000d00afca",
+      "title": "",
+      "date": "2026-01-13T12:44:58Z",
+      "image": "/xhs_news_images/69663e4a000000000d00afca_0_11fd02f054.jpg",
+      "images": [
+        "/xhs_news_images/69663e4a000000000d00afca_0_11fd02f054.jpg"
+      ],
+      "sub_title": "",
+      "description": "",
+      "source": "xhs",
+      "source_url": "https://www.xiaohongshu.com/explore/69663e4a000000000d00afca?xsec_token=ABZtaAtXsRAsORD8GkSJs6rkx5aexuQxTazXz7oFxKPN8=&xsec_source=pc_search",
+      "video": "/xhs_news_videos/69663e4a000000000d00afca_0_72d9a110c2.mp4",
+      "videos": [
+        "/xhs_news_videos/69663e4a000000000d00afca_0_72d9a110c2.mp4"
+      ]
+    },
+    {
+      "id": "6953d1ae000000001e02d3de",
+      "title": "",
+      "date": "2025-12-30T13:20:46Z",
+      "image": "/xhs_news_images/6953d1ae000000001e02d3de_0_7028a02b78.jpg",
+      "images": [
+        "/xhs_news_images/6953d1ae000000001e02d3de_0_7028a02b78.jpg"
+      ],
+      "sub_title": "",
+      "description": "",
+      "source": "xhs",
+      "source_url": "https://www.xiaohongshu.com/explore/6953d1ae000000001e02d3de?xsec_token=ABsVTzLjVhJxpQ8R_tXi0zUwNK3vcGf_pB74wlJF4PzQw=&xsec_source=pc_search",
+      "video": "/xhs_news_videos/6953d1ae000000001e02d3de_0_eee786ab0f.mp4",
+      "videos": [
+        "/xhs_news_videos/6953d1ae000000001e02d3de_0_eee786ab0f.mp4"
+      ]
+    },
+    {
+      "id": "694fe2d0000000001e037e0f",
+      "title": "",
+      "date": "2025-12-27T13:44:48Z",
+      "image": "/xhs_news_images/694fe2d0000000001e037e0f_0_ed6528be3f.jpg",
+      "images": [
+        "/xhs_news_images/694fe2d0000000001e037e0f_0_ed6528be3f.jpg"
+      ],
+      "sub_title": "",
+      "description": "",
+      "source": "xhs",
+      "source_url": "https://www.xiaohongshu.com/explore/694fe2d0000000001e037e0f?xsec_token=ABQZOi6C72ay1gw2JMGq84t_ySSxqcwKLcEo659_3uW7o=&xsec_source=pc_search",
+      "video": "/xhs_news_videos/694fe2d0000000001e037e0f_0_4f2035d112.mp4",
+      "videos": [
+        "/xhs_news_videos/694fe2d0000000001e037e0f_0_4f2035d112.mp4"
+      ]
+    },
+    {
+      "id": "693c0f49000000001e031c02",
+      "title": "",
+      "date": "2025-12-12T12:49:13Z",
+      "image": "/xhs_news_images/693c0f49000000001e031c02_0_5c801c2935.jpg",
+      "images": [
+        "/xhs_news_images/693c0f49000000001e031c02_0_5c801c2935.jpg",
+        "/xhs_news_images/693c0f49000000001e031c02_1_68dcbd2a07.jpg",
+        "/xhs_news_images/693c0f49000000001e031c02_2_17f02171c7.jpg",
+        "/xhs_news_images/693c0f49000000001e031c02_3_e404d2594a.jpg",
+        "/xhs_news_images/693c0f49000000001e031c02_4_1bf8cdcbe6.jpg",
+        "/xhs_news_images/693c0f49000000001e031c02_5_fc909d2181.jpg",
+        "/xhs_news_images/693c0f49000000001e031c02_6_813d9fad79.jpg",
+        "/xhs_news_images/693c0f49000000001e031c02_7_b1a25a2a8b.jpg"
+      ],
+      "sub_title": "",
+      "description": "",
+      "source": "xhs",
+      "source_url": "https://www.xiaohongshu.com/explore/693c0f49000000001e031c02?xsec_token=ABGst8hCxXmfW0AEkpNZXGXFHKLCHbkLs2Khjm3cdDlYY=&xsec_source=pc_search",
+      "video": "",
+      "videos": []
+    },
+    {
+      "id": "69344a65000000001f00d30f",
+      "title": "",
+      "date": "2025-12-06T15:23:17Z",
+      "image": "/xhs_news_images/69344a65000000001f00d30f_0_efb1739385.jpg",
+      "images": [
+        "/xhs_news_images/69344a65000000001f00d30f_0_efb1739385.jpg"
+      ],
+      "sub_title": "",
+      "description": "",
+      "source": "xhs",
+      "source_url": "https://www.xiaohongshu.com/explore/69344a65000000001f00d30f?xsec_token=ABqpPE2Q7uo6hJm4X_CFoEMBmveLYoeMrI8eimqD0elh4=&xsec_source=pc_search",
+      "video": "/xhs_news_videos/69344a65000000001f00d30f_0_cd2b761abc.mp4",
+      "videos": [
+        "/xhs_news_videos/69344a65000000001f00d30f_0_cd2b761abc.mp4"
+      ]
+    },
+    {
+      "id": "692ee6bb000000001e031afb",
+      "title": "",
+      "date": "2025-12-02T13:16:43Z",
+      "image": "/xhs_news_images/692ee6bb000000001e031afb_0_aa5dd07a8b.jpg",
+      "images": [
+        "/xhs_news_images/692ee6bb000000001e031afb_0_aa5dd07a8b.jpg"
+      ],
+      "sub_title": "",
+      "description": "",
+      "source": "xhs",
+      "source_url": "https://www.xiaohongshu.com/explore/692ee6bb000000001e031afb?xsec_token=ABU9ktsM6JmLnbc9NMnWiuMzC6Iu4aZdDnnZrCePbWCgM=&xsec_source=pc_search",
+      "video": "",
+      "videos": []
+    },
+    {
+      "id": "69270bf8000000001e02a818",
+      "title": "",
+      "date": "2025-11-26T14:17:28Z",
+      "image": "/xhs_news_images/69270bf8000000001e02a818_0_8e55613274.jpg",
+      "images": [
+        "/xhs_news_images/69270bf8000000001e02a818_0_8e55613274.jpg"
+      ],
+      "sub_title": "",
+      "description": "",
+      "source": "xhs",
+      "source_url": "https://www.xiaohongshu.com/explore/69270bf8000000001e02a818?xsec_token=ABzbJ1zH19QAh1N24FIIMb37itErLg5JKxzBRGWs80xhE=&xsec_source=pc_search",
+      "video": "",
+      "videos": []
+    }
+  ]
 }
