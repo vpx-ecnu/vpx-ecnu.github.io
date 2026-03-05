@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-04T04:27:10.111847Z",
+  "updatedAt": "2026-03-05T04:42:21.466868Z",
   "publications": [
     {
       "id": "project-pub-1",
@@ -76,14 +76,14 @@
       "title": "SuPer Deep: A Surgical Perception Framework for Robotic Tissue Manipulation using Deep Learning for Feature Extraction",
       "venue": "IEEE Conference on Robotics and Automation (ICRA) 2021",
       "url": "https://sites.google.com/ucsd.edu/super-framework",
-      "image": "/publications/recent_images/a10e34b62583.png"
+      "image": "/publications/recent_images/7ddab0a44121.png"
     },
     {
       "id": "project-pub-12",
       "title": "SuPer: A Surgical Perception Framework for Endoscopic Tissue Manipulation with Surgical Robotics",
       "venue": "IEEE Robotics and Automation Letters 2020",
       "url": "https://sites.google.com/ucsd.edu/super-framework",
-      "image": "/publications/recent_images/a10e34b62583.png"
+      "image": "/publications/recent_images/1f88b83af3f4.png"
     },
     {
       "id": "project-pub-13",
