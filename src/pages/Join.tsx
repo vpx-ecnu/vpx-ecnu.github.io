@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
   ArrowRight,
   Bookmark,
@@ -28,6 +30,8 @@ const LAB_MAP_EMBED =
   `https://www.google.com/maps?q=${LAB_LAT},${LAB_LNG}(Science%20Building)&z=19&output=embed`;
 
 const Join = () => {
+  const [activeQr, setActiveQr] = useState<"xiaohongshu" | "douyin" | null>(null);
+
   const commonTracks = [
     {
       title: "Next-Generation Rendering Engine",
@@ -102,6 +106,22 @@ const Join = () => {
               <ExternalLink className="h-4 w-4" />
               View on GitHub
             </a>
+          </Button>
+          <Button
+            variant="secondary"
+            className="gap-2"
+            onClick={() => setActiveQr("xiaohongshu")}
+          >
+            <ExternalLink className="h-4 w-4" />
+            Follow on Xiaohongshu
+          </Button>
+          <Button
+            variant="secondary"
+            className="gap-2"
+            onClick={() => setActiveQr("douyin")}
+          >
+            <ExternalLink className="h-4 w-4" />
+            Follow on Douyin
           </Button>
         </div>
       </section>
@@ -411,6 +431,19 @@ const Join = () => {
           </CardContent>
         </Card>
       </section>
+
+      <Dialog open={activeQr !== null} onOpenChange={(open) => !open && setActiveQr(null)}>
+        <DialogContent className="sm:max-w-md">
+          <div className="rounded-md border bg-muted p-2">
+            <img
+              src={activeQr === "xiaohongshu" ? "/小红书.jpg" : "/抖音.jpg"}
+              alt={activeQr === "xiaohongshu" ? "Xiaohongshu QR Code" : "Douyin QR Code"}
+              className="mx-auto w-full h-auto max-h-[70vh] object-contain"
+              loading="lazy"
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
     </div>
   );
