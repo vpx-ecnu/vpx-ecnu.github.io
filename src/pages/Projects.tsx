@@ -49,6 +49,9 @@ type ProjectPublication = {
   venue: string;
   url: string;
   image: string;
+  mediaType?: "image" | "video";
+  media?: string;
+  poster?: string;
 };
 
 const getThumbnail = (p: Project) => {
@@ -457,12 +460,25 @@ const Projects = () => {
                         className="group block border bg-card overflow-hidden hover:shadow-md transition-shadow"
                       >
                         <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
-                          <img
-                            src={pub.image || "/placeholder.svg"}
-                            alt={pub.title}
-                            className="h-full w-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
-                            loading="lazy"
-                          />
+                          {pub.mediaType === "video" && pub.media ? (
+                            <video
+                              src={pub.media}
+                              poster={pub.poster || pub.image || "/placeholder.svg"}
+                              className="h-full w-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                              autoPlay
+                              muted
+                              loop
+                              playsInline
+                              preload="metadata"
+                            />
+                          ) : (
+                            <img
+                              src={pub.media || pub.image || "/placeholder.svg"}
+                              alt={pub.title}
+                              className="h-full w-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                              loading="lazy"
+                            />
+                          )}
                           <div className="absolute top-3 left-3">
                             <span className="px-3 py-1 text-xs font-medium bg-black/70 text-white backdrop-blur-sm border border-white/10">
                               {pub.venue || "Unknown Venue"}

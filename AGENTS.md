@@ -61,6 +61,8 @@ The publication pipeline has repository-specific behavior and should be treated 
 - `project_webpage` currently comes from `IHPDEP Selected Publications` and is required by the downstream card generators.
 - Preserve the downstream contract: changes to publication sourcing must not break `recent_publications.json` or `project_publications.json`.
 - If a selected publication is not present in Google Scholar, keep it in the final `publication_updated.json` rather than dropping it.
+- Publication card imagery should be automation-first. Prefer improving the automatic image discovery, validation, cropping, normalization, and caching pipeline over introducing hand-maintained per-paper image mappings.
+- Do not make manual publication-image curation the steady-state workflow unless the user explicitly asks for a temporary exception. The long-term goal is that publication images used across the site can be regenerated automatically from the pipeline.
 - When modifying the publication pipeline, regenerate `public/publications/publication_updated.json`, `public/publications/recent_publications.json`, `public/publications/project_publications.json`, and any updated assets under `public/publications/recent_images/`.
 - The publication GitHub Actions workflow is intentionally monthly plus manual dispatch. Keep failure handling visible in GitHub Actions; do not silently swallow update failures.
 

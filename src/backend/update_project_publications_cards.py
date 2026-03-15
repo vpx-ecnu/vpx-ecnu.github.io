@@ -1,16 +1,19 @@
 import json
+from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
+
+from publication_card_images import (
+    clean_text,
+    inspect_webpage,
+    select_publication_card_asset,
+)
 
 TIMEOUT_SAFE_PLACEHOLDER = "/placeholder.svg"
 
 
 def repo_root() -> Path:
     return Path(__file__).resolve().parents[2]
-
-
-def clean_text(text: str) -> str:
-    return " ".join((text or "").split()).strip()
 
 
 def load_publications(path: Path):
@@ -30,17 +33,6 @@ def main():
     image_dir = root / "public" / "publications" / "recent_images"
     image_dir.mkdir(parents=True, exist_ok=True)
 
-    # Optional image pipeline: if bs4-related helper import fails locally,
-    # we still generate cards with placeholder images.
-    try:
-        from update_recent_publications_cards import (
-            download_image_to_public,
-            find_first_image_urls,
-        )
-        image_pipeline_available = True
-    except Exception:
-        image_pipeline_available = False
-
     pubs = load_publications(source_path)
     with_web = [p for p in pubs if clean_text(p.get("project_webpage", ""))]
     with_web.sort(
@@ -49,35 +41,60 @@ def main():
     )
 
     cards = []
-    for idx, pub in enumerate(with_web, 1):
+    page_catalog_cache = {}
+    reserved_source_urls_by_page = defaultdict(set)
+    next_id = 1
+    for pub in with_web:
         title = clean_text(pub.get("title", ""))
         venue = clean_text(pub.get("journal", ""))
         webpage = clean_text(pub.get("project_webpage", ""))
+        year = int(pub.get("year") or 0)
         image_path = TIMEOUT_SAFE_PLACEHOLDER
+        media_type = "image"
+        media_path = TIMEOUT_SAFE_PLACEHOLDER
+        poster_path = TIMEOUT_SAFE_PLACEHOLDER
 
-        if image_pipeline_available:
-            try:
-                candidates = find_first_image_urls(webpage)
-                for image_url in candidates:
-                    try:
-                        local = download_image_to_public(image_url, image_dir)
-                        if local:
-                            image_path = local
-                            break
-                    except Exception:
-                        continue
-            except Exception:
-                pass
+        try:
+            catalog = page_catalog_cache.get(webpage)
+            if catalog is None:
+                catalog = inspect_webpage(webpage)
+                page_catalog_cache[webpage] = catalog
+
+            asset = select_publication_card_asset(
+                catalog,
+                publication_title=title,
+                publication_year=year,
+                image_dir=image_dir,
+                reserved_source_urls=reserved_source_urls_by_page[webpage],
+                prefer_video=True,
+            )
+            if asset and asset.status_code == 404:
+                print(f"[INFO] skip dead project webpage: {webpage}")
+                continue
+            if asset:
+                image_path = asset.image or TIMEOUT_SAFE_PLACEHOLDER
+                media_type = asset.media_type or "image"
+                media_path = asset.media or image_path
+                poster_path = asset.poster or image_path
+                reserved_source_urls_by_page[webpage].update(asset.reserved_source_urls)
+            else:
+                print(f"[WARN] no usable publication media found for {webpage}")
+        except Exception as exc:
+            print(f"[WARN] media fetch failed for {webpage}: {exc}")
 
         cards.append(
             {
-                "id": f"project-pub-{idx}",
+                "id": f"project-pub-{next_id}",
                 "title": title,
                 "venue": venue,
                 "url": webpage,
                 "image": image_path,
+                "mediaType": media_type,
+                "media": media_path,
+                "poster": poster_path,
             }
         )
+        next_id += 1
 
     payload = {"updatedAt": datetime.utcnow().isoformat() + "Z", "publications": cards}
     output_path.write_text(
