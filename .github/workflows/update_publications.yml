@@ -2,7 +2,7 @@ name: Update Publications
 
 on:
   schedule:
-    - cron: "0 3 * * *"
+    - cron: "0 3 1 * *"
   workflow_dispatch:
 
 permissions:
@@ -36,7 +36,7 @@ jobs:
           fi
 
           if \
-            python src/backend/update_publications_from_ihpdep.py && \
+            python src/backend/build_publication_updated.py && \
             python src/backend/update_recent_publications_cards.py && \
             python src/backend/update_project_publications_cards.py; then
             echo "Publications update succeeded."
@@ -46,7 +46,15 @@ jobs:
               rm -rf public/publications
               cp -a "${backup_dir}" public/publications
             fi
-            exit 0
+            echo "::error::Publication update failed. Restored the previous public/publications snapshot."
+            {
+              echo "## Publications Update Failed"
+              echo
+              echo "The workflow restored the previous \`public/publications\` backup, so the website data was left unchanged."
+              echo
+              echo "Please inspect the failing script logs in this run."
+            } >> "${GITHUB_STEP_SUMMARY}"
+            exit 1
           fi
 
       - name: Commit & push if changed

@@ -1,20 +1,33 @@
 import re
-import signal
-from urllib.parse import parse_qs, urlparse
+import time
+from html import unescape
+from typing import Dict, List, Optional, Tuple
+from urllib.parse import parse_qs, urlencode, urljoin, urlparse
 
-from scholarly import scholarly
+import requests
+from bs4 import BeautifulSoup
 
-GOOGLE_SCHOLAR_PROFILE_URL = "https://scholar.google.co.jp/citations?user=N1ZDSHYAAAAJ&hl=zh-CN&oi=sra"
-DEFAULT_MAX_PUBLICATIONS = 30
-DEFAULT_REQUEST_TIMEOUT_SECONDS = 45
-DEFAULT_FILL_DETAILS = False
+GOOGLE_SCHOLAR_PROFILE_URL = "https://scholar.google.co.jp/citations?user=N1ZDSHYAAAAJ&hl=zh-CN&view_op=list_works&sortby=pubdate"
+DEFAULT_MAX_PUBLICATIONS = 200
+DEFAULT_PAGE_SIZE = 100
+DEFAULT_REQUEST_TIMEOUT_SECONDS = 30
+DEFAULT_FETCH_DETAIL_PAGES = True
+DEFAULT_DETAIL_FETCH_DELAY_SECONDS = 0.2
+
+USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/122.0.0.0 Safari/537.36"
+)
 
 
 def clean(text: str) -> str:
-    return re.sub(r"\s+", " ", (text or "")).strip()
+    text = unescape(text or "")
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
 
 
-def to_tags(title: str):
+def to_tags(title: str) -> List[str]:
     words = re.findall(r"[A-Za-z0-9\-\+²]+", title or "")
     return words[:3]
 
@@ -24,48 +37,16 @@ def parse_year(value) -> int:
     return int(m.group(0)) if m else 0
 
 
-def author_id_from_profile_url(url: str) -> str:
-    parsed = urlparse(url)
-    return parse_qs(parsed.query).get("user", [""])[0]
+def strip_trailing_year(text: str, year: int) -> str:
+    if not text:
+        return ""
+    if year:
+        text = re.sub(rf"(?:,|\(|\s)\s*{year}\s*\)?\s*$", "", text).strip(" ,")
+    return clean(text)
 
 
-def pick_paper_url(filled_pub: dict, bib: dict) -> str:
-    candidates = [
-        filled_pub.get("pub_url"),
-        filled_pub.get("eprint_url"),
-        filled_pub.get("url_scholarbib"),
-        bib.get("url"),
-    ]
-    for url in candidates:
-        if isinstance(url, str) and url.startswith(("http://", "https://")):
-            return url
-    return ""
-
-
-class ScholarTimeout:
-    def __init__(self, seconds: int):
-        self.seconds = max(1, int(seconds))
-
-    def _handle(self, *_):
-        raise TimeoutError(f"scholarly request timed out after {self.seconds}s")
-
-    def __enter__(self):
-        signal.signal(signal.SIGALRM, self._handle)
-        signal.alarm(self.seconds)
-
-    def __exit__(self, exc_type, exc, tb):
-        signal.alarm(0)
-        return False
-
-
-def build_journal(bib: dict, year: int) -> str:
-    venue = clean(
-        bib.get("conference")
-        or bib.get("journal")
-        or bib.get("venue")
-        or bib.get("publisher")
-        or ""
-    )
+def build_journal(venue: str, year: int) -> str:
+    venue = clean(venue)
     if venue and year:
         return f"{venue} {year}"
     if venue:
@@ -75,53 +56,164 @@ def build_journal(bib: dict, year: int) -> str:
     return ""
 
 
-def scrape_google_scholar_publications(
-    profile_url: str = GOOGLE_SCHOLAR_PROFILE_URL,
-    max_publications: int = DEFAULT_MAX_PUBLICATIONS,
-    request_timeout_seconds: int = DEFAULT_REQUEST_TIMEOUT_SECONDS,
-    fill_details: bool = DEFAULT_FILL_DETAILS,
-):
-    author_id = author_id_from_profile_url(profile_url)
-    if not author_id:
-        raise ValueError(f"Cannot parse author id from URL: {profile_url}")
+def make_session() -> requests.Session:
+    session = requests.Session()
+    session.headers.update(
+        {
+            "User-Agent": USER_AGENT,
+            "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+            "Referer": "https://scholar.google.com/",
+        }
+    )
+    return session
 
-    with ScholarTimeout(request_timeout_seconds):
-        author = scholarly.search_author_id(author_id)
-    with ScholarTimeout(request_timeout_seconds):
-        author = scholarly.fill(author, sections=["publications"])
-    publications = (author.get("publications") or [])[:max_publications]
 
-    result = []
-    for pub in publications:
-        filled_pub = pub
-        if fill_details:
-            try:
-                with ScholarTimeout(request_timeout_seconds):
-                    filled_pub = scholarly.fill(pub)
-            except Exception:
-                # 某一篇详情失败不影响整体
-                filled_pub = pub
+def build_list_url(profile_url: str, start: int, page_size: int) -> str:
+    parsed = urlparse(profile_url)
+    query = parse_qs(parsed.query)
+    query["view_op"] = ["list_works"]
+    query["sortby"] = ["pubdate"]
+    query["cstart"] = [str(start)]
+    query["pagesize"] = [str(page_size)]
+    encoded = urlencode(query, doseq=True)
+    return parsed._replace(query=encoded).geturl()
 
-        bib = filled_pub.get("bib") or {}
-        title = clean(bib.get("title", ""))
+
+def fetch_html(session: requests.Session, url: str, timeout_seconds: int) -> str:
+    resp = session.get(url, timeout=timeout_seconds)
+    resp.raise_for_status()
+    return resp.text
+
+
+def extract_total_count(soup: BeautifulSoup) -> Optional[int]:
+    label = soup.select_one("#gsc_a_nn")
+    if not label:
+        return None
+    text = clean(label.get_text(" ", strip=True))
+    matches = re.findall(r"\d+", text)
+    if not matches:
+        return None
+    return int(matches[-1])
+
+
+def parse_profile_rows(html: str, page_url: str) -> Tuple[List[Dict], Optional[int]]:
+    soup = BeautifulSoup(html, "html.parser")
+    rows = []
+
+    for row in soup.select("tr.gsc_a_tr"):
+        title_link = row.select_one("a.gsc_a_at")
+        if not title_link:
+            continue
+
+        title = clean(title_link.get_text(" ", strip=True))
         if not title:
             continue
 
-        year = parse_year(bib.get("pub_year") or bib.get("year"))
-        result.append(
+        detail_url = urljoin(page_url, title_link.get("href") or "")
+
+        gray_lines = row.select("td.gsc_a_t .gs_gray")
+        authors = clean(gray_lines[0].get_text(" ", strip=True)) if len(gray_lines) >= 1 else ""
+        venue_line = clean(gray_lines[1].get_text(" ", strip=True)) if len(gray_lines) >= 2 else ""
+
+        year_text = ""
+        year_node = row.select_one("td.gsc_a_y .gsc_a_h")
+        if year_node:
+            year_text = clean(year_node.get_text(" ", strip=True))
+        year = parse_year(year_text) or parse_year(venue_line)
+        venue = strip_trailing_year(venue_line, year)
+
+        rows.append(
             {
                 "title": title,
-                "authors": clean(bib.get("author", "")),
-                "journal": build_journal(bib, year),
+                "authors": authors,
+                "journal": build_journal(venue, year),
                 "year": year,
-                "doi": pick_paper_url(filled_pub, bib),
+                "doi": "",
                 "project_webpage": "",
                 "tags": to_tags(title),
+                "_detail_url": detail_url,
             }
         )
 
-    result.sort(key=lambda x: (x.get("year", 0), x.get("title", "")), reverse=True)
-    return result
+    return rows, extract_total_count(soup)
+
+
+def parse_detail_page_for_paper_url(html: str, detail_url: str) -> str:
+    soup = BeautifulSoup(html, "html.parser")
+    link = soup.select_one("#gsc_oci_title a.gsc_oci_title_link")
+    if not link:
+        return ""
+    href = clean(link.get("href") or "")
+    if not href:
+        return ""
+    return urljoin(detail_url, href)
+
+
+def scrape_google_scholar_publications(
+    profile_url: str = GOOGLE_SCHOLAR_PROFILE_URL,
+    max_publications: int = DEFAULT_MAX_PUBLICATIONS,
+    page_size: int = DEFAULT_PAGE_SIZE,
+    request_timeout_seconds: int = DEFAULT_REQUEST_TIMEOUT_SECONDS,
+    fetch_detail_pages: bool = DEFAULT_FETCH_DETAIL_PAGES,
+    detail_fetch_delay_seconds: float = DEFAULT_DETAIL_FETCH_DELAY_SECONDS,
+):
+    session = make_session()
+    publications: List[Dict] = []
+    expected_total: Optional[int] = None
+    start = 0
+
+    while len(publications) < max_publications:
+        url = build_list_url(profile_url, start=start, page_size=page_size)
+        html = fetch_html(session, url, timeout_seconds=request_timeout_seconds)
+        rows, page_total = parse_profile_rows(html, url)
+
+        if expected_total is None:
+            expected_total = page_total
+
+        if not rows:
+            break
+
+        remaining = max_publications - len(publications)
+        publications.extend(rows[:remaining])
+
+        if len(rows) < page_size:
+            break
+        if expected_total is not None and len(publications) >= expected_total:
+            break
+
+        start += len(rows)
+
+    if not publications:
+        raise RuntimeError("Google Scholar returned no publication rows.")
+
+    if fetch_detail_pages:
+        for idx, pub in enumerate(publications):
+            detail_url = pub.get("_detail_url", "")
+            if not detail_url:
+                continue
+            try:
+                html = fetch_html(session, detail_url, timeout_seconds=request_timeout_seconds)
+                paper_url = parse_detail_page_for_paper_url(html, detail_url)
+                if paper_url:
+                    pub["doi"] = paper_url
+            except Exception as exc:
+                print(f"[WARN] Google Scholar detail fetch failed for {pub.get('title', '')}: {exc}")
+            if detail_fetch_delay_seconds > 0 and idx + 1 < len(publications):
+                time.sleep(detail_fetch_delay_seconds)
+
+    cleaned = []
+    for pub in publications:
+        item = {k: v for k, v in pub.items() if not k.startswith("_")}
+        cleaned.append(item)
+
+    cleaned.sort(key=lambda x: (int(x.get("year") or 0), x.get("title", "")), reverse=True)
+
+    if expected_total is not None and len(cleaned) < min(expected_total, max_publications):
+        raise RuntimeError(
+            f"Google Scholar returned only {len(cleaned)} publications but profile advertises {expected_total}."
+        )
+
+    return cleaned
 
 
 if __name__ == "__main__":

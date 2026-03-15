@@ -8,7 +8,8 @@
     "tags": [
       "GT²-GS",
       "Geometry-aware",
-      "Texture"
+      "Texture",
+      "GT2-GS"
     ],
     "project_webpage": "https://vpx-ecnu.github.io/GT2-GS-website/"
   },
@@ -26,32 +27,6 @@
     "project_webpage": "https://wxone.github.io/AudioVLA/"
   },
   {
-    "title": "TimeSoccer: An End-to-End Multimodal Large Language Model for Soccer Commentary Generation",
-    "authors": "Ling You, Wenxuan Huang, Xinni Xie, Xiangyi Wei, Bangyan Li, Yang Li, Shaohui Lin, Changbo Wang",
-    "journal": "ACM MM 2025",
-    "year": 2025,
-    "doi": "https://arxiv.org/abs/2504.17365",
-    "tags": [
-      "TimeSoccer",
-      "An",
-      "End-to-End"
-    ],
-    "project_webpage": "https://vpx-ecnu.github.io/TimeSoccer-Website/"
-  },
-  {
-    "title": "ABC-GS: Alignment-Based Controllable Style Transfer for 3D Gaussian Splatting",
-    "authors": "Wenjie Liu, Zhongliang Liu, Xiaoyan Yang, Man Sha, Yang Li",
-    "journal": "IEEE International Conference on Multimedia and Expo (ICME) 2025",
-    "year": 2025,
-    "doi": "https://vpx-ecnu.github.io/ABC-GS-website/",
-    "tags": [
-      "ABC-GS",
-      "Alignment-Based",
-      "Controllable"
-    ],
-    "project_webpage": "https://vpx-ecnu.github.io/ABC-GS-website"
-  },
-  {
     "title": "Warped convolutional neural networks for large homography transformation with psl(3) algebra",
     "authors": "Xinrui Zhan, Wenyu Liu, Risheng Yu, Jianke Zhu and Yang Li",
     "journal": "Neurocomputing 2025",
@@ -63,6 +38,19 @@
       "neural"
     ],
     "project_webpage": ""
+  },
+  {
+    "title": "TimeSoccer: An End-to-End Multimodal Large Language Model for Soccer Commentary Generation",
+    "authors": "Ling You, Wenxuan Huang, Xinni Xie, Xiangyi Wei, Bangyan Li, Yang Li, Shaohui Lin, Changbo Wang",
+    "journal": "ACM MM 2025",
+    "year": 2025,
+    "doi": "https://arxiv.org/abs/2504.17365",
+    "tags": [
+      "TimeSoccer",
+      "An",
+      "End-to-End"
+    ],
+    "project_webpage": "https://vpx-ecnu.github.io/TimeSoccer-Website/"
   },
   {
     "title": "Open-World Reinforcement Learning over Long Short-Term Imagination",
@@ -86,22 +74,127 @@
     "tags": [
       "Motion-Zero",
       "A",
-      "Zero-Shot"
+      "Zero-Shot",
+      "moving"
     ],
     "project_webpage": "https://vpx-ecnu.github.io/MotionZero-website"
   },
   {
-    "title": "ChatTracker: Enhancing Visual Tracking Performance via Chatting with Multimodal Large Language Model",
-    "authors": "Yiming Sun, Fan Yu, Shaoxiang Chen, Yu Zhang, Junwei Huang, Yang Li, Chenhui Li, Changbo Wang",
-    "journal": "NeurIPS 2024",
-    "year": 2024,
-    "doi": "https://arxiv.org/abs/2411.01756",
+    "title": "Lmp: Leveraging motion prior in zero-shot video generation with diffusion transformer",
+    "authors": "C Chen, X Yang, J Shu, C Wang, Y Li",
+    "journal": "arXiv preprint arXiv:2505.14167 2025",
+    "year": 2025,
+    "doi": "https://arxiv.org/abs/2505.14167",
     "tags": [
-      "ChatTracker",
-      "Enhancing",
-      "Visual"
+      "Lmp",
+      "Leveraging",
+      "motion"
     ],
-    "project_webpage": "https://vpx-ecnu.github.io/ChatTracker_website"
+    "project_webpage": ""
+  },
+  {
+    "title": "GTAD: Global Temporal Aggregation Denoising Learning for 3D Semantic Occupancy Prediction",
+    "authors": "T Li, Y Li, M Li, Y Deng, W Ge",
+    "journal": "2025 IEEE/RSJ International Conference on Intelligent Robots and Systems … 2025",
+    "year": 2025,
+    "doi": "https://ieeexplore.ieee.org/abstract/document/11246664/",
+    "tags": [
+      "GTAD",
+      "Global",
+      "Temporal"
+    ],
+    "project_webpage": ""
+  },
+  {
+    "title": "Detail-preserving shape completion of point cloud models with articulated structure",
+    "authors": "Y Quan, C Li, Y Li, C Wang, H Qin",
+    "journal": "Computer Aided Geometric Design 120, 102456 2025",
+    "year": 2025,
+    "doi": "https://www.sciencedirect.com/science/article/pii/S0167839625000457",
+    "tags": [
+      "Detail-preserving",
+      "shape",
+      "completion"
+    ],
+    "project_webpage": ""
+  },
+  {
+    "title": "Data augmentation with attention framework for robust deepfake detection",
+    "authors": "S Mamarasulov, L Chen, C Chen, Y Li, C Wang",
+    "journal": "The Visual Computer 41 (7), 4779-4798 2025",
+    "year": 2025,
+    "doi": "https://link.springer.com/article/10.1007/s00371-024-03690-y",
+    "tags": [
+      "Data",
+      "augmentation",
+      "with"
+    ],
+    "project_webpage": ""
+  },
+  {
+    "title": "CeRF: Convolutional neural radiance derivative fields for new view synthesis",
+    "authors": "W Liu, L You, X Yang, D Lu, Y Li, C Wang",
+    "journal": "Computers & Graphics, 104447 2025",
+    "year": 2025,
+    "doi": "https://www.sciencedirect.com/science/article/pii/S0097849325002882",
+    "tags": [
+      "CeRF",
+      "Convolutional",
+      "neural"
+    ],
+    "project_webpage": ""
+  },
+  {
+    "title": "ABC-GS: Alignment-Based Controllable Style Transfer for 3D Gaussian Splatting",
+    "authors": "Wenjie Liu, Zhongliang Liu, Xiaoyan Yang, Man Sha, Yang Li",
+    "journal": "IEEE International Conference on Multimedia and Expo (ICME) 2025",
+    "year": 2025,
+    "doi": "https://vpx-ecnu.github.io/ABC-GS-website/",
+    "tags": [
+      "ABC-GS",
+      "Alignment-Based",
+      "Controllable"
+    ],
+    "project_webpage": "https://vpx-ecnu.github.io/ABC-GS-website"
+  },
+  {
+    "title": "Multi-Prototype Space Learning for Commonsense-Based Scene Graph Generation",
+    "authors": "Lianggangxu Chen, Youqi Song, Yiqing Cai, Jiale Lu, Yang Li, Yuan Xie, Changbo Wang, Gaoqi He",
+    "journal": "The Conference on Association for the Advancement of Artificial Intelligence 2024",
+    "year": 2024,
+    "doi": "https://ojs.aaai.org/index.php/AAAI/article/view/27874/27773",
+    "tags": [
+      "Multi-Prototype",
+      "Space",
+      "Learning"
+    ],
+    "project_webpage": ""
+  },
+  {
+    "title": "HeRF: A Hierarchical Framework for Efficient and Extendable New View Synthesis",
+    "authors": "X Yang, D Lu, W Liu, L You, Y Li, C Wang",
+    "journal": "2024 International Joint Conference on Neural Networks (IJCNN), 1-8 2024",
+    "year": 2024,
+    "doi": "https://ieeexplore.ieee.org/abstract/document/10650631/",
+    "tags": [
+      "HeRF",
+      "A",
+      "Hierarchical"
+    ],
+    "project_webpage": ""
+  },
+  {
+    "title": "Generative data augmentation with liveness information preserving for face anti-spoofing",
+    "authors": "C Chen, Y Li, J Zhang, J Liu, C Wang",
+    "journal": "Proceedings of the 2024 International Conference on Multimedia Retrieval … 2024",
+    "year": 2024,
+    "doi": "https://dl.acm.org/doi/abs/10.1145/3652583.3658078",
+    "tags": [
+      "Generative",
+      "data",
+      "augmentation"
+    ],
+    "project_webpage": ""
   },
   {
     "title": "FIND: Fine-tuning Initial Noise Distribution with Policy Optimization for Diffusion Models",
@@ -130,15 +223,28 @@
     "project_webpage": "https://vpx-ecnu.github.io/ClothPPO-website"
   },
   {
-    "title": "Multi-Prototype Space Learning for Commonsense-Based Scene Graph Generation",
-    "authors": "Lianggangxu Chen, Youqi Song, Yiqing Cai, Jiale Lu, Yang Li, Yuan Xie, Changbo Wang, Gaoqi He",
-    "journal": "The Conference on Association for the Advancement of Artificial Intelligence 2024",
+    "title": "ChatTracker: Enhancing Visual Tracking Performance via Chatting with Multimodal Large Language Model",
+    "authors": "Yiming Sun, Fan Yu, Shaoxiang Chen, Yu Zhang, Junwei Huang, Yang Li, Chenhui Li, Changbo Wang",
+    "journal": "NeurIPS 2024",
     "year": 2024,
-    "doi": "https://ojs.aaai.org/index.php/AAAI/article/view/27874/27773",
+    "doi": "https://arxiv.org/abs/2411.01756",
     "tags": [
-      "Multi-Prototype",
-      "Space",
-      "Learning"
+      "ChatTracker",
+      "Enhancing",
+      "Visual"
+    ],
+    "project_webpage": "https://vpx-ecnu.github.io/ChatTracker_website"
+  },
+  {
+    "title": "Channel Robust Strategies with Data Augmentation for Audio Anti-spoofing",
+    "authors": "S Mamarasulov, Y Li, C Wang",
+    "journal": "International Conference on Information Security, 121-139 2024",
+    "year": 2024,
+    "doi": "https://link.springer.com/chapter/10.1007/978-3-031-75764-8_7",
+    "tags": [
+      "Channel",
+      "Robust",
+      "Strategies"
     ],
     "project_webpage": ""
   },
@@ -156,28 +262,15 @@
     "project_webpage": ""
   },
   {
-    "title": "AdaptMVSNet: Efficient Multi-View Stereo with Adaptive Convolution and Attention Fusion",
-    "authors": "Pengfei Jiang, Xiaoyan Yang, Yuanjie Chen, Wenjie Song, Yang Li",
-    "journal": "Computers & Graphics 2023",
+    "title": "Multi-Source Templates Learning for Real-Time Aerial Tracking",
+    "authors": "Yiming Sun, Yang Li, Changbo Wang",
+    "journal": "IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) 2023",
     "year": 2023,
-    "doi": "https://www.sciencedirect.com/science/article/pii/S0097849323001838",
+    "doi": "https://ieeexplore.ieee.org/document/10094642",
     "tags": [
-      "AdaptMVSNet",
-      "Efficient",
-      "Multi-View"
-    ],
-    "project_webpage": ""
-  },
-  {
-    "title": "Contact-conditioned Hand-held Object Reconstruction from Single-View Images",
-    "authors": "Xiaoyuan Wang, Yang Li, Adnane Boukhayma, Changbo Wang, Marc Christie",
-    "journal": "Computers & Graphics 2023",
-    "year": 2023,
-    "doi": "https://www.sciencedirect.com/science/article/pii/S009784932300078X",
-    "tags": [
-      "Contact-conditioned",
-      "Hand-held",
-      "Object"
+      "Multi-Source",
+      "Templates",
+      "Learning"
     ],
     "project_webpage": ""
   },
@@ -195,15 +288,28 @@
     "project_webpage": ""
   },
   {
-    "title": "Multi-Source Templates Learning for Real-Time Aerial Tracking",
-    "authors": "Yiming Sun, Yang Li, Changbo Wang",
-    "journal": "IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) 2023",
+    "title": "Contact-conditioned Hand-held Object Reconstruction from Single-View Images",
+    "authors": "Xiaoyuan Wang, Yang Li, Adnane Boukhayma, Changbo Wang, Marc Christie",
+    "journal": "Computers & Graphics 2023",
     "year": 2023,
-    "doi": "https://ieeexplore.ieee.org/document/10094642",
+    "doi": "https://www.sciencedirect.com/science/article/pii/S009784932300078X",
     "tags": [
-      "Multi-Source",
-      "Templates",
-      "Learning"
+      "Contact-conditioned",
+      "Hand-held",
+      "Object"
+    ],
+    "project_webpage": ""
+  },
+  {
+    "title": "AdaptMVSNet: Efficient Multi-View Stereo with Adaptive Convolution and Attention Fusion",
+    "authors": "Pengfei Jiang, Xiaoyan Yang, Yuanjie Chen, Wenjie Song, Yang Li",
+    "journal": "Computers & Graphics 2023",
+    "year": 2023,
+    "doi": "https://www.sciencedirect.com/science/article/pii/S0097849323001838",
+    "tags": [
+      "AdaptMVSNet",
+      "Efficient",
+      "Multi-View"
     ],
     "project_webpage": ""
   },
@@ -234,19 +340,6 @@
     "project_webpage": "https://sites.google.com/ucsd.edu/super-framework"
   },
   {
-    "title": "Attribute-aware Pedestrian Detection in a Crowd",
-    "authors": "Jialiang Zhang, Lixiang Lin, Jianke Zhu, Yang Li, Yun-chen Chen, Yao Hu, Steven C.H. Hoi",
-    "journal": "IEEE Trans. on Multimedia 2020",
-    "year": 2020,
-    "doi": "https://arxiv.org/abs/1910.09188",
-    "tags": [
-      "Attribute-aware",
-      "Pedestrian",
-      "Detection"
-    ],
-    "project_webpage": ""
-  },
-  {
     "title": "SuPer: A Surgical Perception Framework for Endoscopic Tissue Manipulation with Surgical Robotics",
     "authors": "Yang Li, Florian Richter, Jingpei Lu, Emily K. Funk, Ryan K. Orosco, Jianke Zhu and Michael C. Yip",
     "journal": "IEEE Robotics and Automation Letters 2020",
@@ -269,6 +362,19 @@
       "DeepFacade",
       "A",
       "deep"
+    ],
+    "project_webpage": ""
+  },
+  {
+    "title": "Attribute-aware Pedestrian Detection in a Crowd",
+    "authors": "Jialiang Zhang, Lixiang Lin, Jianke Zhu, Yang Li, Yun-chen Chen, Yao Hu, Steven C.H. Hoi",
+    "journal": "IEEE Trans. on Multimedia 2020",
+    "year": 2020,
+    "doi": "https://arxiv.org/abs/1910.09188",
+    "tags": [
+      "Attribute-aware",
+      "Pedestrian",
+      "Detection"
     ],
     "project_webpage": ""
   },
@@ -338,19 +444,6 @@
     "project_webpage": ""
   },
   {
-    "title": "A Scale Adaptive Kernel Correlation Filter Tracker with Feature Integration",
-    "authors": "Yang Li, Jianke Zhu",
-    "journal": "European Conference on Computer Vision, Workshop VOT2014 2014",
-    "year": 2014,
-    "doi": "https://github.com/ihpdep/ihpdep.github.io/raw/master/papers/eccvw14_samf.pdf",
-    "tags": [
-      "A",
-      "Scale",
-      "Adaptive"
-    ],
-    "project_webpage": ""
-  },
-  {
     "title": "The visual object tracking vot2014 challenge results.",
     "authors": "M. Kristan, R. Pflugfelder, et al. (Co-author)",
     "journal": "In ECCV 2014 Workshops, Workshop on Visual Object Tracking Challenge 2014",
@@ -360,6 +453,19 @@
       "The",
       "visual",
       "object"
+    ],
+    "project_webpage": ""
+  },
+  {
+    "title": "A Scale Adaptive Kernel Correlation Filter Tracker with Feature Integration",
+    "authors": "Yang Li, Jianke Zhu",
+    "journal": "European Conference on Computer Vision, Workshop VOT2014 2014",
+    "year": 2014,
+    "doi": "https://github.com/ihpdep/ihpdep.github.io/raw/master/papers/eccvw14_samf.pdf",
+    "tags": [
+      "A",
+      "Scale",
+      "Adaptive"
     ],
     "project_webpage": ""
   },
@@ -377,19 +483,6 @@
     "project_webpage": ""
   },
   {
-    "title": "Adaptive lattice-based light rendering of participating media.",
-    "authors": "Changbo Wang, Chenhui Li, Jinqiu Dai, Yang Li",
-    "journal": "Journal of Computer Animation and Virtual World 2011",
-    "year": 2011,
-    "doi": "http://onlinelibrary.wiley.com/doi/10.1002/cav.426/pdf",
-    "tags": [
-      "Adaptive",
-      "lattice-based",
-      "light"
-    ],
-    "project_webpage": ""
-  },
-  {
     "title": "Real-time realistic rendering of under seawater scene.",
     "authors": "Chenhui Li, Changbo Wang, Yang Li, Min Zhao, et al.",
     "journal": "Journal of Image and Graphics. 2011",
@@ -399,6 +492,21 @@
       "Real-time",
       "realistic",
       "rendering"
+    ],
+    "project_webpage": ""
+  },
+  {
+    "title": "Adaptive lattice-based light rendering of participating media.",
+    "authors": "Changbo Wang, Chenhui Li, Jinqiu Dai, Yang Li",
+    "journal": "Journal of Computer Animation and Virtual World 2011",
+    "year": 2011,
+    "doi": "http://onlinelibrary.wiley.com/doi/10.1002/cav.426/pdf",
+    "tags": [
+      "Adaptive",
+      "lattice-based",
+      "light",
+      "lattice",
+      "based"
     ],
     "project_webpage": ""
   }

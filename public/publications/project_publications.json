@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-03-14T04:29:13.233761Z",
+  "updatedAt": "2026-03-15T11:51:26.069275Z",
   "publications": [
     {
       "id": "project-pub-1",
       "title": "GT²-GS: Geometry-aware Texture Transfer for Gaussian Splatting",
       "venue": "AAAI 2026",
       "url": "https://vpx-ecnu.github.io/GT2-GS-website/",
-      "image": "/publications/recent_images/34be40ff81f4.png"
+      "image": "/placeholder.svg"
     },
     {
       "id": "project-pub-2",
@@ -76,14 +76,14 @@
       "title": "SuPer Deep: A Surgical Perception Framework for Robotic Tissue Manipulation using Deep Learning for Feature Extraction",
       "venue": "IEEE Conference on Robotics and Automation (ICRA) 2021",
       "url": "https://sites.google.com/ucsd.edu/super-framework",
-      "image": "/publications/recent_images/ca093b1038e4.png"
+      "image": "/publications/recent_images/893c6575b1c9.png"
     },
     {
       "id": "project-pub-12",
       "title": "SuPer: A Surgical Perception Framework for Endoscopic Tissue Manipulation with Surgical Robotics",
       "venue": "IEEE Robotics and Automation Letters 2020",
       "url": "https://sites.google.com/ucsd.edu/super-framework",
-      "image": "/publications/recent_images/ca093b1038e4.png"
+      "image": "/placeholder.svg"
     },
     {
       "id": "project-pub-13",
