@@ -61,7 +61,7 @@ const About = () => {
               {/* 标题更有层次 */}
               <div className="mb-8 md:mb-10">
                 <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-                  About VPX-Lab
+                  About VPX Group
                 </h1>
                 <div className="mt-3 h-px w-full bg-gradient-to-r from-transparent via-border/70 to-transparent" />
               </div>
@@ -74,7 +74,7 @@ const About = () => {
                     <p className="text-lg mb-6 leading-relaxed text-muted-foreground">
                       The{" "}
                       <span className="font-semibold bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text text-transparent">
-                        Visual Perception + X (VPX) Lab
+                        Visual Perception + X (VPX) Group
                       </span>{" "}
                       is a research group led by{" "}
                       <span className="font-semibold bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text text-transparent">
@@ -154,7 +154,7 @@ const About = () => {
                   <div className="rounded-2xl border border-border/60 bg-background/30 backdrop-blur-md p-3 shadow-[0_22px_70px_-48px_rgba(0,0,0,0.55)]">
                     <img
                       src="/lovable-uploads/about/about_about_vpx.jpg"
-                      alt="About VPX"
+                      alt="About VPX Group"
                       className="w-full h-auto rounded-xl shadow-sm object-cover"
                     />
                   </div>
@@ -227,23 +227,23 @@ const About = () => {
                       <h2 className="text-2xl font-bold">VPX Mission</h2>
                     </div>
                     <p className="text-muted-foreground">
-                      To cultivate outstanding ECNUers who can take full responsibility – mastering the art of continuous improvement in all endeavors!
+                      To cultivate rigorous, responsible researchers who combine academic ambition with strong execution, professionalism, and continuous improvement.
                     </p>
                   </div>
 
                   <div>
                     <div className="flex items-center gap-3 mb-4">
                       <GraduationCap className="h-6 w-6 text-violet-600" />
-                      <h2 className="text-2xl font-bold">VPX Practical Methods</h2>
+                      <h2 className="text-2xl font-bold">How We Work</h2>
                     </div>
                     <ul className="list-disc pl-6 space-y-2 text-lg text-muted-foreground">
-                      <li><span className="font-semibold">Making our future better through VPX!</span></li>
-                      <li><span className="font-semibold">Be efficient!</span></li>
-                      <li><span className="font-semibold">Be professional!</span></li>
-                      <li><span className="font-semibold">Be logical!</span></li>
-                      <li><span className="font-semibold">Be happy with our life!</span></li>
-                      <li><span className="font-semibold">Finishing is the first priority!</span></li>
-                      <li><span className="font-semibold">Think as a reviewer</span></li>
+                      <li><span className="font-semibold">Pursue research that creates long-term value.</span></li>
+                      <li><span className="font-semibold">Work efficiently and communicate clearly.</span></li>
+                      <li><span className="font-semibold">Maintain professional standards in research and engineering.</span></li>
+                      <li><span className="font-semibold">Think logically and make decisions based on evidence.</span></li>
+                      <li><span className="font-semibold">Build a healthy, sustainable, and supportive lab culture.</span></li>
+                      <li><span className="font-semibold">Prioritize execution and finish what we start.</span></li>
+                      <li><span className="font-semibold">Review our work from the perspective of reviewers and users.</span></li>
                     </ul>
                   </div>
                 </div>

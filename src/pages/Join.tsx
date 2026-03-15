@@ -83,7 +83,7 @@ const Join = () => {
   <div className="container py-12 px-4 md:px-6 space-y-12 page-transition">
       {/* HERO */}
       <section className="space-y-4 text-center max-w-3xl mx-auto fade-in-content">
-        <h1 className="text-3xl md:text-5xl font-bold tracking-tighter md:whitespace-nowrap">
+        <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">
           Join VPX (Visual Perception + X Group)
         </h1>
         <p className="text-muted-foreground md:text-xl">
@@ -317,13 +317,13 @@ const Join = () => {
                     <div className="space-y-2">
                       <h3 className="font-semibold">Join AI Club First (Required)</h3>
                       <p className="text-sm text-muted-foreground">
-                        Hi everyone—before joining VPX-Lab, please use the link below to join our AI Club.
+                        Hi everyone, before joining the VPX Group, please use the link below to join our AI Club.
                         We hope this can become your starting point to get closer to artificial intelligence,
                         participate in research projects, and ultimately grow into a true AI expert.
                       </p>
                       <p className="text-sm text-muted-foreground">
                         We’re currently designing AI Club tutorial materials and a set of small tasks—stay tuned.
-                        If you can complete the corresponding tasks, you’ll have a chance to join VPX-Lab!
+                        If you can complete the corresponding tasks, you’ll have a chance to join the VPX Group.
                       </p>
 
                       <div className="flex flex-col sm:flex-row gap-3 pt-1">

@@ -10,9 +10,9 @@
     {
         "name": "Yu Zhang",
         "title": "Undergraduate Student",
-        "bio": "Working on tracking and multimodal large language models.",
+        "bio": "Researching tracking and multimodal large language models.",
         "image": "/people/people_image/undergraduate/zy.jpg",
-        "email": "arodriguez@university.edu",
+        "email": "",
         "research": ["Tracking", "Multimodal LLMs"]
     }
 ]

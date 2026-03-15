@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { Badge } from "@/components/ui/badge";
 import {
@@ -55,7 +56,16 @@ const getThumbnail = (p: Project) => {
   return p.thumbnail || p.images?.[0] || p.image || "";
 };
 
+const slugifyProjectTitle = (title: string) =>
+  title
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-");
+
 const Projects = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [completedProjects, setCompletedProjects] = useState<Project[]>([]);
   const [ongoingProjects, setOngoingProjects] = useState<Project[]>([]);
   const [projectPublications, setProjectPublications] = useState<ProjectPublication[]>([]);
@@ -80,6 +90,22 @@ const Projects = () => {
       })
       .catch(() => setProjectPublications([]));
   }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const requestedProject = params.get("project");
+    if (!requestedProject) return;
+
+    const allProjects = [...ongoingProjects, ...completedProjects];
+    const match = allProjects.find(
+      (project) => slugifyProjectTitle(project.title) === requestedProject
+    );
+
+    if (match) {
+      setSelectedProject(match);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [location.search, ongoingProjects, completedProjects]);
 
   const selectedImages = useMemo(() => {
     if (!selectedProject) return [];
@@ -120,7 +146,10 @@ const Projects = () => {
             <div className="animate-fade-in">
               <button
                 className="mb-6 px-4 py-2 border bg-card hover:bg-muted/40 transition"
-                onClick={() => setSelectedProject(null)}
+                onClick={() => {
+                  setSelectedProject(null);
+                  navigate("/projects", { replace: true });
+                }}
               >
                 ← Back to Projects
               </button>

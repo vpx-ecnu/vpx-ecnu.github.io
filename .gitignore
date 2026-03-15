@@ -26,3 +26,7 @@ dist-ssr
 # Local secrets for XHS crawler
 secrets/*.txt
 !secrets/*.example
+
+# Local generated review artifacts
+output/
+tmp/

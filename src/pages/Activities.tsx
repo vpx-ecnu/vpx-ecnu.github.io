@@ -48,6 +48,20 @@ function formatDate(iso: string | null) {
   return d.toLocaleDateString();
 }
 
+function sourceLabel(source?: string) {
+  const s = (source || "").toLowerCase();
+  if (s.includes("xiaohongshu") || s === "xhs") return "Xiaohongshu";
+  if (s.includes("bilibili") || s === "bili") return "Bilibili";
+  if (s.includes("twitter") || s.includes("x.com") || s === "twitter") return "Twitter / X";
+  return source || "Website";
+}
+
+function getNewsTitle(item: NewsItem) {
+  const primary = item.title?.trim() || item.sub_title?.trim();
+  if (primary) return primary;
+  return item.source ? `${sourceLabel(item.source)} Update` : "VPX Update";
+}
+
 const PAGE_SIZE = 20;
 
 const Activities = () => {
@@ -70,7 +84,7 @@ const Activities = () => {
       setNewsError("");
 
       try {
-        const r = await fetch("/news.json");;
+        const r = await fetch("/news.json");
         const data = await r.json();
 
         if (cancelled) return;
@@ -231,7 +245,7 @@ const Activities = () => {
                   ← Back to All News
                 </button>
 
-                <h2 className="text-3xl font-bold mb-2">{selectedNews.title}</h2>
+                <h2 className="text-3xl font-bold mb-2">{getNewsTitle(selectedNews)}</h2>
                 <p className="text-sm text-muted-foreground mb-4">
                   {new Date(selectedNews.date).toLocaleDateString()}
                 </p>
@@ -295,7 +309,7 @@ const Activities = () => {
                         ) : selectedNews.image ? (
                           <img
                             src={selectedNews.image}
-                            alt={selectedNews.title}
+                            alt={getNewsTitle(selectedNews)}
                             className="w-full max-w-3xl rounded-lg shadow mb-6"
                             loading="lazy"
                           />
@@ -320,7 +334,7 @@ const Activities = () => {
                         rel="noreferrer"
                         className="text-primary underline"
                       >
-                        View on Xiaohongshu
+                        View on {sourceLabel(selectedNews.source)}
                       </a>
                     </p>
                   ) : null}
@@ -367,7 +381,7 @@ const Activities = () => {
                             {item.image ? (
                               <img
                                 src={item.image}
-                                alt={item.title}
+                                alt={getNewsTitle(item)}
                                 className="w-full h-auto object-cover"
                                 loading="lazy"
                               />
@@ -383,7 +397,7 @@ const Activities = () => {
                             </div>
 
                             <h3 className="text-base font-semibold leading-snug">
-                              {item.title}
+                              {getNewsTitle(item)}
                             </h3>
 
                             {item.description ? (

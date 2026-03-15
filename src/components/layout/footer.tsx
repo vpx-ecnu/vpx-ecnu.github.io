@@ -17,8 +17,8 @@ export function Footer() {
             />
           </Link>
 
-          <p className="text-sm text-muted-foreground whitespace-nowrap">
-            Advancing cross-disciplinary research through artificial intelligence and collaborative innovation.
+          <p className="text-sm text-muted-foreground">
+            Advancing visual perception for cross-disciplinary research.
           </p>
         </div>
 

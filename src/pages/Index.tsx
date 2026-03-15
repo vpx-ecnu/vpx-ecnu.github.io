@@ -6,7 +6,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { useEffect, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
 
 type NewsItem = {
   id: string;
@@ -97,7 +96,6 @@ const Index = () => {
       "/people/graduate.json",
       "/people/part-time.json",
       "/people/Undergraduate.json",
-      "/people/alumni.json",
     ];
 
     const countPeople = (payload: unknown): number => {
@@ -168,6 +166,12 @@ const Index = () => {
     if (s.includes("bilibili") || s === "bili") return "Bilibili";
     if (s.includes("twitter") || s.includes("x.com") || s === "twitter") return "Twitter / X";
     return source || "Website";
+  };
+
+  const getNewsTitle = (item: NewsItem) => {
+    const primary = item.title?.trim() || item.sub_title?.trim();
+    if (primary) return primary;
+    return item.source ? `${sourceLabel(item.source)} Update` : "VPX Update";
   };
 
   return (
@@ -311,7 +315,7 @@ const Index = () => {
                           transition-all
                         "
                       >
-                    <Link to="/projects">
+                    <Link to="/projects?project=embodied-intelligence-for-automated-chemical-titration">
                       Explore Robot Research <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
@@ -323,7 +327,7 @@ const Index = () => {
                 <div className="flex-1 hidden md:block">
                   <img
                     src="/lovable-uploads/home/home_robot.jpg"
-                    alt="VPX Lab Environment"
+                    alt="Automated chemical titration robot"
                     className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
@@ -353,7 +357,9 @@ const Index = () => {
                           transition-all
                         "
                       >
-                      <Link to="/projects#aigc">Explore AIGC Research</Link>
+                      <Link to="/projects?project=ai-powered-virtual-human-video-generation">
+                        Explore AIGC Research
+                      </Link>
                     </Button>
                     <Button variant="outline" size="lg" asChild>
                       <Link to="/join">Join Our Team</Link>
@@ -363,7 +369,7 @@ const Index = () => {
                 <div className="flex-1 hidden md:block">
                   <img
                     src="/lovable-uploads/home/home_metahuman.png"
-                    alt="Generative AI Showcase"
+                    alt="Virtual human generation demo"
                     className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
@@ -392,7 +398,9 @@ const Index = () => {
                           transition-all
                         "
                       >
-                      <Link to="/projects#embodied-ai">View 3D Research</Link>
+                      <Link to="/projects?project=intelligent-virtual-production-with-camera-and-lighting-co-design">
+                        View 3D Research
+                      </Link>
                     </Button>
                     <Button variant="outline" size="lg" asChild>
                       <Link to="/join">Join Our Team</Link>
@@ -402,7 +410,7 @@ const Index = () => {
                 <div className="flex-1 hidden md:block">
                   <img
                     src="/lovable-uploads/home/home_filming.png"
-                    alt="Embodied AI Robot"
+                    alt="Virtual production research demo"
                     className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
@@ -431,7 +439,9 @@ const Index = () => {
                           transition-all
                         "
                       >
-                      <Link to="/projects#embodied-ai">View VLM Research</Link>
+                      <Link to="/projects?project=intelligent-sandplay-for-psychological-assessment">
+                        View VLM Research
+                      </Link>
                     </Button>
                     <Button variant="outline" size="lg" asChild>
                       <Link to="/join">Join Our Team</Link>
@@ -441,7 +451,7 @@ const Index = () => {
                 <div className="flex-1 hidden md:block">
                   <img
                     src="/lovable-uploads/home/home_shapan.png"
-                    alt="Embodied AI Robot"
+                    alt="Psychological assessment research demo"
                     className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
@@ -467,7 +477,7 @@ const Index = () => {
                 <Users className="h-8 w-8 text-primary" />
               </div>
               <h3 className="text-3xl font-bold">{researcherCount ?? "..."}</h3>
-              <p className="text-muted-foreground">Researchers</p>
+              <p className="text-muted-foreground">Current Members</p>
             </div>
             <div className="space-y-2">
               <div className="flex justify-center">
@@ -545,28 +555,28 @@ const Index = () => {
             description:
               "Developing intelligent agents that perceive, learn, and interact with physical environments through robotics and simulation platforms.",
             leaderName: "Xiangyi Wei",
-            leaderId: "xiangyi-wei",
+            leaderId: "phd-xiangyi-wei",
           },
           {
             title: "AIGC",
             description:
               "Pioneering AI-generated content technologies for text, image, video and multimodal creation using cutting-edge generative models.",
             leaderName: "Yu Zhang",
-            leaderId: "yu-zhang",
+            leaderId: "grad-yu-zhang",
           },
           {
             title: "3D Computer Graphics",
             description:
               "Advancing neural rendering, 3D Gaussian splatting, virtual reality (VR), and ray tracing technologies to power next-generation immersive visual experiences.",
             leaderName: "Yijing Wa",
-            leaderId: "yijing-wa",
+            leaderId: "grad-yijing-wa",
           },
           {
             title: "Video Analysis",
             description:
               "Pioneering video understanding, object tracking, video action analysis, and multimodal large language models (LLMs) to build next-generation intelligent video systems.",
             leaderName: "Chenxi Shao",
-            leaderId: "chenxi-shao",
+            leaderId: "grad-chenxi-shao",
           },
         ].map((item, i) => (
           <div
@@ -617,7 +627,7 @@ const Index = () => {
               {newsError ? (
                 <div className="rounded-md border p-4 text-sm text-muted-foreground">
                   <div className="font-medium text-foreground mb-1">Failed to load news</div>
-                  <div className="break-words">{newsError}</div>s
+                  <div className="break-words">{newsError}</div>
                 </div>
               ) : null}
 
@@ -636,7 +646,12 @@ const Index = () => {
                   >
                     <div className="w-full overflow-hidden bg-muted">
                       {item.image ? (
-                        <img src={item.image} alt={item.title} className="w-full h-auto object-cover" loading="lazy" />
+                        <img
+                          src={item.image}
+                          alt={getNewsTitle(item)}
+                          className="w-full h-auto object-cover"
+                          loading="lazy"
+                        />
                       ) : null}
                     </div>
 
@@ -648,7 +663,9 @@ const Index = () => {
                         </span>
                       </div>
 
-                      <h3 className="text-base font-semibold leading-snug">{item.title}</h3>
+                      <h3 className="text-base font-semibold leading-snug">
+                        {getNewsTitle(item)}
+                      </h3>
 
                       {(item.sub_title || item.description) ? (
                         <p className="mt-2 text-sm text-muted-foreground leading-relaxed">

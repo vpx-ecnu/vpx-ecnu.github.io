@@ -7,6 +7,7 @@ import { Mail, Globe } from "lucide-react";
 import faculty from "../../public/people/faculty.json";
 import phdStudents from "../../public/people/phd.json";
 import gradStudents from "../../public/people/graduate.json";
+import partTimeStudents from "../../public/people/part-time.json";
 import undergraduate from "../../public/people/Undergraduate.json";
 import alumni from "../../public/people/alumni.json";
 
@@ -32,10 +33,19 @@ const slugifyName = (name: string) =>
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, "")
     .replace(/\s+/g, "-");
+
+const getPersonAnchorId = (group: string, name: string) =>
+  `${group}-${slugifyName(name)}`;
+
+const LEGACY_ANCHOR_ALIASES: Record<string, string> = {
+  "yu-zhang": "grad-yu-zhang",
+};
+
 const People = () => {
   const facultyList = faculty as Person[];
   const phdList = phdStudents as Person[];
   const gradList = gradStudents as Person[];
+  const partTimeList = partTimeStudents as Person[];
   const ugList = undergraduate as Person[];
   const alumniList = alumni as Person[];
 
@@ -52,7 +62,19 @@ useEffect(() => {
   const maxTries = 30; // 约 30 帧 ≈ 0.5 秒
 
   const tick = () => {
-    const el = document.getElementById(id);
+    const directMatch = document.getElementById(id);
+    const fallbackMatch =
+      LEGACY_ANCHOR_ALIASES[id]
+        ? document.getElementById(LEGACY_ANCHOR_ALIASES[id])
+        : null;
+    const suffixMatches = Array.from(
+      document.querySelectorAll<HTMLElement>(`[id$="-${CSS.escape(id)}"]`)
+    );
+    const el =
+      directMatch ||
+      fallbackMatch ||
+      (suffixMatches.length === 1 ? suffixMatches[0] : null);
+
     if (el) {
       // 先滚到元素
       el.scrollIntoView({ block: "start" });
@@ -83,9 +105,9 @@ useEffect(() => {
       <div className="relative container px-4 md:px-6 py-8 md:py-10">
         {/* Hero */}
         <header className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Our Team</h1>
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">People</h1>
           <p className="text-base text-muted-foreground mt-2 max-w-4xl leading-relaxed">
-            Meet the researchers, faculty, and students who contribute to our research initiatives and academic mission.
+            Meet the faculty members, researchers, and students who contribute to the VPX Group's research and academic community.
           </p>
         </header>
 
@@ -102,7 +124,11 @@ useEffect(() => {
           <Group id="phd" title="PhD Students">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {phdList.map((m, i) => (
-                <div key={`phd-${i}`} id={slugifyName(m.name)} className="scroll-mt-24">
+                <div
+                  key={`phd-${i}`}
+                  id={getPersonAnchorId("phd", m.name)}
+                  className="scroll-mt-24"
+                >
                   <PeopleCardCompact member={m} />
                 </div>
               ))}
@@ -112,7 +138,25 @@ useEffect(() => {
           <Group id="grad" title="Graduate Students">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {gradList.map((m, i) => (
-                <div key={`grad-${i}`} id={slugifyName(m.name)} className="scroll-mt-24">
+                <div
+                  key={`grad-${i}`}
+                  id={getPersonAnchorId("grad", m.name)}
+                  className="scroll-mt-24"
+                >
+                  <PeopleCardCompact member={m} />
+                </div>
+              ))}
+            </div>
+          </Group>
+
+          <Group id="part-time" title="Part-Time Students">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {partTimeList.map((m, i) => (
+                <div
+                  key={`part-time-${i}`}
+                  id={getPersonAnchorId("part-time", m.name)}
+                  className="scroll-mt-24"
+                >
                   <PeopleCardCompact member={m} />
                 </div>
               ))}
@@ -122,8 +166,12 @@ useEffect(() => {
           <Group id="undergrad" title="Undergraduate Students">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {ugList.map((m, i) => (
-                <div key={`undergrad-${i}`} id={slugifyName(m.name)} className="scroll-mt-24">
-                <PeopleCardCompact member={m} />
+                <div
+                  key={`undergrad-${i}`}
+                  id={getPersonAnchorId("undergrad", m.name)}
+                  className="scroll-mt-24"
+                >
+                  <PeopleCardCompact member={m} />
                 </div>
               ))}
             </div>
