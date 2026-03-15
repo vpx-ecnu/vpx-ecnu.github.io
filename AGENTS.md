@@ -47,6 +47,23 @@ Important content locations:
 - `public/people/` for people-related JSON data
 - `public/lovable-uploads/` for image assets currently used by the site
 
+Publication automation locations:
+- `.github/workflows/update_publications.yml` for the scheduled publication update workflow
+- `src/backend/build_publication_updated.py` for building `public/publications/publication_updated.json`
+- `src/backend/update_recent_publications_cards.py` for homepage publication cards
+- `src/backend/update_project_publications_cards.py` for project-page publication cards
+
+## Publications Automation
+The publication pipeline has repository-specific behavior and should be treated as a maintained content workflow, not a generic scraper.
+
+- `publication_updated.json` is built from Google Scholar as the primary source plus `IHPDEP Selected Publications` as a hand-curated overlay.
+- If a publication matches an entry in `IHPDEP Selected Publications`, the IHPDEP metadata should override the Google Scholar metadata for that entry.
+- `project_webpage` currently comes from `IHPDEP Selected Publications` and is required by the downstream card generators.
+- Preserve the downstream contract: changes to publication sourcing must not break `recent_publications.json` or `project_publications.json`.
+- If a selected publication is not present in Google Scholar, keep it in the final `publication_updated.json` rather than dropping it.
+- When modifying the publication pipeline, regenerate `public/publications/publication_updated.json`, `public/publications/recent_publications.json`, `public/publications/project_publications.json`, and any updated assets under `public/publications/recent_images/`.
+- The publication GitHub Actions workflow is intentionally monthly plus manual dispatch. Keep failure handling visible in GitHub Actions; do not silently swallow update failures.
+
 ## Working Style
 Before making meaningful changes:
 - Inspect the relevant files and existing patterns before editing.
@@ -118,3 +135,4 @@ In updates and final responses:
 - Do not silently remove user content or existing data sources without a clear reason.
 - Do not break navigation, route structure, or existing data-loading flows when making design changes.
 - Do not skip local preview/open-browser verification after making changes unless tooling or permissions block it.
+- Do not change the publication source precedence away from `IHPDEP Selected Publications overrides matching Google Scholar entries` unless the user explicitly asks for it.
