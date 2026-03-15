@@ -144,7 +144,7 @@ const Publications = () => {
       ) : filteredPublications.length === 0 ? (
         <div className="text-sm text-muted-foreground">No publications found.</div>
       ) : (
-        <section className="space-y-4">
+        <section className="space-y-3">
           {filteredPublications.map((pub, index) => (
             <Card
               key={`${pub.title}-${pub.year}-${index}`}
@@ -157,19 +157,19 @@ const Publications = () => {
     transition-all"
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <CardContent className="p-6">
-                <div className="grid gap-3">
+              <CardContent className="p-4 md:p-5">
+                <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                   {/* Title */}
-                  <h3 className="text-lg font-semibold leading-snug">
-                    {pub.title}
-                  </h3>
+                  <div className="min-w-0 space-y-2">
+                    <h3 className="text-base font-semibold leading-snug md:text-lg">
+                      {pub.title}
+                    </h3>
 
-                  {/* Authors + Venue */}
-                  <div className="flex flex-wrap items-center gap-2">
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {pub.authors}
-                    </p>
-                    <div className="flex items-center gap-2 flex-wrap">
+                    {/* Authors + Venue */}
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
+                      <p className="text-sm text-muted-foreground leading-6">
+                        {pub.authors}
+                      </p>
                       {pub.journal ? (
                         <Badge className="bg-violet-500/15 text-violet-700 border border-violet-500/20">
                           {pub.journal}
@@ -180,21 +180,18 @@ const Publications = () => {
                     </div>
                   </div>
 
-                  {/* Meta + Actions */}
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-end gap-4 pt-1">
-                    {/* Buttons */}
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="h-9 border-white/15 bg-white/5 hover:bg-white/10"
-                        onClick={() => openLink(pub.doi)}
-                        disabled={!pub.doi}
-                      >
-                        <FileText className="h-4 w-4 mr-2" />
-                        Paper
-                      </Button>
-                    </div>
+                  {/* Actions */}
+                  <div className="flex items-center md:shrink-0">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8 border-white/15 bg-white/5 px-3 hover:bg-white/10"
+                      onClick={() => openLink(pub.doi)}
+                      disabled={!pub.doi}
+                    >
+                      <FileText className="h-4 w-4 mr-2" />
+                      Paper
+                    </Button>
                   </div>
 
                   {/* Optional tags（你以后要用再打开） */}
