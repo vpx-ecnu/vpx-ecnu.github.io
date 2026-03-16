@@ -181,7 +181,7 @@ const Index = () => {
     <div className="page-transition">
       <section
   className="relative isolate overflow-hidden pt-20 pb-20 md:pt-24 md:pb-24 bg-cover bg-center"
-  style={{ backgroundImage: "url('/lovable-uploads/home/home_robot.gif')" }}
+  style={{ backgroundImage: "url('/vpx-assets/home/home_robot.gif')" }}
 >
   {/* 多层遮罩：保证动态图不抢文字、同时更“学术” */}
   <div className="absolute inset-0 -z-10">
@@ -329,7 +329,7 @@ const Index = () => {
                 </div>
                 <div className="flex-1 hidden md:block">
                   <img
-                    src="/lovable-uploads/home/home_robot.jpg"
+                    src="/vpx-assets/home/home_robot.jpg"
                     alt="Automated chemical titration robot"
                     className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
                   />
@@ -371,7 +371,7 @@ const Index = () => {
                 </div>
                 <div className="flex-1 hidden md:block">
                   <img
-                    src="/lovable-uploads/home/home_metahuman.png"
+                    src="/vpx-assets/home/home_metahuman.png"
                     alt="Virtual human generation demo"
                     className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
                   />
@@ -412,7 +412,7 @@ const Index = () => {
                 </div>
                 <div className="flex-1 hidden md:block">
                   <img
-                    src="/lovable-uploads/home/home_filming.png"
+                    src="/vpx-assets/home/home_filming.png"
                     alt="Virtual production research demo"
                     className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
                   />
@@ -453,7 +453,7 @@ const Index = () => {
                 </div>
                 <div className="flex-1 hidden md:block">
                   <img
-                    src="/lovable-uploads/home/home_shapan.png"
+                    src="/vpx-assets/home/home_shapan.png"
                     alt="Psychological assessment research demo"
                     className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
                   />

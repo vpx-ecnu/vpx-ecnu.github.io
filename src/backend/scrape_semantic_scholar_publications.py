@@ -26,7 +26,7 @@ def normalize_year(value) -> int:
 
 def make_session(api_key: Optional[str] = None) -> requests.Session:
     session = requests.Session()
-    session.headers.update({"User-Agent": "luminous-research-hub/semantic-scholar-updater"})
+    session.headers.update({"User-Agent": "vpx-group/semantic-scholar-updater"})
     if api_key:
         session.headers.update({"x-api-key": api_key})
     return session

@@ -153,7 +153,7 @@ const About = () => {
                   {/* 图片外包一层，统一边框/阴影/高级感 */}
                   <div className="rounded-2xl border border-border/60 bg-background/30 backdrop-blur-md p-3 shadow-[0_22px_70px_-48px_rgba(0,0,0,0.55)]">
                     <img
-                      src="/lovable-uploads/about/about_about_vpx.jpg"
+                      src="/vpx-assets/about/about_about_vpx.jpg"
                       alt="About VPX Group"
                       className="w-full h-auto rounded-xl shadow-sm object-cover"
                     />
@@ -251,10 +251,10 @@ const About = () => {
                 {/* 右边四张图：统一圆角/边框/hover */}
                 <div className="flex-1 grid grid-cols-2 gap-4">
                   {[
-                    "/lovable-uploads/about/about_1.png",
-                    "/lovable-uploads/about/about_2.png",
-                    "/lovable-uploads/about/about_3.png",
-                    "/lovable-uploads/about/about_4.png",
+                    "/vpx-assets/about/about_1.png",
+                    "/vpx-assets/about/about_2.png",
+                    "/vpx-assets/about/about_3.png",
+                    "/vpx-assets/about/about_4.png",
                   ].map((src, idx) => (
                     <div
                       key={src}

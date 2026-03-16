@@ -11,7 +11,7 @@ export function Footer() {
         <div className="flex flex-col items-center md:items-start gap-3 text-center md:text-left max-w-md">
           <Link to="/" className="flex items-center space-x-2">
             <img
-              src="/lovable-uploads/c1c1ffb3-a447-43bc-b8cb-b2bba2dad10f.png"
+              src="/vpx-assets/c1c1ffb3-a447-43bc-b8cb-b2bba2dad10f.png"
               alt="VPX Lab Logo"
               className="h-8 w-auto"
             />

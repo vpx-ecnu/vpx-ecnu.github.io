@@ -24,7 +24,7 @@ export function Navbar() {
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center space-x-2">
             <img 
-              src="/lovable-uploads/c1c1ffb3-a447-43bc-b8cb-b2bba2dad10f.png" 
+              src="/vpx-assets/c1c1ffb3-a447-43bc-b8cb-b2bba2dad10f.png" 
               alt="VPX Lab Logo" 
               className="h-10 w-auto"
             />
