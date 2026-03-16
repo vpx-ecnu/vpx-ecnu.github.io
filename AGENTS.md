@@ -1,140 +1,77 @@
 # AGENTS.md
 
-## Purpose
-This repository hosts an academic lab website for a professor and the professor's research group.
-The site should present the professor, lab members, research projects, publications, activities, and joining information in a way that feels credible, polished, and easy to maintain.
+## Scope
+This repository hosts an academic lab website for a professor and research group. Optimize for a polished, credible, easy-to-maintain site rather than generic marketing UI.
 
-## Agent Role
-When working in this repository, act as a frontend-first and deployment-capable agent.
+Use this file for repo-specific rules only. Prefer `README.md` for fuller setup and workflow details.
 
-Required strengths:
-- Strong frontend engineering judgment for React, TypeScript, Tailwind CSS, responsive layout, and content-heavy websites.
-- Strong practical knowledge of local preview, build verification, and lightweight deployment workflows.
-- Strong familiarity with academic websites for professors, labs, and research groups.
+## Role
+Act as a frontend-first, deployment-capable agent for a Vite + React + TypeScript + Tailwind CSS site.
 
-Content expectations for this type of site:
-- Keep the tone professional, academic, and trustworthy.
-- Prefer clarity over marketing language.
-- Preserve factual accuracy for names, titles, affiliations, publications, and project descriptions.
-- Present research in a way that is accessible to visitors outside the field without oversimplifying the work.
-- Maintain a clean distinction between professor profile, group overview, people, projects, publications, activities, and recruitment/join information.
-
-## Project Context
-This project is a Vite + React + TypeScript + Tailwind CSS site.
-
-Key commands:
-- `npm run dev`
-- `npm run build`
-- `npm run preview`
-- `npm run lint`
-
-Main route structure currently includes:
-- `/`
-- `/about`
-- `/projects`
-- `/publications`
-- `/people`
-- `/activities`
-- `/join`
-- `/intranet`
-
-Important content locations:
-- `src/pages/` for route-level pages
-- `src/components/` for shared layout and UI
-- `src/data/` for structured page data
-- `public/content/` for project content JSON
-- `public/publications/` for publication JSON data
-- `public/people/` for people-related JSON data
-- `public/lovable-uploads/` for image assets currently used by the site
-
-Publication automation locations:
-- `.github/workflows/update_publications.yml` for the scheduled publication update workflow
-- `src/backend/build_publication_updated.py` for building `public/publications/publication_updated.json`
-- `src/backend/update_recent_publications_cards.py` for homepage publication cards
-- `src/backend/update_project_publications_cards.py` for project-page publication cards
-
-## Publications Automation
-The publication pipeline has repository-specific behavior and should be treated as a maintained content workflow, not a generic scraper.
-
-- `publication_updated.json` is built from Google Scholar as the primary source plus `IHPDEP Selected Publications` as a hand-curated overlay.
-- If a publication matches an entry in `IHPDEP Selected Publications`, the IHPDEP metadata should override the Google Scholar metadata for that entry.
-- `project_webpage` currently comes from `IHPDEP Selected Publications` and is required by the downstream card generators.
-- Preserve the downstream contract: changes to publication sourcing must not break `recent_publications.json` or `project_publications.json`.
-- If a selected publication is not present in Google Scholar, keep it in the final `publication_updated.json` rather than dropping it.
-- Publication card imagery should be automation-first. Prefer improving the automatic image discovery, validation, cropping, normalization, and caching pipeline over introducing hand-maintained per-paper image mappings.
-- Do not make manual publication-image curation the steady-state workflow unless the user explicitly asks for a temporary exception. The long-term goal is that publication images used across the site can be regenerated automatically from the pipeline.
-- When modifying the publication pipeline, regenerate `public/publications/publication_updated.json`, `public/publications/recent_publications.json`, `public/publications/project_publications.json`, and any updated assets under `public/publications/recent_images/`.
-- The publication GitHub Actions workflow is intentionally monthly plus manual dispatch. Keep failure handling visible in GitHub Actions; do not silently swallow update failures.
-
-## Working Style
-Before making meaningful changes:
-- Inspect the relevant files and existing patterns before editing.
-- Preserve the established visual language unless the task is explicitly a redesign.
+Priorities:
+- Keep tone professional, academic, and factual.
+- Preserve clear separation between professor, lab, people, projects, publications, activities, and joining information.
 - Favor maintainable structure over one-off patches.
 
-When editing content or UI for this site:
-- Think like an academic website editor as well as a frontend engineer.
-- Make sure page hierarchy, section naming, and calls to action fit a professor/lab context.
-- Keep typography, spacing, and image usage polished on both desktop and mobile.
-- Avoid generic startup-style copy or exaggerated promotional wording.
-- If adding or revising research/project text, prefer concise summaries, clear outcomes, and proper scholarly framing.
+## Important Paths
+- `src/pages/`: route-level pages
+- `src/components/`: shared layout and UI
+- `src/data/`: structured site data
+- `public/content/`: project content JSON
+- `public/people/`: people data
+- `public/publications/`: publication datasets and card media
+- `src/backend/`: publication update scripts
+- `.github/workflows/`: deployment and content automation
 
-## Skills and Reuse
-If a task clearly matches an available local skill, use the skill.
+## Publication Workflow
+Treat the publications pipeline as a maintained content workflow, not a generic scraper.
 
-General expectations:
-- State which skill is being used and why.
-- Read only the part of a skill that is needed.
-- Prefer existing scripts, templates, assets, and data files over recreating them.
-- Keep context small and do not load unrelated files unless needed.
+- `publication_updated.json` = Google Scholar primary source + `IHPDEP Selected Publications` overlay.
+- If both sources match a paper, `IHPDEP Selected Publications` wins.
+- If a selected publication is missing from Google Scholar, keep it.
+- `project_webpage` comes from the curated overlay and is required by downstream card generators.
+- Keep the downstream contract intact: changes must not break `recent_publications.json` or `project_publications.json`.
+- Publication card media should stay automation-first; do not turn manual per-paper image curation into the default workflow.
+- Both still images and project videos are valid card media. Prefer videos only when they produce a strong card-ready result.
+- Normalize card media for stable `16:9` output; for videos, generate posters from sampled frames.
+- If `project_webpage` returns `404`, skip that item from downstream card feeds.
+- Keep media failures visible; prefer warnings and preserving previous good outputs over silently degrading feeds.
+- When modifying the publication pipeline, regenerate:
+  - `public/publications/publication_updated.json`
+  - `public/publications/recent_publications.json`
+  - `public/publications/project_publications.json`
+  - referenced assets under `public/publications/recent_images/`
 
-## Verification Workflow
-After every code or content modification, do all of the following unless blocked:
+## Merge And Cleanup Rules
+- Scheduled workflows may update generated publication JSON while local work is in progress. Merge conflicts in publication feeds are expected.
+- When resolving those conflicts, use the newer remote data as baseline, then re-apply local improvements deliberately.
+- For publication cards, preserve the richer feed shape when available: `image`, `mediaType`, `media`, and `poster`. Do not accidentally collapse entries back to image-only objects.
+- After resolving publication-feed conflicts, confirm every JSON-referenced file under `public/publications/recent_images/` exists.
+- If cleaning `public/publications/recent_images/`, keep only assets referenced by the current publication JSON outputs unless the task explicitly asks for a broader cleanup.
 
-1. Run a local verification step appropriate to the change.
-2. Start a local site preview.
-3. Open the local page in a browser for visual confirmation.
-4. Report what was checked and whether anything remains unverified.
+## Working Style
+- Inspect existing patterns before editing.
+- Preserve the current visual language unless the task is explicitly a redesign.
+- When editing site copy, prefer clarity over hype and avoid inventing academic facts.
+- Reuse existing scripts, templates, assets, and data files when possible.
+- Use a local skill when the task clearly matches one.
 
-Default local verification workflow for this repo:
-- Run `npm run build` after changes unless the task is explicitly limited.
-- Start local preview with one of:
-  - `npm run dev -- --host 127.0.0.1 --port 4173`
-  - or `npm run preview -- --host 127.0.0.1 --port 4173`
-- Open `http://127.0.0.1:4173/` in a browser after the preview server is ready.
+## Verification
+After code or content changes, unless blocked:
 
-If the task affects a specific route, open that route directly as well.
+1. Run an appropriate local verification step. Default: `npm run build`.
+2. Start a local preview, usually with `npm run preview -- --host 127.0.0.1 --port 4173`.
+3. Open the relevant page in a browser. If `4173` is occupied, use the actual port Vite selects.
+4. Report what was checked and what remains unverified.
 
-## Git Update and Commit Workflow
-When the local repo is behind remote and there are local changes:
-- Prefer bringing in the remote version first.
-- Save local work safely before updating, for example by using a git stash.
-- Fast-forward to the latest remote commit when possible.
-- Reapply local changes on top of the updated remote state.
-- Resolve overlaps by treating the newly pulled remote version as the baseline, then re-integrate local improvements deliberately.
-
-Before making a commit:
-- Review the diff for low-value noise such as lockfile churn that does not correspond to dependency changes.
-- Remove or ignore generated artifacts and temporary files before staging.
-- Re-check route behavior if URL handling, anchors, or deep links were changed.
-- Run `npm run build`.
-- Re-open the affected local pages in a browser for a final visual pass.
-
-Commit expectations:
-- Keep commits focused on meaningful source, content, and configuration changes.
-- Avoid committing generated PDFs, screenshots, temporary files, or other local review artifacts unless the user explicitly requests them.
-- Preserve `AGENTS.md` as project guidance when it reflects the agreed working process for this repository.
-
-## Communication
-In updates and final responses:
-- Be concise, warm, and collaborative.
-- Explain changes in plain language.
-- Mention any assumptions that could affect factual correctness.
-- If something could not be verified locally, say so directly.
+## Git And Commits
+- If remote is ahead and local changes exist, save local work first, update from remote, then reapply local changes carefully.
+- Review diffs for low-value generated noise before committing.
+- Keep commits focused.
+- Do not commit temporary review artifacts unless explicitly requested.
 
 ## Guardrails
-- Do not invent academic facts, publication metadata, positions, awards, or affiliations.
-- Do not silently remove user content or existing data sources without a clear reason.
-- Do not break navigation, route structure, or existing data-loading flows when making design changes.
-- Do not skip local preview/open-browser verification after making changes unless tooling or permissions block it.
-- Do not change the publication source precedence away from `IHPDEP Selected Publications overrides matching Google Scholar entries` unless the user explicitly asks for it.
+- Do not invent publication metadata, affiliations, positions, awards, or project facts.
+- Do not silently remove user content or data sources without a reason.
+- Do not break routing, navigation, or data-loading flows.
+- Do not change publication source precedence away from `IHPDEP Selected Publications` overriding matching Google Scholar entries unless explicitly requested.
