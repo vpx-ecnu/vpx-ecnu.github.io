@@ -180,7 +180,7 @@ const Index = () => {
   return (
     <div className="page-transition">
       <section
-  className="relative isolate overflow-hidden pt-20 pb-20 md:pt-24 md:pb-24 bg-cover bg-center"
+  className="relative isolate overflow-hidden bg-cover bg-center pt-16 pb-16 sm:pt-20 sm:pb-20 md:pt-24 md:pb-24"
   style={{ backgroundImage: "url('/vpx-assets/home/home_robot.gif')" }}
 >
   {/* 多层遮罩：保证动态图不抢文字、同时更“学术” */}
@@ -204,13 +204,13 @@ const Index = () => {
   <div className="relative z-10 container px-4 md:px-6">
     <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
       {/* 顶部小标签：更像实验室官网 */}
-      <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm md:text-base text-white/85 backdrop-blur-md mb-2">
+      <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs text-white/85 backdrop-blur-md sm:px-4 sm:py-2 sm:text-sm md:text-base">
         <span className="h-1.5 w-1.5 rounded-full bg-cyan-300/90" />
         Visual Perception + X • ECNU
       </div>
 
-      <div className="mt-5 space-y-4">
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
+      <div className="mt-4 space-y-4 sm:mt-5">
+        <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-6xl">
           Welcome to{" "}
           <span className="bg-gradient-to-r from-violet-200 via-white to-cyan-200 bg-clip-text text-transparent">
             VPX Group
@@ -231,8 +231,8 @@ const Index = () => {
     {/* 顶部细亮边 */}
     <div className="h-px w-full bg-gradient-to-r from-transparent via-white/25 to-transparent" />
 
-    <div className="px-8 py-9 md:px-14 md:py-11 text-left">
-      <div className="space-y-6 text-lg md:text-xl leading-relaxed text-white/85">
+    <div className="px-4 py-5 text-left sm:px-6 sm:py-7 md:px-14 md:py-11">
+      <div className="space-y-5 text-base leading-relaxed text-white/85 sm:text-lg md:text-xl">
 
         <p>
           <span className="font-semibold text-white">
@@ -269,10 +269,10 @@ const Index = () => {
 
 
       {/* CTA 按钮：更统一的配色与 hover（第二个按钮文字别用深紫，否则在暗背景不稳） */}
-      <div className="mt-10 flex flex-wrap gap-4 justify-center">
+      <div className="mt-8 flex w-full flex-col items-stretch gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
         <Button
           asChild
-          className="px-9 py-7 text-lg md:text-xl text-white shadow-lg shadow-violet-600/25
+          className="w-full px-5 py-4 text-base text-white shadow-lg shadow-violet-600/25 sm:w-auto sm:px-8 sm:text-lg md:px-9 md:py-7 md:text-xl
                      bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500"
         >
           <Link to="/about">Learn About Us</Link>
@@ -281,7 +281,7 @@ const Index = () => {
         <Button
           asChild
           variant="outline"
-          className="px-9 py-7 text-lg md:text-xl text-white
+          className="w-full px-5 py-4 text-base text-white sm:w-auto sm:px-8 sm:text-lg md:px-9 md:py-7 md:text-xl
                      border-white/30 bg-white/5 hover:bg-white/10 hover:border-white/40"
         >
           <Link to="/projects">View Our Projects</Link>
@@ -292,25 +292,25 @@ const Index = () => {
 </section>
 
 
-      <section className="py-20 px-6 md:px-12 lg:px-24 bg-secondary/30">
+      <section className="bg-secondary/30 px-4 py-12 sm:px-6 sm:py-14 md:px-12 lg:px-24 lg:py-20">
         <div className="relative overflow-visible">
           <Swiper modules={[Navigation]} navigation spaceBetween={50} slidesPerView={1} className="relative container">
             {/* Slide 1 */}
             <SwiperSlide>
-              <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="flex flex-col items-center gap-4 sm:gap-5 lg:gap-8 lg:flex-row">
                 <div className="max-w-3xl flex-1">
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
+                  <h1 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:mb-5 md:text-4xl lg:text-5xl">
                     Embodied Intelligence for Automated Chemical Titration
                   </h1>
-                  <p className="text-xl mb-8 text-muted-foreground">
+                  <p className="mb-4 text-base text-muted-foreground sm:text-lg md:mb-6 md:text-xl">
                     An automated titration framework that combines robotic liquid handling and real-time pH feedback to
                     deliver accurate, repeatable, and safe chemical experiments.
                   </p>
-                  <div className="flex flex-wrap gap-4">
+                  <div className="hidden gap-3 sm:flex-row sm:flex-wrap sm:gap-4 lg:flex">
                     <Button
                         asChild
                         size="lg"
-                        className="
+                        className="w-full sm:w-auto
                           bg-gradient-to-r from-violet-600 to-fuchsia-600
                           hover:from-violet-500 hover:to-fuchsia-500
                           text-white
@@ -322,37 +322,51 @@ const Index = () => {
                       Explore Robot Research <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
-                    <Button variant="outline" size="lg" asChild>
+                    <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
                       <Link to="/join">Join Our Team</Link>
                     </Button>
                   </div>
                 </div>
-                <div className="flex-1 hidden md:block">
+                <div className="w-full flex-1">
                   <img
                     src="/vpx-assets/home/home_robot.jpg"
                     alt="Automated chemical titration robot"
-                    className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
+                    className="h-auto max-h-[240px] w-full rounded-lg object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02] sm:max-h-[320px] lg:max-h-none"
                   />
+                </div>
+                <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3 lg:hidden">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-600/30 transition-all hover:from-violet-500 hover:to-fuchsia-500 sm:w-auto"
+                  >
+                    <Link to="/projects?project=embodied-intelligence-for-automated-chemical-titration">
+                      Explore Robot Research <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
+                    <Link to="/join">Join Our Team</Link>
+                  </Button>
                 </div>
               </div>
             </SwiperSlide>
 
             {/* Slide 2 */}
             <SwiperSlide>
-              <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="flex flex-col items-center gap-4 sm:gap-5 lg:gap-8 lg:flex-row">
                 <div className="max-w-3xl flex-1">
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
+                  <h1 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:mb-5 md:text-4xl lg:text-5xl">
                     AI-Powered Virtual Human Video Generation
                   </h1>
-                  <p className="text-xl mb-8 text-muted-foreground">
+                  <p className="mb-4 text-base text-muted-foreground sm:text-lg md:mb-6 md:text-xl">
                     Automatically generating expressive, speaker-driven presentation videos from portraits, slides,
                     scripts, and backgrounds, enabling fast, scalable, and personalized content creation.
                   </p>
-                  <div className="flex flex-wrap gap-4">
+                  <div className="hidden gap-3 sm:flex-row sm:flex-wrap sm:gap-4 lg:flex">
                     <Button
                         asChild
                         size="lg"
-                        className="
+                        className="w-full sm:w-auto
                           bg-gradient-to-r from-violet-600 to-fuchsia-600
                           hover:from-violet-500 hover:to-fuchsia-500
                           text-white
@@ -364,36 +378,50 @@ const Index = () => {
                         Explore AIGC Research
                       </Link>
                     </Button>
-                    <Button variant="outline" size="lg" asChild>
+                    <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
                       <Link to="/join">Join Our Team</Link>
                     </Button>
                   </div>
                 </div>
-                <div className="flex-1 hidden md:block">
+                <div className="w-full flex-1">
                   <img
                     src="/vpx-assets/home/home_metahuman.png"
                     alt="Virtual human generation demo"
-                    className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
+                    className="h-auto max-h-[240px] w-full rounded-lg object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02] sm:max-h-[320px] lg:max-h-none"
                   />
+                </div>
+                <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3 lg:hidden">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-600/30 transition-all hover:from-violet-500 hover:to-fuchsia-500 sm:w-auto"
+                  >
+                    <Link to="/projects?project=ai-powered-virtual-human-video-generation">
+                      Explore AIGC Research
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
+                    <Link to="/join">Join Our Team</Link>
+                  </Button>
                 </div>
               </div>
             </SwiperSlide>
 
             {/* Slide 3 */}
             <SwiperSlide>
-              <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="flex flex-col items-center gap-4 sm:gap-5 lg:gap-8 lg:flex-row">
                 <div className="max-w-3xl flex-1">
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
+                  <h1 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:mb-5 md:text-4xl lg:text-5xl">
                     Toward Intelligent Cinematic Virtual Production
                   </h1>
-                  <p className="text-xl mb-8 text-muted-foreground">
+                  <p className="mb-4 text-base text-muted-foreground sm:text-lg md:mb-6 md:text-xl">
                     We build an intelligent filming environment where cameras, lighting, and virtual scenes collaborate automatically to achieve highly realistic and efficient virtual production.
                   </p>
-                  <div className="flex flex-wrap gap-4">
+                  <div className="hidden gap-3 sm:flex-row sm:flex-wrap sm:gap-4 lg:flex">
                     <Button
                         asChild
                         size="lg"
-                        className="
+                        className="w-full sm:w-auto
                           bg-gradient-to-r from-violet-600 to-fuchsia-600
                           hover:from-violet-500 hover:to-fuchsia-500
                           text-white
@@ -405,36 +433,50 @@ const Index = () => {
                         View 3D Research
                       </Link>
                     </Button>
-                    <Button variant="outline" size="lg" asChild>
+                    <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
                       <Link to="/join">Join Our Team</Link>
                     </Button>
                   </div>
                 </div>
-                <div className="flex-1 hidden md:block">
+                <div className="w-full flex-1">
                   <img
                     src="/vpx-assets/home/home_filming.png"
                     alt="Virtual production research demo"
-                    className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
+                    className="h-auto max-h-[240px] w-full rounded-lg object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02] sm:max-h-[320px] lg:max-h-none"
                   />
+                </div>
+                <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3 lg:hidden">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-600/30 transition-all hover:from-violet-500 hover:to-fuchsia-500 sm:w-auto"
+                  >
+                    <Link to="/projects?project=intelligent-virtual-production-with-camera-and-lighting-co-design">
+                      View 3D Research
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
+                    <Link to="/join">Join Our Team</Link>
+                  </Button>
                 </div>
               </div>
             </SwiperSlide>
 
             <SwiperSlide>
-              <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="flex flex-col items-center gap-4 sm:gap-5 lg:gap-8 lg:flex-row">
                 <div className="max-w-3xl flex-1">
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
+                  <h1 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:mb-5 md:text-4xl lg:text-5xl">
                     Intelligent Sandplay for Psychological Assessment
                   </h1>
-                  <p className="text-xl mb-8 text-muted-foreground">
+                  <p className="mb-4 text-base text-muted-foreground sm:text-lg md:mb-6 md:text-xl">
                     Leveraging comprehensive data capture and AI-driven analysis to enhance the reliability,
                     scalability, and safety of sandplay-based psychological evaluation in educational settings.
                   </p>
-                  <div className="flex flex-wrap gap-4">
+                  <div className="hidden gap-3 sm:flex-row sm:flex-wrap sm:gap-4 lg:flex">
                     <Button
                         asChild
                         size="lg"
-                        className="
+                        className="w-full sm:w-auto
                           bg-gradient-to-r from-violet-600 to-fuchsia-600
                           hover:from-violet-500 hover:to-fuchsia-500
                           text-white
@@ -446,17 +488,31 @@ const Index = () => {
                         View VLM Research
                       </Link>
                     </Button>
-                    <Button variant="outline" size="lg" asChild>
+                    <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
                       <Link to="/join">Join Our Team</Link>
                     </Button>
                   </div>
                 </div>
-                <div className="flex-1 hidden md:block">
+                <div className="w-full flex-1">
                   <img
                     src="/vpx-assets/home/home_shapan.png"
                     alt="Psychological assessment research demo"
-                    className="w-full h-auto rounded-lg shadow-lg object-cover hover:scale-105 transition-transform duration-300"
+                    className="h-auto max-h-[240px] w-full rounded-lg object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02] sm:max-h-[320px] lg:max-h-none"
                   />
+                </div>
+                <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3 lg:hidden">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-600/30 transition-all hover:from-violet-500 hover:to-fuchsia-500 sm:w-auto"
+                  >
+                    <Link to="/projects?project=intelligent-sandplay-for-psychological-assessment">
+                      View VLM Research
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
+                    <Link to="/join">Join Our Team</Link>
+                  </Button>
                 </div>
               </div>
             </SwiperSlide>
@@ -465,9 +521,9 @@ const Index = () => {
       </section>
 
       {/* Key Statistics */}
-      <section className="bg-muted my-[3px] py-[21px] mx-0 px-[36px] rounded-none">
+      <section className="mx-0 my-[3px] rounded-none bg-muted px-4 py-[21px] sm:px-6 md:px-[36px]">
         <div className="container px-4 md:px-6 fade-in-content">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
             <div className="space-y-2">
               <div className="flex justify-center">
                 <BookOpen className="h-8 w-8 text-primary" />
@@ -503,7 +559,7 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {recentPublications.map((pub) => (
               <a
                 key={pub.id}
@@ -624,7 +680,7 @@ const Index = () => {
       {/* Latest News Wall in a scrollable window */}
       <section className="pt-6 pb-10 md:pt-8 md:pb-14">
         <div className="container px-4 md:px-6">
-          <div className="flex items-end justify-between gap-6 mb-6">
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
             <div className="space-y-2">
               <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Latest News & Activities</h2>
               <p className="text-muted-foreground md:text-lg">A feed-style wall of recent updates.</p>
@@ -632,14 +688,14 @@ const Index = () => {
           </div>
 
           <div className="border bg-card">
-            <div className="flex items-center justify-between px-5 py-3 border-b bg-muted/30">
+            <div className="flex flex-col gap-2 border-b bg-muted/30 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
               <div className="text-sm font-medium">Updates</div>
               <Link to="/activities" className="text-sm font-medium text-violet-600 hover:underline">
                 View all
               </Link>
             </div>
 
-            <div className="h-[680px] overflow-y-auto p-5">
+            <div className="h-[520px] overflow-y-auto p-4 sm:h-[600px] sm:p-5 md:h-[680px]">
               {newsError ? (
                 <div className="rounded-md border p-4 text-sm text-muted-foreground">
                   <div className="font-medium text-foreground mb-1">Failed to load news</div>

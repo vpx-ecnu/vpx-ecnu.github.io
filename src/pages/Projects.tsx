@@ -134,7 +134,7 @@ const Projects = () => {
       {/* Hero */}
       <section className="py-12 md:py-14 px-0 bg-secondary/30">
         <div className="container px-4 md:px-6">
-          <h1 className="text-4xl font-bold mb-4">Research Projects</h1>
+          <h1 className="mb-4 text-3xl font-bold sm:text-4xl">Research Projects</h1>
           <p className="text-lg max-w-3xl text-muted-foreground">
             Explore our ongoing and completed research initiatives spanning
             multiple disciplines and methodologies.
@@ -159,7 +159,7 @@ const Projects = () => {
 
               {/* Title + meta */}
               <div className="mb-6">
-                <div className="flex flex-wrap items-center gap-3">
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                   <h2 className="text-3xl font-bold">{selectedProject.title}</h2>
                   {selectedProject.status && (
                     <Badge
@@ -270,16 +270,31 @@ const Projects = () => {
               </div>
             </div>
           ) : (
-            <Tabs defaultValue="ongoing" className="mb-12">
-              <TabsList className="grid w-full max-w-2xl grid-cols-3">
-                <TabsTrigger value="ongoing">Ongoing Projects</TabsTrigger>
-                <TabsTrigger value="completed">Completed Projects</TabsTrigger>
-                <TabsTrigger value="publications">Publications</TabsTrigger>
+              <Tabs defaultValue="ongoing" className="mb-12">
+              <TabsList className="grid h-auto w-full max-w-2xl grid-cols-1 gap-2 bg-transparent p-0 sm:grid-cols-3">
+                <TabsTrigger
+                  value="ongoing"
+                  className="min-h-10 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
+                >
+                  Ongoing Projects
+                </TabsTrigger>
+                <TabsTrigger
+                  value="completed"
+                  className="min-h-10 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
+                >
+                  Completed Projects
+                </TabsTrigger>
+                <TabsTrigger
+                  value="publications"
+                  className="min-h-10 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
+                >
+                  Publications
+                </TabsTrigger>
               </TabsList>
 
               {/* Ongoing */}
               <TabsContent value="ongoing" className="mt-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {ongoingProjects.map((project, index) => {
                     const thumb = getThumbnail(project);
                     return (
@@ -360,7 +375,7 @@ const Projects = () => {
 
               {/* Completed */}
               <TabsContent value="completed" className="mt-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {completedProjects.map((project, index) => {
                     const thumb = getThumbnail(project);
                     return (
@@ -450,7 +465,7 @@ const Projects = () => {
                     No project-publication cards available.
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {projectPublications.map((pub) => (
                       <a
                         key={pub.id}

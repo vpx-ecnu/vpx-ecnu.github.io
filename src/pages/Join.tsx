@@ -90,8 +90,8 @@ const Join = () => {
           Collaborate, learn, and contribute to research in next-generation AI, computer vision, computer graphics, and robotic perception.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-          <Button asChild variant="secondary" className="gap-2">
+        <div className="flex flex-col gap-3 justify-center pt-2 sm:flex-row sm:flex-wrap">
+          <Button asChild variant="secondary" className="w-full gap-2 sm:w-auto">
             <a
               href="https://space.bilibili.com/487404760?spm_id_from=333.337.0.0"
               target="_blank"
@@ -101,7 +101,7 @@ const Join = () => {
               Follow on Bilibili
             </a>
           </Button>
-          <Button asChild variant="secondary" className="gap-2">
+          <Button asChild variant="secondary" className="w-full gap-2 sm:w-auto">
             <a href="https://github.com/vpx-ecnu" target="_blank" rel="noreferrer">
               <ExternalLink className="h-4 w-4" />
               View on GitHub
@@ -109,7 +109,7 @@ const Join = () => {
           </Button>
           <Button
             variant="secondary"
-            className="gap-2"
+            className="w-full gap-2 sm:w-auto"
             onClick={() => setActiveQr("xiaohongshu")}
           >
             <ExternalLink className="h-4 w-4" />
@@ -117,7 +117,7 @@ const Join = () => {
           </Button>
           <Button
             variant="secondary"
-            className="gap-2"
+            className="w-full gap-2 sm:w-auto"
             onClick={() => setActiveQr("douyin")}
           >
             <ExternalLink className="h-4 w-4" />
@@ -140,7 +140,7 @@ const Join = () => {
           </CardHeader>
 
           <CardContent className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               <Card className="bg-muted/40">
                 <CardContent className="pt-6 text-center">
                   <GraduationCap className="h-10 w-10 text-primary mx-auto mb-4" />
@@ -174,7 +174,7 @@ const Join = () => {
 
             <div className="space-y-3">
               <h3 className="text-lg font-semibold">Research Tracks</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {commonTracks.map((t, idx) => (
                   <div key={idx} className="bg-muted/50 p-4 rounded-lg">
                     <div className="flex items-start gap-2">
@@ -203,7 +203,7 @@ const Join = () => {
                     Send your CV and the track(s) you’re interested in to:
                   </p>
                   <div className="flex flex-col gap-2">
-                    <Button asChild className="gap-2 w-fit">
+                    <Button asChild className="w-full gap-2 sm:w-fit">
                       <a href={`mailto:${YLI_EMAIL}`}>
                         <Mail className="h-4 w-4" />
                         {YLI_EMAIL}
@@ -241,10 +241,25 @@ const Join = () => {
       {/* ROLE-SPECIFIC TABS */}
       <section className="fade-in-content" style={{ animationDelay: "160ms" }}>
         <Tabs defaultValue="phd" className="w-full">
-          <TabsList className="grid grid-cols-3 mb-8">
-            <TabsTrigger value="phd">PhD</TabsTrigger>
-            <TabsTrigger value="master">Master’s</TabsTrigger>
-            <TabsTrigger value="undergrad">Undergraduate</TabsTrigger>
+          <TabsList className="mb-8 grid h-auto w-full grid-cols-1 gap-2 bg-transparent p-0 sm:grid-cols-3">
+            <TabsTrigger
+              value="phd"
+              className="min-h-10 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
+            >
+              PhD
+            </TabsTrigger>
+            <TabsTrigger
+              value="master"
+              className="min-h-10 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
+            >
+              Master’s
+            </TabsTrigger>
+            <TabsTrigger
+              value="undergrad"
+              className="min-h-10 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
+            >
+              Undergraduate
+            </TabsTrigger>
           </TabsList>
 
           {/* PhD */}
@@ -327,7 +342,7 @@ const Join = () => {
                       </p>
 
                       <div className="flex flex-col sm:flex-row gap-3 pt-1">
-                        <Button asChild className="gap-2 w-fit">
+                        <Button asChild className="w-full gap-2 sm:w-fit">
                           <a href={ZULIP_INVITE} target="_blank" rel="noreferrer">
                             <ExternalLink className="h-4 w-4" />
                             Join via Zulip Invite Link
@@ -422,7 +437,7 @@ const Join = () => {
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
-            <Button asChild variant="secondary" className="gap-2 w-fit">
+            <Button asChild variant="secondary" className="w-full gap-2 sm:w-fit">
               <a href={LAB_MAP_LINK} target="_blank" rel="noreferrer">
                 <ExternalLink className="h-4 w-4" />
                 Open in Google Maps

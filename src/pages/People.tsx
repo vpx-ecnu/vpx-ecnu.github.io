@@ -122,7 +122,7 @@ useEffect(() => {
           </Group>
 
           <Group id="phd" title="PhD Students">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
               {phdList.map((m, i) => (
                 <div
                   key={`phd-${i}`}
@@ -136,7 +136,7 @@ useEffect(() => {
           </Group>
 
           <Group id="grad" title="Graduate Students">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
               {gradList.map((m, i) => (
                 <div
                   key={`grad-${i}`}
@@ -150,7 +150,7 @@ useEffect(() => {
           </Group>
 
           <Group id="part-time" title="Part-Time Students">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
               {partTimeList.map((m, i) => (
                 <div
                   key={`part-time-${i}`}
@@ -164,7 +164,7 @@ useEffect(() => {
           </Group>
 
           <Group id="undergrad" title="Undergraduate Students">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
               {ugList.map((m, i) => (
                 <div
                   key={`undergrad-${i}`}
@@ -223,26 +223,26 @@ const FacultyRow = ({ member }: { member: Person }) => {
   const website = getWebsite(member);
 
   return (
-    <div className="flex flex-col md:flex-row md:items-start gap-5">
+    <div className="flex flex-col items-center gap-5 sm:items-start lg:flex-row lg:items-start">
       {/* left: circle avatar */}
-      <div className="shrink-0 flex justify-start">
-        <Avatar className="w-40 h-40 md:w-44 md:h-44 rounded-full">
+      <div className="flex w-full shrink-0 justify-center sm:justify-start lg:w-auto">
+        <Avatar className="h-40 w-40 rounded-full sm:h-36 sm:w-36 lg:h-44 lg:w-44">
           <AvatarImage src={member.image} className="object-cover" />
           <AvatarFallback className="text-lg">{initials}</AvatarFallback>
         </Avatar>
       </div>
 
       {/* right: text */}
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0 flex-1 text-center sm:text-left">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <h3 className="text-xl md:text-2xl font-semibold leading-tight">{member.name}</h3>
-            <p className="text-sm md:text-base text-muted-foreground mt-1">{member.title}</p>
+            <h3 className="text-xl font-semibold leading-tight md:text-2xl">{member.name}</h3>
+            <p className="mt-1 text-sm text-muted-foreground md:text-base">{member.title}</p>
           </div>
         </div>
 
         {member.bio ? (
-          <p className="mt-3 text-sm md:text-base text-muted-foreground leading-relaxed">
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
             {member.bio}
           </p>
         ) : null}
@@ -250,7 +250,7 @@ const FacultyRow = ({ member }: { member: Person }) => {
         {member.research && member.research.length > 0 ? (
           <div className="mt-4">
             <p className="text-sm font-medium">Research Areas</p>
-            <div className="mt-2 flex flex-wrap gap-2">
+            <div className="mt-2 flex flex-wrap justify-center gap-2 sm:justify-start">
               {member.research.map((t, i) => (
                 <span
                   key={i}
@@ -263,9 +263,9 @@ const FacultyRow = ({ member }: { member: Person }) => {
           </div>
         ) : null}
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           {member.email ? (
-            <Button size="sm" variant="outline" className="h-9" asChild>
+            <Button size="sm" variant="outline" className="h-9 w-full sm:w-auto" asChild>
               <a href={`mailto:${member.email}`}>
                 <Mail className="h-4 w-4 mr-2" />
                 Email
@@ -274,7 +274,7 @@ const FacultyRow = ({ member }: { member: Person }) => {
           ) : null}
 
           {website ? (
-            <Button size="sm" variant="outline" className="h-9" asChild>
+            <Button size="sm" variant="outline" className="h-9 w-full sm:w-auto" asChild>
               <a href={website} target="_blank" rel="noopener noreferrer">
                 <Globe className="h-4 w-4 mr-2" />
                 Personal Website
@@ -301,28 +301,50 @@ const PeopleCardCompact = ({ member }: { member: Person }) => {
       .slice(0, 3) || "NA";
 
   const website = getWebsite(member);
+  const mobileResearch = member.research?.slice(0, 2) ?? [];
 
   return (
-    <Card className="h-full flex flex-col border/60 shadow-sm hover:shadow-md transition-shadow">
-      <CardHeader className="flex flex-col items-center text-center pb-2 pt-4 px-4">
-        <Avatar className="w-24 h-24 md:w-28 md:h-28">
-          <AvatarImage src={member.image} className="object-cover" />
-          <AvatarFallback className="text-sm">{initials}</AvatarFallback>
-        </Avatar>
+    <Card className="flex h-full flex-col border/60 shadow-sm transition-shadow hover:shadow-md">
+      <CardHeader className="px-3 pb-2 pt-3 sm:flex sm:flex-col sm:items-center sm:px-4 sm:pb-2 sm:pt-4 sm:text-center">
+        <div className="flex w-full items-center gap-3 sm:flex-col sm:items-center sm:gap-4">
+          <Avatar className="h-32 w-32 shrink-0 sm:h-24 sm:w-24 md:h-28 md:w-28">
+            <AvatarImage src={member.image} className="object-cover" />
+            <AvatarFallback className="text-sm">{initials}</AvatarFallback>
+          </Avatar>
 
-        <CardTitle className="mt-2 text-base leading-tight">{member.name}</CardTitle>
-        <CardDescription className="text-xs leading-snug line-clamp-2">{member.title}</CardDescription>
+          <div className="min-w-0 flex-1 text-left sm:text-center">
+            <div className="flex min-h-[8rem] flex-col justify-center sm:min-h-0">
+              <CardTitle className="text-lg leading-tight sm:mt-2 sm:text-base">{member.name}</CardTitle>
+              <CardDescription className="mt-1 text-sm leading-snug sm:text-xs line-clamp-2">
+              {member.title}
+              </CardDescription>
+
+              {mobileResearch.length > 0 ? (
+                <div className="mt-2.5 space-y-1.5 sm:hidden">
+                  {mobileResearch.map((area, i) => (
+                    <p key={i} className="text-xs leading-relaxed text-muted-foreground line-clamp-2">
+                      {area}
+                    </p>
+                  ))}
+                  {(member.research?.length ?? 0) > mobileResearch.length ? (
+                    <p className="text-xs text-muted-foreground">...</p>
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </div>
       </CardHeader>
 
-      <CardContent className="flex-1 pt-0 px-4 pb-3">
+      <CardContent className="px-3 pb-0 pt-0 sm:flex-1 sm:px-4 sm:pb-3">
         {member.bio ? (
-          <p className="text-xs text-muted-foreground text-center leading-relaxed line-clamp-3">
+          <p className="hidden text-center text-xs leading-relaxed text-muted-foreground line-clamp-3 sm:block">
             {member.bio}
           </p>
         ) : null}
 
         {member.research && member.research.length > 0 ? (
-          <div className="mt-2">
+          <div className="mt-2 hidden sm:block">
             <p className="text-xs font-medium text-center">Research</p>
             <ul className="mt-1 text-xs text-muted-foreground space-y-1 text-center">
               {member.research.slice(0, 3).map((area, i) => (
@@ -334,9 +356,9 @@ const PeopleCardCompact = ({ member }: { member: Person }) => {
         ) : null}
       </CardContent>
 
-      <CardFooter className="flex justify-center gap-2 pt-0 pb-4 px-4">
+      <CardFooter className="flex flex-col items-stretch justify-center gap-2 px-3 pb-3 pt-1 sm:flex-row sm:items-center sm:px-4 sm:pb-4 sm:pt-0">
         {member.email ? (
-          <Button size="sm" variant="outline" className="h-8 px-3 text-xs" asChild>
+          <Button size="sm" variant="outline" className="h-8 w-full px-3 text-xs sm:w-auto" asChild>
             <a href={`mailto:${member.email}`}>
               <Mail className="h-3.5 w-3.5 mr-2" />
               Email
@@ -345,7 +367,7 @@ const PeopleCardCompact = ({ member }: { member: Person }) => {
         ) : null}
 
         {website ? (
-          <Button size="sm" variant="outline" className="h-8 px-3 text-xs" asChild>
+          <Button size="sm" variant="outline" className="h-8 w-full px-3 text-xs sm:w-auto" asChild>
             <a href={website} target="_blank" rel="noopener noreferrer">
               <Globe className="h-3.5 w-3.5 mr-2" />
               Website
@@ -365,8 +387,8 @@ const AlumniTable = ({ data }: { data: Person[] }) => {
   };
 
   return (
-    <div className="rounded-lg overflow-hidden">
-      <div className="hidden md:grid grid-cols-12 gap-3 pb-2 text-xs font-medium text-muted-foreground">
+      <div className="overflow-hidden rounded-lg">
+      <div className="hidden grid-cols-12 gap-3 pb-2 text-xs font-medium text-muted-foreground lg:grid">
         <div className="col-span-3">Name</div>
         <div className="col-span-5">Past Position</div>
         <div className="col-span-4">Placement</div>
@@ -374,23 +396,25 @@ const AlumniTable = ({ data }: { data: Person[] }) => {
 
       <div className="divide-y divide-border/60">
         {data.map((p, idx) => (
-          <div key={idx} className="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-3 py-3">
-            <div className="md:col-span-3 min-w-0">
-              <div className="text-sm font-semibold leading-tight truncate">{p.name}</div>
-              <div className="md:hidden text-xs text-muted-foreground mt-1 line-clamp-2">{p.title}</div>
+          <div key={idx} className="grid grid-cols-1 gap-3 py-3 lg:grid-cols-12 lg:gap-3">
+            <div className="min-w-0 lg:col-span-3">
+              <div className="text-sm font-semibold leading-tight">{p.name}</div>
+              <div className="mt-1 text-xs text-muted-foreground lg:hidden">Past Position</div>
+              <div className="mt-1 text-xs text-muted-foreground line-clamp-2 lg:hidden">{p.title}</div>
             </div>
 
-            <div className="hidden md:block md:col-span-5 text-sm text-muted-foreground leading-snug">
+            <div className="hidden text-sm leading-snug text-muted-foreground lg:block lg:col-span-5">
               {p.title}
             </div>
 
-            <div className="md:col-span-4">
-              <div className="text-sm text-muted-foreground leading-snug">
+            <div className="lg:col-span-4">
+              <div className="text-xs text-muted-foreground lg:hidden">Placement</div>
+              <div className="text-sm leading-snug text-muted-foreground">
                 {formatResearch(p.research)}
               </div>
 
               {p.bio ? (
-                <div className="md:hidden text-xs text-muted-foreground leading-relaxed mt-2 line-clamp-2">
+                <div className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-2 lg:hidden">
                   {p.bio}
                 </div>
               ) : null}

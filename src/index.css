@@ -93,3 +93,24 @@
   color: hsl(var(--primary));
   cursor: pointer;
 }
+
+@media (max-width: 767px) {
+  .swiper-button-prev {
+    left: 0 !important;
+  }
+
+  .swiper-button-next {
+    right: 0 !important;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 32px;
+    height: 32px;
+  }
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 18px !important;
+  }
+}

@@ -90,7 +90,7 @@ const Publications = () => {
 
       {/* Filters */}
       <section className="mb-10 fade-in-content" style={{ animationDelay: "100ms" }}>
-        <div className="flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           {/* Search */}
           <div className="flex-1">
             <input
@@ -103,7 +103,7 @@ const Publications = () => {
           </div>
 
           {/* Year buttons */}
-          <div className="flex flex-wrap gap-2 items-center">
+          <div className="flex flex-wrap items-center gap-2 lg:justify-end">
             <span className="text-sm font-medium text-muted-foreground">Year:</span>
 
             <Button
@@ -158,7 +158,7 @@ const Publications = () => {
               style={{ animationDelay: `${index * 50}ms` }}
             >
               <CardContent className="p-4 md:p-5">
-                <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+                <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                   {/* Title */}
                   <div className="min-w-0 space-y-2">
                     <h3 className="text-base font-semibold leading-snug md:text-lg">
@@ -181,11 +181,11 @@ const Publications = () => {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex items-center md:shrink-0">
+                  <div className="flex items-center lg:shrink-0">
                     <Button
                       variant="outline"
                       size="sm"
-                      className="h-8 border-white/15 bg-white/5 px-3 hover:bg-white/10"
+                      className="h-8 w-full border-white/15 bg-white/5 px-3 hover:bg-white/10 sm:w-auto"
                       onClick={() => openLink(pub.doi)}
                       disabled={!pub.doi}
                     >

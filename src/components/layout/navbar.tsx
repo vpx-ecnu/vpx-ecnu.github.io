@@ -26,11 +26,11 @@ export function Navbar() {
             <img 
               src="/vpx-assets/c1c1ffb3-a447-43bc-b8cb-b2bba2dad10f.png" 
               alt="VPX Lab Logo" 
-              className="h-10 w-auto"
+              className="h-9 w-auto sm:h-10"
             />
           </Link>
 
-          <nav className="hidden md:flex gap-6">
+          <nav className="hidden gap-6 lg:flex">
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -51,7 +51,8 @@ export function Navbar() {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="lg:hidden"
+            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -61,7 +62,7 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="container md:hidden py-4">
+        <div className="container border-t bg-background/95 py-4 lg:hidden">
           <nav className="flex flex-col space-y-4">
             {navItems.map((item) => (
               <Link

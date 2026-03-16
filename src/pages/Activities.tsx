@@ -210,12 +210,18 @@ const Activities = () => {
       {/* Tabs */}
       <section className="relative fade-in-content" style={{ animationDelay: "100ms" }}>
         <Tabs defaultValue="news" className="w-full">
-          <TabsList className="grid grid-cols-2 mb-8">
-            <TabsTrigger value="news" className="flex items-center gap-2">
+          <TabsList className="mb-8 grid h-auto w-full grid-cols-1 gap-2 bg-transparent p-0 sm:grid-cols-2">
+            <TabsTrigger
+              value="news"
+              className="flex min-h-10 items-center gap-2 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
+            >
               <Cpu className="h-4 w-4" />
               News & Activities
             </TabsTrigger>
-            <TabsTrigger value="seminars" className="flex items-center gap-2">
+            <TabsTrigger
+              value="seminars"
+              className="flex min-h-10 items-center gap-2 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
+            >
               <GraduationCap className="h-4 w-4" />
               VPX Reading Club
             </TabsTrigger>
@@ -245,7 +251,7 @@ const Activities = () => {
                   ← Back to All News
                 </button>
 
-                <h2 className="text-3xl font-bold mb-2">{getNewsTitle(selectedNews)}</h2>
+                <h2 className="mb-2 text-2xl font-bold sm:text-3xl">{getNewsTitle(selectedNews)}</h2>
                 <p className="text-sm text-muted-foreground mb-4">
                   {new Date(selectedNews.date).toLocaleDateString()}
                 </p>
@@ -286,7 +292,7 @@ const Activities = () => {
                       {!hideImageForVideoOnly ? (
                         Array.isArray(selectedNews.images) && selectedNews.images.length > 0 ? (
                           <div className="mb-6">
-                            <div className="columns-2 sm:columns-3 gap-3 [column-fill:_balance]">
+                            <div className="columns-1 gap-3 [column-fill:_balance] sm:columns-2 lg:columns-3">
                               {selectedNews.images.map((url, idx) => (
                                 <a
                                   key={`${selectedNews.id}-img-${idx}`}
@@ -345,11 +351,11 @@ const Activities = () => {
                 {/* News Wall (scrollable masonry) */}
                 <div className="border bg-card">
                   {/* title bar */}
-                  <div className="flex items-center justify-between px-5 py-3 border-b bg-muted/30">
+                  <div className="flex flex-col gap-3 border-b bg-muted/30 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
                     <div className="text-sm font-medium">Updates</div>
 
                     {/* filter buttons */}
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
                       {(["all", "recent", "older"] as const).map((filter) => (
                         <button
                           key={filter}
@@ -367,7 +373,7 @@ const Activities = () => {
                   </div>
 
                   {/* scroll area */}
-                  <div className="h-[720px] overflow-y-auto p-5">
+                  <div className="h-[560px] overflow-y-auto p-4 sm:h-[640px] sm:p-5 md:h-[720px]">
                     <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
                       {filteredNews.map((item) => (
                         <button
@@ -426,7 +432,7 @@ const Activities = () => {
           {/* ---------------- VPX Reading Club Tab ---------------- */}
           <TabsContent value="seminars" className="space-y-6">
             {/* Top controls */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div className="flex flex-col justify-between gap-3 lg:flex-row lg:items-center">
               <div className="text-sm text-muted-foreground">
                 Total:{" "}
                 <span className="text-foreground font-medium">
@@ -456,7 +462,7 @@ const Activities = () => {
                 value={videoQuery}
                 onChange={(e) => setVideoQuery(e.target.value)}
                 placeholder="Search title / description..."
-                className="h-9 w-full md:w-80 rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
+                className="h-9 w-full rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring lg:w-80"
               />
             </div>
 
@@ -502,7 +508,7 @@ const Activities = () => {
             {/* Pagination */}
             {filteredVideos.length > PAGE_SIZE ? (
               <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
                   <button
                     className="px-3 py-1 text-sm rounded-md bg-muted text-muted-foreground disabled:opacity-50"
                     onClick={() => goToPage(page - 1)}
@@ -558,7 +564,7 @@ const Activities = () => {
                   </button>
                 </div>
 
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground sm:justify-start">
                   <span>Go to</span>
                   <input
                     value={String(page)}

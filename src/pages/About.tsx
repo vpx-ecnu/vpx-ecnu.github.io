@@ -66,12 +66,12 @@ const About = () => {
                 <div className="mt-3 h-px w-full bg-gradient-to-r from-transparent via-border/70 to-transparent" />
               </div>
 
-              <div className="flex flex-col lg:flex-row gap-10 items-start">
+              <div className="flex flex-col items-start gap-8 lg:flex-row lg:gap-10">
                 {/* Left: Text */}
-                <div className="lg:w-[70%]">
+                <div className="lg:w-[62%]">
                   <div className="rounded-2xl border border-border/60 bg-background/40 backdrop-blur-md p-6 md:p-8 shadow-[0_22px_70px_-48px_rgba(0,0,0,0.55)]">
                     
-                    <p className="text-lg mb-6 leading-relaxed text-muted-foreground">
+                    <p className="mb-6 text-base leading-relaxed text-muted-foreground md:text-lg">
                       The{" "}
                       <span className="font-semibold bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text text-transparent">
                         Visual Perception + X (VPX) Group
@@ -91,7 +91,7 @@ const About = () => {
                       .
                     </p>
 
-                    <p className="text-lg mb-6 leading-relaxed text-muted-foreground">
+                    <p className="mb-6 text-base leading-relaxed text-muted-foreground md:text-lg">
                       Our mission is to advance{" "}
                       <span className="font-semibold bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text text-transparent">
                         visual perception for cross-disciplinary research
@@ -107,7 +107,7 @@ const About = () => {
                       from videos and raw streaming sources.
                     </p>
 
-                    <p className="text-lg leading-relaxed text-muted-foreground">
+                    <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
                       Currently, VPX focuses on{" "}
                       <span className="font-semibold bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text text-transparent">
                         video analysis
@@ -123,7 +123,7 @@ const About = () => {
                       , enabling applications in the metaverse, AIGC, and embodied intelligence.
                     </p>
 
-                    <p className="text-lg mt-6 text-muted-foreground">
+                    <p className="mt-6 text-base text-muted-foreground md:text-lg">
                       For more information, please visit our{" "}
                       <a
                         href="https://space.bilibili.com/487404760"
@@ -149,9 +149,9 @@ const About = () => {
                 </div>
 
                 {/* Right: Image */}
-                <div className="lg:w-[40%] w-full">
+                <div className="w-full lg:w-[38%]">
                   {/* 图片外包一层，统一边框/阴影/高级感 */}
-                  <div className="rounded-2xl border border-border/60 bg-background/30 backdrop-blur-md p-3 shadow-[0_22px_70px_-48px_rgba(0,0,0,0.55)]">
+                  <div className="rounded-2xl border border-border/60 bg-background/30 p-2 shadow-[0_22px_70px_-48px_rgba(0,0,0,0.55)] backdrop-blur-md sm:p-3">
                     <img
                       src="/vpx-assets/about/about_about_vpx.jpg"
                       alt="About VPX Group"
@@ -165,8 +165,8 @@ const About = () => {
 
           {/* Lab Life：保持内容，提升“信息墙”质感 */}
           <section className="rounded-2xl border border-border/60 bg-background/35 backdrop-blur-md shadow-[0_22px_70px_-52px_rgba(0,0,0,0.55)] overflow-hidden">
-            <div className="px-6 md:px-8 py-7 md:py-9">
-              <div className="flex items-end justify-between gap-6 mb-6">
+            <div className="px-4 py-6 sm:px-6 sm:py-7 md:px-8 md:py-9">
+              <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
                 <div className="space-y-2">
                   <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
                     Lab Life
@@ -179,8 +179,8 @@ const About = () => {
 
               {/* 可滚动窗口（更像画廊 + 轻提示） */}
               <div className="relative rounded-xl border border-border/60 bg-black/20">
-                <div className="h-[520px] md:h-[640px] overflow-y-auto pr-2">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
+                <div className="h-[420px] overflow-y-auto pr-2 sm:h-[520px] md:h-[640px]">
+                  <div className="grid grid-cols-1 gap-0 sm:grid-cols-2 lg:grid-cols-3">
                     {labLifeData.map((item) => {
                       const Wrapper: any = item.link ? "a" : "div";
                       return (
@@ -217,8 +217,8 @@ const About = () => {
 
           {/* Mission & Vision：更统一的“左文右图”模块 */}
           <section className="rounded-2xl border border-border/60 bg-background/35 backdrop-blur-md shadow-[0_22px_70px_-52px_rgba(0,0,0,0.55)] overflow-hidden">
-            <div className="px-6 md:px-8 py-8 md:py-10">
-              <div className="flex flex-col lg:flex-row gap-12 items-start">
+            <div className="px-4 py-7 sm:px-6 md:px-8 md:py-10">
+              <div className="flex flex-col items-start gap-8 lg:flex-row lg:gap-12">
                 {/* 左边文字 */}
                 <div className="flex-1 space-y-12">
                   <div>
@@ -236,7 +236,7 @@ const About = () => {
                       <GraduationCap className="h-6 w-6 text-violet-600" />
                       <h2 className="text-2xl font-bold">How We Work</h2>
                     </div>
-                    <ul className="list-disc pl-6 space-y-2 text-lg text-muted-foreground">
+                    <ul className="list-disc space-y-2 pl-6 text-base text-muted-foreground md:text-lg">
                       <li><span className="font-semibold">Pursue research that creates long-term value.</span></li>
                       <li><span className="font-semibold">Work efficiently and communicate clearly.</span></li>
                       <li><span className="font-semibold">Maintain professional standards in research and engineering.</span></li>
@@ -249,7 +249,7 @@ const About = () => {
                 </div>
 
                 {/* 右边四张图：统一圆角/边框/hover */}
-                <div className="flex-1 grid grid-cols-2 gap-4">
+                <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2">
                   {[
                     "/vpx-assets/about/about_1.png",
                     "/vpx-assets/about/about_2.png",
@@ -275,14 +275,14 @@ const About = () => {
           {/* Core Values：卡片统一、图标更学术克制 */}
           <section className="py-2">
             <div className="mx-auto max-w-screen-xl">
-              <div className="text-center mb-10">
+              <div className="mb-8 text-center">
                 <h2 className="text-3xl font-bold tracking-tight">Our Core Values</h2>
                 <p className="mt-2 text-muted-foreground">
                   Guiding principles that shape how we research, collaborate, and grow.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {[
                   {
                     icon: <BookOpen className="h-7 w-7" />,
@@ -305,13 +305,15 @@ const About = () => {
                 ].map((value, index) => (
                   <div
                     key={index}
-                    className="rounded-2xl border border-border/60 bg-background/35 backdrop-blur-md p-6 shadow-sm hover:shadow-md transition-shadow"
+                    className="rounded-2xl border border-border/60 bg-background/35 p-5 shadow-sm transition-shadow hover:shadow-md backdrop-blur-md"
                   >
-                    <div className="mb-4 inline-flex items-center justify-center rounded-xl border border-border/60 bg-gradient-to-b from-violet-500/10 to-cyan-500/5 p-3 text-violet-600">
-                      {value.icon}
+                    <div className="mb-3 flex items-center gap-3">
+                      <div className="inline-flex items-center justify-center rounded-lg border border-border/60 bg-gradient-to-b from-violet-500/10 to-cyan-500/5 p-2.5 text-violet-600">
+                        {value.icon}
+                      </div>
+                      <h3 className="text-lg font-semibold leading-snug">{value.title}</h3>
                     </div>
-                    <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{value.description}</p>
+                    <p className="text-sm leading-6 text-muted-foreground">{value.description}</p>
                   </div>
                 ))}
               </div>
@@ -326,7 +328,7 @@ const About = () => {
               </h2>
               <div className="mt-3 h-px w-full bg-gradient-to-r from-transparent via-border/70 to-transparent" />
 
-              <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {[
                   {
                     title: "Embodied Intelligence",
