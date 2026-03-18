@@ -2,6 +2,7 @@
     {
       "name": "Libing Yang",
       "title": "Former Master's Student",
+      "graduationYear": "2025",
       "bio": "Graduated in 2025, now working on robotic-related LLMs.",
       "image": "/placeholder.svg",
       "email": "",
@@ -10,6 +11,7 @@
     {
       "name": "Sardor Mamarasulov",
       "title": "Former PhD Candidate",
+      "graduationYear": "2025",
       "bio": "Graduated in 2025, now working as a Postdoctoral Researcher at Shenzhen University.",
       "image": "/placeholder.svg",
       "email": "mamarasulovsardor@gmail.com",
@@ -18,6 +20,7 @@
     {
         "name": "Xiaoyan Yang",
         "title": "Former Master's Student",
+        "graduationYear": "2024",
         "bio": "Graduated in 2024, now working on AIGC.",
         "image": "/placeholder.svg",
         "email": "",
@@ -26,6 +29,7 @@
     {
         "name": "Dingbo Lu",
         "title": "Former Master's Student",
+        "graduationYear": "2024",
         "bio": "Graduated in 2024, now working on NeRF and 3DGS.",
         "image": "/placeholder.svg",
         "email": "",
@@ -34,6 +38,7 @@
     {
         "name": "Ziqing Li",
         "title": "Former Master's Student",
+        "graduationYear": "2024",
         "bio": "Graduated in 2024, now working on SMPL-related action research.",
         "image": "/placeholder.svg",
         "email": "",
@@ -42,6 +47,7 @@
     {
         "name": "Yiming Sun",
         "title": "Former Undergraduate",
+        "graduationYear": "2024",
         "bio": "Graduated in 2024, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "",
@@ -50,6 +56,7 @@
     {
         "name": "Fan Yu",
         "title": "Former Undergraduate",
+        "graduationYear": "2025",
         "bio": "Graduated in 2025, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "",
@@ -58,6 +65,7 @@
     {
         "name": "Junwei Huang",
         "title": "Former Undergraduate",
+        "graduationYear": "2025",
         "bio": "Graduated in 2025, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "",
@@ -66,6 +74,7 @@
     {
         "name": "Pengfei Jiang",
         "title": "Former Part-Time Student",
+        "graduationYear": "2024",
         "bio": "Graduated in 2024, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "",
@@ -74,6 +83,7 @@
     {
         "name": "Jincheng Weng",
         "title": "Former Part-Time Student",
+        "graduationYear": "2024",
         "bio": "Graduated in 2024, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "",
@@ -82,6 +92,7 @@
     {
         "name": "Kaibo Yin",
         "title": "Former Undergraduate",
+        "graduationYear": "2025",
         "bio": "Working on functions and systems necessary for artificially-intelligent robots that can act within the space of human society.",
         "image": "/people/people_image/part_time/ykb.jpg",
         "email": "a1021524866@gmail.com",
