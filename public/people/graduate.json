@@ -1,132 +1,178 @@
 [
-    {
-        "name": "Wenjie Liu",
-        "title": "Master's Student",
-        "bio": "Exploring Neural Rendering and AIGC (image and 3D editing).",
-        "image": "/people/people_image/master/lwj.jpg",
-        "email": "362449104@qq.com",
-        "research": ["Style Transfer", "3DGS","diffusion"]
-    },
-    {
-        "name": "Ling You",
-        "title": "Master's Student",
-        "bio": "Exploring MLLMs and video understanding.",
-        "image": "/people/people_image/master/u0.jpg",
-        "email": "51265901023@stu.ecnu.edu.cn",
-        "research": ["MLLMs", "Sports Video Analytics"]
-    },
-    {
-        "name": "Zehui Guo",
-        "title": "Master's Student",
-        "bio": "Exploring diffusion.",
-        "image": "/people/people_image/master/gzh.jpg",
-        "email": "1360733921@qq.com",
-        "research": ["image editing", "AIGC"]
-    },
-    {
-        "name": "Yu Zhang",
-        "title": "Master's Student",
-        "bio": "Exploring virtual human video generation.",
-        "image": "/people/people_image/master/zy.jpg",
-        "email": "51275900029@stu.ecnu.edu.cn",
-        "research": ["Virtual Avatar", "Diffusion"]
-    },
-    {
-        "name": "Yijing Wa",
-        "title": "Master's Student",
-        "bio": "Exploring relighting in virtual reality.",
-        "image": "/people/people_image/master/wyj.jpg",
-        "email": "748628335@qq.com",
-        "research": ["relighting", "virtual shooting"]
-    },
-    {
-        "name": "Zhichao Huang",
-        "title": "Master's Student",
-        "bio": "Exploring wearable device and Human–Computer Interaction.",
-        "image": "/people/people_image/master/hzc.jpg",
-        "email": "51275901117@stu.ecnu.edu.cn",
-        "research": ["Wearable device", "Human–Computer Interaction"]
-    },
-    {
-        "name": "Wenzheng Song",
-        "title": "Master's Student",
-        "bio": "Exploring advanced rendering techniques.",
-        "image": "/people/people_image/master/swz.jpg",
-        "email": "244198756@qq.com",
-        "research": ["3DGS", "VDB"]
-    },
-    {
-        "name": "Wenzhi He",
-        "title": "Master's Student",
-        "bio": "Focusing on bridging the Sim-to-Real gap in robotic manipulation using gaussian splatting.",
-        "image": "/people/people_image/master/hwz.jpg",
-        "email": "1524186933@qq.com",
-        "research": ["Embodied Intelligence", "Gaussian Splatting"]
-    },
-    {
-        "name": "Chenxi Shao",
-        "title": "Master's Student",
-        "bio": "Exploring multimodal video understanding.",
-        "image": "/people/people_image/master/scx.jpg",
-        "email": "2011848311@qq.com",
-        "research": ["Multimodal LLMs", "Video Analytics"]
-    },
-    {
-        "name": "Kaiyuan Shen",
-        "title": "Master's Student",
-        "bio": "Exploring 3D Gaussian splatting-based virtual human.",
-        "image": "/people/people_image/master/sky.jpg",
-        "email": "zjut_sky@163.com",
-        "research": ["Computer Graphics", "3D Vision"]
-    },
-    {
-        "name": "Mingyang Yuan",
-        "title": "Master's Student",
-        "bio": "Exploring unified diffusion models for understanding and generation.",
-        "image": "/people/people_image/master/ymy.jpg",
-        "email": "51285900034@stu.ecnu.edu.cn",
-        "research": ["diffusion"]
-    },
-    {
-        "name": "Hanzhe Yao",
-        "title": "Master's Student",
-        "bio": "Exploring multimodal in-context learning.",
-        "image": "/people/people_image/master/yhz.jpg",
-        "email": "3061794854@qq.com",
-        "research": ["MLLMs", "ICL"]
-    },
-    {
-        "name": "Qijie Yu",
-        "title": "Master's Student",
-        "bio": "Exploring virtual reality.",
-        "image": "/people/people_image/master/yqj.jpg",
-        "email": "1753843107@qq.com",
-        "research": ["Robotic Teleoperation", "XR Development"]
-    },
-    {
-        "name": "Mingyang Yin",
-        "title": "Master's Student",
-        "bio": "Exploring vision–language navigation agents.",
-        "image": "/people/people_image/master/mingyangyin.jpg",
-        "email": "51285901113@stu.ecnu.edu.cn",
-        "research": ["VLN", "Embodied Intelligence"]
-    },
-    {
-        "name": "Tieshi Zhong",
-        "title": "Master's Student",
-        "bio": "Exploring 3D Reconstruction.",
-        "image": "/people/people_image/master/zts.jpg",
-        "email": "h528014081@163.com",
-        "research": ["Neural Rendering", "3D Computer Vision"]
-    },
-    {
-        "name": "Shaobo Wang",
-        "title": "Master's Student",
-        "bio": "Exploring multimodal fusion for human pose estimation.",
-        "image": "/people/people_image/master/sbw.jpg",
-        "email": "13093278778@163.com",
-        "research": ["Multimodal", "RL"]
-    }
-
-
-  ]
+  {
+    "name": "Wenjie Liu",
+    "title": "Master's Student",
+    "bio": "Exploring Neural Rendering and AIGC (image and 3D editing).",
+    "image": "/people/people_image/thumbs/master/lwj.jpg",
+    "email": "362449104@qq.com",
+    "research": [
+      "Style Transfer",
+      "3DGS",
+      "diffusion"
+    ]
+  },
+  {
+    "name": "Ling You",
+    "title": "Master's Student",
+    "bio": "Exploring MLLMs and video understanding.",
+    "image": "/people/people_image/thumbs/master/u0.jpg",
+    "email": "51265901023@stu.ecnu.edu.cn",
+    "research": [
+      "MLLMs",
+      "Sports Video Analytics"
+    ]
+  },
+  {
+    "name": "Zehui Guo",
+    "title": "Master's Student",
+    "bio": "Exploring diffusion.",
+    "image": "/people/people_image/thumbs/master/gzh.jpg",
+    "email": "1360733921@qq.com",
+    "research": [
+      "image editing",
+      "AIGC"
+    ]
+  },
+  {
+    "name": "Yu Zhang",
+    "title": "Master's Student",
+    "bio": "Exploring virtual human video generation.",
+    "image": "/people/people_image/thumbs/master/zy.jpg",
+    "email": "51275900029@stu.ecnu.edu.cn",
+    "research": [
+      "Virtual Avatar",
+      "Diffusion"
+    ]
+  },
+  {
+    "name": "Yijing Wa",
+    "title": "Master's Student",
+    "bio": "Exploring relighting in virtual reality.",
+    "image": "/people/people_image/thumbs/master/wyj.jpg",
+    "email": "748628335@qq.com",
+    "research": [
+      "relighting",
+      "virtual shooting"
+    ]
+  },
+  {
+    "name": "Zhichao Huang",
+    "title": "Master's Student",
+    "bio": "Exploring wearable device and Human–Computer Interaction.",
+    "image": "/people/people_image/thumbs/master/hzc.jpg",
+    "email": "51275901117@stu.ecnu.edu.cn",
+    "research": [
+      "Wearable device",
+      "Human–Computer Interaction"
+    ]
+  },
+  {
+    "name": "Wenzheng Song",
+    "title": "Master's Student",
+    "bio": "Exploring advanced rendering techniques.",
+    "image": "/people/people_image/thumbs/master/swz.jpg",
+    "email": "244198756@qq.com",
+    "research": [
+      "3DGS",
+      "VDB"
+    ]
+  },
+  {
+    "name": "Wenzhi He",
+    "title": "Master's Student",
+    "bio": "Focusing on bridging the Sim-to-Real gap in robotic manipulation using gaussian splatting.",
+    "image": "/people/people_image/thumbs/master/hwz.jpg",
+    "email": "1524186933@qq.com",
+    "research": [
+      "Embodied Intelligence",
+      "Gaussian Splatting"
+    ]
+  },
+  {
+    "name": "Chenxi Shao",
+    "title": "Master's Student",
+    "bio": "Exploring multimodal video understanding.",
+    "image": "/people/people_image/thumbs/master/scx.jpg",
+    "email": "2011848311@qq.com",
+    "research": [
+      "Multimodal LLMs",
+      "Video Analytics"
+    ]
+  },
+  {
+    "name": "Kaiyuan Shen",
+    "title": "Master's Student",
+    "bio": "Exploring 3D Gaussian splatting-based virtual human.",
+    "image": "/people/people_image/thumbs/master/sky.jpg",
+    "email": "zjut_sky@163.com",
+    "research": [
+      "Computer Graphics",
+      "3D Vision"
+    ]
+  },
+  {
+    "name": "Mingyang Yuan",
+    "title": "Master's Student",
+    "bio": "Exploring unified diffusion models for understanding and generation.",
+    "image": "/people/people_image/thumbs/master/ymy.jpg",
+    "email": "51285900034@stu.ecnu.edu.cn",
+    "research": [
+      "diffusion"
+    ]
+  },
+  {
+    "name": "Hanzhe Yao",
+    "title": "Master's Student",
+    "bio": "Exploring multimodal in-context learning.",
+    "image": "/people/people_image/thumbs/master/yhz.jpg",
+    "email": "3061794854@qq.com",
+    "research": [
+      "MLLMs",
+      "ICL"
+    ]
+  },
+  {
+    "name": "Qijie Yu",
+    "title": "Master's Student",
+    "bio": "Exploring virtual reality.",
+    "image": "/people/people_image/thumbs/master/yqj.jpg",
+    "email": "1753843107@qq.com",
+    "research": [
+      "Robotic Teleoperation",
+      "XR Development"
+    ]
+  },
+  {
+    "name": "Mingyang Yin",
+    "title": "Master's Student",
+    "bio": "Exploring vision–language navigation agents.",
+    "image": "/people/people_image/thumbs/master/mingyangyin.jpg",
+    "email": "51285901113@stu.ecnu.edu.cn",
+    "research": [
+      "VLN",
+      "Embodied Intelligence"
+    ]
+  },
+  {
+    "name": "Tieshi Zhong",
+    "title": "Master's Student",
+    "bio": "Exploring 3D Reconstruction.",
+    "image": "/people/people_image/thumbs/master/zts.jpg",
+    "email": "h528014081@163.com",
+    "research": [
+      "Neural Rendering",
+      "3D Computer Vision"
+    ]
+  },
+  {
+    "name": "Shaobo Wang",
+    "title": "Master's Student",
+    "bio": "Exploring multimodal fusion for human pose estimation.",
+    "image": "/people/people_image/thumbs/master/sbw.jpg",
+    "email": "13093278778@163.com",
+    "research": [
+      "Multimodal",
+      "RL"
+    ]
+  }
+]

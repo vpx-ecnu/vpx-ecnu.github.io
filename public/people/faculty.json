@@ -1,12 +1,16 @@
 [
-    {
-      "name": "Yang Li",
-      "title": "Associate Professor of Computer Science and Technology",
-      "bio": "Leads the lab's research in visual perception, embodied AI, AIGC, 3D graphics, and video understanding.",
-      "image": "/people/people_image/liyang.png",
-      "email": "yli@cs.ecnu.edu.cn",
-      "website": "https://ihpdep.github.io/",
-      "research": ["Embodied Intelligence", "AI-Generated Content (AIGC)", "3D Rendering & Graphics", "Video Understanding"]
-    }
-  ]
-  
+  {
+    "name": "Yang Li",
+    "title": "Associate Professor of Computer Science and Technology",
+    "bio": "Leads the lab's research in visual perception, embodied AI, AIGC, 3D graphics, and video understanding.",
+    "image": "/people/people_image/thumbs/liyang.png",
+    "email": "yli@cs.ecnu.edu.cn",
+    "website": "https://ihpdep.github.io/",
+    "research": [
+      "Embodied Intelligence",
+      "AI-Generated Content (AIGC)",
+      "3D Rendering & Graphics",
+      "Video Understanding"
+    ]
+  }
+]

@@ -111,34 +111,39 @@ const Index = () => {
     };
 
     const loadStats = async () => {
-      try {
-        const pubResp = await fetch("/publications/publication_updated.json");
-        const pubJson = await pubResp.json();
-        if (!cancelled) {
-          setPublicationCount(Array.isArray(pubJson) ? pubJson.length : 0);
-        }
-      } catch {
-        if (!cancelled) setPublicationCount(0);
-      }
-
-      try {
-        const peopleResults = await Promise.allSettled(
+      const [publicationResult, peopleResults] = await Promise.allSettled([
+        fetch("/publications/publication_updated.json").then(async (response) => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json();
+        }),
+        Promise.allSettled(
           peopleFiles.map(async (path) => {
             const r = await fetch(path);
             if (!r.ok) return 0;
             const data = await r.json();
             return countPeople(data);
           })
-        );
+        ),
+      ]);
 
-        const total = peopleResults.reduce((sum, result) => {
-          if (result.status === "fulfilled") return sum + result.value;
-          return sum;
-        }, 0);
+      if (!cancelled) {
+        if (publicationResult.status === "fulfilled") {
+          setPublicationCount(
+            Array.isArray(publicationResult.value) ? publicationResult.value.length : 0
+          );
+        } else {
+          setPublicationCount(0);
+        }
 
-        if (!cancelled) setResearcherCount(total);
-      } catch {
-        if (!cancelled) setResearcherCount(0);
+        if (peopleResults.status === "fulfilled") {
+          const total = peopleResults.value.reduce((sum, result) => {
+            if (result.status === "fulfilled") return sum + result.value;
+            return sum;
+          }, 0);
+          setResearcherCount(total);
+        } else {
+          setResearcherCount(0);
+        }
       }
     };
 
@@ -179,10 +184,22 @@ const Index = () => {
 
   return (
     <div className="page-transition">
-      <section
-  className="relative isolate overflow-hidden bg-cover bg-center pt-16 pb-16 sm:pt-20 sm:pb-20 md:pt-24 md:pb-24"
-  style={{ backgroundImage: "url('/vpx-assets/home/home_robot.gif')" }}
->
+      <section className="relative isolate overflow-hidden pt-16 pb-16 sm:pt-20 sm:pb-20 md:pt-24 md:pb-24">
+  <div className="absolute inset-0 -z-20">
+    <video
+      className="h-full w-full object-cover"
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      poster="/vpx-assets/home/home_robot.jpg"
+      aria-hidden="true"
+    >
+      <source src="/vpx-assets/home/home_robot.mp4" type="video/mp4" />
+    </video>
+  </div>
+
   {/* 多层遮罩：保证动态图不抢文字、同时更“学术” */}
   <div className="absolute inset-0 -z-10">
     {/* 暗化 + 冷色渐变，提升可读性 */}

@@ -311,6 +311,7 @@ const Projects = () => {
                               alt={project.title}
                               className="h-full w-full object-cover"
                               loading="lazy"
+                              decoding="async"
                             />
                             {/* status badge */}
                             {project.status ? (
@@ -392,6 +393,7 @@ const Projects = () => {
                               alt={project.title}
                               className="h-full w-full object-cover"
                               loading="lazy"
+                              decoding="async"
                             />
                             {project.status ? (
                               <div className="absolute top-3 left-3">

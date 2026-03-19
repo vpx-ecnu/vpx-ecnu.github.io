@@ -1,0 +1,71 @@
+name: Sync Derived Media
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "public/content/**"
+      - "public/people/**"
+      - "public/publications/recent_publications.json"
+      - "public/publications/project_publications.json"
+      - "public/publications/recent_images/**"
+      - "public/vpx-assets/about/lab-life/**"
+      - "public/vpx-assets/home/home_robot.gif"
+      - "src/backend/generate_derived_media.py"
+      - "src/data/labLife.ts"
+      - ".github/workflows/sync_derived_media.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-derived-media
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install media deps
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pillow
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+
+      - name: Refresh derived media
+        run: python src/backend/generate_derived_media.py
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add public/content
+          git add public/people
+          git add public/publications/recent_publications.json
+          git add public/publications/project_publications.json
+          git add public/publications/recent_images || true
+          git add public/vpx-assets/about/lab-life/web || true
+          git add public/vpx-assets/home/home_robot.mp4 || true
+
+          if git diff --cached --quiet; then
+            echo "No derived media changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: refresh derived media assets"
+          git push

@@ -11,9 +11,12 @@
     "name": "Yanjing Li",
     "title": "Digital Domain",
     "bio": "Working on generative AI for talking virtual avatars.",
-    "image": "/people/people_image/part_time/yj.jpg",
+    "image": "/people/people_image/thumbs/part_time/yj.jpg",
     "email": "71255901065@stu.ecnu.edu.cn",
-    "research": ["generative AI", "talking virtual avatars"]
+    "research": [
+      "generative AI",
+      "talking virtual avatars"
+    ]
   },
   {
     "name": "Yasong Li",

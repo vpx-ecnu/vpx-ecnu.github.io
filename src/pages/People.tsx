@@ -265,6 +265,8 @@ const FacultyRow = ({ member }: { member: Person }) => {
         <Avatar className={getFacultyAvatarClassName(member)}>
           <AvatarImage
             src={member.image}
+            loading="lazy"
+            decoding="async"
             className="object-cover"
             style={getAvatarImageStyle(member)}
           />
@@ -350,6 +352,8 @@ const PeopleCardCompact = ({ member }: { member: Person }) => {
           <Avatar className="h-32 w-32 shrink-0 sm:h-32 sm:w-32 md:h-36 md:w-36">
             <AvatarImage
               src={member.image}
+              loading="lazy"
+              decoding="async"
               className="object-cover"
               style={getAvatarImageStyle(member)}
             />

@@ -24,6 +24,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install requests beautifulsoup4 lxml pillow
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
 
       - name: Update publications
         run: |
@@ -38,7 +42,8 @@ jobs:
           if \
             python src/backend/build_publication_updated.py && \
             python src/backend/update_recent_publications_cards.py && \
-            python src/backend/update_project_publications_cards.py; then
+            python src/backend/update_project_publications_cards.py && \
+            python src/backend/generate_derived_media.py; then
             echo "Publications update succeeded."
           else
             echo "Publications update failed, restoring backups."
@@ -61,9 +66,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/publications/publication_updated.json
-          git add public/publications/recent_publications.json
-          git add public/publications/project_publications.json
-          git add public/publications/recent_images || true
+          git add public/publications
           git commit -m "chore: update publications" || echo "No changes"
           git push

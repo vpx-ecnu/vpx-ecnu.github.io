@@ -4,11 +4,14 @@
     "description": "An intelligent tennis video analysis method that integrates action recognition and AR-based visualization to reveal ball trajectories and match insights in real time.",
     "details": "## Overview\nThis project focuses on intelligent tennis video analysis by combining action recognition and match understanding to automatically extract key gameplay information from broadcast and recorded tennis videos.\n## Key Features\nThe approach enables accurate ball detection, tracking, and trajectory analysis, while automatically deriving match statistics such as shot counts and outcomes. By integrating augmented reality techniques, the project provides real-time visualization of ball trajectories, landing positions, and scores, enhancing both match analysis and viewing experience.",
     "lead": "Ling You",
-    "tags": ["AI/ML", "Sports Analysis", "Tennis"],
+    "tags": [
+      "AI/ML",
+      "Sports Analysis",
+      "Tennis"
+    ],
     "timeframe": "2023–2024",
     "status": "Completed",
-
-    "thumbnail": "/content/completed_image/c_project1_1.png",
+    "thumbnail": "/content/completed_image/card/c_project1_1.jpg",
     "images": [
       "/content/completed_image/c_project1_1.png",
       "/content/completed_image/c_project1_2.png"

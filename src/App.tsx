@@ -1,44 +1,103 @@
-
+import { Suspense, lazy, type ReactNode } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components/layout/layout";
-
-// Pages
 import Index from "./pages/Index";
-import About from "./pages/About";
-import Projects from "./pages/Projects";
-import Publications from "./pages/Publications";
-import People from "./pages/People"; 
-import Activities from "./pages/Activities";
-import Join from "./pages/Join";
-import Intranet from "./pages/Intranet";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+const About = lazy(() => import("./pages/About"));
+const Projects = lazy(() => import("./pages/Projects"));
+const Publications = lazy(() => import("./pages/Publications"));
+const People = lazy(() => import("./pages/People"));
+const Activities = lazy(() => import("./pages/Activities"));
+const Join = lazy(() => import("./pages/Join"));
+const Intranet = lazy(() => import("./pages/Intranet"));
+
+const RouteFallback = () => (
+  <div className="container px-4 py-12 text-sm text-muted-foreground md:px-6">
+    Loading page...
+  </div>
+);
+
+const RoutedPage = ({ children }: { children: ReactNode }) => (
+  <Layout>
+    <Suspense fallback={<RouteFallback />}>{children}</Suspense>
+  </Layout>
+);
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout><Index /></Layout>} />
-          <Route path="/about" element={<Layout><About /></Layout>} />
-          <Route path="/projects" element={<Layout><Projects /></Layout>} />
-          <Route path="/publications" element={<Layout><Publications /></Layout>} />
-          <Route path="/people" element={<Layout><People /></Layout>} />
-          <Route path="/activities" element={<Layout><Activities /></Layout>} />
-          <Route path="/join" element={<Layout><Join /></Layout>} />
-          <Route path="/intranet" element={<Layout><Intranet /></Layout>} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <>
+    <Toaster />
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <Index />
+            </Layout>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <RoutedPage>
+              <About />
+            </RoutedPage>
+          }
+        />
+        <Route
+          path="/projects"
+          element={
+            <RoutedPage>
+              <Projects />
+            </RoutedPage>
+          }
+        />
+        <Route
+          path="/publications"
+          element={
+            <RoutedPage>
+              <Publications />
+            </RoutedPage>
+          }
+        />
+        <Route
+          path="/people"
+          element={
+            <RoutedPage>
+              <People />
+            </RoutedPage>
+          }
+        />
+        <Route
+          path="/activities"
+          element={
+            <RoutedPage>
+              <Activities />
+            </RoutedPage>
+          }
+        />
+        <Route
+          path="/join"
+          element={
+            <RoutedPage>
+              <Join />
+            </RoutedPage>
+          }
+        />
+        <Route
+          path="/intranet"
+          element={
+            <RoutedPage>
+              <Intranet />
+            </RoutedPage>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  </>
 );
 
 export default App;

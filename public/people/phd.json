@@ -1,43 +1,57 @@
 [
-    {
-      "name": "Changgu Chen",
-      "title": "PhD Candidate",
-      "bio": "Researching controllable motion generation for AIGC.",
-      "image": "/people/people_image/phd/ccg.jpg",
-      "email": "277006597@qq.com",
-      "research": ["AIGC", "Controllable Motion Generation"]
-    },
-    {
-        "name": "Xiangyi Wei",
-        "title": "PhD Candidate",
-        "bio": "Working on embodied intelligence.",
-        "image": "/people/people_image/phd/wxy.jpg",
-        "email": "52285901014@stu.ecnu.edu.cn",
-        "research": ["Multi-modal", "VLA"]
-    },
-    {
-      "name": "Junwei Shu",
-      "title": "PhD Candidate",
-      "bio": "Exploring diffusion models and computer graphics.",
-      "image": "/people/people_image/phd/sjw.jpg",
-      "email": "51265901091@stu.ecnu.edu.cn",
-      "research": ["diffusion", "computer graphics"]
-    },
-    {
-      "name": "Mingjie Han",
-      "title": "PhD Candidate",
-      "bio": "Exploring multimodal large language models and spatial intelligence.",
-      "image": "/people/people_image/phd/hmj.jpg",
-      "email": "mingjiehan@stu.ecnu.edu.cn",
-      "research": ["MLLM", "spatial intelligence"]
-    },
-    {
-        "name": "Xiaoyuan Wang",
-        "title": "PhD Candidate",
-        "bio": "Exploring natural human–object interaction understanding and generation.",
-        "image": "/people/people_image/phd/xiaoyuanwang.jpg",
-        "email": "xiaoyuan.wang@irisa.fr",
-        "research": ["Human–Object Interaction", "Spatial Intelligence"]
-    }
-  ]
-  
+  {
+    "name": "Changgu Chen",
+    "title": "PhD Candidate",
+    "bio": "Researching controllable motion generation for AIGC.",
+    "image": "/people/people_image/thumbs/phd/ccg.jpg",
+    "email": "277006597@qq.com",
+    "research": [
+      "AIGC",
+      "Controllable Motion Generation"
+    ]
+  },
+  {
+    "name": "Xiangyi Wei",
+    "title": "PhD Candidate",
+    "bio": "Working on embodied intelligence.",
+    "image": "/people/people_image/thumbs/phd/wxy.jpg",
+    "email": "52285901014@stu.ecnu.edu.cn",
+    "research": [
+      "Multi-modal",
+      "VLA"
+    ]
+  },
+  {
+    "name": "Junwei Shu",
+    "title": "PhD Candidate",
+    "bio": "Exploring diffusion models and computer graphics.",
+    "image": "/people/people_image/thumbs/phd/sjw.jpg",
+    "email": "51265901091@stu.ecnu.edu.cn",
+    "research": [
+      "diffusion",
+      "computer graphics"
+    ]
+  },
+  {
+    "name": "Mingjie Han",
+    "title": "PhD Candidate",
+    "bio": "Exploring multimodal large language models and spatial intelligence.",
+    "image": "/people/people_image/thumbs/phd/hmj.jpg",
+    "email": "mingjiehan@stu.ecnu.edu.cn",
+    "research": [
+      "MLLM",
+      "spatial intelligence"
+    ]
+  },
+  {
+    "name": "Xiaoyuan Wang",
+    "title": "PhD Candidate",
+    "bio": "Exploring natural human–object interaction understanding and generation.",
+    "image": "/people/people_image/thumbs/phd/xiaoyuanwang.jpg",
+    "email": "xiaoyuan.wang@irisa.fr",
+    "research": [
+      "Human–Object Interaction",
+      "Spatial Intelligence"
+    ]
+  }
+]
