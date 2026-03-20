@@ -3,6 +3,15 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Sync Derived Media
+      - Update XHS news.json
+      - Update VPX Reading Club (data + covers)
+      - Update Publications
+    types:
+      - completed
 
 permissions:
   contents: read
@@ -15,9 +24,13 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'workflow_run' && format('refs/heads/{0}', github.event.workflow_run.head_branch) || github.ref }}
 
       - uses: actions/setup-python@v5
         with:
