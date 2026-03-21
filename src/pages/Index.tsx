@@ -29,6 +29,24 @@ type RecentPublication = {
   poster?: string;
 };
 
+type OngoingResearchProject = {
+  title: string;
+  description?: string;
+  thumbnail?: string;
+  images?: string[];
+  image?: string;
+};
+
+const slugifyProjectTitle = (title: string) =>
+  title
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-");
+
+const getProjectThumbnail = (project: OngoingResearchProject) =>
+  project.thumbnail || project.images?.[0] || project.image || "/placeholder.svg";
+
 const Index = () => {
   // ----------------------
   // News (API based) - for home page latest 6
@@ -39,6 +57,7 @@ const Index = () => {
   const [publicationCount, setPublicationCount] = useState<number | null>(null);
   const [researcherCount, setResearcherCount] = useState<number | null>(null);
   const [recentPublications, setRecentPublications] = useState<RecentPublication[]>([]);
+  const [ongoingResearchProjects, setOngoingResearchProjects] = useState<OngoingResearchProject[]>([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -64,6 +83,28 @@ const Index = () => {
     };
 
     loadNews();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadOngoingProjects = async () => {
+      try {
+        const r = await fetch("/content/ongoing-projects.json");
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const data = await r.json();
+        if (!cancelled) {
+          setOngoingResearchProjects(Array.isArray(data) ? data : []);
+        }
+      } catch {
+        if (!cancelled) setOngoingResearchProjects([]);
+      }
+    };
+
+    loadOngoingProjects();
     return () => {
       cancelled = true;
     };
@@ -154,9 +195,14 @@ const Index = () => {
   }, []);
 
   const yearsOfResearch = useMemo(() => {
-    const startYear = 2020;
-    const currentYear = new Date().getFullYear();
-    return Math.max(1, currentYear - startYear + 1);
+    const labStart = new Date(2020, 9, 1); // 2020-10-01
+    const now = new Date();
+    const elapsedMonths = Math.max(
+      0,
+      (now.getFullYear() - labStart.getFullYear()) * 12 +
+        (now.getMonth() - labStart.getMonth())
+    );
+    return Math.max(1, Math.floor(elapsedMonths / 12));
   }, []);
 
   const latest6News = useMemo(() => {
@@ -167,6 +213,11 @@ const Index = () => {
     });
     return sorted.slice(0, 6);
   }, [newsList]);
+
+  const featuredOngoingProjects = useMemo(
+    () => ongoingResearchProjects.slice(0, 4),
+    [ongoingResearchProjects]
+  );
 
   const sourceLabel = (source?: string) => {
     const s = (source || "").toLowerCase();
@@ -308,234 +359,60 @@ const Index = () => {
   </div>
 </section>
 
+      {featuredOngoingProjects.length > 0 ? (
+        <section className="bg-secondary/30 px-4 py-12 sm:px-6 sm:py-14 md:px-12 lg:px-24 lg:py-20">
+          <div className="relative overflow-visible">
+            <Swiper
+              modules={[Navigation]}
+              navigation
+              loop={featuredOngoingProjects.length > 1}
+              spaceBetween={50}
+              slidesPerView={1}
+              className="relative container"
+            >
+              {featuredOngoingProjects.map((project) => {
+                const projectLink = `/projects?project=${slugifyProjectTitle(project.title)}`;
+                const projectImage = getProjectThumbnail(project);
 
-      <section className="bg-secondary/30 px-4 py-12 sm:px-6 sm:py-14 md:px-12 lg:px-24 lg:py-20">
-        <div className="relative overflow-visible">
-          <Swiper modules={[Navigation]} navigation spaceBetween={50} slidesPerView={1} className="relative container">
-            {/* Slide 1 */}
-            <SwiperSlide>
-              <div className="flex flex-col items-center gap-4 sm:gap-5 lg:gap-8 lg:flex-row">
-                <div className="max-w-3xl flex-1">
-                  <h1 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:mb-5 md:text-4xl lg:text-5xl">
-                    Embodied Intelligence for Automated Chemical Titration
-                  </h1>
-                  <p className="mb-4 text-base text-muted-foreground sm:text-lg md:mb-6 md:text-xl">
-                    An automated titration framework that combines robotic liquid handling and real-time pH feedback to
-                    deliver accurate, repeatable, and safe chemical experiments.
-                  </p>
-                  <div className="hidden gap-3 sm:flex-row sm:flex-wrap sm:gap-4 lg:flex">
-                    <Button
-                        asChild
-                        size="lg"
-                        className="w-full sm:w-auto
-                          bg-gradient-to-r from-violet-600 to-fuchsia-600
-                          hover:from-violet-500 hover:to-fuchsia-500
-                          text-white
-                          shadow-lg shadow-violet-600/30
-                          transition-all
-                        "
-                      >
-                    <Link to="/projects?project=embodied-intelligence-for-automated-chemical-titration">
-                      Explore Robot Research <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                    <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
-                      <Link to="/join">Join Our Team</Link>
-                    </Button>
-                  </div>
-                </div>
-                <div className="w-full flex-1">
-                  <img
-                    src="/vpx-assets/home/home_robot.jpg"
-                    alt="Automated chemical titration robot"
-                    className="h-auto max-h-[240px] w-full rounded-lg object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02] sm:max-h-[320px] lg:max-h-none"
-                  />
-                </div>
-                <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3 lg:hidden">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-600/30 transition-all hover:from-violet-500 hover:to-fuchsia-500 sm:w-auto"
-                  >
-                    <Link to="/projects?project=embodied-intelligence-for-automated-chemical-titration">
-                      Explore Robot Research <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                  <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
-                    <Link to="/join">Join Our Team</Link>
-                  </Button>
-                </div>
-              </div>
-            </SwiperSlide>
-
-            {/* Slide 2 */}
-            <SwiperSlide>
-              <div className="flex flex-col items-center gap-4 sm:gap-5 lg:gap-8 lg:flex-row">
-                <div className="max-w-3xl flex-1">
-                  <h1 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:mb-5 md:text-4xl lg:text-5xl">
-                    AI-Powered Virtual Human Video Generation
-                  </h1>
-                  <p className="mb-4 text-base text-muted-foreground sm:text-lg md:mb-6 md:text-xl">
-                    Automatically generating expressive, speaker-driven presentation videos from portraits, slides,
-                    scripts, and backgrounds, enabling fast, scalable, and personalized content creation.
-                  </p>
-                  <div className="hidden gap-3 sm:flex-row sm:flex-wrap sm:gap-4 lg:flex">
-                    <Button
-                        asChild
-                        size="lg"
-                        className="w-full sm:w-auto
-                          bg-gradient-to-r from-violet-600 to-fuchsia-600
-                          hover:from-violet-500 hover:to-fuchsia-500
-                          text-white
-                          shadow-lg shadow-violet-600/30
-                          transition-all
-                        "
-                      >
-                      <Link to="/projects?project=ai-powered-virtual-human-video-generation">
-                        Explore AIGC Research
-                      </Link>
-                    </Button>
-                    <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
-                      <Link to="/join">Join Our Team</Link>
-                    </Button>
-                  </div>
-                </div>
-                <div className="w-full flex-1">
-                  <img
-                    src="/vpx-assets/home/home_metahuman.png"
-                    alt="Virtual human generation demo"
-                    className="h-auto max-h-[240px] w-full rounded-lg object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02] sm:max-h-[320px] lg:max-h-none"
-                  />
-                </div>
-                <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3 lg:hidden">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-600/30 transition-all hover:from-violet-500 hover:to-fuchsia-500 sm:w-auto"
-                  >
-                    <Link to="/projects?project=ai-powered-virtual-human-video-generation">
-                      Explore AIGC Research
-                    </Link>
-                  </Button>
-                  <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
-                    <Link to="/join">Join Our Team</Link>
-                  </Button>
-                </div>
-              </div>
-            </SwiperSlide>
-
-            {/* Slide 3 */}
-            <SwiperSlide>
-              <div className="flex flex-col items-center gap-4 sm:gap-5 lg:gap-8 lg:flex-row">
-                <div className="max-w-3xl flex-1">
-                  <h1 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:mb-5 md:text-4xl lg:text-5xl">
-                    Toward Intelligent Cinematic Virtual Production
-                  </h1>
-                  <p className="mb-4 text-base text-muted-foreground sm:text-lg md:mb-6 md:text-xl">
-                    We build an intelligent filming environment where cameras, lighting, and virtual scenes collaborate automatically to achieve highly realistic and efficient virtual production.
-                  </p>
-                  <div className="hidden gap-3 sm:flex-row sm:flex-wrap sm:gap-4 lg:flex">
-                    <Button
-                        asChild
-                        size="lg"
-                        className="w-full sm:w-auto
-                          bg-gradient-to-r from-violet-600 to-fuchsia-600
-                          hover:from-violet-500 hover:to-fuchsia-500
-                          text-white
-                          shadow-lg shadow-violet-600/30
-                          transition-all
-                        "
-                      >
-                      <Link to="/projects?project=intelligent-virtual-production-with-camera-and-lighting-co-design">
-                        View 3D Research
-                      </Link>
-                    </Button>
-                    <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
-                      <Link to="/join">Join Our Team</Link>
-                    </Button>
-                  </div>
-                </div>
-                <div className="w-full flex-1">
-                  <img
-                    src="/vpx-assets/home/home_filming.png"
-                    alt="Virtual production research demo"
-                    className="h-auto max-h-[240px] w-full rounded-lg object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02] sm:max-h-[320px] lg:max-h-none"
-                  />
-                </div>
-                <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3 lg:hidden">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-600/30 transition-all hover:from-violet-500 hover:to-fuchsia-500 sm:w-auto"
-                  >
-                    <Link to="/projects?project=intelligent-virtual-production-with-camera-and-lighting-co-design">
-                      View 3D Research
-                    </Link>
-                  </Button>
-                  <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
-                    <Link to="/join">Join Our Team</Link>
-                  </Button>
-                </div>
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="flex flex-col items-center gap-4 sm:gap-5 lg:gap-8 lg:flex-row">
-                <div className="max-w-3xl flex-1">
-                  <h1 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:mb-5 md:text-4xl lg:text-5xl">
-                    Intelligent Sandplay for Psychological Assessment
-                  </h1>
-                  <p className="mb-4 text-base text-muted-foreground sm:text-lg md:mb-6 md:text-xl">
-                    Leveraging comprehensive data capture and AI-driven analysis to enhance the reliability,
-                    scalability, and safety of sandplay-based psychological evaluation in educational settings.
-                  </p>
-                  <div className="hidden gap-3 sm:flex-row sm:flex-wrap sm:gap-4 lg:flex">
-                    <Button
-                        asChild
-                        size="lg"
-                        className="w-full sm:w-auto
-                          bg-gradient-to-r from-violet-600 to-fuchsia-600
-                          hover:from-violet-500 hover:to-fuchsia-500
-                          text-white
-                          shadow-lg shadow-violet-600/30
-                          transition-all
-                        "
-                      >
-                      <Link to="/projects?project=intelligent-sandplay-for-psychological-assessment">
-                        View VLM Research
-                      </Link>
-                    </Button>
-                    <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
-                      <Link to="/join">Join Our Team</Link>
-                    </Button>
-                  </div>
-                </div>
-                <div className="w-full flex-1">
-                  <img
-                    src="/vpx-assets/home/home_shapan.png"
-                    alt="Psychological assessment research demo"
-                    className="h-auto max-h-[240px] w-full rounded-lg object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02] sm:max-h-[320px] lg:max-h-none"
-                  />
-                </div>
-                <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3 lg:hidden">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-600/30 transition-all hover:from-violet-500 hover:to-fuchsia-500 sm:w-auto"
-                  >
-                    <Link to="/projects?project=intelligent-sandplay-for-psychological-assessment">
-                      View VLM Research
-                    </Link>
-                  </Button>
-                  <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
-                    <Link to="/join">Join Our Team</Link>
-                  </Button>
-                </div>
-              </div>
-            </SwiperSlide>
-          </Swiper>
-        </div>
-      </section>
+                return (
+                  <SwiperSlide key={project.title}>
+                    <div className="flex flex-col items-center gap-4 sm:gap-5 lg:gap-8 lg:flex-row">
+                      <div className="max-w-3xl flex-1">
+                        <h1 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:mb-5 md:text-4xl lg:text-5xl">
+                          {project.title}
+                        </h1>
+                        <p className="mb-4 text-base text-muted-foreground sm:text-lg md:mb-6 md:text-xl">
+                          {project.description || "Explore one of our current ongoing research projects."}
+                        </p>
+                        <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3">
+                          <Button
+                            asChild
+                            size="lg"
+                            className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-600/30 transition-all hover:from-violet-500 hover:to-fuchsia-500 sm:w-auto"
+                          >
+                            <Link to={projectLink}>
+                              Explore Project <ArrowRight className="ml-2 h-4 w-4" />
+                            </Link>
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="w-full flex-1">
+                        <img
+                          src={projectImage}
+                          alt={project.title}
+                          className="h-auto max-h-[240px] w-full rounded-lg object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02] sm:max-h-[320px] lg:max-h-none"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          </div>
+        </section>
+      ) : null}
 
       {/* Key Statistics */}
       <section className="mx-0 my-[3px] rounded-none bg-muted px-4 py-[21px] sm:px-6 md:px-[36px]">
