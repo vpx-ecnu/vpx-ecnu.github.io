@@ -74,7 +74,7 @@ const Index = () => {
 
     const loadRecentPublications = async () => {
       try {
-        const r = await fetch("/publications/recent_publications.json");
+        const r = await fetch("/publications/project_publications.json");
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         const data = await r.json();
         const pubs = Array.isArray(data?.publications) ? data.publications : [];
@@ -572,8 +572,13 @@ const Index = () => {
           <div className="flex items-end justify-between gap-6 mb-6">
             <div className="space-y-2">
               <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">Recent Publications</h2>
-              <p className="text-muted-foreground md:text-lg">Selected recent papers with project webpages.</p>
+              <p className="text-muted-foreground md:text-lg">Latest six publications from our full project-publication collection.</p>
             </div>
+            <Button asChild variant="outline" className="hidden sm:inline-flex">
+              <Link to="/projects?tab=publications">
+                View All <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

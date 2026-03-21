@@ -54,6 +54,8 @@ type ProjectPublication = {
   poster?: string;
 };
 
+type ProjectTab = "ongoing" | "completed" | "publications";
+
 const getThumbnail = (p: Project) => {
   // 优先 thumbnail；否则 images[0]；否则旧的 image
   return p.thumbnail || p.images?.[0] || p.image || "";
@@ -66,13 +68,24 @@ const slugifyProjectTitle = (title: string) =>
     .replace(/[^a-z0-9\s-]/g, "")
     .replace(/\s+/g, "-");
 
+const normalizeProjectTab = (value: string | null): ProjectTab => {
+  if (value === "completed" || value === "publications") return value;
+  return "ongoing";
+};
+
 const Projects = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const searchParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
+  const requestedProject = searchParams.get("project");
+  const requestedPublication = searchParams.get("publication");
   const [completedProjects, setCompletedProjects] = useState<Project[]>([]);
   const [ongoingProjects, setOngoingProjects] = useState<Project[]>([]);
   const [projectPublications, setProjectPublications] = useState<ProjectPublication[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [activeTab, setActiveTab] = useState<ProjectTab>(
+    normalizeProjectTab(searchParams.get("tab"))
+  );
 
   useEffect(() => {
     fetch("/content/completed-projects.json")
@@ -95,9 +108,14 @@ const Projects = () => {
   }, []);
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const requestedProject = params.get("project");
-    if (!requestedProject) return;
+    setActiveTab(normalizeProjectTab(searchParams.get("tab")));
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (!requestedProject) {
+      setSelectedProject(null);
+      return;
+    }
 
     const allProjects = [...ongoingProjects, ...completedProjects];
     const match = allProjects.find(
@@ -108,7 +126,7 @@ const Projects = () => {
       setSelectedProject(match);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }, [location.search, ongoingProjects, completedProjects]);
+  }, [requestedProject, ongoingProjects, completedProjects]);
 
   const selectedImages = useMemo(() => {
     if (!selectedProject) return [];
@@ -119,6 +137,38 @@ const Projects = () => {
       ? [selectedProject.image]
       : [];
   }, [selectedProject]);
+
+  useEffect(() => {
+    if (selectedProject || activeTab !== "publications" || !requestedPublication) return;
+    if (projectPublications.length === 0) return;
+
+    const timer = window.setTimeout(() => {
+      const element = document.getElementById(`publication-card-${requestedPublication}`);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }, 150);
+
+    return () => window.clearTimeout(timer);
+  }, [activeTab, projectPublications, requestedPublication, selectedProject]);
+
+  const updateProjectsRoute = (nextTab: ProjectTab) => {
+    const params = new URLSearchParams(location.search);
+    params.delete("project");
+
+    if (nextTab === "ongoing") {
+      params.delete("tab");
+    } else {
+      params.set("tab", nextTab);
+    }
+
+    if (nextTab !== "publications") {
+      params.delete("publication");
+    }
+
+    const nextSearch = params.toString();
+    navigate(nextSearch ? `/projects?${nextSearch}` : "/projects", { replace: true });
+  };
 
   return (
     <div className="relative w-full overflow-hidden bg-background text-foreground">
@@ -151,7 +201,7 @@ const Projects = () => {
                 className="mb-6 px-4 py-2 border bg-card hover:bg-muted/40 transition"
                 onClick={() => {
                   setSelectedProject(null);
-                  navigate("/projects", { replace: true });
+                  updateProjectsRoute(activeTab);
                 }}
               >
                 ← Back to Projects
@@ -270,7 +320,15 @@ const Projects = () => {
               </div>
             </div>
           ) : (
-              <Tabs defaultValue="ongoing" className="mb-12">
+              <Tabs
+                value={activeTab}
+                onValueChange={(value) => {
+                  const nextTab = normalizeProjectTab(value);
+                  setActiveTab(nextTab);
+                  updateProjectsRoute(nextTab);
+                }}
+                className="mb-12"
+              >
               <TabsList className="grid h-auto w-full max-w-2xl grid-cols-1 gap-2 bg-transparent p-0 sm:grid-cols-3">
                 <TabsTrigger
                   value="ongoing"
@@ -470,11 +528,16 @@ const Projects = () => {
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {projectPublications.map((pub) => (
                       <a
+                        id={`publication-card-${pub.id}`}
                         key={pub.id}
                         href={pub.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="group block border bg-card overflow-hidden hover:shadow-md transition-shadow"
+                        className={`group block overflow-hidden border bg-card transition-shadow hover:shadow-md ${
+                          requestedPublication === pub.id
+                            ? "ring-2 ring-violet-500/60 shadow-lg"
+                            : ""
+                        }`}
                       >
                         <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
                           {pub.mediaType === "video" && pub.media ? (

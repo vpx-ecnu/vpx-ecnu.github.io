@@ -41,8 +41,8 @@ jobs:
 
           if \
             python src/backend/build_publication_updated.py && \
-            python src/backend/update_recent_publications_cards.py && \
             python src/backend/update_project_publications_cards.py && \
+            python src/backend/update_recent_publications_cards.py && \
             python src/backend/generate_derived_media.py; then
             echo "Publications update succeeded."
           else
