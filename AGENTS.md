@@ -23,10 +23,30 @@ Priorities:
 - `src/backend/`: publication update scripts
 - `.github/workflows/`: deployment and content automation
 
+## Homepage Data Flow
+- The homepage ongoing-research carousel is sourced from `public/content/ongoing-projects.json`. Keep it aligned with the `Projects` page instead of maintaining duplicate hardcoded slide content in `src/pages/Index.tsx`.
+- The homepage `Recent Publications` section consumes the first 6 items from the full `project_publications.json` feed. Treat `recent_publications.json` as a derived compatibility artifact, not the primary source of homepage ordering.
+- The homepage `Latest News & Activities` section currently consumes the latest 8 items from `public/news.json` and renders them as an editorial mosaic in `src/pages/Index.tsx`.
+- Homepage stats are intentional data contracts:
+  - `Publications` = total items in `public/publications/publication_updated.json`
+  - `Current Members` = sum of the current people JSON files used on the homepage (`faculty.json`, `phd.json`, `graduate.json`, `part-time.json`, `Undergraduate.json`)
+  - `Years of Research` = floor of elapsed years since October 2020, not a simple calendar-year delta and not a manually entered number
+
+## Activities And News Data Flow
+- The `/activities` page `News & Activities` tab and the homepage news mosaic intentionally share the same source: `public/news.json`.
+- The `/activities` page `VPX Reading Club` tab uses `src/data/readingClub.json`, not `public/news.json`.
+- `public/news.json` is the maintained source of truth for site news cards. Keep its companion media directories aligned:
+  - `public/xhs_news_images/`
+  - `public/xhs_news_videos/`
+- `src/data/activities.ts` is currently legacy/static draft data and is not the active source for the homepage or `/activities` page. Do not update it unless you are intentionally reconnecting that file to the UI.
+- When modifying homepage or `/activities` news presentation, prefer preserving the shared `public/news.json` contract rather than introducing duplicate page-specific datasets.
+
 ## Publication Workflow
 Treat the publications pipeline as a maintained content workflow, not a generic scraper.
 
 - `publication_updated.json` = Google Scholar primary source + `IHPDEP Selected Publications` overlay.
+- `project_publications.json` = full ordered feed of project-backed publication cards.
+- `recent_publications.json` = top 6 derived from `project_publications.json`; keep ordering logic centralized in the full feed instead of maintaining separate selection rules in multiple places.
 - If both sources match a paper, `IHPDEP Selected Publications` wins.
 - If a selected publication is missing from Google Scholar, keep it.
 - `project_webpage` comes from the curated overlay and is required by downstream card generators.
@@ -36,11 +56,16 @@ Treat the publications pipeline as a maintained content workflow, not a generic 
 - Normalize card media for stable `16:9` output; for videos, generate posters from sampled frames.
 - If `project_webpage` returns `404`, skip that item from downstream card feeds.
 - Keep media failures visible; prefer warnings and preserving previous good outputs over silently degrading feeds.
+- In `update_publications.yml`, preserve the generation order: `build_publication_updated.py` -> `update_project_publications_cards.py` -> `update_recent_publications_cards.py` -> `generate_derived_media.py`.
 - When modifying the publication pipeline, regenerate:
   - `public/publications/publication_updated.json`
   - `public/publications/recent_publications.json`
   - `public/publications/project_publications.json`
   - referenced assets under `public/publications/recent_images/`
+
+## Deployment Automation
+- `deploy.yml` intentionally listens to `workflow_run` from content-updating workflows because bot-authored commits created with `GITHUB_TOKEN` do not reliably trigger downstream `push` deploy workflows.
+- If you change scheduled content automation, preserve an explicit path from automated content updates to GitHub Pages deployment.
 
 ## Merge And Cleanup Rules
 - Scheduled workflows may update generated publication JSON while local work is in progress. Merge conflicts in publication feeds are expected.
@@ -69,6 +94,8 @@ After code or content changes, unless blocked:
 - Review diffs for low-value generated noise before committing.
 - Keep commits focused.
 - Do not commit temporary review artifacts unless explicitly requested.
+- For this repository, after requested implementation work has been locally verified, the agent may commit and push directly to the current branch without asking for an extra confirmation round unless the user explicitly says not to push or asks to review first.
+- When doing so, do not include unrelated local changes in the commit; keep the user's separate working changes untouched.
 
 ## Guardrails
 - Do not invent publication metadata, affiliations, positions, awards, or project facts.
