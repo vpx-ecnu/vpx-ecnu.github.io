@@ -23,6 +23,21 @@ Priorities:
 - `src/backend/`: publication update scripts
 - `.github/workflows/`: deployment and content automation
 
+## Fast Start For New Threads
+- Do not rescan the whole repository to rediscover basic project structure if the task is a routine page/content/layout update. Read `AGENTS.md` first, then only inspect the files directly relevant to the request.
+- Default task-to-file starting points:
+  - Homepage layout/content: `src/pages/Index.tsx`
+  - Homepage news data: `public/news.json`
+  - Activities page layout/content: `src/pages/Activities.tsx`
+  - Reading Club data: `src/data/readingClub.json`
+  - Homepage / projects data: `public/content/ongoing-projects.json`
+  - Homepage / publication cards: `public/publications/project_publications.json`
+  - Homepage people/stat counts: `public/people/faculty.json`, `public/people/phd.json`, `public/people/graduate.json`, `public/people/part-time.json`, `public/people/Undergraduate.json`
+  - Publication pipeline: `src/backend/` scripts plus `.github/workflows/update_publications.yml`
+  - News pipeline: `run_xhs_pipeline_mediacrawler.py` plus `.github/workflows/update_xhs_news.yml`
+  - Reading Club pipeline: `scripts/update_reading_club.py` plus `.github/workflows/update-reading-club.yml`
+- Escalate to broader repo exploration only when the task actually changes architecture, routing, build/deploy behavior, or a data source contract.
+
 ## Homepage Data Flow
 - The homepage ongoing-research carousel is sourced from `public/content/ongoing-projects.json`. Keep it aligned with the `Projects` page instead of maintaining duplicate hardcoded slide content in `src/pages/Index.tsx`.
 - The homepage `Recent Publications` section consumes the first 6 items from the full `project_publications.json` feed. Treat `recent_publications.json` as a derived compatibility artifact, not the primary source of homepage ordering.
