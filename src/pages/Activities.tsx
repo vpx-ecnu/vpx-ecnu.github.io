@@ -348,83 +348,71 @@ const Activities = () => {
               </div>
             ) : (
               <>
-                {/* News Wall (scrollable masonry) */}
-                <div className="border bg-card">
-                  {/* title bar */}
-                  <div className="flex flex-col gap-3 border-b bg-muted/30 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-                    <div className="text-sm font-medium">Updates</div>
-
-                    {/* filter buttons */}
-                    <div className="flex flex-wrap gap-2">
-                      {(["all", "recent", "older"] as const).map((filter) => (
-                        <button
-                          key={filter}
-                          className={`px-3 py-1 text-sm rounded-md ${
-                            newsFilter === filter
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-muted text-muted-foreground"
-                          }`}
-                          onClick={() => setNewsFilter(filter)}
-                        >
-                          {filter.charAt(0).toUpperCase() + filter.slice(1)}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* scroll area */}
-                  <div className="h-[560px] overflow-y-auto p-4 sm:h-[640px] sm:p-5 md:h-[720px]">
-                    <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
-                      {filteredNews.map((item) => (
-                        <button
-                          key={item.id}
-                          type="button"
-                          onClick={() => setSelectedNews(item)}
-                          className="mb-5 block w-full text-left break-inside-avoid border bg-card hover:shadow-md transition-shadow"
-                        >
-                          {/* image */}
-                          <div className="w-full overflow-hidden bg-muted">
-                            {item.image ? (
-                              <img
-                                src={item.image}
-                                alt={getNewsTitle(item)}
-                                className="w-full h-auto object-cover"
-                                loading="lazy"
-                              />
-                            ) : null}
-                          </div>
-
-                          {/* text */}
-                          <div className="p-4">
-                            <div className="flex items-center gap-2 mb-2">
-                              <span className="text-xs text-muted-foreground">
-                                {new Date(item.date).toLocaleDateString()}
-                              </span>
-                            </div>
-
-                            <h3 className="text-base font-semibold leading-snug">
-                              {getNewsTitle(item)}
-                            </h3>
-
-                            {item.description ? (
-                              <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-4">
-                                {item.description}
-                              </p>
-                            ) : null}
-
-                            <div className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-violet-600">
-                              Open
-                            </div>
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-
-                    {!loadingNews && !newsError && filteredNews.length === 0 ? (
-                      <div className="text-sm text-muted-foreground">No news found.</div>
-                    ) : null}
+                <div className="flex justify-end">
+                  <div className="flex flex-wrap gap-2">
+                    {(["all", "recent", "older"] as const).map((filter) => (
+                      <button
+                        key={filter}
+                        className={`px-3 py-1 text-sm rounded-md ${
+                          newsFilter === filter
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-muted text-muted-foreground"
+                        }`}
+                        onClick={() => setNewsFilter(filter)}
+                      >
+                        {filter.charAt(0).toUpperCase() + filter.slice(1)}
+                      </button>
+                    ))}
                   </div>
                 </div>
+
+                <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
+                  {filteredNews.map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => setSelectedNews(item)}
+                      className="mb-5 block w-full text-left break-inside-avoid border bg-card hover:shadow-md transition-shadow"
+                    >
+                      <div className="w-full overflow-hidden bg-muted">
+                        {item.image ? (
+                          <img
+                            src={item.image}
+                            alt={getNewsTitle(item)}
+                            className="w-full h-auto object-cover"
+                            loading="lazy"
+                          />
+                        ) : null}
+                      </div>
+
+                      <div className="p-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-xs text-muted-foreground">
+                            {new Date(item.date).toLocaleDateString()}
+                          </span>
+                        </div>
+
+                        <h3 className="text-base font-semibold leading-snug">
+                          {getNewsTitle(item)}
+                        </h3>
+
+                        {item.description ? (
+                          <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-4">
+                            {item.description}
+                          </p>
+                        ) : null}
+
+                        <div className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-violet-600">
+                          Open
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+
+                {!loadingNews && !newsError && filteredNews.length === 0 ? (
+                  <div className="text-sm text-muted-foreground">No news found.</div>
+                ) : null}
               </>
             )}
           </TabsContent>

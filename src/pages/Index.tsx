@@ -205,13 +205,13 @@ const Index = () => {
     return Math.max(1, Math.floor(elapsedMonths / 12));
   }, []);
 
-  const latest6News = useMemo(() => {
+  const latest8News = useMemo(() => {
     const sorted = [...newsList].sort((a, b) => {
       const ta = new Date(a.date).getTime();
       const tb = new Date(b.date).getTime();
       return (Number.isNaN(tb) ? 0 : tb) - (Number.isNaN(ta) ? 0 : ta);
     });
-    return sorted.slice(0, 6);
+    return sorted.slice(0, 8);
   }, [newsList]);
 
   const featuredOngoingProjects = useMemo(
@@ -230,7 +230,27 @@ const Index = () => {
   const getNewsTitle = (item: NewsItem) => {
     const primary = item.title?.trim() || item.sub_title?.trim();
     if (primary) return primary;
-    return item.source ? `${sourceLabel(item.source)} Update` : "VPX Update";
+    return "VPX Update";
+  };
+
+  const formatNewsDate = (date: string) => {
+    const parsed = new Date(date);
+    if (Number.isNaN(parsed.getTime())) return "—";
+    return parsed.toLocaleDateString();
+  };
+
+  const getNewsSummary = (item: NewsItem) => {
+    return (
+      item.sub_title?.trim() ||
+      item.description?.trim() ||
+      ""
+    );
+  };
+
+  const getMosaicClassName = (index: number) => {
+    if (index === 0) return "md:col-span-2 lg:col-span-2 lg:row-span-2";
+    if (index === 3) return "md:col-span-2 lg:col-span-2";
+    return "";
   };
 
   return (
@@ -414,6 +434,72 @@ const Index = () => {
         </section>
       ) : null}
 
+      {/* Featured Research */}
+      <section className="pt-4 pb-16 md:pt-10 md:pb-20">
+  <div className="container px-4 md:px-6">
+    <div className="grid gap-8 md:gap-12">
+      <div className="fade-in-content flex flex-col gap-2 md:gap-4">
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Core Research Areas</h2>
+        <p className="text-muted-foreground md:text-lg">
+          Our current research spans multiple disciplines and real-world applications.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          {
+            title: "Embodied AI",
+            description:
+              "Developing intelligent agents that perceive, learn, and interact with physical environments through robotics and simulation platforms.",
+            leaderName: "Xiangyi Wei",
+            leaderId: "phd-xiangyi-wei",
+          },
+          {
+            title: "AIGC",
+            description:
+              "Pioneering AI-generated content technologies for text, image, video and multimodal creation using cutting-edge generative models.",
+            leaderName: "Yu Zhang",
+            leaderId: "grad-yu-zhang",
+          },
+          {
+            title: "3D Computer Graphics",
+            description:
+              "Advancing neural rendering, 3D Gaussian splatting, virtual reality (VR), and ray tracing technologies to power next-generation immersive visual experiences.",
+            leaderName: "Yijing Wa",
+            leaderId: "grad-yijing-wa",
+          },
+          {
+            title: "Video Analysis",
+            description:
+              "Pioneering video understanding, object tracking, video action analysis, and multimodal large language models (LLMs) to build next-generation intelligent video systems.",
+            leaderName: "Chenxi Shao",
+            leaderId: "grad-chenxi-shao",
+          },
+        ].map((item, i) => (
+          <div
+            key={i}
+            className="flex flex-col p-6 bg-card rounded-lg border hover:shadow-md transition-shadow fade-in-content"
+            style={{ animationDelay: `${i * 150}ms` }}
+          >
+            <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+            <p className="text-muted-foreground flex-1">{item.description}</p>
+
+            <div className="mt-4 ml-auto text-sm text-muted-foreground">
+              Leader:{" "}
+              <Link
+                to={`/people#${item.leaderId}`}
+                className="font-medium text-violet-600 hover:text-violet-700 transition-colors"
+              >
+                {item.leaderName}
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
       {/* Key Statistics */}
       <section className="mx-0 my-[3px] rounded-none bg-muted px-4 py-[21px] sm:px-6 md:px-[36px]">
         <div className="container px-4 md:px-6 fade-in-content">
@@ -508,151 +594,81 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Research */}
-      <section className="pt-4 pb-16 md:pt-10 md:pb-20">
-  <div className="container px-4 md:px-6">
-    <div className="grid gap-8 md:gap-12">
-      <div className="fade-in-content flex flex-col gap-2 md:gap-4">
-        <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Core Research Areas</h2>
-        <p className="text-muted-foreground md:text-lg">
-          Our current research spans multiple disciplines and real-world applications.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {[
-          {
-            title: "Embodied AI",
-            description:
-              "Developing intelligent agents that perceive, learn, and interact with physical environments through robotics and simulation platforms.",
-            leaderName: "Xiangyi Wei",
-            leaderId: "phd-xiangyi-wei",
-          },
-          {
-            title: "AIGC",
-            description:
-              "Pioneering AI-generated content technologies for text, image, video and multimodal creation using cutting-edge generative models.",
-            leaderName: "Yu Zhang",
-            leaderId: "grad-yu-zhang",
-          },
-          {
-            title: "3D Computer Graphics",
-            description:
-              "Advancing neural rendering, 3D Gaussian splatting, virtual reality (VR), and ray tracing technologies to power next-generation immersive visual experiences.",
-            leaderName: "Yijing Wa",
-            leaderId: "grad-yijing-wa",
-          },
-          {
-            title: "Video Analysis",
-            description:
-              "Pioneering video understanding, object tracking, video action analysis, and multimodal large language models (LLMs) to build next-generation intelligent video systems.",
-            leaderName: "Chenxi Shao",
-            leaderId: "grad-chenxi-shao",
-          },
-        ].map((item, i) => (
-          <div
-            key={i}
-            className="flex flex-col p-6 bg-card rounded-lg border hover:shadow-md transition-shadow fade-in-content"
-            style={{ animationDelay: `${i * 150}ms` }}
-          >
-            <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-            <p className="text-muted-foreground flex-1">{item.description}</p>
-
-            {/* ✅ 这里是替换 Learn more 的部分 */}
-            <div className="mt-4 ml-auto text-sm text-muted-foreground">
-              Leader:{" "}
-              <Link
-                to={`/people#${item.leaderId}`}
-                className="font-medium text-violet-600 hover:text-violet-700 transition-colors"
-              >
-                {item.leaderName}
-              </Link>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
-
-
-      {/* Latest News Wall in a scrollable window */}
+      {/* Latest News & Activities */}
       <section className="pt-6 pb-10 md:pt-8 md:pb-14">
         <div className="container px-4 md:px-6">
-          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+          <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
             <div className="space-y-2">
               <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Latest News & Activities</h2>
-              <p className="text-muted-foreground md:text-lg">A feed-style wall of recent updates.</p>
+              <p className="text-sm text-muted-foreground/80 md:text-base">
+                Eight recent updates from our lab news feed.
+              </p>
             </div>
+            <Link
+              to="/activities"
+              className="inline-flex items-center gap-2 text-sm font-medium text-violet-600 transition-colors hover:text-violet-700"
+            >
+              View all <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
 
-          <div className="border bg-card">
-            <div className="flex flex-col gap-2 border-b bg-muted/30 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-              <div className="text-sm font-medium">Updates</div>
-              <Link to="/activities" className="text-sm font-medium text-violet-600 hover:underline">
-                View all
-              </Link>
+          {newsError ? (
+            <div className="rounded-lg border p-4 text-sm text-muted-foreground">
+              <div className="mb-1 font-medium text-foreground">Failed to load news</div>
+              <div className="break-words">{newsError}</div>
             </div>
+          ) : null}
 
-            <div className="h-[520px] overflow-y-auto p-4 sm:h-[600px] sm:p-5 md:h-[680px]">
-              {newsError ? (
-                <div className="rounded-md border p-4 text-sm text-muted-foreground">
-                  <div className="font-medium text-foreground mb-1">Failed to load news</div>
-                  <div className="break-words">{newsError}</div>
-                </div>
-              ) : null}
+          {loadingNews ? (
+            <div className="text-sm text-muted-foreground">Loading news…</div>
+          ) : null}
 
-              {loadingNews ? <div className="text-sm text-muted-foreground">Loading news…</div> : null}
+          {!loadingNews && !newsError && latest8News.length === 0 ? (
+            <div className="text-sm text-muted-foreground">No news found.</div>
+          ) : null}
 
-              {!loadingNews && !newsError && latest6News.length === 0 ? (
-                <div className="text-sm text-muted-foreground">No news found.</div>
-              ) : null}
+          {!loadingNews && !newsError && latest8News.length > 0 ? (
+            <div className="grid auto-rows-[220px] grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+              {latest8News.map((item, index) => (
+                <Link
+                  key={item.id}
+                  to={`/activities?newsId=${encodeURIComponent(String(item.id || ""))}`}
+                  className={`group relative overflow-hidden rounded-2xl border bg-slate-900 ${getMosaicClassName(index)}`}
+                >
+                  {item.image ? (
+                    <img
+                      src={item.image}
+                      alt={getNewsTitle(item)}
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-950" />
+                  )}
 
-              <div className="columns-1 sm:columns-2 lg:columns-4 gap-5 [column-fill:_balance]">
-                {latest6News.map((item) => (
-                  <Link
-                    key={item.id}
-                    to={`/activities?newsId=${encodeURIComponent(String(item.id || ""))}`}
-                    className="mb-5 block break-inside-avoid border bg-card hover:shadow-md transition-shadow"
-                  >
-                    <div className="w-full overflow-hidden bg-muted">
-                      {item.image ? (
-                        <img
-                          src={item.image}
-                          alt={getNewsTitle(item)}
-                          className="w-full h-auto object-cover"
-                          loading="lazy"
-                        />
-                      ) : null}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/45 to-transparent" />
+
+                  <div className="relative flex h-full flex-col justify-end p-5 text-white">
+                    <div className="mb-3 flex flex-wrap items-center gap-2 text-xs text-white/80">
+                      <span className="rounded-full border border-white/20 bg-white/10 px-2 py-1 backdrop-blur-sm">
+                        {formatNewsDate(item.date)}
+                      </span>
                     </div>
 
-                    <div className="p-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        {/* <span className="text-xs px-2 py-1 border bg-muted">{sourceLabel(item.source)}</span> */}
-                        <span className="text-xs text-muted-foreground">
-                          {new Date(item.date).toLocaleDateString()}
-                        </span>
-                      </div>
+                    <h4 className={`${index === 0 ? "text-2xl md:text-3xl" : "text-lg"} font-semibold leading-snug`}>
+                      {getNewsTitle(item)}
+                    </h4>
 
-                      <h3 className="text-base font-semibold leading-snug">
-                        {getNewsTitle(item)}
-                      </h3>
-
-                      {(item.sub_title || item.description) ? (
-                        <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                          {item.sub_title || item.description}
-                        </p>
-                      ) : null}
-
-                      <div className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-violet-600">
-                        Open <ArrowRight className="h-4 w-4" />
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
+                    {index < 4 && getNewsSummary(item) ? (
+                      <p className="mt-3 text-sm leading-relaxed text-white/80 line-clamp-3">
+                        {getNewsSummary(item)}
+                      </p>
+                    ) : null}
+                  </div>
+                </Link>
+              ))}
             </div>
-          </div>
+          ) : null}
         </div>
       </section>
     </div>
