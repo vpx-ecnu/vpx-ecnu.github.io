@@ -109,8 +109,9 @@ After code or content changes, unless blocked:
 - Review diffs for low-value generated noise before committing.
 - Keep commits focused.
 - Do not commit temporary review artifacts unless explicitly requested.
-- For this repository, after requested implementation work has been locally verified, the agent may commit and push directly to the current branch without asking for an extra confirmation round unless the user explicitly says not to push or asks to review first.
-- When doing so, do not include unrelated local changes in the commit; keep the user's separate working changes untouched.
+- For this repository, do not treat local verification alone as permission to commit or push. Commit and push only after the user explicitly asks for it or clearly approves it in the current thread.
+- Once that explicit approval has been given, do not ask for a second redundant confirmation before the actual `commit` or `push` unless the scope changed, the diff now includes unexpected files, or there is another concrete risk that should be surfaced first.
+- When committing or pushing, do not include unrelated local changes in the commit; keep the user's separate working changes untouched.
 
 ## Guardrails
 - Do not invent publication metadata, affiliations, positions, awards, or project facts.
