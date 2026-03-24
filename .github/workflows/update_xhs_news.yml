@@ -3,8 +3,8 @@ name: Update XHS news.json
 on:
   workflow_dispatch:
   schedule:
-    # 每天 03:15 UTC（北京时间 11:15）
-    - cron: "15 3 * * *"
+    # 调试用：每 10 分钟运行一次
+    - cron: "*/10 * * * *"
 
 permissions:
   contents: write
@@ -40,22 +40,118 @@ jobs:
           XHS_CREATOR_ID: ${{ secrets.XHS_CREATOR_ID }}
           XHS_COOKIES: ${{ secrets.XHS_COOKIES }}
         run: |
-          set -e
-          backup_file="/tmp/news.json.bak"
+          set -eo pipefail
+          debug_dir="/tmp/xhs-debug"
+          backup_file="${debug_dir}/news.before.json"
+          log_file="${debug_dir}/xhs_pipeline.log"
+          listing_file="${debug_dir}/xhs_dir_listing.txt"
+
+          mkdir -p "${debug_dir}"
 
           if [ -f public/news.json ]; then
             cp public/news.json "${backup_file}"
           fi
 
-          if python run_xhs_pipeline_mediacrawler.py; then
-            echo "Pipeline succeeded."
+          {
+            echo "== before pipeline: $(date -u +%FT%TZ) =="
+            if [ -d MediaCrawler/data/xhs ]; then
+              ls -lt MediaCrawler/data/xhs || true
+            else
+              echo "MediaCrawler/data/xhs missing"
+            fi
+          } > "${listing_file}"
+
+          if python run_xhs_pipeline_mediacrawler.py 2>&1 | tee "${log_file}"; then
+            echo "Pipeline succeeded." | tee -a "${log_file}"
           else
-            echo "Pipeline failed, restore original news.json."
+            status=$?
+            echo "Pipeline failed (exit ${status}), restore original news.json." | tee -a "${log_file}"
             if [ -f "${backup_file}" ]; then
               cp "${backup_file}" public/news.json
             fi
-            exit 0
+            exit "${status}"
           fi
+
+          {
+            echo
+            echo "== after pipeline: $(date -u +%FT%TZ) =="
+            if [ -d MediaCrawler/data/xhs ]; then
+              ls -lt MediaCrawler/data/xhs || true
+            else
+              echo "MediaCrawler/data/xhs missing"
+            fi
+          } >> "${listing_file}"
+
+      - name: Summarize XHS run
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          summary_path = Path(os.environ["GITHUB_STEP_SUMMARY"])
+          backup_path = Path("/tmp/xhs-debug/news.before.json")
+          news_path = Path("public/news.json")
+          xhs_dir = Path("MediaCrawler/data/xhs")
+
+          lines = ["## XHS pipeline summary", ""]
+
+          def describe_news(path: Path, label: str):
+              if not path.exists():
+                  lines.append(f"- {label}: missing")
+                  return None
+              try:
+                  payload = json.loads(path.read_text(encoding="utf-8"))
+                  news = payload.get("news", [])
+              except Exception as exc:
+                  lines.append(f"- {label}: unreadable ({exc})")
+                  return None
+
+              lines.append(f"- {label} count: {len(news)}")
+              if news:
+                  latest = news[0]
+                  lines.append(f"- {label} latest id: {latest.get('id', '')}")
+                  lines.append(f"- {label} latest date: {latest.get('date', '')}")
+                  lines.append(f"- {label} latest title: {latest.get('title', '') or '(empty)'}")
+              return news
+
+          before = describe_news(backup_path, "Before")
+          after = describe_news(news_path, "After")
+
+          if before is not None and after is not None:
+              changed = before != after
+              lines.append(f"- Data changed: {'yes' if changed else 'no'}")
+
+          if xhs_dir.exists():
+              xlsx_files = sorted(xhs_dir.glob("*.xlsx"), key=lambda p: p.stat().st_mtime, reverse=True)
+              if xlsx_files:
+                  latest = xlsx_files[0]
+                  mtime = datetime.fromtimestamp(latest.stat().st_mtime, tz=timezone.utc).isoformat()
+                  lines.append(f"- Latest xlsx: `{latest}`")
+                  lines.append(f"- Latest xlsx mtime (UTC): {mtime}")
+              else:
+                  lines.append("- Latest xlsx: none found")
+          else:
+              lines.append("- Latest xlsx dir: missing")
+
+          summary_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+          PY
+
+      - name: Upload XHS debug artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xhs-debug-run-${{ github.run_number }}
+          if-no-files-found: warn
+          compression-level: 0
+          path: |
+            /tmp/xhs-debug/xhs_pipeline.log
+            /tmp/xhs-debug/xhs_dir_listing.txt
+            /tmp/xhs-debug/news.before.json
+            public/news.json
+            MediaCrawler/data/xhs/*.xlsx
 
       - name: Commit & push if changed
         run: |
