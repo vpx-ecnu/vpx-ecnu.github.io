@@ -205,7 +205,10 @@ python3 run_xhs_pipeline_mediacrawler.py
 Inputs and dependencies:
 
 - `MediaCrawler/`
+- `secrets/xhs_creator_url.txt` or the `XHS_CREATOR_URL` environment variable
+  - Recommended: use the full creator profile URL, including `xsec_token` and `xsec_source`
 - `secrets/xhs_creator_id.txt` or the `XHS_CREATOR_ID` environment variable
+  - Backward-compatible alias; if you use it, prefer storing the same full creator profile URL instead of a bare user ID
 - `secrets/xhs_cookies.txt` or the `XHS_COOKIES` environment variable
 
 This script updates:

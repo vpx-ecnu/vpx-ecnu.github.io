@@ -37,6 +37,7 @@ jobs:
 
       - name: Run pipeline
         env:
+          XHS_CREATOR_URL: ${{ secrets.XHS_CREATOR_URL }}
           XHS_CREATOR_ID: ${{ secrets.XHS_CREATOR_ID }}
           XHS_COOKIES: ${{ secrets.XHS_COOKIES }}
         run: |

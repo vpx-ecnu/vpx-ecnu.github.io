@@ -7,8 +7,9 @@ import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qs
 from urllib.parse import quote
+from urllib.parse import urlparse
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -31,6 +32,7 @@ NEWS_VIDEO_DIR = ROOT / "public" / "xhs_news_videos"
 NEWS_VIDEO_WEB_PREFIX = "/xhs_news_videos"
 
 CREATOR_ID_FILE = ROOT / "secrets" / "xhs_creator_id.txt"
+CREATOR_URL_FILE = ROOT / "secrets" / "xhs_creator_url.txt"
 COOKIES_FILE = ROOT / "secrets" / "xhs_cookies.txt"
 
 
@@ -70,23 +72,93 @@ def read_value_from_file(path: Path) -> str:
 
 
 def get_runtime_credentials():
-    creator_id = (
-        os.getenv("XHS_CREATOR_ID", "").strip()
+    creator_target = (
+        os.getenv("XHS_CREATOR_URL", "").strip()
+        or read_value_from_file(CREATOR_URL_FILE)
+        or os.getenv("XHS_CREATOR_ID", "").strip()
         or read_value_from_file(CREATOR_ID_FILE)
     )
     cookies = (
         os.getenv("XHS_COOKIES", "").strip()
         or read_value_from_file(COOKIES_FILE)
     )
-    return creator_id, cookies
+    return creator_target, cookies
+
+
+def _extract_xhs_creator_url_parts(value: str):
+    parsed = urlparse(value)
+    path_parts = [part for part in parsed.path.split("/") if part]
+    if len(path_parts) < 3 or path_parts[:2] != ["user", "profile"]:
+        return "", "", ""
+    params = parse_qs(parsed.query)
+    user_id = path_parts[2].strip()
+    xsec_token = (params.get("xsec_token") or [""])[0].strip()
+    xsec_source = (params.get("xsec_source") or [""])[0].strip()
+    return user_id, xsec_token, xsec_source
+
+
+def describe_creator_target(value: str) -> str:
+    s = str(value or "").strip()
+    if not s:
+        return "missing"
+    if re.fullmatch(r"[0-9a-fA-F]{24}", s):
+        return f"bare user_id ({s[:6]}...{s[-4:]})"
+    if s.startswith(("http://", "https://")):
+        user_id, xsec_token, xsec_source = _extract_xhs_creator_url_parts(s)
+        if not user_id:
+            return "creator URL in unexpected format"
+        token_state = "yes" if xsec_token else "no"
+        source_state = xsec_source or "(missing)"
+        return (
+            f"profile URL user_id={user_id} "
+            f"has_xsec_token={token_state} xsec_source={source_state}"
+        )
+    return "unrecognized format"
+
+
+def validate_creator_target(value: str) -> str:
+    s = str(value or "").strip()
+    if not s:
+        raise ValueError(
+            "Missing creator target. Set XHS_CREATOR_URL (recommended) or "
+            "XHS_CREATOR_ID, or write it to secrets/xhs_creator_url.txt / "
+            "secrets/xhs_creator_id.txt"
+        )
+
+    if re.fullmatch(r"[0-9a-fA-F]{24}", s):
+        raise ValueError(
+            "XHS creator target is currently a bare user_id. MediaCrawler now "
+            "needs the full creator profile URL including xsec_token and "
+            "xsec_source to fetch creator posts. Update GitHub secret "
+            "XHS_CREATOR_URL (recommended) or XHS_CREATOR_ID to a full URL "
+            "copied from the creator homepage address bar."
+        )
+
+    parsed = urlparse(s)
+    if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+        raise ValueError(
+            "Invalid XHS creator target. Expected a full creator profile URL "
+            "like https://www.xiaohongshu.com/user/profile/<id>?xsec_token=...&xsec_source=..."
+        )
+
+    user_id, xsec_token, xsec_source = _extract_xhs_creator_url_parts(s)
+    if not user_id:
+        raise ValueError(
+            "Invalid XHS creator URL path. Expected /user/profile/<id> in the URL."
+        )
+    if not xsec_token or not xsec_source:
+        raise ValueError(
+            "XHS creator URL is missing xsec_token or xsec_source. Open the "
+            "creator homepage in a logged-in browser and copy the full URL "
+            "from the address bar."
+        )
+
+    return s
 
 
 def run_mediacrawler_once():
-    creator_id, cookies = get_runtime_credentials()
-    if not creator_id:
-        raise ValueError(
-            "Missing creator id. Set env XHS_CREATOR_ID or write it to secrets/xhs_creator_id.txt"
-        )
+    creator_target_raw, cookies = get_runtime_credentials()
+    creator_target = validate_creator_target(creator_target_raw)
     if not cookies:
         raise ValueError(
             "Missing cookies. Set env XHS_COOKIES or write it to secrets/xhs_cookies.txt"
@@ -94,6 +166,7 @@ def run_mediacrawler_once():
     if not MEDIA_CRAWLER_DIR.exists():
         raise FileNotFoundError(f"MediaCrawler dir not found: {MEDIA_CRAWLER_DIR}")
 
+    print(f"[XHS] creator target: {describe_creator_target(creator_target)}")
     cmd = [
         sys.executable,
         "main.py",
@@ -110,7 +183,7 @@ def run_mediacrawler_once():
         "--headless",
         "true",
         "--creator_id",
-        creator_id,
+        creator_target,
         "--cookies",
         cookies,
     ]
