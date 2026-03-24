@@ -5,15 +5,14 @@ import os
 import re
 import subprocess
 import sys
-from datetime import datetime
+from collections import Counter
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import parse_qs
 from urllib.parse import quote
 from urllib.parse import urlparse
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
-
-import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parent
@@ -23,7 +22,7 @@ MEDIA_CRAWLER_DIR = Path(
         str((ROOT / "MediaCrawler") if (ROOT / "MediaCrawler").exists() else "/data3/yl/MediaCrawler"),
     )
 )
-EXCEL_DIR = MEDIA_CRAWLER_DIR / "data" / "xhs"
+RAW_JSON_DIR = MEDIA_CRAWLER_DIR / "data" / "xhs" / "json"
 
 OUTPUT_NEWS_JSON = ROOT / "public" / "news.json"
 NEWS_IMG_DIR = ROOT / "public" / "xhs_news_images"
@@ -33,29 +32,50 @@ NEWS_VIDEO_WEB_PREFIX = "/xhs_news_videos"
 
 CREATOR_ID_FILE = ROOT / "secrets" / "xhs_creator_id.txt"
 CREATOR_URL_FILE = ROOT / "secrets" / "xhs_creator_url.txt"
+SEARCH_KEYWORDS_FILE = ROOT / "secrets" / "xhs_search_keywords.txt"
+TARGET_USER_ID_FILE = ROOT / "secrets" / "xhs_target_user_id.txt"
+TARGET_NICKNAMES_FILE = ROOT / "secrets" / "xhs_target_nicknames.txt"
 COOKIES_FILE = ROOT / "secrets" / "xhs_cookies.txt"
+
+DEFAULT_SEARCH_KEYWORDS = [
+    "VPX",
+    "VPXer们的快乐科研生活",
+]
+DEFAULT_TARGET_USER_ID = "63428cc7000000001901f9a4"
+DEFAULT_TARGET_NICKNAMES = [
+    "VPXer们的快乐科研生活",
+]
 
 
 def to_iso_date(v):
-    now = datetime.utcnow().isoformat() + "Z"
+    now = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     if v is None:
         return now
     if isinstance(v, str) and not v.strip():
         return now
 
+    if isinstance(v, datetime):
+        dt = v if v.tzinfo else v.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+
     try:
         ts = int(float(v))
         if ts > 10**12:
             ts = ts / 1000
-        return datetime.utcfromtimestamp(ts).isoformat() + "Z"
+        return datetime.fromtimestamp(ts, tz=timezone.utc).isoformat().replace("+00:00", "Z")
     except Exception:
         pass
 
     try:
-        d = pd.to_datetime(v, utc=True, errors="coerce")
-        if pd.isna(d):
-            return now
-        return d.to_pydatetime().isoformat().replace("+00:00", "Z")
+        s = str(v).strip()
+        if s.endswith("Z"):
+            s = s[:-1] + "+00:00"
+        dt = datetime.fromisoformat(s)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        else:
+            dt = dt.astimezone(timezone.utc)
+        return dt.isoformat().replace("+00:00", "Z")
     except Exception:
         return now
 
@@ -71,18 +91,35 @@ def read_value_from_file(path: Path) -> str:
     return ""
 
 
-def get_runtime_credentials():
-    creator_target = (
+def split_list_value(raw: str) -> list[str]:
+    if not raw:
+        return []
+    values = []
+    for part in re.split(r"[\n,，]+", raw):
+        s = part.strip()
+        if s:
+            values.append(s)
+    return values
+
+
+def unique_preserve_order(values: list[str]) -> list[str]:
+    seen = set()
+    unique = []
+    for value in values:
+        if value in seen:
+            continue
+        seen.add(value)
+        unique.append(value)
+    return unique
+
+
+def get_legacy_creator_target() -> str:
+    return (
         os.getenv("XHS_CREATOR_URL", "").strip()
         or read_value_from_file(CREATOR_URL_FILE)
         or os.getenv("XHS_CREATOR_ID", "").strip()
         or read_value_from_file(CREATOR_ID_FILE)
     )
-    cookies = (
-        os.getenv("XHS_COOKIES", "").strip()
-        or read_value_from_file(COOKIES_FILE)
-    )
-    return creator_target, cookies
 
 
 def _extract_xhs_creator_url_parts(value: str):
@@ -116,57 +153,83 @@ def describe_creator_target(value: str) -> str:
     return "unrecognized format"
 
 
-def validate_creator_target(value: str) -> str:
+def derive_user_id_from_creator_target(value: str) -> str:
     s = str(value or "").strip()
     if not s:
-        raise ValueError(
-            "Missing creator target. Set XHS_CREATOR_URL (recommended) or "
-            "XHS_CREATOR_ID, or write it to secrets/xhs_creator_url.txt / "
-            "secrets/xhs_creator_id.txt"
-        )
-
+        return ""
     if re.fullmatch(r"[0-9a-fA-F]{24}", s):
-        raise ValueError(
-            "XHS creator target is currently a bare user_id. MediaCrawler now "
-            "needs the full creator profile URL including xsec_token and "
-            "xsec_source to fetch creator posts. Update GitHub secret "
-            "XHS_CREATOR_URL (recommended) or XHS_CREATOR_ID to a full URL "
-            "copied from the creator homepage address bar."
+        return s
+    if s.startswith(("http://", "https://")):
+        user_id, _, _ = _extract_xhs_creator_url_parts(s)
+        return user_id
+    return ""
+
+
+def get_runtime_config() -> dict:
+    legacy_creator_target = get_legacy_creator_target()
+    target_user_id = (
+        os.getenv("XHS_TARGET_USER_ID", "").strip()
+        or read_value_from_file(TARGET_USER_ID_FILE)
+        or derive_user_id_from_creator_target(legacy_creator_target)
+        or DEFAULT_TARGET_USER_ID
+    )
+    target_nicknames = unique_preserve_order(
+        split_list_value(
+            os.getenv("XHS_TARGET_NICKNAMES", "").strip()
+            or read_value_from_file(TARGET_NICKNAMES_FILE)
         )
-
-    parsed = urlparse(s)
-    if parsed.scheme not in {"http", "https"} or not parsed.netloc:
-        raise ValueError(
-            "Invalid XHS creator target. Expected a full creator profile URL "
-            "like https://www.xiaohongshu.com/user/profile/<id>?xsec_token=...&xsec_source=..."
+    ) or list(DEFAULT_TARGET_NICKNAMES)
+    search_keywords = unique_preserve_order(
+        split_list_value(
+            os.getenv("XHS_SEARCH_KEYWORDS", "").strip()
+            or read_value_from_file(SEARCH_KEYWORDS_FILE)
         )
-
-    user_id, xsec_token, xsec_source = _extract_xhs_creator_url_parts(s)
-    if not user_id:
-        raise ValueError(
-            "Invalid XHS creator URL path. Expected /user/profile/<id> in the URL."
-        )
-    if not xsec_token or not xsec_source:
-        raise ValueError(
-            "XHS creator URL is missing xsec_token or xsec_source. Open the "
-            "creator homepage in a logged-in browser and copy the full URL "
-            "from the address bar."
-        )
-
-    return s
+    ) or list(DEFAULT_SEARCH_KEYWORDS)
+    cookies = (
+        os.getenv("XHS_COOKIES", "").strip()
+        or read_value_from_file(COOKIES_FILE)
+    )
+    return {
+        "legacy_creator_target": legacy_creator_target,
+        "target_user_id": target_user_id,
+        "target_nicknames": target_nicknames,
+        "search_keywords": search_keywords,
+        "cookies": cookies,
+    }
 
 
-def run_mediacrawler_once():
-    creator_target_raw, cookies = get_runtime_credentials()
-    creator_target = validate_creator_target(creator_target_raw)
+def cleanup_previous_search_outputs(raw_dir: Path):
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    removed = 0
+    for path in raw_dir.glob("search_*.json"):
+        path.unlink()
+        removed += 1
+    print(f"[XHS] cleared {removed} previous raw search JSON file(s) from {raw_dir}")
+
+
+def run_mediacrawler_once(runtime_config: dict):
+    cookies = runtime_config["cookies"]
     if not cookies:
         raise ValueError(
             "Missing cookies. Set env XHS_COOKIES or write it to secrets/xhs_cookies.txt"
         )
+    if not runtime_config["search_keywords"]:
+        raise ValueError(
+            "Missing search keywords. Set XHS_SEARCH_KEYWORDS or write secrets/xhs_search_keywords.txt"
+        )
     if not MEDIA_CRAWLER_DIR.exists():
         raise FileNotFoundError(f"MediaCrawler dir not found: {MEDIA_CRAWLER_DIR}")
 
-    print(f"[XHS] creator target: {describe_creator_target(creator_target)}")
+    cleanup_previous_search_outputs(RAW_JSON_DIR)
+    print("[XHS] pipeline mode: search -> raw json -> local filter")
+    print(f"[XHS] search keywords: {runtime_config['search_keywords']}")
+    print(f"[XHS] target user id: {runtime_config['target_user_id'] or '(none)'}")
+    print(f"[XHS] target nicknames: {runtime_config['target_nicknames'] or '(none)'}")
+    if runtime_config["legacy_creator_target"]:
+        print(
+            f"[XHS] legacy creator target (used only for user-id derivation): "
+            f"{describe_creator_target(runtime_config['legacy_creator_target'])}"
+        )
     cmd = [
         sys.executable,
         "main.py",
@@ -175,15 +238,17 @@ def run_mediacrawler_once():
         "--lt",
         "cookie",
         "--type",
-        "creator",
+        "search",
         "--save_data_option",
-        "excel",
+        "json",
         "--save_data_path",
         "data",
         "--headless",
         "true",
-        "--creator_id",
-        creator_target,
+        "--get_comment",
+        "false",
+        "--keywords",
+        ",".join(runtime_config["search_keywords"]),
         "--cookies",
         cookies,
     ]
@@ -367,11 +432,99 @@ def localize_videos(note_id: str, videos: list[str]):
     return primary, localized
 
 
-def find_latest_xlsx(excel_dir: Path) -> Path:
-    files = list(excel_dir.glob("*.xlsx"))
+def find_latest_raw_json(raw_json_dir: Path) -> Path:
+    files = list(raw_json_dir.glob("search_contents_*.json"))
     if not files:
-        raise FileNotFoundError(f"No .xlsx found in: {excel_dir}")
+        raise FileNotFoundError(f"No raw search JSON found in: {raw_json_dir}")
     return max(files, key=lambda p: p.stat().st_mtime)
+
+
+def load_raw_notes(raw_json_path: Path) -> list[dict]:
+    try:
+        payload = json.loads(raw_json_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Invalid raw JSON file {raw_json_path}: {e}") from e
+
+    if isinstance(payload, list):
+        return [item for item in payload if isinstance(item, dict)]
+    if isinstance(payload, dict):
+        return [payload]
+    raise ValueError(f"Unexpected raw JSON payload type in {raw_json_path}: {type(payload).__name__}")
+
+
+def get_row_note_id(row: dict) -> str:
+    return str(row.get("note_id", "") or row.get("笔记id", "")).strip()
+
+
+def get_row_time_value(row: dict):
+    return row.get("time", "") if row.get("time", "") != "" else row.get("上传时间", "")
+
+
+def row_sort_key(row: dict) -> str:
+    return to_iso_date(get_row_time_value(row))
+
+
+def normalize_nickname(value: str) -> str:
+    return re.sub(r"\s+", "", str(value or "")).casefold()
+
+
+def has_vpx_signal(row: dict) -> bool:
+    fields = [
+        row.get("title", ""),
+        row.get("desc", ""),
+        row.get("tag_list", ""),
+        row.get("source_keyword", ""),
+        row.get("nickname", ""),
+    ]
+    haystack = " ".join(str(field or "") for field in fields)
+    return re.search(r"vpx", haystack, flags=re.IGNORECASE) is not None
+
+
+def row_matches_target(row: dict, runtime_config: dict) -> bool:
+    target_user_id = str(runtime_config.get("target_user_id", "") or "").strip()
+    target_nicknames = {
+        normalize_nickname(value)
+        for value in runtime_config.get("target_nicknames", [])
+        if str(value or "").strip()
+    }
+
+    user_id = str(row.get("user_id", "") or "").strip()
+    nickname = normalize_nickname(row.get("nickname", ""))
+
+    if target_user_id and user_id == target_user_id:
+        return True
+    if target_nicknames and nickname in target_nicknames:
+        return True
+    if not target_user_id and not target_nicknames:
+        return has_vpx_signal(row)
+    return False
+
+
+def summarize_candidate_authors(rows: list[dict], limit: int = 5) -> str:
+    counter = Counter()
+    for row in rows:
+        nickname = str(row.get("nickname", "") or "(empty)").strip() or "(empty)"
+        user_id = str(row.get("user_id", "") or "(empty)").strip() or "(empty)"
+        counter[(nickname, user_id)] += 1
+    if not counter:
+        return "(none)"
+    parts = []
+    for (nickname, user_id), count in counter.most_common(limit):
+        parts.append(f"{nickname} [{user_id}] x{count}")
+    return "; ".join(parts)
+
+
+def filter_and_dedupe_raw_notes(raw_notes: list[dict], runtime_config: dict) -> list[dict]:
+    filtered = [row for row in raw_notes if row_matches_target(row, runtime_config)]
+    deduped = {}
+    for row in filtered:
+        note_id = get_row_note_id(row)
+        if not note_id:
+            continue
+        previous = deduped.get(note_id)
+        if not previous or row_sort_key(row) >= row_sort_key(previous):
+            deduped[note_id] = row
+    return list(deduped.values())
 
 
 def map_row_to_news(row: dict):
@@ -414,11 +567,22 @@ def map_row_to_news(row: dict):
     }
 
 
-def export_news_json(xlsx_path: Path, out_json_path: Path):
-    df = pd.read_excel(xlsx_path).fillna("")
+def export_news_json(raw_json_path: Path, out_json_path: Path, runtime_config: dict):
+    raw_notes = load_raw_notes(raw_json_path)
+    if not raw_notes:
+        raise ValueError(f"Raw search JSON is empty: {raw_json_path}")
+
+    filtered_rows = filter_and_dedupe_raw_notes(raw_notes, runtime_config)
+    if not filtered_rows:
+        raise ValueError(
+            "No searched notes matched the local filter. "
+            f"target_user_id={runtime_config.get('target_user_id') or '(none)'} "
+            f"target_nicknames={runtime_config.get('target_nicknames') or '(none)'} "
+            f"candidate_authors={summarize_candidate_authors(raw_notes)}"
+        )
+
     news = []
-    for _, row_ in df.iterrows():
-        row = row_.to_dict()
+    for row in filtered_rows:
         news.append(map_row_to_news(row))
 
     # optional: sort by date desc
@@ -434,22 +598,26 @@ def export_news_json(xlsx_path: Path, out_json_path: Path):
         json.dumps({"news": news}, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
-    print(f"Exported {len(news)} items -> {out_json_path}")
+    print(
+        f"Exported {len(news)} items from {len(filtered_rows)} filtered / "
+        f"{len(raw_notes)} raw search records -> {out_json_path}"
+    )
 
 
 def main():
+    runtime_config = get_runtime_config()
     if os.getenv("SKIP_MEDIACRAWLER", "").strip().lower() not in ("1", "true", "yes"):
-        run_mediacrawler_once()
+        run_mediacrawler_once(runtime_config)
     else:
         print("== 1) SKIP_MEDIACRAWLER enabled, skip crawling ==")
 
-    if not EXCEL_DIR.exists():
-        raise FileNotFoundError(f"MediaCrawler excel dir not found: {EXCEL_DIR}")
-    print("== 2) Finding latest xlsx ==")
-    latest_xlsx = find_latest_xlsx(EXCEL_DIR)
-    print(f"Using latest xlsx: {latest_xlsx}")
-    print("== 3) Exporting news.json + downloading images ==")
-    export_news_json(latest_xlsx, OUTPUT_NEWS_JSON)
+    if not RAW_JSON_DIR.exists():
+        raise FileNotFoundError(f"MediaCrawler raw JSON dir not found: {RAW_JSON_DIR}")
+    print("== 2) Finding latest raw search JSON ==")
+    latest_raw_json = find_latest_raw_json(RAW_JSON_DIR)
+    print(f"Using latest raw JSON: {latest_raw_json}")
+    print("== 3) Filtering raw notes and exporting news.json ==")
+    export_news_json(latest_raw_json, OUTPUT_NEWS_JSON, runtime_config)
 
 
 if __name__ == "__main__":

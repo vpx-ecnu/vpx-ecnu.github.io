@@ -32,13 +32,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r MediaCrawler/requirements.txt
-          pip install pandas openpyxl
           python -m playwright install chromium
 
       - name: Run pipeline
         env:
           XHS_CREATOR_URL: ${{ secrets.XHS_CREATOR_URL }}
           XHS_CREATOR_ID: ${{ secrets.XHS_CREATOR_ID }}
+          XHS_TARGET_USER_ID: ${{ secrets.XHS_TARGET_USER_ID }}
+          XHS_TARGET_NICKNAMES: ${{ secrets.XHS_TARGET_NICKNAMES }}
+          XHS_SEARCH_KEYWORDS: ${{ secrets.XHS_SEARCH_KEYWORDS }}
           XHS_COOKIES: ${{ secrets.XHS_COOKIES }}
         run: |
           set -eo pipefail
@@ -95,7 +97,7 @@ jobs:
           summary_path = Path(os.environ["GITHUB_STEP_SUMMARY"])
           backup_path = Path("/tmp/xhs-debug/news.before.json")
           news_path = Path("public/news.json")
-          xhs_dir = Path("MediaCrawler/data/xhs")
+          raw_dir = Path("MediaCrawler/data/xhs/json")
 
           lines = ["## XHS pipeline summary", ""]
 
@@ -125,17 +127,23 @@ jobs:
               changed = before != after
               lines.append(f"- Data changed: {'yes' if changed else 'no'}")
 
-          if xhs_dir.exists():
-              xlsx_files = sorted(xhs_dir.glob("*.xlsx"), key=lambda p: p.stat().st_mtime, reverse=True)
-              if xlsx_files:
-                  latest = xlsx_files[0]
+          if raw_dir.exists():
+              raw_files = sorted(raw_dir.glob("search_contents_*.json"), key=lambda p: p.stat().st_mtime, reverse=True)
+              if raw_files:
+                  latest = raw_files[0]
                   mtime = datetime.fromtimestamp(latest.stat().st_mtime, tz=timezone.utc).isoformat()
-                  lines.append(f"- Latest xlsx: `{latest}`")
-                  lines.append(f"- Latest xlsx mtime (UTC): {mtime}")
+                  lines.append(f"- Latest raw json: `{latest}`")
+                  lines.append(f"- Latest raw json mtime (UTC): {mtime}")
+                  try:
+                      payload = json.loads(latest.read_text(encoding="utf-8"))
+                      raw_count = len(payload) if isinstance(payload, list) else 1
+                      lines.append(f"- Latest raw json records: {raw_count}")
+                  except Exception as exc:
+                      lines.append(f"- Latest raw json records: unreadable ({exc})")
               else:
-                  lines.append("- Latest xlsx: none found")
+                  lines.append("- Latest raw json: none found")
           else:
-              lines.append("- Latest xlsx dir: missing")
+              lines.append("- Latest raw json dir: missing")
 
           summary_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
           PY
@@ -152,7 +160,7 @@ jobs:
             /tmp/xhs-debug/xhs_dir_listing.txt
             /tmp/xhs-debug/news.before.json
             public/news.json
-            MediaCrawler/data/xhs/*.xlsx
+            MediaCrawler/data/xhs/json/*.json
 
       - name: Commit & push if changed
         run: |

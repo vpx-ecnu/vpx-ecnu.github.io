@@ -205,17 +205,23 @@ python3 run_xhs_pipeline_mediacrawler.py
 Inputs and dependencies:
 
 - `MediaCrawler/`
-- `secrets/xhs_creator_url.txt` or the `XHS_CREATOR_URL` environment variable
-  - Recommended: use the full creator profile URL, including `xsec_token` and `xsec_source`
-- `secrets/xhs_creator_id.txt` or the `XHS_CREATOR_ID` environment variable
-  - Backward-compatible alias; if you use it, prefer storing the same full creator profile URL instead of a bare user ID
 - `secrets/xhs_cookies.txt` or the `XHS_COOKIES` environment variable
+- Optional: `secrets/xhs_search_keywords.txt` or `XHS_SEARCH_KEYWORDS`
+  - The pipeline now searches candidate notes first, stores raw search results as JSON, and then filters locally
+- Optional: `secrets/xhs_target_user_id.txt` or `XHS_TARGET_USER_ID`
+  - Used as the stable local filter for the VPX account after search results are fetched
+- Optional: `secrets/xhs_target_nicknames.txt` or `XHS_TARGET_NICKNAMES`
+  - Fallback nickname filter when needed
+- Optional legacy compatibility: `secrets/xhs_creator_url.txt` / `XHS_CREATOR_URL` or `secrets/xhs_creator_id.txt` / `XHS_CREATOR_ID`
+  - These are no longer used as the crawl entry point; if present, the script only derives a stable `user_id` from them
 
 This script updates:
 
 - `public/news.json`
 - `public/xhs_news_images/`
 - `public/xhs_news_videos/`
+
+The scheduled workflow also uploads the raw search JSON from `MediaCrawler/data/xhs/json/` as an artifact for debugging.
 
 ## GitHub Actions
 
