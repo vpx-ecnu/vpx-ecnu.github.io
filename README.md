@@ -209,7 +209,7 @@ Inputs and dependencies:
 - Optional: `secrets/xhs_search_keywords.txt` or `XHS_SEARCH_KEYWORDS`
   - The pipeline now searches candidate notes first, stores raw search results as JSON, and then filters locally
 - Optional: `secrets/xhs_target_user_id.txt` or `XHS_TARGET_USER_ID`
-  - Used as the stable local filter for the VPX account after search results are fetched
+  - Used as the stable local filter for the VPX account after search results are fetched; supports one or more IDs separated by commas or new lines
 - Optional: `secrets/xhs_target_nicknames.txt` or `XHS_TARGET_NICKNAMES`
   - Fallback nickname filter when needed
 - Optional legacy compatibility: `secrets/xhs_creator_url.txt` / `XHS_CREATOR_URL` or `secrets/xhs_creator_id.txt` / `XHS_CREATOR_ID`

@@ -41,7 +41,10 @@ DEFAULT_SEARCH_KEYWORDS = [
     "VPX",
     "VPXer们的快乐科研生活",
 ]
-DEFAULT_TARGET_USER_ID = "63428cc7000000001901f9a4"
+DEFAULT_TARGET_USER_IDS = [
+    "63428cc7000000001901f9a4",
+    "2901283856",
+]
 DEFAULT_TARGET_NICKNAMES = [
     "VPXer们的快乐科研生活",
 ]
@@ -167,12 +170,18 @@ def derive_user_id_from_creator_target(value: str) -> str:
 
 def get_runtime_config() -> dict:
     legacy_creator_target = get_legacy_creator_target()
-    target_user_id = (
-        os.getenv("XHS_TARGET_USER_ID", "").strip()
-        or read_value_from_file(TARGET_USER_ID_FILE)
-        or derive_user_id_from_creator_target(legacy_creator_target)
-        or DEFAULT_TARGET_USER_ID
+    target_user_ids = unique_preserve_order(
+        split_list_value(
+            os.getenv("XHS_TARGET_USER_ID", "").strip()
+            or read_value_from_file(TARGET_USER_ID_FILE)
+        )
     )
+    legacy_user_id = derive_user_id_from_creator_target(legacy_creator_target)
+    if legacy_user_id:
+        target_user_ids.append(legacy_user_id)
+    if not target_user_ids:
+        target_user_ids = list(DEFAULT_TARGET_USER_IDS)
+    target_user_ids = unique_preserve_order(target_user_ids)
     target_nicknames = unique_preserve_order(
         split_list_value(
             os.getenv("XHS_TARGET_NICKNAMES", "").strip()
@@ -191,7 +200,7 @@ def get_runtime_config() -> dict:
     )
     return {
         "legacy_creator_target": legacy_creator_target,
-        "target_user_id": target_user_id,
+        "target_user_ids": target_user_ids,
         "target_nicknames": target_nicknames,
         "search_keywords": search_keywords,
         "cookies": cookies,
@@ -223,7 +232,7 @@ def run_mediacrawler_once(runtime_config: dict):
     cleanup_previous_search_outputs(RAW_JSON_DIR)
     print("[XHS] pipeline mode: search -> raw json -> local filter")
     print(f"[XHS] search keywords: {runtime_config['search_keywords']}")
-    print(f"[XHS] target user id: {runtime_config['target_user_id'] or '(none)'}")
+    print(f"[XHS] target user ids: {runtime_config['target_user_ids'] or '(none)'}")
     print(f"[XHS] target nicknames: {runtime_config['target_nicknames'] or '(none)'}")
     if runtime_config["legacy_creator_target"]:
         print(
@@ -481,7 +490,11 @@ def has_vpx_signal(row: dict) -> bool:
 
 
 def row_matches_target(row: dict, runtime_config: dict) -> bool:
-    target_user_id = str(runtime_config.get("target_user_id", "") or "").strip()
+    target_user_ids = {
+        str(value or "").strip()
+        for value in runtime_config.get("target_user_ids", [])
+        if str(value or "").strip()
+    }
     target_nicknames = {
         normalize_nickname(value)
         for value in runtime_config.get("target_nicknames", [])
@@ -491,11 +504,11 @@ def row_matches_target(row: dict, runtime_config: dict) -> bool:
     user_id = str(row.get("user_id", "") or "").strip()
     nickname = normalize_nickname(row.get("nickname", ""))
 
-    if target_user_id and user_id == target_user_id:
+    if target_user_ids and user_id in target_user_ids:
         return True
     if target_nicknames and nickname in target_nicknames:
         return True
-    if not target_user_id and not target_nicknames:
+    if not target_user_ids and not target_nicknames:
         return has_vpx_signal(row)
     return False
 
@@ -576,7 +589,7 @@ def export_news_json(raw_json_path: Path, out_json_path: Path, runtime_config: d
     if not filtered_rows:
         raise ValueError(
             "No searched notes matched the local filter. "
-            f"target_user_id={runtime_config.get('target_user_id') or '(none)'} "
+            f"target_user_ids={runtime_config.get('target_user_ids') or '(none)'} "
             f"target_nicknames={runtime_config.get('target_nicknames') or '(none)'} "
             f"candidate_authors={summarize_candidate_authors(raw_notes)}"
         )
