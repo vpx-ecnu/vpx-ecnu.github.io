@@ -9,7 +9,9 @@
     "build:dev": "vite build --mode development",
     "generate:media": "python3 src/backend/generate_derived_media.py",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "studio:install": "npm --prefix src/server install",
+    "studio:server": "npm --prefix src/server run start"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

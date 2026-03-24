@@ -1,5 +1,7 @@
 # VPX Lab Website
 
+> Project note: this repository is also a vibe-coding experiment. The initial version of the site was scaffolded with Lovable, then revised by @uujianghhh, and it is currently being iterated with Codex-based vibe coding. Hope you enjoy it.
+
 This repository maintains the frontend for an academic lab website, along with several scripts and GitHub Actions workflows used to update publications, activities, and social/news content.
 
 The project is now maintained and deployed as a standard GitHub repository. The frontend is built with Vite + React + TypeScript + Tailwind CSS, and the site is deployed to GitHub Pages.
@@ -196,7 +198,30 @@ The current source is a designated Bilibili series API.
 
 ## Xiaohongshu/XHS News Updates
 
-The entry point for social/news updates is:
+Phase 1 of the local XHS studio uses the same Python pipeline, but the intended
+operator flow is now local rather than GitHub-hosted:
+
+1. Start the local studio API:
+
+```bash
+npm run studio:install
+npm run studio:server
+```
+
+2. Start the site locally:
+
+```bash
+npm run dev
+```
+
+3. Open `http://127.0.0.1:5173/studio/news` (or the port Vite prints)
+4. Run a local preview sync, review the draft, then merge / publish
+5. Optionally sync the freshest local XHS cookie cache back to GitHub secrets from the studio UI
+   - This uses the local GitHub CLI session, so run `gh auth login` on your machine first
+   - The studio keeps this separate from normal content `Commit and push`, so secret rotation and content publishing stay independently recoverable
+6. Commit and push when the local result looks right
+
+The pipeline entry point remains:
 
 ```bash
 python3 run_xhs_pipeline_mediacrawler.py
@@ -206,14 +231,16 @@ Inputs and dependencies:
 
 - `MediaCrawler/`
 - `secrets/xhs_cookies.txt` or the `XHS_COOKIES` environment variable
-- Optional: `secrets/xhs_search_keywords.txt` or `XHS_SEARCH_KEYWORDS`
-  - The pipeline now searches candidate notes first, stores raw search results as JSON, and then filters locally
+- Preferred: `secrets/xhs_creator_url.txt` or `XHS_CREATOR_URL`
+  - The local studio now uses creator mode as the primary sync strategy; a full creator profile URL is preferred because it can carry the freshest `xsec` context
+- Fallback: `secrets/xhs_creator_id.txt` or `XHS_CREATOR_ID`
+  - A 24-character internal creator user ID also works when a full profile URL is not available
 - Optional: `secrets/xhs_target_user_id.txt` or `XHS_TARGET_USER_ID`
-  - Used as the stable local filter for the VPX account after search results are fetched; supports one or more IDs separated by commas or new lines
+  - Used as the stable local filter and identity contract for the VPX account; supports one or more IDs separated by commas or new lines
 - Optional: `secrets/xhs_target_nicknames.txt` or `XHS_TARGET_NICKNAMES`
   - Fallback nickname filter when needed
-- Optional legacy compatibility: `secrets/xhs_creator_url.txt` / `XHS_CREATOR_URL` or `secrets/xhs_creator_id.txt` / `XHS_CREATOR_ID`
-  - These are no longer used as the crawl entry point; if present, the script only derives a stable `user_id` from them
+- Optional: `secrets/xhs_search_keywords.txt` or `XHS_SEARCH_KEYWORDS`
+  - Search mode still exists for debugging, but it is no longer the primary studio flow
 
 This script updates:
 
@@ -221,7 +248,33 @@ This script updates:
 - `public/xhs_news_images/`
 - `public/xhs_news_videos/`
 
-The scheduled workflow also uploads the raw search JSON from `MediaCrawler/data/xhs/json/` as an artifact for debugging.
+Publishing from the local studio now merges by note `id`:
+
+- New Xiaohongshu note IDs are added to `public/news.json`
+- Existing items are kept unchanged, so manual edits in `public/news.json` are not overwritten by a later sync
+
+The local studio also writes preview and operator state under:
+
+- `.local/studio/news/`
+
+During local preview sync, the studio also refreshes:
+
+- `secrets/xhs_cookies.txt`
+  - exported from the local browser session after a successful Xiaohongshu login
+  - stores the full current cookie string, not just `web_session`
+  - can then be synced back into the repository's `XHS_COOKIES` GitHub secret from the studio UI
+
+The GitHub credential sync in the studio intentionally updates only the stable pieces needed for the backup workflow:
+
+- `XHS_COOKIES`
+- `XHS_CREATOR_ID`
+- `XHS_CREATOR_URL`
+  - written with the stable creator user ID to override any stale URL-style secret without reintroducing volatile `xsec_token` values
+- `XHS_TARGET_USER_ID`
+- `XHS_TARGET_NICKNAMES`
+
+The GitHub workflow remains available for low-frequency backup runs, but the
+primary Xiaohongshu operator flow is the local studio.
 
 ## GitHub Actions
 
@@ -234,7 +287,7 @@ The workflows most directly related to site maintenance are:
 - `.github/workflows/update-reading-club.yml`
   - Updates reading club data and covers daily
 - `.github/workflows/update_xhs_news.yml`
-  - Updates social/news content daily and can also be triggered manually
+  - Low-frequency backup XHS path; the normal news publishing path is now local studio -> local verification -> git push -> deploy
 
 The deployment workflow copies `dist/index.html` to `dist/404.html` after build time so SPA route refreshes work correctly on GitHub Pages.
 
@@ -263,4 +316,4 @@ For most changes, the recommended sequence is:
 
 - `dist/` is a build artifact and is not intended for manual editing
 - Some files under `public/publications/` are generated outputs, so publication-pipeline changes should always be checked against the generated results
-- GitHub is the only supported maintenance and deployment entry point for this repository, and this README is intended to reflect the current codebase and workflows
+- Most site maintenance can still be done through normal git-based edits, but XHS news publishing is now designed around the local studio workflow rather than GitHub-hosted crawling

@@ -12,6 +12,7 @@ const People = lazy(() => import("./pages/People"));
 const Activities = lazy(() => import("./pages/Activities"));
 const Join = lazy(() => import("./pages/Join"));
 const Intranet = lazy(() => import("./pages/Intranet"));
+const StudioNews = lazy(() => import("./pages/StudioNews"));
 
 const RouteFallback = () => (
   <div className="container px-4 py-12 text-sm text-muted-foreground md:px-6">
@@ -91,6 +92,14 @@ const App = () => (
           element={
             <RoutedPage>
               <Intranet />
+            </RoutedPage>
+          }
+        />
+        <Route
+          path="/studio/news"
+          element={
+            <RoutedPage>
+              <StudioNews />
             </RoutedPage>
           }
         />

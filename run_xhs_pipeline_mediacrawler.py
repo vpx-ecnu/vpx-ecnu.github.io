@@ -24,7 +24,6 @@ MEDIA_CRAWLER_DIR = Path(
 )
 RAW_JSON_DIR = MEDIA_CRAWLER_DIR / "data" / "xhs" / "json"
 
-OUTPUT_NEWS_JSON = ROOT / "public" / "news.json"
 NEWS_IMG_DIR = ROOT / "public" / "xhs_news_images"
 NEWS_IMG_WEB_PREFIX = "/xhs_news_images"
 NEWS_VIDEO_DIR = ROOT / "public" / "xhs_news_videos"
@@ -48,6 +47,20 @@ DEFAULT_TARGET_USER_IDS = [
 DEFAULT_TARGET_NICKNAMES = [
     "VPXer们的快乐科研生活",
 ]
+DEFAULT_CRAWL_MODE = "creator"
+DEFAULT_MAX_NOTES_COUNT = 200
+
+
+def env_flag(name: str, default: bool) -> bool:
+    raw = os.getenv(name, "").strip().lower()
+    if not raw:
+        return default
+    return raw in {"1", "true", "yes", "y", "on"}
+
+
+OUTPUT_NEWS_JSON = Path(
+    os.getenv("XHS_OUTPUT_NEWS_JSON", str(ROOT / "public" / "news.json"))
+).expanduser()
 
 
 def to_iso_date(v):
@@ -168,6 +181,26 @@ def derive_user_id_from_creator_target(value: str) -> str:
     return ""
 
 
+def is_creator_user_id(value: str) -> bool:
+    return re.fullmatch(r"[0-9a-fA-F]{24}", str(value or "").strip()) is not None
+
+
+def get_creator_targets(legacy_creator_target: str, target_user_ids: list[str]) -> list[str]:
+    if legacy_creator_target:
+        return [legacy_creator_target]
+    for user_id in target_user_ids:
+        if is_creator_user_id(user_id):
+            return [user_id]
+    return []
+
+
+def get_crawl_mode() -> str:
+    mode = os.getenv("XHS_CRAWLER_MODE", "").strip().lower() or DEFAULT_CRAWL_MODE
+    if mode not in {"creator", "search"}:
+        raise ValueError(f"Unsupported XHS_CRAWLER_MODE={mode!r}. Use 'creator' or 'search'.")
+    return mode
+
+
 def get_runtime_config() -> dict:
     legacy_creator_target = get_legacy_creator_target()
     target_user_ids = unique_preserve_order(
@@ -198,40 +231,70 @@ def get_runtime_config() -> dict:
         os.getenv("XHS_COOKIES", "").strip()
         or read_value_from_file(COOKIES_FILE)
     )
+    crawl_mode = get_crawl_mode()
+    login_type = os.getenv("XHS_LOGIN_TYPE", "").strip().lower() or "cookie"
+    headless = env_flag("XHS_HEADLESS", True)
+    localize_media = env_flag("XHS_LOCALIZE_MEDIA", True)
+    raw_json_path = os.getenv("XHS_RAW_JSON_PATH", "").strip()
+    max_notes_count = int(os.getenv("XHS_MAX_NOTES_COUNT", str(DEFAULT_MAX_NOTES_COUNT)).strip() or DEFAULT_MAX_NOTES_COUNT)
+    creator_targets = get_creator_targets(legacy_creator_target, target_user_ids)
     return {
+        "crawl_mode": crawl_mode,
         "legacy_creator_target": legacy_creator_target,
+        "creator_targets": creator_targets,
         "target_user_ids": target_user_ids,
         "target_nicknames": target_nicknames,
         "search_keywords": search_keywords,
         "cookies": cookies,
+        "login_type": login_type,
+        "headless": headless,
+        "localize_media": localize_media,
+        "raw_json_path": raw_json_path,
+        "max_notes_count": max_notes_count,
     }
 
 
-def cleanup_previous_search_outputs(raw_dir: Path):
+def cleanup_previous_raw_outputs(raw_dir: Path, crawl_mode: str):
     raw_dir.mkdir(parents=True, exist_ok=True)
     removed = 0
-    for path in raw_dir.glob("search_*.json"):
+    for path in raw_dir.glob(f"{crawl_mode}_*.json"):
         path.unlink()
         removed += 1
-    print(f"[XHS] cleared {removed} previous raw search JSON file(s) from {raw_dir}")
+    print(f"[XHS] cleared {removed} previous raw {crawl_mode} JSON file(s) from {raw_dir}")
 
 
 def run_mediacrawler_once(runtime_config: dict):
     cookies = runtime_config["cookies"]
-    if not cookies:
+    crawl_mode = runtime_config["crawl_mode"]
+    login_type = runtime_config["login_type"]
+    headless = runtime_config["headless"]
+    if login_type not in {"cookie", "qrcode", "phone"}:
+        raise ValueError(
+            f"Unsupported XHS_LOGIN_TYPE={login_type!r}. Use cookie, qrcode, or phone."
+        )
+    if login_type == "cookie" and not cookies:
         raise ValueError(
             "Missing cookies. Set env XHS_COOKIES or write it to secrets/xhs_cookies.txt"
         )
-    if not runtime_config["search_keywords"]:
+    if login_type == "qrcode" and headless:
+        print("[XHS] qrcode login requested; forcing headless=false for local interactive login")
+        headless = False
+    if crawl_mode == "search" and not runtime_config["search_keywords"]:
         raise ValueError(
             "Missing search keywords. Set XHS_SEARCH_KEYWORDS or write secrets/xhs_search_keywords.txt"
+        )
+    if crawl_mode == "creator" and not runtime_config["creator_targets"]:
+        raise ValueError(
+            "Missing creator target. Set XHS_CREATOR_URL/XHS_CREATOR_ID or write "
+            "secrets/xhs_creator_url.txt or secrets/xhs_creator_id.txt"
         )
     if not MEDIA_CRAWLER_DIR.exists():
         raise FileNotFoundError(f"MediaCrawler dir not found: {MEDIA_CRAWLER_DIR}")
 
-    cleanup_previous_search_outputs(RAW_JSON_DIR)
-    print("[XHS] pipeline mode: search -> raw json -> local filter")
-    print(f"[XHS] search keywords: {runtime_config['search_keywords']}")
+    cleanup_previous_raw_outputs(RAW_JSON_DIR, crawl_mode)
+    print(f"[XHS] pipeline mode: {crawl_mode} -> raw json -> local filter")
+    print(f"[XHS] login type: {login_type}")
+    print(f"[XHS] max notes count: {runtime_config['max_notes_count']}")
     print(f"[XHS] target user ids: {runtime_config['target_user_ids'] or '(none)'}")
     print(f"[XHS] target nicknames: {runtime_config['target_nicknames'] or '(none)'}")
     if runtime_config["legacy_creator_target"]:
@@ -239,30 +302,45 @@ def run_mediacrawler_once(runtime_config: dict):
             f"[XHS] legacy creator target (used only for user-id derivation): "
             f"{describe_creator_target(runtime_config['legacy_creator_target'])}"
         )
+    if crawl_mode == "creator":
+        print(f"[XHS] creator targets: {runtime_config['creator_targets']}")
+    else:
+        print(f"[XHS] search keywords: {runtime_config['search_keywords']}")
+
     cmd = [
         sys.executable,
         "main.py",
         "--platform",
         "xhs",
         "--lt",
-        "cookie",
+        login_type,
         "--type",
-        "search",
+        crawl_mode,
         "--save_data_option",
         "json",
         "--save_data_path",
         "data",
         "--headless",
-        "true",
+        "true" if headless else "false",
         "--get_comment",
         "false",
-        "--keywords",
-        ",".join(runtime_config["search_keywords"]),
-        "--cookies",
-        cookies,
     ]
+    if crawl_mode == "search":
+        cmd.extend([
+            "--keywords",
+            ",".join(runtime_config["search_keywords"]),
+        ])
+    else:
+        cmd.extend([
+            "--creator_id",
+            ",".join(runtime_config["creator_targets"]),
+        ])
+    if login_type == "cookie" and cookies:
+        cmd.extend(["--cookies", cookies])
     print("== 1) Running MediaCrawler ==")
-    subprocess.run(cmd, cwd=str(MEDIA_CRAWLER_DIR), check=True)
+    child_env = os.environ.copy()
+    child_env["CRAWLER_MAX_NOTES_COUNT"] = str(runtime_config["max_notes_count"])
+    subprocess.run(cmd, cwd=str(MEDIA_CRAWLER_DIR), check=True, env=child_env)
 
 
 def parse_image_list(raw):
@@ -389,6 +467,13 @@ def localize_images(note_id: str, images: list[str]):
     return cover, localized
 
 
+def prepare_images_for_output(note_id: str, images: list[str], localize_media: bool):
+    if localize_media:
+        return localize_images(note_id, images)
+    cover = images[0] if images else ""
+    return cover, images
+
+
 def _guess_video_ext(url: str) -> str:
     path = urlparse(url).path or ""
     ext = Path(path).suffix.lower()
@@ -441,10 +526,28 @@ def localize_videos(note_id: str, videos: list[str]):
     return primary, localized
 
 
-def find_latest_raw_json(raw_json_dir: Path) -> Path:
-    files = list(raw_json_dir.glob("search_contents_*.json"))
+def prepare_videos_for_output(note_id: str, videos: list[str], localize_media: bool):
+    if localize_media:
+        return localize_videos(note_id, videos)
+    primary = videos[0] if videos else ""
+    return primary, videos
+
+
+def resolve_raw_json_path(raw_json_dir: Path, configured_path: str, crawl_mode: str) -> Path:
+    if configured_path:
+        path = Path(configured_path).expanduser()
+        if not path.is_absolute():
+            path = (ROOT / path).resolve()
+        if not path.exists():
+            raise FileNotFoundError(f"Configured XHS_RAW_JSON_PATH not found: {path}")
+        return path
+    return find_latest_raw_json(raw_json_dir, crawl_mode)
+
+
+def find_latest_raw_json(raw_json_dir: Path, crawl_mode: str) -> Path:
+    files = list(raw_json_dir.glob(f"{crawl_mode}_contents_*.json"))
     if not files:
-        raise FileNotFoundError(f"No raw search JSON found in: {raw_json_dir}")
+        raise FileNotFoundError(f"No raw {crawl_mode} JSON found in: {raw_json_dir}")
     return max(files, key=lambda p: p.stat().st_mtime)
 
 
@@ -540,7 +643,7 @@ def filter_and_dedupe_raw_notes(raw_notes: list[dict], runtime_config: dict) -> 
     return list(deduped.values())
 
 
-def map_row_to_news(row: dict):
+def map_row_to_news(row: dict, localize_media: bool):
     note_id = str(row.get("note_id", "") or row.get("笔记id", "")).strip() or "unknown"
     desc = str(row.get("desc", "") or row.get("描述", "")).strip()
     source_url = str(row.get("note_url", "") or row.get("笔记url", "")).strip()
@@ -548,14 +651,14 @@ def map_row_to_news(row: dict):
 
     images_raw = row.get("image_list", "") if row.get("image_list", "") != "" else row.get("图片地址url列表", "")
     images = parse_image_list(images_raw)
-    cover_local, images_local = localize_images(note_id, images)
+    cover_local, images_local = prepare_images_for_output(note_id, images, localize_media)
     videos_raw = (
         row.get("video_url", "")
         if row.get("video_url", "") != ""
         else (row.get("视频地址url", "") if row.get("视频地址url", "") != "" else row.get("video_addr", ""))
     )
     videos = parse_video_list(videos_raw)
-    video_local, videos_local = localize_videos(note_id, videos)
+    video_local, videos_local = prepare_videos_for_output(note_id, videos, localize_media)
 
     # 规则：
     # 1) 如果 desc 含 #vpx，则取其后的文本并翻译成英文放在 title（不含 #vpx）。
@@ -583,12 +686,12 @@ def map_row_to_news(row: dict):
 def export_news_json(raw_json_path: Path, out_json_path: Path, runtime_config: dict):
     raw_notes = load_raw_notes(raw_json_path)
     if not raw_notes:
-        raise ValueError(f"Raw search JSON is empty: {raw_json_path}")
+        raise ValueError(f"Raw {runtime_config['crawl_mode']} JSON is empty: {raw_json_path}")
 
     filtered_rows = filter_and_dedupe_raw_notes(raw_notes, runtime_config)
     if not filtered_rows:
         raise ValueError(
-            "No searched notes matched the local filter. "
+            f"No {runtime_config['crawl_mode']} notes matched the local filter. "
             f"target_user_ids={runtime_config.get('target_user_ids') or '(none)'} "
             f"target_nicknames={runtime_config.get('target_nicknames') or '(none)'} "
             f"candidate_authors={summarize_candidate_authors(raw_notes)}"
@@ -596,7 +699,7 @@ def export_news_json(raw_json_path: Path, out_json_path: Path, runtime_config: d
 
     news = []
     for row in filtered_rows:
-        news.append(map_row_to_news(row))
+        news.append(map_row_to_news(row, localize_media=runtime_config["localize_media"]))
 
     # optional: sort by date desc
     news.sort(
@@ -613,7 +716,7 @@ def export_news_json(raw_json_path: Path, out_json_path: Path, runtime_config: d
     )
     print(
         f"Exported {len(news)} items from {len(filtered_rows)} filtered / "
-        f"{len(raw_notes)} raw search records -> {out_json_path}"
+        f"{len(raw_notes)} raw {runtime_config['crawl_mode']} records -> {out_json_path}"
     )
 
 
@@ -626,10 +729,16 @@ def main():
 
     if not RAW_JSON_DIR.exists():
         raise FileNotFoundError(f"MediaCrawler raw JSON dir not found: {RAW_JSON_DIR}")
-    print("== 2) Finding latest raw search JSON ==")
-    latest_raw_json = find_latest_raw_json(RAW_JSON_DIR)
+    print("== 2) Finding latest raw XHS JSON ==")
+    latest_raw_json = resolve_raw_json_path(
+        RAW_JSON_DIR,
+        runtime_config["raw_json_path"],
+        runtime_config["crawl_mode"],
+    )
     print(f"Using latest raw JSON: {latest_raw_json}")
     print("== 3) Filtering raw notes and exporting news.json ==")
+    print(f"Writing output JSON to: {OUTPUT_NEWS_JSON}")
+    print(f"Localize media: {runtime_config['localize_media']}")
     export_news_json(latest_raw_json, OUTPUT_NEWS_JSON, runtime_config)
 
 

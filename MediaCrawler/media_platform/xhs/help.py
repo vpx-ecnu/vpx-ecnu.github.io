@@ -328,23 +328,25 @@ def parse_creator_info_from_url(url: str) -> CreatorUrlInfo:
     Returns:
         CreatorUrlInfo: Object containing user_id, xsec_token, xsec_source
     """
+    normalized = str(url or "").strip()
+
     # If it's a pure ID format (24 hexadecimal characters), return directly
-    if len(url) == 24 and all(c in "0123456789abcdef" for c in url):
-        return CreatorUrlInfo(user_id=url, xsec_token="", xsec_source="")
+    if len(normalized) == 24 and all(c in "0123456789abcdef" for c in normalized.lower()):
+        return CreatorUrlInfo(user_id=normalized, xsec_token="", xsec_source="pc_feed")
 
     # Extract user_id from URL: /user/profile/xxx
     import re
     user_pattern = r'/user/profile/([^/?]+)'
-    match = re.search(user_pattern, url)
+    match = re.search(user_pattern, normalized)
     if match:
         user_id = match.group(1)
         # Extract xsec_token and xsec_source parameters
-        params = extract_url_params_to_dict(url)
+        params = extract_url_params_to_dict(normalized)
         xsec_token = params.get("xsec_token", "")
-        xsec_source = params.get("xsec_source", "")
+        xsec_source = params.get("xsec_source", "") or "pc_feed"
         return CreatorUrlInfo(user_id=user_id, xsec_token=xsec_token, xsec_source=xsec_source)
 
-    raise ValueError(f"Unable to parse creator info from URL: {url}")
+    raise ValueError(f"Unable to parse creator info from URL: {normalized}")
 
 
 if __name__ == '__main__':

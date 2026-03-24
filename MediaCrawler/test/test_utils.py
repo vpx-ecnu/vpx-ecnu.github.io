@@ -28,3 +28,10 @@ def test_convert_cookies():
     cookie_dict = utils.convert_str_cookie_to_dict(xhs_cookies)
     assert cookie_dict.get("webId") == "1190c4d3cxxxx125xxx"
     assert cookie_dict.get("a1") == "x000101360"
+
+
+def test_convert_cookies_with_equals_in_value():
+    xhs_cookies = "web_session=abc==; a1=x000101360; "
+    cookie_dict = utils.convert_str_cookie_to_dict(xhs_cookies)
+    assert cookie_dict.get("web_session") == "abc=="
+    assert cookie_dict.get("a1") == "x000101360"

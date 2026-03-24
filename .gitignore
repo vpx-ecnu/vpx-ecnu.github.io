@@ -30,3 +30,6 @@ secrets/*.txt
 # Local generated review artifacts
 output/
 tmp/
+.local/
+.venv-xhs/
+.venv-xhs310/

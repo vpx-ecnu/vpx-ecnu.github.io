@@ -61,6 +61,24 @@ class XiaoHongShuCrawler(AbstractCrawler):
         self.cdp_manager = None
         self.ip_proxy_pool = None  # Proxy IP pool for automatic proxy refresh
 
+    async def export_runtime_cookies_if_requested(self) -> None:
+        export_path = os.getenv("XHS_COOKIE_EXPORT_PATH", "").strip()
+        if not export_path:
+            return
+
+        cookie_str, _ = utils.convert_cookies(await self.browser_context.cookies())
+        if not cookie_str:
+            utils.logger.warning("[XiaoHongShuCrawler.export_runtime_cookies_if_requested] No cookies available to export")
+            return
+
+        os.makedirs(os.path.dirname(export_path), exist_ok=True)
+        with open(export_path, "w", encoding="utf-8") as cookie_file:
+            cookie_file.write(cookie_str + "\n")
+        utils.logger.info(
+            "[XiaoHongShuCrawler.export_runtime_cookies_if_requested] Exported runtime cookies "
+            f"to {export_path}"
+        )
+
     async def start(self) -> None:
         playwright_proxy_format, httpx_proxy_format = None, None
         if config.ENABLE_IP_PROXY:
@@ -106,6 +124,7 @@ class XiaoHongShuCrawler(AbstractCrawler):
                 )
                 await login_obj.begin()
                 await self.xhs_client.update_cookies(browser_context=self.browser_context)
+            await self.export_runtime_cookies_if_requested()
 
             crawler_type_var.set(config.CRAWLER_TYPE)
             if config.CRAWLER_TYPE == "search":
@@ -177,8 +196,11 @@ class XiaoHongShuCrawler(AbstractCrawler):
                     # Sleep after each page navigation
                     await asyncio.sleep(config.CRAWLER_MAX_SLEEP_SEC)
                     utils.logger.info(f"[XiaoHongShuCrawler.search] Sleeping for {config.CRAWLER_MAX_SLEEP_SEC} seconds after page {page-1}")
-                except DataFetchError:
-                    utils.logger.error("[XiaoHongShuCrawler.search] Get note detail error")
+                except (DataFetchError, RetryError) as ex:
+                    utils.logger.error(
+                        f"[XiaoHongShuCrawler.search] Search request failed for keyword={keyword}, "
+                        f"page={page}: {ex}"
+                    )
                     break
 
     async def get_creators_and_notes(self) -> None:
@@ -188,6 +210,7 @@ class XiaoHongShuCrawler(AbstractCrawler):
             try:
                 # Parse creator URL to get user_id and security tokens
                 creator_info: CreatorUrlInfo = parse_creator_info_from_url(creator_url)
+                creator_info.xsec_source = creator_info.xsec_source or "pc_feed"
                 utils.logger.info(f"[XiaoHongShuCrawler.get_creators_and_notes] Parse creator URL info: {creator_info}")
                 user_id = creator_info.user_id
 

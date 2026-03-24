@@ -34,7 +34,7 @@ Priorities:
   - Homepage / publication cards: `public/publications/project_publications.json`
   - Homepage people/stat counts: `public/people/faculty.json`, `public/people/phd.json`, `public/people/graduate.json`, `public/people/part-time.json`, `public/people/Undergraduate.json`
   - Publication pipeline: `src/backend/` scripts plus `.github/workflows/update_publications.yml`
-  - News pipeline: `run_xhs_pipeline_mediacrawler.py` plus `.github/workflows/update_xhs_news.yml`
+  - News pipeline: `src/pages/StudioNews.tsx`, `src/server/index.js`, `run_xhs_pipeline_mediacrawler.py`, and `.github/workflows/update_xhs_news.yml`
   - Reading Club pipeline: `scripts/update_reading_club.py` plus `.github/workflows/update-reading-club.yml`
 - Escalate to broader repo exploration only when the task actually changes architecture, routing, build/deploy behavior, or a data source contract.
 
@@ -55,6 +55,14 @@ Priorities:
   - `public/xhs_news_videos/`
 - `src/data/activities.ts` is currently legacy/static draft data and is not the active source for the homepage or `/activities` page. Do not update it unless you are intentionally reconnecting that file to the UI.
 - When modifying homepage or `/activities` news presentation, prefer preserving the shared `public/news.json` contract rather than introducing duplicate page-specific datasets.
+- The primary XHS operator workflow is local studio:
+  - `/studio/news` for preview, merge, local verification, git push, and optional GitHub secret sync
+  - `run_xhs_pipeline_mediacrawler.py` for the underlying creator-mode crawl / transform
+  - `.github/workflows/update_xhs_news.yml` as a low-frequency backup path, not the primary day-to-day publishing path
+- Local studio publishing is intentionally merge-based:
+  - add new Xiaohongshu note IDs into `public/news.json`
+  - preserve existing entries and manual edits for matching IDs
+- Local studio can refresh `secrets/xhs_cookies.txt` from a successful browser login and optionally sync safe GitHub secrets (`XHS_COOKIES`, stable creator ID, target IDs) through the local `gh` CLI session. Do not treat volatile `xsec_token` values as durable repo configuration.
 
 ## Publication Workflow
 Treat the publications pipeline as a maintained content workflow, not a generic scraper.
