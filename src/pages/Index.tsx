@@ -324,28 +324,41 @@ const Index = () => {
 
         <p>
           <span className="font-semibold text-white">
-            Visual Perception + X (VPX)
+            The Visual Perception + X (VPX) group at East China Normal University
           </span>{" "}
-          develops visual perception for{" "}
+          takes visual perception as its foundation and crosses disciplinary
+          boundaries - the "X" - to pursue{" "}
           <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
-            cross-disciplinary research
+            Embodied AI
           </span>
-          , focusing on extracting{" "}
-          <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
-            meaningful information
-          </span>{" "}
-          and{" "}
-          <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
-            structured representations
-          </span>{" "}
-          from videos and raw streaming sources.
+          .
         </p>
 
         <p>
-          Our research explores visual intelligence from perception to generation and
-          interaction, with a focus on{" "}
+          Our current focus is on{" "}
           <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
-            Embodied AI, AIGC, 3D Computer Graphics, and Video Analysis
+            Temporal Intelligence and Embodied Simulation
+          </span>
+          : endowing AI with the capacity to experience and simulate the world
+          dynamically, not merely reason about it statically.
+        </p>
+
+        <p>
+          Inspired by how the human brain continuously perceives temporal streams,
+          constructs 3D spatial models, imagines unseen scenarios, and acts through
+          the body, our research spans four interconnected pillars:{" "}
+          <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
+            temporal perception, spatial simulation, imaginative generation, and
+            physical interaction
+          </span>{" "}
+          .
+        </p>
+
+        <p>
+          We bridge computer vision, generative AI, and robotics under a unified
+          cognitive framework, building{" "}
+          <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
+            the experiential intelligence that today's analytical AI still lacks
           </span>
           .
         </p>

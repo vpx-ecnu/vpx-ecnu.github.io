@@ -113,79 +113,67 @@ const About = () => {
               <div className="flex flex-col items-start gap-8 lg:flex-row lg:gap-10">
                 <div className="lg:w-[62%]">
                   <div className="rounded-2xl border border-border/60 bg-background/90 p-6 shadow-[0_22px_70px_-48px_rgba(0,0,0,0.28)] md:p-8">
-                    <p className="mb-6 text-base leading-relaxed text-muted-foreground md:text-lg">
-                      The{" "}
-                      <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                        Visual Perception + X (VPX) Group
-                      </span>{" "}
-                      is a research group led by{" "}
-                      <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                        Prof. Yang Li
-                      </span>{" "}
-                      within the{" "}
-                      <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                        School of Computer Science and Technology
-                      </span>{" "}
-                      at{" "}
-                      <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                        East China Normal University (ECNU)
-                      </span>
-                      .
-                    </p>
+                    <div className="space-y-5 text-base leading-relaxed text-muted-foreground md:text-lg">
+                      <p>
+                        Based at the{" "}
+                        <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
+                          School of Computer Science and Technology, East China
+                          Normal University
+                        </span>
+                        , the{" "}
+                        <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
+                          Visual Perception + X (VPX) group
+                        </span>{" "}
+                        takes visual perception as its foundation and uses "X" to
+                        cross disciplinary boundaries in pursuit of{" "}
+                        <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
+                          Embodied AI
+                        </span>
+                        .
+                      </p>
 
-                    <p className="mb-6 text-base leading-relaxed text-muted-foreground md:text-lg">
-                      Our mission is to advance{" "}
-                      <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                        visual perception for cross-disciplinary research
-                      </span>
-                      , focusing on extracting{" "}
-                      <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                        meaningful information
-                      </span>{" "}
-                      and{" "}
-                      <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                        structured data
-                      </span>{" "}
-                      from videos and raw streaming sources.
-                    </p>
+                      <p>
+                        Our current focus is on{" "}
+                        <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
+                          Temporal Intelligence and Embodied Simulation
+                        </span>
+                        : giving AI the capacity to experience and simulate the
+                        world dynamically, not merely reason about it statically.
+                        Inspired by how the brain links perception, spatial modeling,
+                        imagination, and action, our work centers on four connected
+                        pillars:
+                      </p>
 
-                    <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
-                      Currently, VPX focuses on{" "}
-                      <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                        video analysis
-                      </span>
-                      ,{" "}
-                      <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                        controllable image and video generation
-                      </span>
-                      , and{" "}
-                      <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                        non-rigid object manipulation in robotics
-                      </span>
-                      , enabling applications in the metaverse, AIGC, and embodied intelligence.
-                    </p>
+                      <ul className="space-y-2.5 border-l border-border/70 pl-5">
+                        <li>
+                          <span className="font-semibold text-foreground">
+                            Temporal Perception
+                          </span>{" "}
+                          - video understanding, streaming VLMs, and long-horizon
+                          tracking
+                        </li>
+                        <li>
+                          <span className="font-semibold text-foreground">
+                            Spatial Simulation
+                          </span>{" "}
+                          - 3D reconstruction, Gaussian Splatting, and neural
+                          rendering
+                        </li>
+                        <li>
+                          <span className="font-semibold text-foreground">
+                            Imaginative Generation
+                          </span>{" "}
+                          - diffusion-based creation and controllable generation
+                        </li>
+                        <li>
+                          <span className="font-semibold text-foreground">
+                            Physical Interaction
+                          </span>{" "}
+                          - embodied manipulation and teleoperation
+                        </li>
+                      </ul>
 
-                    <p className="mt-6 text-base text-muted-foreground md:text-lg">
-                      For more information, please visit our{" "}
-                      <a
-                        href="https://space.bilibili.com/487404760"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-medium text-transparent transition-opacity hover:opacity-85"
-                      >
-                        Bilibili
-                      </a>{" "}
-                      and{" "}
-                      <a
-                        href="https://github.com/vpx-ecnu"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-medium text-transparent transition-opacity hover:opacity-85"
-                      >
-                        GitHub
-                      </a>
-                      .
-                    </p>
+                    </div>
                   </div>
                 </div>
 
@@ -201,44 +189,6 @@ const About = () => {
                     />
                   </div>
                 </div>
-              </div>
-            </div>
-          </section>
-
-          <section className={surfaceClassName}>
-            <div className="px-4 py-6 sm:px-6 sm:py-7 md:px-8 md:py-9">
-              <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-                <div className="space-y-2">
-                  <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-                    Lab Life
-                  </h2>
-                  <p className="text-muted-foreground md:text-lg">
-                    Moments from our daily research, demos, meetings, and events.
-                  </p>
-                </div>
-              </div>
-
-              <div className="relative rounded-xl border border-border/60 bg-background/92">
-                <div
-                  ref={setLabLifeScrollRoot}
-                  className="h-[420px] overflow-y-auto pr-2 sm:h-[520px] md:h-[640px]"
-                  style={{
-                    scrollbarGutter: "stable",
-                  }}
-                >
-                  <div className="grid grid-cols-1 gap-px bg-border/40 sm:grid-cols-2 lg:grid-cols-3">
-                    {labLifeData.map((item, index) => (
-                      <LabLifeTile
-                        key={item.id}
-                        item={item}
-                        index={index}
-                        scrollRoot={labLifeScrollRoot}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 rounded-b-xl bg-gradient-to-t from-background/92 to-transparent" />
               </div>
             </div>
           </section>
@@ -390,6 +340,44 @@ const About = () => {
                     </CardContent>
                   </Card>
                 ))}
+              </div>
+            </div>
+          </section>
+
+          <section className={surfaceClassName}>
+            <div className="px-4 py-6 sm:px-6 sm:py-7 md:px-8 md:py-9">
+              <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+                <div className="space-y-2">
+                  <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+                    Lab Life
+                  </h2>
+                  <p className="text-muted-foreground md:text-lg">
+                    Moments from our daily research, demos, meetings, and events.
+                  </p>
+                </div>
+              </div>
+
+              <div className="relative rounded-xl border border-border/60 bg-background/92">
+                <div
+                  ref={setLabLifeScrollRoot}
+                  className="h-[420px] overflow-y-auto pr-2 sm:h-[520px] md:h-[640px]"
+                  style={{
+                    scrollbarGutter: "stable",
+                  }}
+                >
+                  <div className="grid grid-cols-1 gap-px bg-border/40 sm:grid-cols-2 lg:grid-cols-3">
+                    {labLifeData.map((item, index) => (
+                      <LabLifeTile
+                        key={item.id}
+                        item={item}
+                        index={index}
+                        scrollRoot={labLifeScrollRoot}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 rounded-b-xl bg-gradient-to-t from-background/92 to-transparent" />
               </div>
             </div>
           </section>
