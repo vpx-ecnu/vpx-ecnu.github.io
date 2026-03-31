@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
 import { Mail } from "lucide-react";
+import { VisitorMapWidget } from "./visitor-map-widget";
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="w-full border-t border-border/60 bg-background py-8">
-      <div className="container flex flex-col items-center justify-between gap-8 lg:flex-row lg:items-start">
+      <div className="container flex flex-col items-center gap-8 lg:flex-row lg:items-end lg:justify-between">
         {/* Left: Logo + Slogan */}
-        <div className="flex max-w-md flex-col items-center gap-3 text-center lg:items-start lg:text-left">
+        <div className="flex max-w-md flex-1 flex-col items-center gap-3 text-center lg:items-start lg:text-left">
           <Link to="/" className="flex items-center space-x-2">
             <img
               src="/vpx-assets/c1c1ffb3-a447-43bc-b8cb-b2bba2dad10f.png"
@@ -22,8 +23,12 @@ export function Footer() {
           </p>
         </div>
 
+        <div className="shrink-0">
+          <VisitorMapWidget />
+        </div>
+
         {/* Right: Contact & Social */}
-        <div className="flex flex-col items-center gap-2 text-center text-sm text-muted-foreground lg:items-end lg:text-right">
+        <div className="flex flex-1 flex-col items-center gap-2 text-center text-sm text-muted-foreground lg:items-end lg:text-right">
           <a
             href="mailto:yli@cs.ecnu.edu.cn"
             className="flex flex-wrap items-center justify-center gap-2 transition-colors hover:text-foreground lg:justify-end"
