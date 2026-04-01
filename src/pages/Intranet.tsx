@@ -24,8 +24,8 @@ const Intranet = () => {
   };
 
   return (
-    <div className="container flex items-center justify-center min-h-[calc(100vh-8rem)] py-12 px-4 md:px-6 page-transition">
-      <div className="w-full max-w-md space-y-8 fade-in-content">
+    <div className="container flex min-h-[calc(100vh-8rem)] items-center justify-center px-4 py-12 md:px-6">
+      <div className="w-full max-w-md space-y-8">
         <div className="text-center space-y-2">
           <div className="flex justify-center">
             <Lock className="h-12 w-12 text-primary" />

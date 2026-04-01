@@ -2,7 +2,7 @@
 import { ReactNode } from "react";
 import { Navbar } from "./navbar";
 import { Footer } from "./footer";
-import { PageTransition } from "./page-transition";
+import { ScrollToTop } from "./scroll-to-top";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 
 interface LayoutProps {
@@ -13,10 +13,9 @@ export function Layout({ children }: LayoutProps) {
   return (
     <ThemeProvider>
       <div className="flex min-h-screen flex-col">
+        <ScrollToTop />
         <Navbar />
-        <PageTransition>
-          <main className="flex-1">{children}</main>
-        </PageTransition>
+        <main className="flex-1">{children}</main>
         <Footer />
       </div>
     </ThemeProvider>

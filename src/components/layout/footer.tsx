@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { Mail } from "lucide-react";
+import { PreloadLink as Link } from "@/components/preload-link";
 import { VisitorMapWidget } from "./visitor-map-widget";
 
 export function Footer() {

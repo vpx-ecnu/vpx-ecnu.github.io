@@ -80,9 +80,9 @@ const Join = () => {
     <div className="absolute bottom-80 left-50 h-[320px] w-[320px] rounded-full bg-cyan-500/15 blur-3xl" />
     <div className="absolute bottom-0 right-0 h-[320px] w-[320px] rounded-full bg-indigo-500/15 blur-3xl" />
   </div>
-  <div className="container py-12 px-4 md:px-6 space-y-12 page-transition">
+  <div className="container space-y-12 px-4 py-12 md:px-6">
       {/* HERO */}
-      <section className="space-y-4 text-center max-w-3xl mx-auto fade-in-content">
+      <section className="mx-auto max-w-3xl space-y-4 text-center">
         <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">
           Join VPX (Visual Perception + X Group)
         </h1>
@@ -127,7 +127,7 @@ const Join = () => {
       </section>
 
       {/* COMMON INFO FIRST (Shared for PhD / Master / Undergrad) */}
-      <section className="max-w-5xl mx-auto space-y-6 fade-in-content" style={{ animationDelay: "80ms" }}>
+      <section className="mx-auto max-w-5xl space-y-6">
         <Card className="overflow-hidden">
           <CardHeader className="space-y-3">
             <CardTitle className="flex items-center gap-2">
@@ -239,7 +239,7 @@ const Join = () => {
       </section>
 
       {/* ROLE-SPECIFIC TABS */}
-      <section className="fade-in-content" style={{ animationDelay: "160ms" }}>
+      <section>
         <Tabs defaultValue="phd" className="w-full">
           <TabsList className="mb-8 grid h-auto w-full grid-cols-1 gap-2 bg-transparent p-0 sm:grid-cols-3">
             <TabsTrigger
@@ -375,7 +375,7 @@ const Join = () => {
       </section>
 
       {/* FAQ */}
-      <section className="max-w-5xl mx-auto fade-in-content" style={{ animationDelay: "240ms" }}>
+      <section className="mx-auto max-w-5xl">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -413,7 +413,7 @@ const Join = () => {
       </section> */}
 
       {/* LAB LOCATION */}
-      <section className="max-w-5xl mx-auto fade-in-content" style={{ animationDelay: "300ms" }}>
+      <section className="mx-auto max-w-5xl">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">

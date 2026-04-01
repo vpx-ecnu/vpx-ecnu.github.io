@@ -189,7 +189,7 @@ const Activities = () => {
   }, [page, totalPages]);
 
   return (
-    <div className="container py-12 px-4 md:px-6 space-y-12 page-transition relative">
+    <div className="relative container space-y-12 px-4 py-12 md:px-6">
       {/* Background glow */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-violet-600/15 blur-3xl" />
@@ -198,7 +198,7 @@ const Activities = () => {
       </div>
 
       {/* Header */}
-      <section className="relative space-y-4 text-center max-w-3xl mx-auto fade-in-content">
+      <section className="relative mx-auto max-w-3xl space-y-4 text-center">
         <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">
           Updates
         </h1>
@@ -208,7 +208,7 @@ const Activities = () => {
       </section>
 
       {/* Tabs */}
-      <section className="relative fade-in-content" style={{ animationDelay: "100ms" }}>
+      <section className="relative">
         <Tabs defaultValue="news" className="w-full">
           <TabsList className="mb-8 grid h-auto w-full grid-cols-1 gap-2 bg-transparent p-0 sm:grid-cols-2">
             <TabsTrigger

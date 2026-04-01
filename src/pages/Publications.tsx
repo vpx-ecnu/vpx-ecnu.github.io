@@ -72,14 +72,14 @@ const Publications = () => {
   };
 
   return (
-    <div className="container py-12 px-4 md:px-6 page-transition">
+    <div className="container py-12 px-4 md:px-6">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
     <div className="absolute -top-40 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-violet-600/20 blur-3xl" />
     <div className="absolute top-40 -left-24 h-[180px] w-[320px] rounded-full bg-emerald-400/15 blur-2xl" />
     <div className="absolute -top-40 right-24 h-[320px] w-[320px] rounded-full bg-cyan-500/15 blur-2xl" />
   </div>
       {/* Header */}
-      <section className="space-y-4 text-center max-w-3xl mx-auto mb-12 fade-in-content">
+      <section className="mx-auto mb-12 max-w-3xl space-y-4 text-center">
         <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">
           Publications
         </h1>
@@ -89,7 +89,7 @@ const Publications = () => {
       </section>
 
       {/* Filters */}
-      <section className="mb-10 fade-in-content" style={{ animationDelay: "100ms" }}>
+      <section className="mb-10">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           {/* Search */}
           <div className="flex-1">
@@ -148,14 +148,12 @@ const Publications = () => {
           {filteredPublications.map((pub, index) => (
             <Card
               key={`${pub.title}-${pub.year}-${index}`}
-              className="fade-in-content
-    border border-white/15
+              className="border border-white/15
     bg-white/5
     backdrop-blur-md
     hover:bg-white/8
     hover:border-white/25
     transition-all"
-              style={{ animationDelay: `${index * 50}ms` }}
             >
               <CardContent className="p-4 md:p-5">
                 <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">

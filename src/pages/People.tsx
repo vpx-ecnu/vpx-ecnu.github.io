@@ -129,7 +129,7 @@ useEffect(() => {
 
 
   return (
-    <div className="relative w-full page-transition">
+    <div className="relative w-full">
       {/* Subtle background glow */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-violet-600/15 blur-3xl" />

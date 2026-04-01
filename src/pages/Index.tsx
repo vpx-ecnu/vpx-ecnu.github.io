@@ -1,6 +1,6 @@
 import { ArrowRight, BookOpen, Clock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { PreloadLink as Link } from "@/components/preload-link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -254,7 +254,7 @@ const Index = () => {
   };
 
   return (
-    <div className="page-transition">
+    <div>
       <section className="relative isolate overflow-hidden pt-16 pb-16 sm:pt-20 sm:pb-20 md:pt-24 md:pb-24">
   <div className="absolute inset-0 -z-20">
     <video
@@ -451,7 +451,7 @@ const Index = () => {
       <section className="pt-4 pb-16 md:pt-10 md:pb-20">
   <div className="container px-4 md:px-6">
     <div className="grid gap-8 md:gap-12">
-      <div className="fade-in-content flex flex-col gap-2 md:gap-4">
+      <div className="flex flex-col gap-2 md:gap-4">
         <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Core Research Areas</h2>
         <p className="text-muted-foreground md:text-lg">
           Our current research spans multiple disciplines and real-world applications.
@@ -491,8 +491,7 @@ const Index = () => {
         ].map((item, i) => (
           <div
             key={i}
-            className="flex flex-col p-6 bg-card rounded-lg border hover:shadow-md transition-shadow fade-in-content"
-            style={{ animationDelay: `${i * 150}ms` }}
+            className="flex flex-col rounded-lg border bg-card p-6 transition-shadow hover:shadow-md"
           >
             <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
             <p className="text-muted-foreground flex-1">{item.description}</p>
@@ -515,7 +514,7 @@ const Index = () => {
 
       {/* Key Statistics */}
       <section className="mx-0 my-[3px] rounded-none bg-muted px-4 py-[21px] sm:px-6 md:px-[36px]">
-        <div className="container px-4 md:px-6 fade-in-content">
+        <div className="container px-4 md:px-6">
           <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
             <div className="space-y-2">
               <div className="flex justify-center">
