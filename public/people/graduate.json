@@ -32,6 +32,10 @@
       {
         "name": "Prof. Changbo Wang",
         "url": "https://dase.ecnu.edu.cn/37/5e/c41774a538462/page.htm"
+      },
+      {
+        "name": "Prof. Long Chen",
+        "url": "https://zjuchenlong.github.io/"
       }
     ],
     "research": [
@@ -45,6 +49,12 @@
     "bio": "Exploring virtual human video generation.",
     "image": "/people/people_image/thumbs/master/zy.jpg",
     "email": "51275900029@stu.ecnu.edu.cn",
+    "coSupervisors": [
+      {
+        "name": "Prof. Jianke Zhu",
+        "url": "https://www.slai.edu.cn/en/teacher/233"
+      }
+    ],
     "research": [
       "Virtual Avatar",
       "Diffusion"
@@ -138,6 +148,10 @@
       {
         "name": "Prof. Changbo Wang",
         "url": "https://dase.ecnu.edu.cn/37/5e/c41774a538462/page.htm"
+      },
+      {
+        "name": "Prof. Jianke Zhu",
+        "url": "https://www.slai.edu.cn/en/teacher/233"
       }
     ],
     "research": [
