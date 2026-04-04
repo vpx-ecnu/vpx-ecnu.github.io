@@ -5,6 +5,12 @@
     "bio": "Researching controllable motion generation for AIGC.",
     "image": "/people/people_image/thumbs/phd/ccg.jpg",
     "email": "277006597@qq.com",
+    "coSupervisors": [
+      {
+        "name": "Prof. Changbo Wang",
+        "url": "https://dase.ecnu.edu.cn/37/5e/c41774a538462/page.htm"
+      }
+    ],
     "research": [
       "AIGC",
       "Controllable Motion Generation"
@@ -16,6 +22,12 @@
     "bio": "Working on embodied intelligence.",
     "image": "/people/people_image/thumbs/phd/wxy.jpg",
     "email": "52285901014@stu.ecnu.edu.cn",
+    "coSupervisors": [
+      {
+        "name": "Prof. Changbo Wang",
+        "url": "https://dase.ecnu.edu.cn/37/5e/c41774a538462/page.htm"
+      }
+    ],
     "research": [
       "Multi-modal",
       "VLA"
@@ -27,6 +39,12 @@
     "bio": "Exploring diffusion models and computer graphics.",
     "image": "/people/people_image/thumbs/phd/sjw.jpg",
     "email": "51265901091@stu.ecnu.edu.cn",
+    "coSupervisors": [
+      {
+        "name": "Prof. Changbo Wang",
+        "url": "https://dase.ecnu.edu.cn/37/5e/c41774a538462/page.htm"
+      }
+    ],
     "research": [
       "diffusion",
       "computer graphics"
@@ -49,6 +67,16 @@
     "bio": "Exploring natural human–object interaction understanding and generation.",
     "image": "/people/people_image/thumbs/phd/xiaoyuanwang.jpg",
     "email": "xiaoyuan.wang@irisa.fr",
+    "coSupervisors": [
+      {
+        "name": "Prof. Changbo Wang",
+        "url": "https://dase.ecnu.edu.cn/37/5e/c41774a538462/page.htm"
+      },
+      {
+        "name": "Prof. Marc Christie",
+        "url": "https://people.irisa.fr/Marc.Christie/"
+      }
+    ],
     "research": [
       "Human–Object Interaction",
       "Spatial Intelligence"

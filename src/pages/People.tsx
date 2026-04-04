@@ -25,6 +25,7 @@ type Person = {
   website?: string;
   personalWebsite?: string;
   research?: string[];
+  coSupervisors?: Array<string | { name: string; url?: string }>;
 };
 
 const DEFAULT_AVATAR_POSITION = "center 20%";
@@ -62,6 +63,50 @@ const getGraduationYearValue = (person: Person) => {
 };
 
 const getWebsite = (p: Person) => p.personalWebsite || p.website;
+
+const getCoSupervisorName = (supervisor: string | { name: string; url?: string }) =>
+  typeof supervisor === "string" ? supervisor : supervisor.name;
+
+const getCoSupervisorUrl = (supervisor: string | { name: string; url?: string }) =>
+  typeof supervisor === "string" ? undefined : supervisor.url;
+
+const getCoSupervisorSeparator = (index: number, total: number) => {
+  if (index === 0) return "";
+  if (index === total - 1) return total === 2 ? " and " : ", and ";
+  return ", ";
+};
+
+const renderCoSupervisionNote = (person: Person) => {
+  if (!person.coSupervisors || person.coSupervisors.length === 0) return null;
+
+  return (
+    <>
+      <span>Cosupervised with </span>
+      {person.coSupervisors.map((supervisor, index) => {
+        const name = getCoSupervisorName(supervisor);
+        const url = getCoSupervisorUrl(supervisor);
+
+        return (
+          <React.Fragment key={`${name}-${index}`}>
+            {getCoSupervisorSeparator(index, person.coSupervisors?.length ?? 0)}
+            {url ? (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-muted-foreground/50 underline-offset-2 transition-colors hover:text-foreground"
+              >
+                {name}
+              </a>
+            ) : (
+              <span>{name}</span>
+            )}
+          </React.Fragment>
+        );
+      })}
+    </>
+  );
+};
 
 const slugifyName = (name: string) =>
   name
@@ -344,6 +389,7 @@ const PeopleCardCompact = ({ member }: { member: Person }) => {
 
   const website = getWebsite(member);
   const mobileResearch = member.research?.slice(0, 2) ?? [];
+  const coSupervisionNote = renderCoSupervisionNote(member);
 
   return (
     <Card className="flex h-full flex-col border/60 shadow-sm transition-shadow hover:shadow-md">
@@ -363,6 +409,12 @@ const PeopleCardCompact = ({ member }: { member: Person }) => {
           <div className="min-w-0 flex-1 text-left sm:text-center">
             <div className="space-y-2 sm:space-y-1.5">
               <CardTitle className="text-lg leading-tight sm:text-[1.02rem]">{member.name}</CardTitle>
+
+              {coSupervisionNote ? (
+                <p className="text-xs leading-relaxed text-muted-foreground sm:px-2">
+                  {coSupervisionNote}
+                </p>
+              ) : null}
 
               {mobileResearch.length > 0 ? (
                 <div className="mt-2 space-y-1 sm:hidden">

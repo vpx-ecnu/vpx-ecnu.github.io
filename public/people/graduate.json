@@ -28,6 +28,12 @@
     "bio": "Exploring diffusion.",
     "image": "/people/people_image/thumbs/master/gzh.jpg",
     "email": "1360733921@qq.com",
+    "coSupervisors": [
+      {
+        "name": "Prof. Changbo Wang",
+        "url": "https://dase.ecnu.edu.cn/37/5e/c41774a538462/page.htm"
+      }
+    ],
     "research": [
       "image editing",
       "AIGC"
@@ -61,6 +67,12 @@
     "bio": "Exploring wearable device and Human–Computer Interaction.",
     "image": "/people/people_image/thumbs/master/hzc.jpg",
     "email": "51275901117@stu.ecnu.edu.cn",
+    "coSupervisors": [
+      {
+        "name": "Prof. Yang Gao",
+        "url": "https://www2.scut.edu.cn/ft_en/2025/1021/c45325a606212/page.htm"
+      }
+    ],
     "research": [
       "Wearable device",
       "Human–Computer Interaction"
@@ -94,6 +106,12 @@
     "bio": "Exploring multimodal video understanding.",
     "image": "/people/people_image/thumbs/master/scx.jpg",
     "email": "2011848311@qq.com",
+    "coSupervisors": [
+      {
+        "name": "Prof. Changbo Wang",
+        "url": "https://dase.ecnu.edu.cn/37/5e/c41774a538462/page.htm"
+      }
+    ],
     "research": [
       "Multimodal LLMs",
       "Video Analytics"
@@ -116,6 +134,12 @@
     "bio": "Exploring unified diffusion models for understanding and generation.",
     "image": "/people/people_image/thumbs/master/ymy.jpg",
     "email": "51285900034@stu.ecnu.edu.cn",
+    "coSupervisors": [
+      {
+        "name": "Prof. Changbo Wang",
+        "url": "https://dase.ecnu.edu.cn/37/5e/c41774a538462/page.htm"
+      }
+    ],
     "research": [
       "diffusion"
     ]
@@ -126,6 +150,12 @@
     "bio": "Exploring multimodal in-context learning.",
     "image": "/people/people_image/thumbs/master/yhz.jpg",
     "email": "3061794854@qq.com",
+    "coSupervisors": [
+      {
+        "name": "Prof. Changbo Wang",
+        "url": "https://dase.ecnu.edu.cn/37/5e/c41774a538462/page.htm"
+      }
+    ],
     "research": [
       "MLLMs",
       "ICL"
@@ -137,6 +167,12 @@
     "bio": "Exploring virtual reality.",
     "image": "/people/people_image/thumbs/master/yqj.jpg",
     "email": "1753843107@qq.com",
+    "coSupervisors": [
+      {
+        "name": "Prof. Yang Gao",
+        "url": "https://www2.scut.edu.cn/ft_en/2025/1021/c45325a606212/page.htm"
+      }
+    ],
     "research": [
       "Robotic Teleoperation",
       "XR Development"
@@ -148,6 +184,12 @@
     "bio": "Exploring vision–language navigation agents.",
     "image": "/people/people_image/thumbs/master/mingyangyin.jpg",
     "email": "51285901113@stu.ecnu.edu.cn",
+    "coSupervisors": [
+      {
+        "name": "Prof. Yang Gao",
+        "url": "https://www2.scut.edu.cn/ft_en/2025/1021/c45325a606212/page.htm"
+      }
+    ],
     "research": [
       "VLN",
       "Embodied Intelligence"
@@ -159,6 +201,12 @@
     "bio": "Exploring 3D Reconstruction.",
     "image": "/people/people_image/thumbs/master/zts.jpg",
     "email": "h528014081@163.com",
+    "coSupervisors": [
+      {
+        "name": "Prof. Liangyu Chen",
+        "url": "https://faculty.ecnu.edu.cn/_s43/cly_en/main.psp"
+      }
+    ],
     "research": [
       "Neural Rendering",
       "3D Computer Vision"
