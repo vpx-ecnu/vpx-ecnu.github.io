@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 const CLUSTRMAPS_SCRIPT_ID = "clustrmaps";
 const CLUSTRMAPS_SCRIPT_SRC =
-  "https://clustrmaps.com/map_v2.js?d=JAiyy3SIEEXGNMaZse8-UzAU4R0tl5U9fGNVrcY3FC4&cl=ffffff&w=a";
+  "https://cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=tt&d=JAiyy3SIEEXGNMaZse8-UzAU4R0tl5U9fGNVrcY3FC4";
 
 export function VisitorMapWidget() {
   const containerRef = useRef<HTMLDivElement | null>(null);
