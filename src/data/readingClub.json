@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-04T05:47:53.524364+00:00",
+  "updatedAt": "2026-05-05T05:26:46.177741+00:00",
   "source": {
     "mid": 487404760,
     "series_id": 3793757,
@@ -9,6 +9,33 @@
     "total_from_api": null
   },
   "videos": [
+    {
+      "bvid": "BV191RiBfEPy",
+      "title": "VPX 51 | From Past to Present: Style Transfer 系列论文讲解！",
+      "description": "",
+      "cover": "/reading_club_covers/BV191RiBfEPy_5d17d20a17_VPX_51_From_Past_to_Present_Style_Transfer_系列论文讲解.jpg",
+      "cover_remote": "http://i1.hdslb.com/bfs/archive/1e222117ed28e79e5c67f16ebb48b4faf7469857.jpg",
+      "publishedAt": "2026-05-04T14:34:46+00:00",
+      "url": "https://www.bilibili.com/video/BV191RiBfEPy"
+    },
+    {
+      "bvid": "BV13DRiB4Eh2",
+      "title": "VPX 50 | V-JEPA 2: Self-Supervised Video Models Enable Understanding... 论文讲解！",
+      "description": "",
+      "cover": "/reading_club_covers/BV13DRiB4Eh2_d7c2f3e231_VPX_50_V-JEPA_2_Self-Supervised_Video_Models_Enable_Understanding..._论文讲解.jpg",
+      "cover_remote": "http://i2.hdslb.com/bfs/archive/ac5b72e231facb90ac8fd7a71c4751c3a6b05f97.jpg",
+      "publishedAt": "2026-05-04T14:22:52+00:00",
+      "url": "https://www.bilibili.com/video/BV13DRiB4Eh2"
+    },
+    {
+      "bvid": "BV1S6QuBqEiu",
+      "title": "VPX 49 | 【CVPR 2025】DreamTrack: Dreaming the Future for Multimodal...论文讲解！",
+      "description": "",
+      "cover": "/reading_club_covers/BV1S6QuBqEiu_1f4896d53a_VPX_49_CVPR_2025_DreamTrack_Dreaming_the_Future_for_Multimodal...论文讲解.jpg",
+      "cover_remote": "http://i1.hdslb.com/bfs/archive/73f7c33f8311cafd9c50f969307e106efe31a905.jpg",
+      "publishedAt": "2026-04-14T12:28:15+00:00",
+      "url": "https://www.bilibili.com/video/BV1S6QuBqEiu"
+    },
     {
       "bvid": "BV163zKB2E5p",
       "title": "VPX 48 | 【CVPR 2025】ScribbleLight: Single Image Indoor Relighting... 论文讲解！",
