@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-06T05:42:13.893088+00:00",
+  "updatedAt": "2026-05-07T05:44:59.605886+00:00",
   "source": {
     "mid": 487404760,
     "series_id": 3793757,
@@ -9,6 +9,15 @@
     "total_from_api": null
   },
   "videos": [
+    {
+      "bvid": "BV14HR4BsEJ9",
+      "title": "VPX 52 | VDB及其高性能进化之路 相关论文与技术分享！",
+      "description": "",
+      "cover": "/reading_club_covers/BV14HR4BsEJ9_f0be259fae_VPX_52_VDB及其高性能进化之路_相关论文与技术分享.jpg",
+      "cover_remote": "http://i0.hdslb.com/bfs/archive/eb1c3204e3319566e18bad07f36866f8b9776693.jpg",
+      "publishedAt": "2026-05-06T10:58:53+00:00",
+      "url": "https://www.bilibili.com/video/BV14HR4BsEJ9"
+    },
     {
       "bvid": "BV191RiBfEPy",
       "title": "VPX 51 | From Past to Present: Style Transfer 系列论文讲解！",
