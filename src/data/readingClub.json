@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-14T06:00:46.973194+00:00",
+  "updatedAt": "2026-05-15T06:07:51.717869+00:00",
   "source": {
     "mid": 487404760,
     "series_id": 3793757,
@@ -9,6 +9,15 @@
     "total_from_api": null
   },
   "videos": [
+    {
+      "bvid": "BV1n55m6uEuS",
+      "title": "VPX 53 | From VR Input to Robot Action: The Teleoperation Pipeline 相关论文与技术分享！",
+      "description": "",
+      "cover": "/reading_club_covers/BV1n55m6uEuS_ae72ca067d_VPX_53_From_VR_Input_to_Robot_Action_The_Teleoperation_Pipeline_相关论文与技术分享.jpg",
+      "cover_remote": "http://i0.hdslb.com/bfs/archive/512246c1b35e238cf152cb936dd408119735b75a.jpg",
+      "publishedAt": "2026-05-13T14:14:48+00:00",
+      "url": "https://www.bilibili.com/video/BV1n55m6uEuS"
+    },
     {
       "bvid": "BV14HR4BsEJ9",
       "title": "VPX 52 | VDB及其高性能进化之路 相关论文与技术分享！",
