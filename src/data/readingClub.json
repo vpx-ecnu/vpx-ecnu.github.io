@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-27T06:44:03.038435+00:00",
+  "updatedAt": "2026-05-28T06:35:44.630961+00:00",
   "source": {
     "mid": 487404760,
     "series_id": 3793757,
@@ -9,6 +9,15 @@
     "total_from_api": null
   },
   "videos": [
+    {
+      "bvid": "BV11UG26uE7z",
+      "title": "VPX 54 | 【CVPR 2026】FlexAvatar: Learning Complete 3D Head Avatars...论文分享！",
+      "description": "",
+      "cover": "/reading_club_covers/BV11UG26uE7z_d2aecaa4ff_VPX_54_CVPR_2026_FlexAvatar_Learning_Complete_3D_Head_Avatars...论文分享.jpg",
+      "cover_remote": "http://i1.hdslb.com/bfs/archive/25af99f8753afd58a8c2921498d04e1256564610.jpg",
+      "publishedAt": "2026-05-27T12:05:24+00:00",
+      "url": "https://www.bilibili.com/video/BV11UG26uE7z"
+    },
     {
       "bvid": "BV1n55m6uEuS",
       "title": "VPX 53 | From VR Input to Robot Action: The Teleoperation Pipeline 相关论文与技术分享！",
