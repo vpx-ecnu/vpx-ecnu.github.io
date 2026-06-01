@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-16T05:10:40.312414Z",
+  "updatedAt": "2026-06-01T08:42:18.774232Z",
   "publications": [
     {
       "id": "project-pub-1",
@@ -93,33 +93,43 @@
     },
     {
       "id": "project-pub-10",
-      "title": "SuPer Deep: A Surgical Perception Framework for Robotic Tissue Manipulation using Deep Learning for Feature Extraction",
-      "venue": "IEEE Conference on Robotics and Automation (ICRA) 2021",
-      "url": "https://sites.google.com/ucsd.edu/super-framework",
-      "image": "/publications/recent_images/9775cb6fc142.png",
+      "title": "Homography Decomposition Networks for Planar Object Tracking",
+      "venue": "The Conference on Association for the Advancement of Artificial Intelligence (AAAI) 2022",
+      "url": "https://zhanxinrui.github.io/HDN-homepage/",
+      "image": "/publications/recent_images/663fe9aac750.png",
       "mediaType": "image",
-      "media": "/publications/recent_images/9775cb6fc142.png",
-      "poster": "/publications/recent_images/9775cb6fc142.png"
+      "media": "/publications/recent_images/663fe9aac750.png",
+      "poster": "/publications/recent_images/663fe9aac750.png"
     },
     {
       "id": "project-pub-11",
-      "title": "SuPer: A Surgical Perception Framework for Endoscopic Tissue Manipulation with Surgical Robotics",
-      "venue": "IEEE Robotics and Automation Letters 2020",
+      "title": "SuPer Deep: A Surgical Perception Framework for Robotic Tissue Manipulation using Deep Learning for Feature Extraction",
+      "venue": "IEEE Conference on Robotics and Automation (ICRA) 2021",
       "url": "https://sites.google.com/ucsd.edu/super-framework",
-      "image": "/publications/recent_images/bbdb0c5e6de3.png",
+      "image": "/publications/recent_images/2d5d0e3dd0d5.png",
       "mediaType": "image",
-      "media": "/publications/recent_images/bbdb0c5e6de3.png",
-      "poster": "/publications/recent_images/bbdb0c5e6de3.png"
+      "media": "/publications/recent_images/2d5d0e3dd0d5.png",
+      "poster": "/publications/recent_images/2d5d0e3dd0d5.png"
     },
     {
       "id": "project-pub-12",
+      "title": "SuPer: A Surgical Perception Framework for Endoscopic Tissue Manipulation with Surgical Robotics",
+      "venue": "IEEE Robotics and Automation Letters 2020",
+      "url": "https://sites.google.com/ucsd.edu/super-framework",
+      "image": "/publications/recent_images/d3ad56e824a2.png",
+      "mediaType": "image",
+      "media": "/publications/recent_images/d3ad56e824a2.png",
+      "poster": "/publications/recent_images/d3ad56e824a2.png"
+    },
+    {
+      "id": "project-pub-13",
       "title": "Robust Estimation of Similarity Transformation for Visual Object Tracking",
       "venue": "The Conference on Association for the Advancement of Artificial Intelligence (AAAI) 2019",
       "url": "https://sites.google.com/view/ldestracker",
-      "image": "/publications/recent_images/c670ca4616ed.png",
+      "image": "/publications/recent_images/617a1f04f697.png",
       "mediaType": "image",
-      "media": "/publications/recent_images/c670ca4616ed.png",
-      "poster": "/publications/recent_images/c670ca4616ed.png"
+      "media": "/publications/recent_images/617a1f04f697.png",
+      "poster": "/publications/recent_images/617a1f04f697.png"
     }
   ]
 }

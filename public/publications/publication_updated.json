@@ -1,5 +1,18 @@
 [
   {
+    "title": "Grasping Motion Generation Through Latent Diffusion Models",
+    "authors": "X Wang, Y Li, C Wang, M Christie",
+    "journal": "Computer Graphics Forum, e70423 2026",
+    "year": 2026,
+    "doi": "https://onlinelibrary.wiley.com/doi/abs/10.1111/cgf.70423",
+    "tags": [
+      "Grasping",
+      "Motion",
+      "Generation"
+    ],
+    "project_webpage": ""
+  },
+  {
     "title": "GT²-GS: Geometry-aware Texture Transfer for Gaussian Splatting",
     "authors": "Wenjie Liu, Zhongliang Liu, Junwei Shu, Changbo Wang, Yang Li",
     "journal": "AAAI 2026",
@@ -36,6 +49,19 @@
       "Warped",
       "convolutional",
       "neural"
+    ],
+    "project_webpage": ""
+  },
+  {
+    "title": "Wandering and feeling the Scenes: Body-Aware Diffusion for 3D Human Motion Generation",
+    "authors": "C Zhang, J Gong, S Lin, Y Li, Z Zhang",
+    "journal": "Proceedings of the 7th ACM International Conference on Multimedia in Asia, 1-7 2025",
+    "year": 2025,
+    "doi": "https://dl.acm.org/doi/abs/10.1145/3743093.3770934",
+    "tags": [
+      "Wandering",
+      "and",
+      "feeling"
     ],
     "project_webpage": ""
   },
@@ -119,11 +145,11 @@
     "project_webpage": ""
   },
   {
-    "title": "Data augmentation with attention framework for robust deepfake detection",
+    "title": "Data augmentation with attention framework for robust deepfake detection.",
     "authors": "S Mamarasulov, L Chen, C Chen, Y Li, C Wang",
-    "journal": "The Visual Computer 41 (7), 4779-4798 2025",
+    "journal": "Visual Computer 41 (7), 4779 2025",
     "year": 2025,
-    "doi": "https://link.springer.com/article/10.1007/s00371-024-03690-y",
+    "doi": "https://openurl.ebsco.com/contentitem/gcd:184707151?sid=ebsco:plink:crawler-gcd&id=ebsco:gcd:184707151&crl=c&jrnl=01782789",
     "tags": [
       "Data",
       "augmentation",
