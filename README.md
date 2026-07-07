@@ -179,6 +179,7 @@ The publication workflow in this repository follows these rules:
 - `IHPDEP Selected Publications` acts as a curated overlay
 - If a publication appears in both sources, the metadata from `IHPDEP Selected Publications` takes precedence
 - If a selected publication does not appear in Google Scholar, it should still remain in the final output
+- Add `<!-- vpx:exclude-card -->` inside a selected publication on the IHPDEP homepage to keep it in the full publication data while preventing VPX project/homepage cards from being generated for it
 - If `project_webpage` returns `404`, the downstream card feed should not keep that broken entry alive
 
 ## Reading Club Updates

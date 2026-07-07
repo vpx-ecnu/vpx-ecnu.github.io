@@ -34,7 +34,17 @@ def main():
     image_dir.mkdir(parents=True, exist_ok=True)
 
     pubs = load_publications(source_path)
-    with_web = [p for p in pubs if clean_text(p.get("project_webpage", ""))]
+    excluded_cards = [
+        p for p in pubs
+        if clean_text(p.get("project_webpage", "")) and p.get("vpx_exclude_card")
+    ]
+    for pub in excluded_cards:
+        print(f"[INFO] skip VPX-excluded publication card: {clean_text(pub.get('title', ''))}")
+
+    with_web = [
+        p for p in pubs
+        if clean_text(p.get("project_webpage", "")) and not p.get("vpx_exclude_card")
+    ]
     with_web.sort(
         key=lambda x: (int(x.get("year") or 0), clean_text(x.get("title", ""))),
         reverse=True,

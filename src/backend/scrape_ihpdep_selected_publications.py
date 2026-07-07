@@ -1,8 +1,9 @@
 import re
 import requests
-from bs4 import BeautifulSoup, Tag
+from bs4 import BeautifulSoup, Comment, Tag
 
 URL = "https://ihpdep.github.io/"
+VPX_EXCLUDE_CARD_MARKER = "vpx:exclude-card"
 
 def clean(s: str) -> str:
     return re.sub(r"\s+", " ", (s or "")).strip()
@@ -14,6 +15,27 @@ def parse_year(s: str) -> int:
 def to_tags(title: str):
     words = re.findall(r"[A-Za-z0-9\-\+²]+", title or "")
     return words[:3]
+
+def has_vpx_exclude_card_marker(text: str) -> bool:
+    return VPX_EXCLUDE_CARD_MARKER in (text or "").casefold()
+
+def is_vpx_card_excluded(el: Tag) -> bool:
+    for comment in el.find_all(string=lambda text: isinstance(text, Comment)):
+        if has_vpx_exclude_card_marker(str(comment)):
+            return True
+
+    for tag in el.find_all(True):
+        marker_values = [
+            tag.get("data-vpx", ""),
+            tag.get("data-vpx-card", ""),
+            " ".join(tag.get("class") or []),
+        ]
+        if any(has_vpx_exclude_card_marker(value) for value in marker_values):
+            return True
+        if clean(tag.get("data-vpx-exclude-card", "")).casefold() in ("1", "true", "yes"):
+            return True
+
+    return has_vpx_exclude_card_marker(el.get_text(" ", strip=True))
 
 def pick_best_link(links):
     """
@@ -128,6 +150,7 @@ def scrape_selected_publications(url: str = URL, timeout: int = 30):
             "year": year,
             "doi": paper_url,           # 仍旧沿用 doi 字段存 paper 链接（不动前端也能继续用）
             "project_webpage": project_url,  # ✅ 新增：Project Webpage 链接
+            "vpx_exclude_card": is_vpx_card_excluded(el),
             "tags": to_tags(title)
         })
 
