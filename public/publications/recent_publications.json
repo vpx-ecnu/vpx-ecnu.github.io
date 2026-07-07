@@ -1,8 +1,18 @@
 {
-  "updatedAt": "2026-06-01T08:42:18.829674Z",
+  "updatedAt": "2026-07-07T04:42:03.893516Z",
   "publications": [
     {
       "id": "recent-1",
+      "title": "VfxDB: A Visual Effects Volume Dataset and Benchmark for VDB-Native Generative Modeling",
+      "venue": "SIGGRAPH 2026",
+      "url": "https://vfxdb-official.github.io/VfxDB/",
+      "image": "/publications/recent_images/0a74bcf3c787.png",
+      "mediaType": "image",
+      "media": "/publications/recent_images/0a74bcf3c787.png",
+      "poster": "/publications/recent_images/0a74bcf3c787.png"
+    },
+    {
+      "id": "recent-2",
       "title": "GT²-GS: Geometry-aware Texture Transfer for Gaussian Splatting",
       "venue": "AAAI 2026",
       "url": "https://vpx-ecnu.github.io/GT2-GS-website/",
@@ -12,7 +22,27 @@
       "poster": "/publications/recent_images/d39c5b816261.png"
     },
     {
-      "id": "recent-2",
+      "id": "recent-3",
+      "title": "EmbodiedHead: Real-Time Listening and Speaking Avatar for Conversational Agents",
+      "venue": "ECCV 2026",
+      "url": "https://vpx-ecnu.github.io/EmbodiedHead-Website/",
+      "image": "/publications/recent_images/40f33cf679dc.png",
+      "mediaType": "video",
+      "media": "/publications/recent_images/1f52984bfdfc_card.mp4",
+      "poster": "/publications/recent_images/40f33cf679dc.png"
+    },
+    {
+      "id": "recent-4",
+      "title": "ChatTracker: Enhancing Visual Tracking via LLM-Driven Iterative Description Refinement",
+      "venue": "T-PAMI 2026",
+      "url": "https://ymsun2020.github.io/ChatTrackerV2_website/",
+      "image": "/publications/recent_images/2cb88760eb8e.png",
+      "mediaType": "image",
+      "media": "/publications/recent_images/2cb88760eb8e.png",
+      "poster": "/publications/recent_images/2cb88760eb8e.png"
+    },
+    {
+      "id": "recent-5",
       "title": "Audio-VLA: Adding Contact Audio Perception to Vision-Language-Action Model for Robotic Manipulation",
       "venue": "ICRA 2026",
       "url": "https://wxone.github.io/AudioVLA/",
@@ -22,7 +52,7 @@
       "poster": "/publications/recent_images/b542c154d04c.png"
     },
     {
-      "id": "recent-3",
+      "id": "recent-6",
       "title": "TimeSoccer: An End-to-End Multimodal Large Language Model for Soccer Commentary Generation",
       "venue": "ACM MM 2025",
       "url": "https://vpx-ecnu.github.io/TimeSoccer-Website/",
@@ -30,36 +60,6 @@
       "mediaType": "video",
       "media": "/publications/recent_images/0ad4f0903e06_card.mp4",
       "poster": "/publications/recent_images/0fc3cd7a9416.png"
-    },
-    {
-      "id": "recent-4",
-      "title": "Open-World Reinforcement Learning over Long Short-Term Imagination",
-      "venue": "ICLR 2025",
-      "url": "https://qiwang067.github.io/ls-imagine",
-      "image": "/publications/recent_images/e4e9f3515718.png",
-      "mediaType": "image",
-      "media": "/publications/recent_images/e4e9f3515718.png",
-      "poster": "/publications/recent_images/e4e9f3515718.png"
-    },
-    {
-      "id": "recent-5",
-      "title": "Motion-Zero: A Zero-Shot Trajectory Control Framework of Moving Object for Diffusion-Based Video Generation",
-      "venue": "AAAI 2025",
-      "url": "https://vpx-ecnu.github.io/MotionZero-website",
-      "image": "/publications/recent_images/406c63bfd4f2.png",
-      "mediaType": "video",
-      "media": "/publications/recent_images/94d3e02f1ef9_card.mp4",
-      "poster": "/publications/recent_images/406c63bfd4f2.png"
-    },
-    {
-      "id": "recent-6",
-      "title": "ABC-GS: Alignment-Based Controllable Style Transfer for 3D Gaussian Splatting",
-      "venue": "IEEE International Conference on Multimedia and Expo (ICME) 2025",
-      "url": "https://vpx-ecnu.github.io/ABC-GS-website",
-      "image": "/publications/recent_images/6a93968d3545.png",
-      "mediaType": "image",
-      "media": "/publications/recent_images/6a93968d3545.png",
-      "poster": "/publications/recent_images/6a93968d3545.png"
     }
   ]
 }

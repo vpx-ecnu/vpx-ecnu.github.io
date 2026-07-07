@@ -1,5 +1,45 @@
 [
   {
+    "title": "h-Flow: Flexible Flow-based Image Editing via Doob's h-Transform",
+    "authors": "Zehui Guo, Zhen Wang, Junwei Shu, Yang Li, Changbo Wang, Long Chen",
+    "journal": "ECCV 2026",
+    "year": 2026,
+    "doi": "",
+    "tags": [
+      "h-Flow",
+      "Flexible",
+      "Flow-based"
+    ],
+    "project_webpage": ""
+  },
+  {
+    "title": "VfxDB: A Visual Effects Volume Dataset and Benchmark for VDB-Native Generative Modeling",
+    "authors": "Junwei Shu, Hantang Liu, Dawei Miao, Wenzheng Song, Mingyang Yuan, Wenjie Liu, Changgu Chen, Yang Li, Changbo Wang",
+    "journal": "SIGGRAPH 2026",
+    "year": 2026,
+    "doi": "https://vfxdb-official.github.io/VfxDB/",
+    "tags": [
+      "VfxDB",
+      "A",
+      "Visual"
+    ],
+    "project_webpage": "https://vfxdb-official.github.io/VfxDB/"
+  },
+  {
+    "title": "S²-VLA: State-Space Guided Vision-Language-Action Models for Long-Horizon Manipulation",
+    "authors": "Zhipeng Xie, Zongyi Han, Xiangyi Wei, Shiliang Sun, Yang Li and Jing Zhao",
+    "journal": "IJCAI 2026",
+    "year": 2026,
+    "doi": "https://arxiv.org/abs/2606.27872v1",
+    "tags": [
+      "S²-VLA",
+      "State-Space",
+      "Guided"
+    ],
+    "project_webpage": "https://xzpam.github.io/SSVLA.github.io/",
+    "vpx_exclude_card": true
+  },
+  {
     "title": "Grasping Motion Generation Through Latent Diffusion Models",
     "authors": "X Wang, Y Li, C Wang, M Christie",
     "journal": "Computer Graphics Forum, e70423 2026",
@@ -25,6 +65,32 @@
       "GT2-GS"
     ],
     "project_webpage": "https://vpx-ecnu.github.io/GT2-GS-website/"
+  },
+  {
+    "title": "EmbodiedHead: Real-Time Listening and Speaking Avatar for Conversational Agents",
+    "authors": "Yu Zhang, Kaiyuan Shen, Yang Li",
+    "journal": "ECCV 2026",
+    "year": 2026,
+    "doi": "https://arxiv.org/abs/2604.17211",
+    "tags": [
+      "EmbodiedHead",
+      "Real-Time",
+      "Listening"
+    ],
+    "project_webpage": "https://vpx-ecnu.github.io/EmbodiedHead-Website/"
+  },
+  {
+    "title": "ChatTracker: Enhancing Visual Tracking via LLM-Driven Iterative Description Refinement",
+    "authors": "Yu Zhang, Yiming Sun, Mi Zhang, Fan Yu, Shaoxiang Chen, Yang Li, Changbo Wang, Jianke Zhu and Steven C. H. Hoi",
+    "journal": "T-PAMI 2026",
+    "year": 2026,
+    "doi": "https://ieeexplore.ieee.org/document/11435004/",
+    "tags": [
+      "ChatTracker",
+      "Enhancing",
+      "Visual"
+    ],
+    "project_webpage": "https://ymsun2020.github.io/ChatTrackerV2_website/"
   },
   {
     "title": "Audio-VLA: Adding Contact Audio Perception to Vision-Language-Action Model for Robotic Manipulation",
