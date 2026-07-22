@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-21T05:33:42.001935+00:00",
+  "updatedAt": "2026-07-22T05:32:38.094750+00:00",
   "source": {
     "mid": 487404760,
     "series_id": 3793757,
@@ -9,6 +9,15 @@
     "total_from_api": null
   },
   "videos": [
+    {
+      "bvid": "BV1WuK86gEs8",
+      "title": "VPX 57 | 【CVPR 2026 Highlight】OVI-MAP: Open-Vocabulary ...论文分享！",
+      "description": "",
+      "cover": "/reading_club_covers/BV1WuK86gEs8_5e370ab8a1_VPX_57_CVPR_2026_Highlight_OVI-MAP_Open-Vocabulary_...论文分享.jpg",
+      "cover_remote": "http://i0.hdslb.com/bfs/archive/96dff9355c442079d11baeb68f571b850c9eb133.jpg",
+      "publishedAt": "2026-07-21T07:16:03+00:00",
+      "url": "https://www.bilibili.com/video/BV1WuK86gEs8"
+    },
     {
       "bvid": "BV1WAjZ65EZh",
       "title": "VPX 56 | 【CVPR 2026】Multi-Scale Gaussian-Language Map ... 论文讲解！",
