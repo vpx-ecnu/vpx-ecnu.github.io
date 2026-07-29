@@ -9,16 +9,5 @@
       "Stylization",
       "3DGS"
     ]
-  },
-  {
-    "name": "Yu Zhang",
-    "title": "Undergraduate Student",
-    "bio": "Researching tracking and multimodal large language models.",
-    "image": "/people/people_image/thumbs/undergraduate/zy.jpg",
-    "email": "",
-    "research": [
-      "Tracking",
-      "Multimodal LLMs"
-    ]
   }
 ]

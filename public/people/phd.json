@@ -1,22 +1,5 @@
 [
   {
-    "name": "Changgu Chen",
-    "title": "PhD Candidate",
-    "bio": "Researching controllable motion generation for AIGC.",
-    "image": "/people/people_image/thumbs/phd/ccg.jpg",
-    "email": "277006597@qq.com",
-    "coSupervisors": [
-      {
-        "name": "Prof. Changbo Wang",
-        "url": "https://dase.ecnu.edu.cn/37/5e/c41774a538462/page.htm"
-      }
-    ],
-    "research": [
-      "AIGC",
-      "Controllable Motion Generation"
-    ]
-  },
-  {
     "name": "Xiangyi Wei",
     "title": "PhD Candidate",
     "bio": "Working on embodied intelligence.",

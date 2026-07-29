@@ -97,5 +97,83 @@
         "image": "/people/people_image/part_time/ykb.jpg",
         "email": "a1021524866@gmail.com",
         "research": ["Pursuing a graduate degree at The University of Tokyo"]
+    },
+    {
+        "name": "Changgu Chen",
+        "title": "Former PhD Candidate",
+        "graduationYear": "2026",
+        "bio": "Graduated in 2026 after researching controllable motion generation for AIGC and joined Xiaomi.",
+        "image": "/people/people_image/thumbs/phd/ccg.jpg",
+        "email": "277006597@qq.com",
+        "coSupervisors": [
+          {
+            "name": "Prof. Changbo Wang",
+            "url": "https://dase.ecnu.edu.cn/37/5e/c41774a538462/page.htm"
+          }
+        ],
+        "research": ["Xiaomi"]
+    },
+    {
+        "name": "Wenjie Liu",
+        "title": "Former Master's Student",
+        "graduationYear": "2026",
+        "bio": "Graduated in 2026 after exploring neural rendering and AIGC and joined NIO.",
+        "image": "/people/people_image/thumbs/master/lwj.jpg",
+        "email": "362449104@qq.com",
+        "research": ["NIO"]
+    },
+    {
+        "name": "Ling You",
+        "title": "Former Master's Student",
+        "graduationYear": "2026",
+        "bio": "Graduated in 2026 after exploring MLLMs and video understanding and joined Xiaohongshu.",
+        "image": "/people/people_image/thumbs/master/u0.jpg",
+        "email": "51265901023@stu.ecnu.edu.cn",
+        "research": ["Xiaohongshu"]
+    },
+    {
+        "name": "Yu Zhang",
+        "title": "Former Undergraduate",
+        "graduationYear": "2026",
+        "bio": "Graduated in 2026 after researching tracking and multimodal large language models, then continued studying at Shanghai Jiao Tong University.",
+        "image": "/people/people_image/thumbs/undergraduate/zy.jpg",
+        "email": "",
+        "research": ["Further study at Shanghai Jiao Tong University"]
+    },
+    {
+        "name": "Yanjing Li",
+        "title": "Former Part-Time Student",
+        "graduationYear": "2026",
+        "bio": "Graduated in 2026 after working on generative AI for talking virtual avatars and joined Digital Domain.",
+        "image": "/people/people_image/thumbs/part_time/yj.jpg",
+        "email": "71255901065@stu.ecnu.edu.cn",
+        "research": ["Digital Domain"]
+    },
+    {
+        "name": "Yasong Li",
+        "title": "Former Part-Time Student",
+        "graduationYear": "2026",
+        "bio": "Graduated in 2026 and joined Shanghai High School.",
+        "image": "/placeholder.svg",
+        "email": "",
+        "research": ["Shanghai High School"]
+    },
+    {
+        "name": "Yading Huang",
+        "title": "Former Part-Time Student",
+        "graduationYear": "2026",
+        "bio": "Graduated in 2026 and joined Positec.",
+        "image": "/placeholder.svg",
+        "email": "",
+        "research": ["Positec"]
+    },
+    {
+        "name": "Wenxiang Xu",
+        "title": "Former Part-Time Student",
+        "graduationYear": "2026",
+        "bio": "Graduated in 2026 and joined SiScan Technology.",
+        "image": "/placeholder.svg",
+        "email": "",
+        "research": ["SiScan Technology"]
     }
   ]

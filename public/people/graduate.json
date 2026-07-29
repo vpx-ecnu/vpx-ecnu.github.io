@@ -1,28 +1,5 @@
 [
   {
-    "name": "Wenjie Liu",
-    "title": "Master's Student",
-    "bio": "Exploring Neural Rendering and AIGC (image and 3D editing).",
-    "image": "/people/people_image/thumbs/master/lwj.jpg",
-    "email": "362449104@qq.com",
-    "research": [
-      "Style Transfer",
-      "3DGS",
-      "diffusion"
-    ]
-  },
-  {
-    "name": "Ling You",
-    "title": "Master's Student",
-    "bio": "Exploring MLLMs and video understanding.",
-    "image": "/people/people_image/thumbs/master/u0.jpg",
-    "email": "51265901023@stu.ecnu.edu.cn",
-    "research": [
-      "MLLMs",
-      "Sports Video Analytics"
-    ]
-  },
-  {
     "name": "Zehui Guo",
     "title": "Master's Student",
     "bio": "Exploring diffusion.",
@@ -159,23 +136,6 @@
     ]
   },
   {
-    "name": "Hanzhe Yao",
-    "title": "Master's Student",
-    "bio": "Exploring multimodal in-context learning.",
-    "image": "/people/people_image/thumbs/master/yhz.jpg",
-    "email": "3061794854@qq.com",
-    "coSupervisors": [
-      {
-        "name": "Prof. Changbo Wang",
-        "url": "https://dase.ecnu.edu.cn/37/5e/c41774a538462/page.htm"
-      }
-    ],
-    "research": [
-      "MLLMs",
-      "ICL"
-    ]
-  },
-  {
     "name": "Qijie Yu",
     "title": "Master's Student",
     "bio": "Exploring virtual reality.",
@@ -210,6 +170,23 @@
     ]
   },
   {
+    "name": "Hanzhe Yao",
+    "title": "Master's Student",
+    "bio": "Exploring multimodal in-context learning.",
+    "image": "/people/people_image/thumbs/master/yhz.jpg",
+    "email": "3061794854@qq.com",
+    "coSupervisors": [
+      {
+        "name": "Prof. Changbo Wang",
+        "url": "https://dase.ecnu.edu.cn/37/5e/c41774a538462/page.htm"
+      }
+    ],
+    "research": [
+      "MLLMs",
+      "ICL"
+    ]
+  },
+  {
     "name": "Tieshi Zhong",
     "title": "Master's Student",
     "bio": "Exploring 3D Reconstruction.",
@@ -235,6 +212,17 @@
     "research": [
       "Multimodal",
       "RL"
+    ]
+  },
+  {
+    "name": "Yidong Weng",
+    "title": "Master's Student",
+    "bio": "Exploring robotics and spatial perception.",
+    "image": "/people/people_image/thumbs/master/wyd.jpg",
+    "email": "",
+    "research": [
+      "Robotics",
+      "Spatial Perception"
     ]
   }
 ]
