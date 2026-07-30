@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Mail, Globe } from "lucide-react";
 
 import faculty from "../../public/people/faculty.json";
+import researchOperations from "../../public/people/research-operations.json";
 import phdStudents from "../../public/people/phd.json";
 import gradStudents from "../../public/people/graduate.json";
 import partTimeStudents from "../../public/people/part-time.json";
@@ -34,7 +35,7 @@ const getAvatarImageStyle = (member: Person): React.CSSProperties => ({
   objectPosition: member.imagePosition || DEFAULT_AVATAR_POSITION,
 });
 
-const getFacultyAvatarClassName = (member: Person) =>
+const getProfileAvatarClassName = (member: Person) =>
   member.name === "Yang Li"
     ? "h-44 w-44 rounded-full sm:h-40 sm:w-40 lg:h-52 lg:w-52"
     : "h-40 w-40 rounded-full sm:h-36 sm:w-36 lg:h-44 lg:w-44";
@@ -124,6 +125,7 @@ const LEGACY_ANCHOR_ALIASES: Record<string, string> = {
 
 const People = () => {
   const facultyList = faculty as Person[];
+  const researchOperationsList = researchOperations as Person[];
   const phdList = phdStudents as Person[];
   const gradList = gradStudents as Person[];
   const partTimeList = partTimeStudents as Person[];
@@ -197,7 +199,19 @@ useEffect(() => {
           <Group id="faculty" title="Faculty" subtitle="Principal investigators and faculty members.">
             <div className="space-y-8">
               {facultyList.map((m, i) => (
-                <FacultyRow key={`faculty-${i}`} member={m} />
+                <ProfileRow key={`faculty-${i}`} member={m} />
+              ))}
+            </div>
+          </Group>
+
+          <Group
+            id="research-operations"
+            title="Research Operations"
+            subtitle="Research coordination and laboratory operations."
+          >
+            <div className="space-y-8">
+              {researchOperationsList.map((m, i) => (
+                <ProfileRow key={`research-operations-${i}`} member={m} />
               ))}
             </div>
           </Group>
@@ -292,7 +306,7 @@ const Group = ({
 };
 
 /** Faculty: no Card background, left avatar (circle) + right content */
-const FacultyRow = ({ member }: { member: Person }) => {
+const ProfileRow = ({ member }: { member: Person }) => {
   const initials =
     member.name
       ?.split(" ")
@@ -307,7 +321,7 @@ const FacultyRow = ({ member }: { member: Person }) => {
     <div className="flex flex-col items-center gap-5 sm:items-start lg:flex-row lg:items-start">
       {/* left: circle avatar */}
       <div className="flex w-full shrink-0 justify-center sm:justify-start lg:w-auto">
-        <Avatar className={getFacultyAvatarClassName(member)}>
+        <Avatar className={getProfileAvatarClassName(member)}>
           <AvatarImage
             src={member.image}
             loading="lazy"

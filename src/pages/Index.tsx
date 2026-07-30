@@ -136,6 +136,7 @@ const Index = () => {
 
     const peopleFiles = [
       "/people/faculty.json",
+      "/people/research-operations.json",
       "/people/phd.json",
       "/people/graduate.json",
       "/people/part-time.json",
