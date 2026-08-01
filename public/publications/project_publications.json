@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-07T04:42:03.840051Z",
+  "updatedAt": "2026-08-01T06:07:06.215481Z",
   "publications": [
     {
       "id": "project-pub-1",
@@ -136,30 +136,30 @@
       "title": "SuPer Deep: A Surgical Perception Framework for Robotic Tissue Manipulation using Deep Learning for Feature Extraction",
       "venue": "IEEE Conference on Robotics and Automation (ICRA) 2021",
       "url": "https://sites.google.com/ucsd.edu/super-framework",
-      "image": "/publications/recent_images/599db51fcfc4.png",
+      "image": "/publications/recent_images/b442c2eaa985.png",
       "mediaType": "image",
-      "media": "/publications/recent_images/599db51fcfc4.png",
-      "poster": "/publications/recent_images/599db51fcfc4.png"
+      "media": "/publications/recent_images/b442c2eaa985.png",
+      "poster": "/publications/recent_images/b442c2eaa985.png"
     },
     {
       "id": "project-pub-15",
       "title": "SuPer: A Surgical Perception Framework for Endoscopic Tissue Manipulation with Surgical Robotics",
       "venue": "IEEE Robotics and Automation Letters 2020",
       "url": "https://sites.google.com/ucsd.edu/super-framework",
-      "image": "/publications/recent_images/6e66e6e69723.png",
+      "image": "/publications/recent_images/d67e399b08fd.png",
       "mediaType": "image",
-      "media": "/publications/recent_images/6e66e6e69723.png",
-      "poster": "/publications/recent_images/6e66e6e69723.png"
+      "media": "/publications/recent_images/d67e399b08fd.png",
+      "poster": "/publications/recent_images/d67e399b08fd.png"
     },
     {
       "id": "project-pub-16",
       "title": "Robust Estimation of Similarity Transformation for Visual Object Tracking",
       "venue": "The Conference on Association for the Advancement of Artificial Intelligence (AAAI) 2019",
       "url": "https://sites.google.com/view/ldestracker",
-      "image": "/publications/recent_images/49ea1bae5395.png",
+      "image": "/publications/recent_images/01d3487ed1e2.png",
       "mediaType": "image",
-      "media": "/publications/recent_images/49ea1bae5395.png",
-      "poster": "/publications/recent_images/49ea1bae5395.png"
+      "media": "/publications/recent_images/01d3487ed1e2.png",
+      "poster": "/publications/recent_images/01d3487ed1e2.png"
     }
   ]
 }
