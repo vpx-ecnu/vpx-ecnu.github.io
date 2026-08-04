@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T05:55:37.708505+00:00",
+  "updatedAt": "2026-08-04T05:28:18.313513+00:00",
   "source": {
     "mid": 487404760,
     "series_id": 3793757,
@@ -9,6 +9,33 @@
     "total_from_api": null
   },
   "videos": [
+    {
+      "bvid": "BV1qrMX6eEnv",
+      "title": "VPX 60｜【ICRA 2026 Best Paper】IMR-LLM: Industrial Multi-Robot...论文简介！",
+      "description": "",
+      "cover": "/reading_club_covers/BV1qrMX6eEnv_38fd0ee2ab_VPX_60_ICRA_2026_Best_Paper_IMR-LLM_Industrial_Multi-Robot...论文简介.jpg",
+      "cover_remote": "http://i2.hdslb.com/bfs/archive/654a06b3b890866254a42d2ff4dc21c93377390a.jpg",
+      "publishedAt": "2026-08-03T10:36:38+00:00",
+      "url": "https://www.bilibili.com/video/BV1qrMX6eEnv"
+    },
+    {
+      "bvid": "BV1VUMX6fEMH",
+      "title": "VPX 59｜Diffusion Forcing: Next-token Prediction Meets Full-Sequence...论文分享！",
+      "description": "",
+      "cover": "/reading_club_covers/BV1VUMX6fEMH_ed80dc9194_VPX_59_Diffusion_Forcing_Next-token_Prediction_Meets_Full-Sequence...论文分享.jpg",
+      "cover_remote": "http://i1.hdslb.com/bfs/archive/931c6c0a888e48414f9d36c2c02f3cf3aeb9a3d9.jpg",
+      "publishedAt": "2026-08-03T10:15:21+00:00",
+      "url": "https://www.bilibili.com/video/BV1VUMX6fEMH"
+    },
+    {
+      "bvid": "BV1L2MX6cE49",
+      "title": "VPX 58｜Dive into Claude Code Harness：The Runtime Design of Coding Agents技术分享！",
+      "description": "",
+      "cover": "/reading_club_covers/BV1L2MX6cE49_76c5b7945e_VPX_58_Dive_into_Claude_Code_Harness_The_Runtime_Design_of_Coding_Agents技术分享.jpg",
+      "cover_remote": "http://i1.hdslb.com/bfs/archive/f753638cb379bef07d485a130f14b4255810717f.jpg",
+      "publishedAt": "2026-08-03T10:08:09+00:00",
+      "url": "https://www.bilibili.com/video/BV1L2MX6cE49"
+    },
     {
       "bvid": "BV1WuK86gEs8",
       "title": "VPX 57 | 【CVPR 2026 Highlight】OVI-MAP: Open-Vocabulary ...论文分享！",
