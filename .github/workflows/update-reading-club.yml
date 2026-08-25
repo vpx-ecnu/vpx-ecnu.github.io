@@ -7,11 +7,13 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write
   contents: write
 
 concurrency:
   group: update-reading-club
-  cancel-in-progress: true
+  # Never cancel after a content push but before the deploy dispatch.
+  cancel-in-progress: false
 
 jobs:
   update:
@@ -54,19 +56,32 @@ jobs:
               rm -rf public/reading_club_covers
               cp -a "${backup_dir}/reading_club_covers.bak" public/reading_club_covers
             fi
-            exit 0
+            exit 1
           fi
 
       - name: Commit changes (if any)
+        id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           git add src/data/readingClub.json public/reading_club_covers
 
-          # 没有变更就不提交
-          git diff --cached --quiet && echo "No changes to commit." || git commit -m "chore: update reading club data & covers"
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No changes to commit."
+          else
+            git commit -m "chore: update reading club data & covers"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Push
-        run: |
-          git push
+        if: ${{ steps.commit.outputs.changed == 'true' }}
+        run: git push
+
+      - name: Trigger Pages deployment
+        # Manual runs double as a recovery path when a previous dispatch failed.
+        if: ${{ steps.commit.outputs.changed == 'true' || github.event_name == 'workflow_dispatch' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main --repo "$GITHUB_REPOSITORY"

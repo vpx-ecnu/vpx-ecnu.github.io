@@ -8,10 +8,11 @@ on:
     workflows:
       - Sync Derived Media
       - Update XHS news.json
-      - Update VPX Reading Club (data + covers)
       - Update Publications
     types:
       - completed
+
+# Reading Club explicitly dispatches this workflow after pushing content changes.
 
 permissions:
   contents: read

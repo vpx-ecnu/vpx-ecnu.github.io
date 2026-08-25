@@ -116,8 +116,12 @@ def fetch_all_archives():
 
         d = data.get("data") or {}
         if total is None:
-            # 有的返回是 total，有的可能叫 total_count；这里做兼容
-            total = d.get("total") or d.get("total_count")
+            # B站当前把总数放在 data.page.total；兼容旧字段。
+            page = d.get("page") if isinstance(d.get("page"), dict) else {}
+            for candidate in (d.get("total"), d.get("total_count"), page.get("total")):
+                if isinstance(candidate, int) and not isinstance(candidate, bool):
+                    total = candidate
+                    break
 
         archives = d.get("archives") or []
         if not archives:
@@ -144,8 +148,36 @@ def fetch_all_archives():
     return all_archives, total
 
 
+def load_existing_payload():
+    try:
+        with open(OUT_JSON, "r", encoding="utf-8") as f:
+            payload = json.load(f)
+    except FileNotFoundError:
+        return None
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        print(f"Warning: could not read existing {OUT_JSON}: {exc}")
+        return None
+
+    if not isinstance(payload, dict) or not isinstance(payload.get("updatedAt"), str):
+        return None
+    return payload
+
+
+def content_without_timestamp(payload):
+    if not isinstance(payload, dict):
+        return payload
+    return {key: value for key, value in payload.items() if key != "updatedAt"}
+
+
 def main():
     archives, total = fetch_all_archives()
+
+    if not archives:
+        raise RuntimeError("Bili API returned no archives; refusing to replace existing data")
+    if isinstance(total, int) and len(archives) < total:
+        raise RuntimeError(
+            f"Bili API returned an incomplete series: expected {total}, fetched {len(archives)}"
+        )
 
     videos = []
     for v in archives:
@@ -166,8 +198,7 @@ def main():
             "url": f"https://www.bilibili.com/video/{bvid}" if bvid else "",
         })
 
-    payload = {
-        "updatedAt": datetime.now(timezone.utc).isoformat(),
+    content = {
         "source": {
             "mid": MID,
             "series_id": SERIES_ID,
@@ -177,6 +208,17 @@ def main():
             "total_from_api": total,
         },
         "videos": videos,
+    }
+
+    existing_payload = load_existing_payload()
+    if content_without_timestamp(existing_payload) == content:
+        print(f"No Reading Club content changes; kept existing {OUT_JSON}")
+        print(f"Covers verified in {COVER_DIR}")
+        return
+
+    payload = {
+        "updatedAt": datetime.now(timezone.utc).isoformat(),
+        **content,
     }
 
     os.makedirs(os.path.dirname(OUT_JSON), exist_ok=True)
