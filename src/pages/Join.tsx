@@ -4,21 +4,32 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
-  ArrowRight,
   Bookmark,
-  BookOpen,
+  Compass,
   ExternalLink,
   GraduationCap,
-  Users,
+  Heart,
+  Laptop,
+  Lightbulb,
   Mail,
   Sparkles,
   CheckCircle2,
   Link as LinkIcon,
   FileText,
   MapPin,
+  Rocket,
+  Target,
+  Users,
+  Workflow,
 } from "lucide-react";
 
-const YLI_EMAIL = "yli@cs.ecnu.edu.cn";
+const APPLICATION_EMAIL = "talents.vpx@gmail.com";
+const APPLICATION_SUBJECT =
+  "[VPX Application][Category][Research Track][Remote/On-site] Name – Institution";
+const APPLICATION_MAILTO = `mailto:${APPLICATION_EMAIL}?subject=${encodeURIComponent(
+  APPLICATION_SUBJECT,
+)}`;
+const LAST_UPDATED = "August 2026";
 const ZULIP_INVITE =
   "https://vpx-ecnu.zulipchat.com/join/hskqkiyqkq4z537uzxcfhbqp/";
 const LAB_ADDRESS = "Science Building, East China Normal University, 3663 Zhongshan North Road, Putuo District, Shanghai";
@@ -29,46 +40,110 @@ const LAB_MAP_LINK =
 const LAB_MAP_EMBED =
   `https://www.google.com/maps?q=${LAB_LAT},${LAB_LNG}(Science%20Building)&z=19&output=embed`;
 
+const memberBenefits = [
+  {
+    icon: Lightbulb,
+    title: "Idea-Rich, Structured Research Mentorship",
+    description:
+      "Work with a rich pool of original, mechanism-driven research ideas, with structured guidance in problem formulation, experimentation, engineering, and academic writing.",
+  },
+  {
+    icon: Workflow,
+    title: "End-to-End Research Training",
+    description:
+      "Learn the full research process, from defining a problem and analyzing mechanisms to prototyping, rigorous evaluation, and communicating results.",
+  },
+  {
+    icon: Compass,
+    title: "Frontier and Interdisciplinary Research",
+    description:
+      "Explore open questions across temporal, spatial, generative, and physical AI, where different fields and methods meet.",
+  },
+  {
+    icon: Rocket,
+    title: "Research with Real-World Impact",
+    description:
+      "Pursue strong academic contributions while validating ideas through systems, applications, and real-world research problems.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Growth toward Research Independence",
+    description:
+      "Progress from structured onboarding to developing your own research judgment, original ideas, and the ability to lead projects independently.",
+  },
+  {
+    icon: Users,
+    title: "Like-Minded Peers and a Shared Mission",
+    description:
+      "Build lasting friendships with curious, ambitious peers and contribute together to human-centered AGI that benefits people and society.",
+  },
+];
+
+const coreValues = [
+  {
+    icon: Sparkles,
+    title: "Create with Originality",
+    description:
+      "We believe breakthroughs begin with original questions and ideas. We cross disciplinary boundaries, challenge assumptions, and combine perspectives from vision, graphics, generative models, robotics, and beyond.",
+  },
+  {
+    icon: Target,
+    title: "Pursue Excellence",
+    description:
+      "Great ideas are only the beginning. We reason from mechanisms and evidence, execute with rigor, and refine our work until it can stand at the highest level and create real impact.",
+  },
+  {
+    icon: Heart,
+    title: "Stay Open and Inclusive",
+    description:
+      "Frontier research is uncertain, debated, and interdisciplinary. We welcome diverse perspectives and constructive disagreement, respect the people behind every idea, and pursue human-centered AI that serves people and contributes to a better society.",
+  },
+];
+
+const researchTracks = [
+  {
+    title: "Temporal AI — VLM Perception & Reasoning",
+    description:
+      "Understanding people, objects, behaviors, and events as the visual world evolves over time.",
+  },
+  {
+    title: "Spatial AI — 3D/4D World Modeling",
+    description:
+      "Building computable, reconstructable, and interactive representations of dynamic spaces.",
+  },
+  {
+    title: "Generative AI — Controllable Content Creation",
+    description:
+      "Creating controllable and temporally consistent images, videos, 3D content, and digital humans.",
+  },
+  {
+    title: "Physical AI — Embodied Perception & Action",
+    description:
+      "Enabling intelligent agents to perceive, reason, decide, and act through continuous interaction with the physical world.",
+  },
+];
+
+const faqs = [
+  {
+    q: "What should I include in my application email?",
+    a: `Use the subject format “${APPLICATION_SUBJECT}”. Include your CV, application category, intended research track, and representative projects, papers, or portfolio links. Undergraduate students@ECNU should follow the Zulip process instead of applying by email.`,
+  },
+  {
+    q: "Do you support remote collaboration?",
+    a: "Yes. VPX supports project-based remote collaboration, primarily through Remote RA opportunities. A minimum commitment of three months is expected. Research scope, weekly availability, supervision, and collaboration arrangements will be discussed individually. Formal degree programs remain subject to ECNU requirements.",
+  },
+  {
+    q: "How are candidates evaluated?",
+    a: "We look for candidates who align with VPX’s core values and have the potential to reach an exceptional level in all three: original thinking, rigorous execution that turns ideas into impact, and an open, inclusive, human-centered approach to interdisciplinary research. Role-specific eligibility requirements still apply.",
+  },
+  {
+    q: "Will every applicant receive a reply?",
+    a: "We receive an exceptionally high volume of application emails. Due to limited capacity, we may only be able to reply to candidates whose background and interests closely match our current opportunities.",
+  },
+];
+
 const Join = () => {
   const [activeQr, setActiveQr] = useState<"xiaohongshu" | "douyin" | null>(null);
-
-  const commonTracks = [
-    {
-      title: "Next-Generation Rendering Engine",
-      description:
-        "Focused on NeRF and 3D Gaussian Splatting (3DGS), exploring virtual humans, lighting reconstruction, 3D reconstruction, and 3D scene stylization. Helpful skills: CG/ML background, VR/MR, UE5, CUDA, shaders, PyTorch.",
-    },
-    {
-      title: "Metaverse Content Generation",
-      description:
-        "Centered around AIGC and diffusion models, investigating controllable image/video generation and 3D mesh generation. Helpful skills: DL/ML background, Photoshop, ComfyUI/WebUI, PyTorch.",
-    },
-    {
-      title: "Video Analysis and Large Model Applications",
-      description:
-        "Focused on tracking, SAM, and large vision models (LVM), covering live content generation, soccer commentary, and virtual geofencing. Helpful skills: SAM, LLaVA, ChatGPT, YOLO, C++.",
-    },
-    {
-      title: "Embodied Intelligence Robots",
-      description:
-        "Focused on reinforcement learning (RL) and vision-language-action (VLA) models, exploring household robotics and automated chemical experiments. Helpful skills: robotics/hardware, ROS, LVM, PPO, PyTorch.",
-    },
-  ];
-
-  const faqs = [
-    {
-      q: "What should I include in my application email?",
-      a: "Please include your CV and clearly state the track(s) you’re interested in. If you have representative projects, papers, or a portfolio, add links in the email.",
-    },
-    {
-      q: "Do you support remote collaboration?",
-      a: "Most positions require in-person participation, but we do collaborate remotely in specific cases. Mention your situation in the email so we can evaluate feasibility.",
-    },
-    {
-      q: "How are candidates evaluated?",
-      a: "We evaluate candidates holistically: fundamentals, research potential, execution ability, and fit with our tracks. Strong evidence of hands-on work is a big plus.",
-    },
-  ];
 
   return (
     <div className="relative w-full overflow-hidden bg-background text-foreground">
@@ -88,6 +163,9 @@ const Join = () => {
         </h1>
         <p className="text-muted-foreground md:text-xl">
           Collaborate, learn, and contribute to research in next-generation AI, computer vision, computer graphics, and robotic perception.
+        </p>
+        <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+          Last updated: {LAST_UPDATED}
         </p>
 
         <div className="flex flex-col gap-3 justify-center pt-2 sm:flex-row sm:flex-wrap">
@@ -126,110 +204,61 @@ const Join = () => {
         </div>
       </section>
 
-      {/* COMMON INFO FIRST (Shared for PhD / Master / Undergrad) */}
+      {/* APPLICATION OVERVIEW */}
       <section className="mx-auto max-w-5xl space-y-6">
         <Card className="overflow-hidden">
-          <CardHeader className="space-y-3">
-            <CardTitle className="flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-primary" />
-              What You’ll Get at VPX
-            </CardTitle>
-            <CardDescription>
-              Shared information for PhD, Master’s, and Undergraduate applicants.
-            </CardDescription>
-          </CardHeader>
-
-          <CardContent className="space-y-6">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <Card className="bg-muted/40">
-                <CardContent className="pt-6 text-center">
-                  <GraduationCap className="h-10 w-10 text-primary mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">Education</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Mentorship, reading groups, and systematic research training.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-muted/40">
-                <CardContent className="pt-6 text-center">
-                  <BookOpen className="h-10 w-10 text-primary mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">Research</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Meaningful projects with strong engineering + academic rigor.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-muted/40">
-                <CardContent className="pt-6 text-center">
-                  <Users className="h-10 w-10 text-primary mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">Community</h3>
-                  <p className="text-sm text-muted-foreground">
-                    A collaborative team culture and frequent technical sharing.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="space-y-3">
-              <h3 className="text-lg font-semibold">Research Tracks</h3>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {commonTracks.map((t, idx) => (
-                  <div key={idx} className="bg-muted/50 p-4 rounded-lg">
-                    <div className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
-                      <div className="space-y-1">
-                        <h4 className="font-medium">{t.title}</h4>
-                        <p className="text-sm text-muted-foreground">{t.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <CardContent className="pt-6">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
               <Card className="bg-muted/30">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-base flex items-center gap-2">
                     <Mail className="h-4 w-4 text-primary" />
-                    Unified Application Method
+                    Application by Email
                   </CardTitle>
-                  <CardDescription>For PhD / Master’s / Undergraduate</CardDescription>
+                  <CardDescription>For PhD / Master’s / RA</CardDescription>
                 </CardHeader>
                 <CardContent className="text-sm text-muted-foreground space-y-2">
                   <p>
-                    Send your CV and the track(s) you’re interested in to:
+                    Send your CV, application category, and intended research track to:
                   </p>
                   <div className="flex flex-col gap-2">
                     <Button asChild className="w-full gap-2 sm:w-fit">
-                      <a href={`mailto:${YLI_EMAIL}`}>
+                      <a href={APPLICATION_MAILTO}>
                         <Mail className="h-4 w-4" />
-                        {YLI_EMAIL}
+                        {APPLICATION_EMAIL}
                       </a>
                     </Button>
+                    <p className="break-words text-xs">
+                      Subject: {APPLICATION_SUBJECT}
+                    </p>
                     <p className="text-xs">
-                      Tip: Use a clear subject line like “Application – Master’s – Video Analysis”.
+                      Replace each bracketed placeholder with your details before sending.
+                    </p>
+                    <p className="text-xs">
+                      Categories: PhD, Direct PhD, Master’s, On-site RA, or Remote RA.
+                    </p>
+                    <p className="text-xs">
+                      Due to the exceptionally high volume of application emails and our limited capacity, we may only be able to reply to candidates whose background and interests closely match our current opportunities.
                     </p>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-muted/30 lg:col-span-2">
+              <Card className="bg-muted/30">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-base flex items-center gap-2">
                     <FileText className="h-4 w-4 text-primary" />
                     What to Prepare
                   </CardTitle>
-                  <CardDescription>Recommended materials to speed up evaluation</CardDescription>
+                  <CardDescription>For PhD, Master’s, and RA email applications</CardDescription>
                 </CardHeader>
                 <CardContent className="text-sm text-muted-foreground">
                   <ul className="list-disc list-inside space-y-2">
                     <li>CV (education, projects, publications, awards)</li>
+                    <li>Application category, intended research track, and preferred working mode</li>
                     <li>Links: GitHub / personal page / portfolio (if any)</li>
                     <li>One-page research interest statement (optional but helpful)</li>
-                    <li>Representative work: papers / demos / reports (optional)</li>
+                    <li>Representative work: papers / demos / reports (required where specified below)</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -241,7 +270,7 @@ const Join = () => {
       {/* ROLE-SPECIFIC TABS */}
       <section>
         <Tabs defaultValue="phd" className="w-full">
-          <TabsList className="mb-8 grid h-auto w-full grid-cols-1 gap-2 bg-transparent p-0 sm:grid-cols-3">
+          <TabsList className="mb-8 grid h-auto w-full grid-cols-1 gap-2 bg-transparent p-0 sm:grid-cols-2 lg:grid-cols-4">
             <TabsTrigger
               value="phd"
               className="min-h-10 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
@@ -260,6 +289,12 @@ const Join = () => {
             >
               Undergraduate
             </TabsTrigger>
+            <TabsTrigger
+              value="ra"
+              className="min-h-10 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
+            >
+              Research Assistant (RA)
+            </TabsTrigger>
           </TabsList>
 
           {/* PhD */}
@@ -271,25 +306,42 @@ const Join = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">
-                  We welcome PhD applicants who aim for top-tier research impact and can demonstrate strong research maturity and execution ability.
+                  We welcome PhD applicants who aim for top-tier research impact and can demonstrate strong research maturity and execution ability. Please apply through the pathway that matches your academic background.
                 </p>
 
-                <h3 className="text-lg font-semibold mt-6">Additional Requirement (PhD)</h3>
-                <div className="bg-muted/50 p-4 rounded-lg space-y-2">
-                  <p className="text-sm">
-                    Applicants are expected to have{" "}
-                    <span className="font-medium">A-class computer science conference papers</span>{" "}
-                    (e.g., top-tier venues in CV/CG/ML), or equivalent research outputs.
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    If your paper is under review, include the submission status and (if available) reviewer feedback.
-                  </p>
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                  <div className="space-y-3 rounded-lg bg-muted/50 p-4">
+                    <div>
+                      <h3 className="font-semibold">PhD Applicants with a Master’s Degree</h3>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        For applicants who already hold a Master’s degree.
+                      </p>
+                    </div>
+                    <p className="text-sm">
+                      Applicants must already hold a Master’s degree and have at least one paper accepted by or currently submitted to a CCF-A conference.
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      For a paper under review, attach the submitted manuscript and state its current submission status. Reviewer comments are not required.
+                    </p>
+                  </div>
+
+                  <div className="space-y-3 rounded-lg bg-muted/50 p-4">
+                    <div>
+                      <h3 className="font-semibold">Direct PhD Applicants</h3>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        For applicants entering directly from a Bachelor’s degree.
+                      </p>
+                    </div>
+                    <p className="text-sm">
+                      Applicants should demonstrate substantial research experience or an outstanding achievement in a relevant area.
+                    </p>
+                  </div>
                 </div>
 
                 <h3 className="text-lg font-semibold mt-6">How to Apply</h3>
                 <ol className="list-decimal list-inside space-y-2 text-sm text-muted-foreground">
-                  <li>Pick the track(s) that fit your research goal.</li>
-                  <li>Email your CV (and key links) to {YLI_EMAIL}.</li>
+                  <li>State “PhD” or “Direct PhD” and choose the track(s) that fit your research goal.</li>
+                  <li>Email your CV, key links, and any required manuscript to {APPLICATION_EMAIL}.</li>
                   <li>Shortlisted candidates will be invited to interview.</li>
                 </ol>
               </CardContent>
@@ -301,7 +353,7 @@ const Join = () => {
             <Card>
               <CardHeader>
                 <CardTitle>Master’s Student Opportunities</CardTitle>
-                <CardDescription>Full-time Master’s positions in VPX</CardDescription>
+                <CardDescription>Research opportunities for Master’s students in VPX</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">
@@ -311,7 +363,7 @@ const Join = () => {
                 <h3 className="text-lg font-semibold mt-6">How to Apply</h3>
                 <ol className="list-decimal list-inside space-y-2 text-sm text-muted-foreground">
                   <li>Pick the track(s) that match your interest and skills.</li>
-                  <li>Email your CV (and key links) to {YLI_EMAIL}.</li>
+                  <li>Email your CV (and key links) to {APPLICATION_EMAIL}.</li>
                   <li>Shortlisted candidates will be invited to interview.</li>
                 </ol>
               </CardContent>
@@ -322,23 +374,20 @@ const Join = () => {
           <TabsContent value="undergrad" className="space-y-8">
             <Card>
               <CardHeader>
-                <CardTitle>Undergraduate Research</CardTitle>
-                <CardDescription>Start your AI research journey with structured onboarding</CardDescription>
+                <CardTitle>Undergraduate Research for ECNU Students</CardTitle>
+                <CardDescription>For current ECNU undergraduate students</CardDescription>
               </CardHeader>
               <CardContent className="space-y-5">
                 <div className="bg-muted/50 p-4 rounded-lg space-y-3">
                   <div className="flex items-start gap-2">
                     <LinkIcon className="h-5 w-5 text-primary mt-0.5" />
                     <div className="space-y-2">
-                      <h3 className="font-semibold">Join AI Club First (Required)</h3>
+                      <h3 className="font-semibold">Join AI Club and Complete the Tutorial</h3>
                       <p className="text-sm text-muted-foreground">
-                        Hi everyone, before joining the VPX Group, please use the link below to join our AI Club.
-                        We hope this can become your starting point to get closer to artificial intelligence,
-                        participate in research projects, and ultimately grow into a true AI expert.
+                        This pathway is for current ECNU undergraduate students. Before joining VPX, use the link below to join our AI Club on Zulip.
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        We’re currently designing AI Club tutorial materials and a set of small tasks—stay tuned.
-                        If you can complete the corresponding tasks, you’ll have a chance to join the VPX Group.
+                        Read the Welcome guidance and complete the tutorial provided there. You do not need to send an application email.
                       </p>
 
                       <div className="flex flex-col sm:flex-row gap-3 pt-1">
@@ -348,30 +397,147 @@ const Join = () => {
                             Join via Zulip Invite Link
                           </a>
                         </Button>
-                        {/* <Button asChild variant="secondary" className="gap-2 w-fit">
-                          <a href={`mailto:${YLI_EMAIL}`}>
-                            <Mail className="h-4 w-4" />
-                            Email CV to Apply
-                          </a>
-                        </Button> */}
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="space-y-3">
+                  <h3 className="text-lg font-semibold">How to Get Started</h3>
+                  <ol className="list-decimal list-inside space-y-2 text-sm text-muted-foreground">
+                    <li>Join AI Club through the Zulip link above.</li>
+                    <li>Follow the Welcome guidance and complete the tutorial.</li>
+                    <li>Once finished, send the PI a direct message on Zulip with a brief introduction and what you completed.</li>
+                  </ol>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Research Assistant */}
+          <TabsContent value="ra" className="space-y-8">
+            <Card>
+              <CardHeader>
+                <CardTitle>Research Assistant Opportunities</CardTitle>
+                <CardDescription>Project-based on-site and remote collaboration with VPX</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-5">
+                <p className="text-muted-foreground">
+                  RA opportunities are available for candidates who want to contribute to ongoing VPX research projects. The project scope, responsibilities, and collaboration arrangements will be discussed individually.
+                </p>
+
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                  <div className="space-y-3 rounded-lg bg-muted/50 p-4">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="h-5 w-5 text-primary" />
+                      <h3 className="font-semibold">On-site RA</h3>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Work on-site with the VPX team for a minimum commitment of six months.
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Compensation may be available depending on the project scope, responsibilities, and candidate fit.
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Depending on the project, accommodation may be available at ECNU’s Lin-gang Campus; availability and arrangements will be discussed individually.
+                    </p>
+                  </div>
+
+                  <div className="space-y-3 rounded-lg bg-muted/50 p-4">
+                    <div className="flex items-center gap-2">
+                      <Laptop className="h-5 w-5 text-primary" />
+                      <h3 className="font-semibold">Remote RA</h3>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Join selected VPX research projects remotely for a minimum commitment of three months.
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Research scope, weekly availability, supervision, and collaboration arrangements will be discussed individually.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
                   <h3 className="text-lg font-semibold">How to Apply</h3>
                   <ol className="list-decimal list-inside space-y-2 text-sm text-muted-foreground">
-                    <li>Join AI Club via the Zulip link above.</li>
-                    <li>Prepare a brief self-introduction + CV (projects/coursework are great).</li>
-                    <li>Email your CV and intended track(s) to {YLI_EMAIL}.</li>
-                    <li>We will contact shortlisted students for the next steps.</li>
+                    <li>State whether you are applying for an On-site RA or Remote RA role and select your intended research track.</li>
+                    <li>Email your CV and representative work to {APPLICATION_EMAIL}.</li>
+                    <li>Include your location, time zone, earliest start date, expected duration, and weekly availability.</li>
+                    <li>Shortlisted candidates will be contacted to discuss a suitable project and working arrangement.</li>
                   </ol>
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
         </Tabs>
+      </section>
+
+      {/* VPX EXPERIENCE, VALUES, AND RESEARCH */}
+      <section className="mx-auto max-w-5xl space-y-6">
+        <Card className="overflow-hidden">
+          <CardHeader className="space-y-3">
+            <CardTitle className="flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-primary" />
+              What You’ll Get at VPX
+            </CardTitle>
+            <CardDescription>
+              Shared information for PhD, Master’s, Undergraduate, and Research Assistant applicants.
+            </CardDescription>
+          </CardHeader>
+
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {memberBenefits.map(({ icon: Icon, title, description }) => (
+                <Card key={title} className="bg-muted/40">
+                  <CardContent className="pt-6 text-center">
+                    <Icon className="mx-auto mb-4 h-10 w-10 text-primary" />
+                    <h3 className="mb-2 text-lg font-semibold">{title}</h3>
+                    <p className="text-sm text-muted-foreground">{description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            <div className="space-y-3">
+              <div>
+                <h3 className="text-lg font-semibold">VPX Core Values</h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  These principles guide how we select, mentor, and grow our members.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                {coreValues.map(({ icon: Icon, title, description }) => (
+                  <Card key={title} className="bg-muted/30">
+                    <CardContent className="pt-6">
+                      <div className="mb-3 flex items-center gap-2">
+                        <Icon className="h-5 w-5 shrink-0 text-primary" />
+                        <h4 className="font-semibold">{title}</h4>
+                      </div>
+                      <p className="text-sm leading-6 text-muted-foreground">{description}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <h3 className="text-lg font-semibold">Research Tracks</h3>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {researchTracks.map((track) => (
+                  <div key={track.title} className="rounded-lg bg-muted/50 p-4">
+                    <div className="flex items-start gap-2">
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 text-primary" />
+                      <div className="space-y-1">
+                        <h4 className="font-medium">{track.title}</h4>
+                        <p className="text-sm text-muted-foreground">{track.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </section>
 
       {/* FAQ */}
@@ -383,8 +549,8 @@ const Join = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-5">
-            {faqs.map((item, idx) => (
-              <div key={idx} className="space-y-2">
+            {faqs.map((item) => (
+              <div key={item.q} className="space-y-2">
                 <h4 className="font-medium">{item.q}</h4>
                 <p className="text-sm text-muted-foreground">{item.a}</p>
               </div>
@@ -392,25 +558,6 @@ const Join = () => {
           </CardContent>
         </Card>
       </section>
-
-      {/* BOTTOM CTA */}
-      {/* <section className="text-center fade-in-content" style={{ animationDelay: "300ms" }}>
-        <Card className="max-w-3xl mx-auto bg-muted/30">
-          <CardContent className="py-8 space-y-3">
-            <h3 className="text-xl font-semibold">Ready to Apply?</h3>
-            <p className="text-sm text-muted-foreground">
-              Email your CV and your preferred track(s). We’ll get back to you if there’s a strong match.
-            </p>
-            <div className="flex justify-center">
-              <Button asChild className="gap-2">
-                <a href={`mailto:${YLI_EMAIL}`}>
-                  Apply via Email <ArrowRight className="h-4 w-4" />
-                </a>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </section> */}
 
       {/* LAB LOCATION */}
       <section className="mx-auto max-w-5xl">
