@@ -211,11 +211,11 @@
     "project_webpage": ""
   },
   {
-    "title": "Data augmentation with attention framework for robust deepfake detection.",
+    "title": "Data augmentation with attention framework for robust deepfake detection: S. Mamarasulov et al.",
     "authors": "S Mamarasulov, L Chen, C Chen, Y Li, C Wang",
-    "journal": "Visual Computer 41 (7), 4779 2025",
+    "journal": "The Visual Computer 41 (7), 4779-4798 2025",
     "year": 2025,
-    "doi": "https://openurl.ebsco.com/contentitem/gcd:184707151?sid=ebsco:plink:crawler-gcd&id=ebsco:gcd:184707151&crl=c&jrnl=01782789",
+    "doi": "https://link.springer.com/article/10.1007/s00371-024-03690-y",
     "tags": [
       "Data",
       "augmentation",
@@ -328,15 +328,15 @@
     "project_webpage": "https://vpx-ecnu.github.io/ChatTracker_website"
   },
   {
-    "title": "Channel Robust Strategies with Data Augmentation for Audio Anti-spoofing",
+    "title": "Channel robust strategies with data augmentation for audio anti-spoofing",
     "authors": "S Mamarasulov, Y Li, C Wang",
     "journal": "International Conference on Information Security, 121-139 2024",
     "year": 2024,
     "doi": "https://link.springer.com/chapter/10.1007/978-3-031-75764-8_7",
     "tags": [
       "Channel",
-      "Robust",
-      "Strategies"
+      "robust",
+      "strategies"
     ],
     "project_webpage": ""
   },
