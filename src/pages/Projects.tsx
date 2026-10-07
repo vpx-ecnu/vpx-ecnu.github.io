@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { formatPublicationVenue } from "@/lib/publication-venue";
 
 type ProjectVideo =
   | {
@@ -59,6 +60,15 @@ type ProjectTab = "ongoing" | "completed" | "publications";
 const getThumbnail = (p: Project) => {
   // 优先 thumbnail；否则 images[0]；否则旧的 image
   return p.thumbnail || p.images?.[0] || p.image || "";
+};
+
+const getBilibiliVideoUrl = (embedUrl: string) => {
+  try {
+    const bvid = new URL(embedUrl).searchParams.get("bvid");
+    return bvid ? `https://www.bilibili.com/video/${encodeURIComponent(bvid)}` : null;
+  } catch {
+    return null;
+  }
 };
 
 const slugifyProjectTitle = (title: string) =>
@@ -186,8 +196,8 @@ const Projects = () => {
         <div className="container px-4 md:px-6">
           <h1 className="mb-4 text-3xl font-bold sm:text-4xl">Research Projects</h1>
           <p className="text-lg max-w-3xl text-muted-foreground">
-            Explore our ongoing and completed research initiatives spanning
-            multiple disciplines and methodologies.
+            Explore the questions, methods, and applications behind our ongoing
+            and completed research projects.
           </p>
         </div>
       </section>
@@ -278,11 +288,19 @@ const Projects = () => {
                         </div>
                       </div>
 
-                      {/* 小提示（可删） */}
-                      {selectedProject.video.type === "bilibili" ? (
+                      {selectedProject.video.type === "bilibili" &&
+                      getBilibiliVideoUrl(selectedProject.video.embedUrl) ? (
                         <p className="mt-2 text-xs text-muted-foreground">
-                          If the video does not display, please check your site CSP settings
-                          (iframe permissions) and ensure the embed URL uses player.bilibili.com.
+                          Video not loading here?{" "}
+                          <a
+                            href={getBilibiliVideoUrl(selectedProject.video.embedUrl) ?? undefined}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-violet-600 hover:underline"
+                          >
+                            Watch on Bilibili
+                          </a>
+                          .
                         </p>
                       ) : null}
                     </div>
@@ -346,7 +364,7 @@ const Projects = () => {
                   value="publications"
                   className="min-h-10 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
                 >
-                  Publications
+                  Featured Publications
                 </TabsTrigger>
               </TabsList>
 
@@ -522,7 +540,7 @@ const Projects = () => {
               <TabsContent value="publications" className="mt-6">
                 {projectPublications.length === 0 ? (
                   <div className="text-sm text-muted-foreground">
-                    No project-publication cards available.
+                    No featured publications are available at the moment.
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -561,7 +579,7 @@ const Projects = () => {
                           )}
                           <div className="absolute top-3 left-3">
                             <span className="px-3 py-1 text-xs font-medium bg-black/70 text-white backdrop-blur-sm border border-white/10">
-                              {pub.venue || "Unknown Venue"}
+                              {pub.venue ? formatPublicationVenue(pub.venue) : "Unknown Venue"}
                             </span>
                           </div>
                         </div>
@@ -570,7 +588,7 @@ const Projects = () => {
                             {pub.title}
                           </h3>
                           <div className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-violet-600">
-                            View on web →
+                            View project page →
                           </div>
                         </div>
                       </a>

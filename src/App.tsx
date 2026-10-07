@@ -14,7 +14,7 @@ const People = lazy(routeModuleLoaders.people);
 const Activities = lazy(routeModuleLoaders.activities);
 const Join = lazy(routeModuleLoaders.join);
 const Intranet = lazy(routeModuleLoaders.intranet);
-const StudioNews = lazy(routeModuleLoaders.studioNews);
+const StudioNews = import.meta.env.DEV ? lazy(() => import("./pages/StudioNews")) : null;
 
 const LayoutShell = () => (
   <Layout>
@@ -38,7 +38,9 @@ const App = () => (
           <Route path="/activities" element={<Activities />} />
           <Route path="/join" element={<Join />} />
           <Route path="/intranet" element={<Intranet />} />
-          <Route path="/studio/news" element={<StudioNews />} />
+          {StudioNews ? (
+            <Route path="/studio/news" element={<StudioNews />} />
+          ) : null}
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

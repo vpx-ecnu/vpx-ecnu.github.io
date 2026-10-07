@@ -3,19 +3,19 @@
       "name": "Libing Yang",
       "title": "Former Master's Student",
       "graduationYear": "2025",
-      "bio": "Graduated in 2025, now working on robotic-related LLMs.",
+      "bio": "Graduated in 2025, now working on LLMs for robotics.",
       "image": "/placeholder.svg",
       "email": "",
-      "research": ["HUAWEI"]
+      "research": ["Huawei"]
     },
     {
       "name": "Sardor Mamarasulov",
-      "title": "Former PhD Candidate",
+      "title": "Former PhD Student",
       "graduationYear": "2025",
       "bio": "Graduated in 2025, now working as a Postdoctoral Researcher at Shenzhen University.",
       "image": "/placeholder.svg",
       "email": "mamarasulovsardor@gmail.com",
-      "research": ["Working as a Postdoctoral Researcher at Shenzhen University"]
+      "research": ["Postdoctoral Researcher, Shenzhen University"]
     },
     {
         "name": "Xiaoyan Yang",
@@ -42,7 +42,7 @@
         "bio": "Graduated in 2024, now working on SMPL-related action research.",
         "image": "/placeholder.svg",
         "email": "",
-        "research": ["ABC"]
+        "research": []
     },
     {
         "name": "Yiming Sun",
@@ -51,7 +51,7 @@
         "bio": "Graduated in 2024, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "",
-        "research": ["Pursuing a graduate degree at Fudan University"]
+        "research": ["Graduate Study, Fudan University"]
     },
     {
         "name": "Fan Yu",
@@ -60,7 +60,7 @@
         "bio": "Graduated in 2025, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "",
-        "research": ["Pursuing a graduate degree at Shanghai Jiao Tong University"]
+        "research": ["Graduate Study, Shanghai Jiao Tong University"]
     },
     {
         "name": "Junwei Huang",
@@ -78,29 +78,29 @@
         "bio": "Graduated in 2024, now working on scientific LLMs.",
         "image": "/placeholder.svg",
         "email": "",
-        "research": ["HUAWEI"]
+        "research": ["Huawei"]
     },
     {
         "name": "Jincheng Weng",
         "title": "Former Part-Time Student",
         "graduationYear": "2024",
-        "bio": "Graduated in 2024, now working on scientific LLMs.",
+        "bio": "Graduated in 2024, now working on scientific LLMs. Research interests include scientific NLP and knowledge graphs.",
         "image": "/placeholder.svg",
         "email": "",
-        "research": ["Scientific NLP", "Knowledge Graph"]
+        "research": []
     },
     {
         "name": "Kaibo Yin",
         "title": "Former Undergraduate",
         "graduationYear": "2025",
-        "bio": "Working on functions and systems necessary for artificially-intelligent robots that can act within the space of human society.",
+        "bio": "Researching systems that enable intelligent robots to act in human environments.",
         "image": "/people/people_image/part_time/ykb.jpg",
         "email": "a1021524866@gmail.com",
-        "research": ["Pursuing a graduate degree at The University of Tokyo"]
+        "research": ["Graduate Study, The University of Tokyo"]
     },
     {
         "name": "Changgu Chen",
-        "title": "Former PhD Candidate",
+        "title": "Former PhD Student",
         "graduationYear": "2026",
         "bio": "Graduated in 2026 after researching controllable motion generation for AIGC and joined Xiaomi.",
         "image": "/people/people_image/thumbs/phd/ccg.jpg",
@@ -138,7 +138,7 @@
         "bio": "Graduated in 2026 after researching tracking and multimodal large language models, then continued studying at Shanghai Jiao Tong University.",
         "image": "/people/people_image/thumbs/undergraduate/zy.jpg",
         "email": "",
-        "research": ["Further study at Shanghai Jiao Tong University"]
+        "research": ["Graduate Study, Shanghai Jiao Tong University"]
     },
     {
         "name": "Yanjing Li",

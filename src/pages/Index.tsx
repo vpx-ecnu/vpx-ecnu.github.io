@@ -6,6 +6,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { useEffect, useMemo, useState } from "react";
+import { formatPublicationVenue } from "@/lib/publication-venue";
+import { researchTracks } from "@/data/researchIdentity";
 
 type NewsItem = {
   id: string;
@@ -47,6 +49,13 @@ const slugifyProjectTitle = (title: string) =>
 const getProjectThumbnail = (project: OngoingResearchProject) =>
   project.thumbnail || project.images?.[0] || project.image || "/placeholder.svg";
 
+const researchTrackLeaders = [
+  { name: "Chenxi Shao", id: "grad-chenxi-shao" },
+  { name: "Yijing Wa", id: "grad-yijing-wa" },
+  { name: "Yu Zhang", id: "grad-yu-zhang" },
+  { name: "Xiangyi Wei", id: "phd-xiangyi-wei" },
+] as const;
+
 const Index = () => {
   // ----------------------
   // News (API based) - for home page latest 6
@@ -73,10 +82,10 @@ const Index = () => {
 
         const arr = Array.isArray(data?.news) ? data.news : [];
         setNewsList(arr);
-      } catch (e: any) {
+      } catch (e: unknown) {
         if (cancelled) return;
         setNewsList([]);
-        setNewsError(e?.message || "Failed to load news");
+        setNewsError(e instanceof Error ? e.message : "Failed to load news");
       } finally {
         if (!cancelled) setLoadingNews(false);
       }
@@ -237,7 +246,12 @@ const Index = () => {
   const formatNewsDate = (date: string) => {
     const parsed = new Date(date);
     if (Number.isNaN(parsed.getTime())) return "—";
-    return parsed.toLocaleDateString();
+    return new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      timeZone: "UTC",
+    }).format(parsed);
   };
 
   const getNewsSummary = (item: NewsItem) => {
@@ -304,7 +318,7 @@ const Index = () => {
           <span className="bg-gradient-to-r from-violet-200 via-white to-cyan-200 bg-clip-text text-transparent">
             VPX Group
           </span>{" "}
-          @ ECNU
+          at ECNU
         </h1>
 
         {/* <p className="mx-auto max-w-3xl text-base md:text-xl leading-relaxed text-white/80">
@@ -325,43 +339,25 @@ const Index = () => {
 
         <p>
           <span className="font-semibold text-white">
-            The Visual Perception + X (VPX) group at East China Normal University
+            The Visual Perception + X (VPX) Group at East China Normal University
           </span>{" "}
-          takes visual perception as its foundation and crosses disciplinary
-          boundaries - the "X" - to pursue{" "}
+          takes visual perception as its foundation and connects it with other
+          disciplines to advance{" "}
           <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
-            Embodied AI
-          </span>
-          .
+            human-centered AGI
+          </span>.
         </p>
 
         <p>
-          Our current focus is on{" "}
-          <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
-            Temporal Intelligence and Embodied Simulation
-          </span>
-          : endowing AI with the capacity to experience and simulate the world
-          dynamically, not merely reason about it statically.
+          We study how intelligent systems perceive and model dynamic environments,
+          generate controllable content, and act in the physical world.
         </p>
 
         <p>
-          Inspired by how the human brain continuously perceives temporal streams,
-          constructs 3D spatial models, imagines unseen scenarios, and acts through
-          the body, our research spans four interconnected pillars:{" "}
+          Our research connects four directions:{" "}
           <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
-            temporal perception, spatial simulation, imaginative generation, and
-            physical interaction
-          </span>{" "}
-          .
-        </p>
-
-        <p>
-          We bridge computer vision, generative AI, and robotics under a unified
-          cognitive framework, building{" "}
-          <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
-            the experiential intelligence that today's analytical AI still lacks
-          </span>
-          .
+            Temporal AI, Spatial AI, Generative AI, and Physical AI
+          </span>.
         </p>
 
       </div>
@@ -412,11 +408,11 @@ const Index = () => {
                   <SwiperSlide key={project.title}>
                     <div className="flex flex-col items-center gap-4 sm:gap-5 lg:gap-8 lg:flex-row">
                       <div className="max-w-3xl flex-1">
-                        <h1 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:mb-5 md:text-4xl lg:text-5xl">
+                        <h2 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:mb-5 md:text-4xl lg:text-5xl">
                           {project.title}
-                        </h1>
+                        </h2>
                         <p className="mb-4 text-base text-muted-foreground sm:text-lg md:mb-6 md:text-xl">
-                          {project.description || "Explore one of our current ongoing research projects."}
+                          {project.description || "Explore one of our ongoing research projects."}
                         </p>
                         <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3">
                           <Button
@@ -453,43 +449,14 @@ const Index = () => {
   <div className="container px-4 md:px-6">
     <div className="grid gap-8 md:gap-12">
       <div className="flex flex-col gap-2 md:gap-4">
-        <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Core Research Areas</h2>
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Research Tracks</h2>
         <p className="text-muted-foreground md:text-lg">
-          Our current research spans multiple disciplines and real-world applications.
+          Four connected directions link visual understanding, world modeling, generation, and embodied action.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {[
-          {
-            title: "Embodied AI",
-            description:
-              "Developing intelligent agents that perceive, learn, and interact with physical environments through robotics and simulation platforms.",
-            leaderName: "Xiangyi Wei",
-            leaderId: "phd-xiangyi-wei",
-          },
-          {
-            title: "AIGC",
-            description:
-              "Pioneering AI-generated content technologies for text, image, video and multimodal creation using cutting-edge generative models.",
-            leaderName: "Yu Zhang",
-            leaderId: "grad-yu-zhang",
-          },
-          {
-            title: "3D Computer Graphics",
-            description:
-              "Advancing neural rendering, 3D Gaussian splatting, virtual reality (VR), and ray tracing technologies to power next-generation immersive visual experiences.",
-            leaderName: "Yijing Wa",
-            leaderId: "grad-yijing-wa",
-          },
-          {
-            title: "Video Analysis",
-            description:
-              "Pioneering video understanding, object tracking, video action analysis, and multimodal large language models (LLMs) to build next-generation intelligent video systems.",
-            leaderName: "Chenxi Shao",
-            leaderId: "grad-chenxi-shao",
-          },
-        ].map((item, i) => (
+        {researchTracks.map((item, i) => (
           <div
             key={i}
             className="flex flex-col rounded-lg border bg-card p-6 transition-shadow hover:shadow-md"
@@ -500,10 +467,10 @@ const Index = () => {
             <div className="mt-4 ml-auto text-sm text-muted-foreground">
               Leader:{" "}
               <Link
-                to={`/people#${item.leaderId}`}
+                to={`/people#${researchTrackLeaders[i].id}`}
                 className="font-medium text-violet-600 hover:text-violet-700 transition-colors"
               >
-                {item.leaderName}
+                {researchTrackLeaders[i].name}
               </Link>
             </div>
           </div>
@@ -515,27 +482,28 @@ const Index = () => {
 
       {/* Key Statistics */}
       <section className="mx-0 my-[3px] rounded-none bg-muted px-4 py-[21px] sm:px-6 md:px-[36px]">
+        <h2 className="sr-only">VPX at a Glance</h2>
         <div className="container px-4 md:px-6">
           <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
             <div className="space-y-2">
               <div className="flex justify-center">
                 <BookOpen className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold">{publicationCount ?? "..."}</h3>
+              <p className="text-3xl font-bold">{publicationCount ?? "..."}</p>
               <p className="text-muted-foreground">Publications</p>
             </div>
             <div className="space-y-2">
               <div className="flex justify-center">
                 <Users className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold">{researcherCount ?? "..."}</h3>
+              <p className="text-3xl font-bold">{researcherCount ?? "..."}</p>
               <p className="text-muted-foreground">Current Members</p>
             </div>
             <div className="space-y-2">
               <div className="flex justify-center">
                 <Clock className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold">{yearsOfResearch}</h3>
+              <p className="text-3xl font-bold">{yearsOfResearch}</p>
               <p className="text-muted-foreground">Years of Research</p>
             </div>
           </div>
@@ -548,7 +516,7 @@ const Index = () => {
           <div className="flex items-end justify-between gap-6 mb-6">
             <div className="space-y-2">
               <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">Recent Publications</h2>
-              <p className="text-muted-foreground md:text-lg">Latest six publications from our full project-publication collection.</p>
+              <p className="text-muted-foreground md:text-lg">Selected recent publications from VPX.</p>
             </div>
             <Button asChild variant="outline" className="hidden sm:inline-flex">
               <Link to="/projects?tab=publications">
@@ -588,7 +556,7 @@ const Index = () => {
                   )}
                   <div className="absolute top-3 left-3">
                     <span className="px-3 py-1 text-xs font-medium bg-black/70 text-white backdrop-blur-sm border border-white/10">
-                      {pub.venue}
+                      {formatPublicationVenue(pub.venue)}
                     </span>
                   </div>
                 </div>
@@ -598,7 +566,7 @@ const Index = () => {
                     {pub.title}
                   </h3>
                   <div className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-violet-600">
-                    View on web <ArrowRight className="h-4 w-4" />
+                    View publication <ArrowRight className="h-4 w-4" />
                   </div>
                 </div>
               </a>
@@ -614,7 +582,7 @@ const Index = () => {
             <div className="space-y-2">
               <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Latest News & Activities</h2>
               <p className="text-sm text-muted-foreground/80 md:text-base">
-                Eight recent updates from our lab news feed.
+                Recent updates from VPX.
               </p>
             </div>
             <Link
@@ -668,9 +636,9 @@ const Index = () => {
                       </span>
                     </div>
 
-                    <h4 className={`${index === 0 ? "text-2xl md:text-3xl" : "text-lg"} font-semibold leading-snug`}>
+                    <h3 className={`${index === 0 ? "text-2xl md:text-3xl" : "text-lg"} font-semibold leading-snug`}>
                       {getNewsTitle(item)}
-                    </h4>
+                    </h3>
 
                     {index < 4 && getNewsSummary(item) ? (
                       <p className="mt-3 text-sm leading-relaxed text-white/80 line-clamp-3">

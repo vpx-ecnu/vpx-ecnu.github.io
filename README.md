@@ -14,10 +14,12 @@ The site currently includes the following main routes and content areas:
 - `/about` professor and lab introduction
 - `/projects` ongoing and completed projects
 - `/publications` publication list and publication cards
-- `/people` faculty, PhD students, graduate students, undergraduates, part-time members, and alumni
+- `/people` faculty, PhD students, master's students, undergraduates, part-time students, and alumni
 - `/activities` academic activities, reading club, and lab news
 - `/join` admissions and joining information
-- `/intranet` internal portal
+- `/intranet` notice that internal resources are not available on the public site
+
+The `/studio/news` operator interface is available only in local development; it is not routed in production builds.
 
 This is a static website project. Most content is loaded from structured data in `src/data/`, `public/content/`, `public/people/`, `public/publications/`, and other static assets under `public/`.
 

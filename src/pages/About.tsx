@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { labLifeData, type LabLifeItem } from "@/data/labLife";
-import { Award, BookOpen, GraduationCap, Heart, Target } from "lucide-react";
+import { coreValues, researchTracks } from "@/data/researchIdentity";
+import { GraduationCap, Heart, Sparkles, Target } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const surfaceClassName =
   "rounded-2xl border border-border/60 bg-background/85 shadow-[0_22px_70px_-52px_rgba(0,0,0,0.32)] overflow-hidden";
+const coreValueIcons = [Sparkles, Target, Heart] as const;
 
 const tileStyle: CSSProperties = {
   contain: "layout paint style",
@@ -62,17 +64,29 @@ const LabLifeTile = ({ item, index, scrollRoot }: LabLifeTileProps) => {
         className="relative aspect-[4/3] w-full overflow-hidden bg-muted/60"
       >
         {shouldLoad ? (
-          <img
-            src={resolveLabLifeImageSrc(item.image)}
-            alt={item.title || "Lab life"}
-            loading={index < 6 ? "eager" : "lazy"}
-            decoding="async"
-            fetchPriority={index < 3 ? "high" : "auto"}
-            onLoad={() => setIsLoaded(true)}
-            className={`h-full w-full object-cover transition-opacity duration-300 ${
-              isLoaded ? "opacity-100" : "opacity-0"
-            }`}
-          />
+          <>
+            {item.imageFit === "contain" ? (
+              <img
+                src={resolveLabLifeImageSrc(item.image)}
+                alt=""
+                aria-hidden="true"
+                loading={index < 6 ? "eager" : "lazy"}
+                decoding="async"
+                className="absolute inset-0 h-full w-full scale-110 object-cover opacity-35 blur-xl"
+              />
+            ) : null}
+            <img
+              src={resolveLabLifeImageSrc(item.image)}
+              alt={item.title || "Lab life"}
+              loading={index < 6 ? "eager" : "lazy"}
+              decoding="async"
+              fetchPriority={index < 3 ? "high" : "auto"}
+              onLoad={() => setIsLoaded(true)}
+              className={`relative h-full w-full transition-opacity duration-300 ${
+                item.imageFit === "contain" ? "object-contain" : "object-cover"
+              } ${isLoaded ? "opacity-100" : "opacity-0"}`}
+            />
+          </>
         ) : null}
 
         <div
@@ -115,62 +129,36 @@ const About = () => {
                   <div className="rounded-2xl border border-border/60 bg-background/90 p-6 shadow-[0_22px_70px_-48px_rgba(0,0,0,0.28)] md:p-8">
                     <div className="space-y-5 text-base leading-relaxed text-muted-foreground md:text-lg">
                       <p>
-                        Based at the{" "}
+                        Based at{" "}
                         <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                          School of Computer Science and Technology, East China
-                          Normal University
+                          East China Normal University
                         </span>
                         , the{" "}
                         <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                          Visual Perception + X (VPX) group
+                          Visual Perception + X (VPX) Group
                         </span>{" "}
-                        takes visual perception as its foundation and uses "X" to
-                        cross disciplinary boundaries in pursuit of{" "}
+                        takes visual perception as its foundation and connects it
+                        with other disciplines to advance{" "}
                         <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                          Embodied AI
-                        </span>
-                        .
+                          human-centered AGI
+                        </span>.
                       </p>
 
                       <p>
-                        Our current focus is on{" "}
-                        <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                          Temporal Intelligence and Embodied Simulation
-                        </span>
-                        : giving AI the capacity to experience and simulate the
-                        world dynamically, not merely reason about it statically.
-                        Inspired by how the brain links perception, spatial modeling,
-                        imagination, and action, our work centers on four connected
-                        pillars:
+                        We study how intelligent systems perceive and model dynamic
+                        environments, generate controllable content, and act in the
+                        physical world. Our work connects four research directions:
                       </p>
 
                       <ul className="space-y-2.5 border-l border-border/70 pl-5">
-                        <li>
-                          <span className="font-semibold text-foreground">
-                            Temporal Perception
-                          </span>{" "}
-                          - video understanding, streaming VLMs, and long-horizon
-                          tracking
-                        </li>
-                        <li>
-                          <span className="font-semibold text-foreground">
-                            Spatial Simulation
-                          </span>{" "}
-                          - 3D reconstruction, Gaussian Splatting, and neural
-                          rendering
-                        </li>
-                        <li>
-                          <span className="font-semibold text-foreground">
-                            Imaginative Generation
-                          </span>{" "}
-                          - diffusion-based creation and controllable generation
-                        </li>
-                        <li>
-                          <span className="font-semibold text-foreground">
-                            Physical Interaction
-                          </span>{" "}
-                          - embodied manipulation and teleoperation
-                        </li>
+                        {researchTracks.map((track) => (
+                          <li key={track.name}>
+                            <span className="font-semibold text-foreground">
+                              {track.name}
+                            </span>{" "}
+                            — {track.shortDescription}
+                          </li>
+                        ))}
                       </ul>
 
                     </div>
@@ -181,7 +169,7 @@ const About = () => {
                   <div className="rounded-2xl border border-border/60 bg-background/92 p-2 shadow-[0_22px_70px_-48px_rgba(0,0,0,0.28)] sm:p-3">
                     <img
                       src="/vpx-assets/about/about_about_vpx.jpg"
-                      alt="About VPX Group"
+                      alt=""
                       loading="eager"
                       decoding="async"
                       fetchPriority="high"
@@ -203,7 +191,7 @@ const About = () => {
                       <h2 className="text-2xl font-bold">VPX Mission</h2>
                     </div>
                     <p className="text-muted-foreground">
-                      To cultivate rigorous, responsible researchers who combine academic ambition with strong execution, professionalism, and continuous improvement.
+                      To pursue original, rigorous research toward human-centered AGI that benefits people and society, while helping members develop independent research judgment in a supportive lab culture.
                     </p>
                   </div>
 
@@ -213,13 +201,11 @@ const About = () => {
                       <h2 className="text-2xl font-bold">How We Work</h2>
                     </div>
                     <ul className="list-disc space-y-2 pl-6 text-base text-muted-foreground md:text-lg">
-                      <li><span className="font-semibold">Pursue research that creates long-term value.</span></li>
-                      <li><span className="font-semibold">Work efficiently and communicate clearly.</span></li>
-                      <li><span className="font-semibold">Maintain professional standards in research and engineering.</span></li>
-                      <li><span className="font-semibold">Think logically and make decisions based on evidence.</span></li>
-                      <li><span className="font-semibold">Build a healthy, sustainable, and supportive lab culture.</span></li>
-                      <li><span className="font-semibold">Prioritize execution and finish what we start.</span></li>
-                      <li><span className="font-semibold">Review our work from the perspective of reviewers and users.</span></li>
+                      <li><span className="font-semibold">Ask original questions and examine underlying mechanisms.</span></li>
+                      <li><span className="font-semibold">Design rigorous experiments and evaluate claims against evidence.</span></li>
+                      <li><span className="font-semibold">Turn promising ideas into complete, reproducible research.</span></li>
+                      <li><span className="font-semibold">Communicate clearly and welcome constructive critique.</span></li>
+                      <li><span className="font-semibold">Build a healthy, inclusive, and sustainable lab culture.</span></li>
                     </ul>
                   </div>
                 </div>
@@ -230,14 +216,14 @@ const About = () => {
                     "/vpx-assets/about/about_2.png",
                     "/vpx-assets/about/about_3.png",
                     "/vpx-assets/about/about_4.png",
-                  ].map((src, idx) => (
+                  ].map((src) => (
                     <div
                       key={src}
                       className="rounded-xl border border-border/60 bg-background/92 p-2 shadow-sm"
                     >
                       <img
                         src={src}
-                        alt={`img${idx + 1}`}
+                        alt=""
                         loading="lazy"
                         decoding="async"
                         className="h-auto w-full rounded-lg object-cover"
@@ -254,44 +240,28 @@ const About = () => {
               <div className="mb-8 text-center">
                 <h2 className="text-3xl font-bold tracking-tight">Our Core Values</h2>
                 <p className="mt-2 text-muted-foreground">
-                  Guiding principles that shape how we research, collaborate, and grow.
+                  These principles guide how we select, mentor, and grow our members.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {[
-                  {
-                    icon: <BookOpen className="h-7 w-7" />,
-                    title: "Academic Excellence",
-                    description:
-                      "We uphold the highest standards of scholarly rigor and intellectual integrity in all our research endeavors.",
-                  },
-                  {
-                    icon: <Award className="h-7 w-7" />,
-                    title: "Innovation",
-                    description:
-                      "We embrace creative approaches and novel methodologies to address complex research questions.",
-                  },
-                  {
-                    icon: <Heart className="h-7 w-7" />,
-                    title: "Inclusivity",
-                    description:
-                      "We foster a diverse and inclusive environment where all perspectives are valued and respected.",
-                  },
-                ].map((value, index) => (
+                {coreValues.map((value, index) => {
+                  const Icon = coreValueIcons[index];
+                  return (
                   <div
-                    key={index}
+                    key={value.title}
                     className="rounded-2xl border border-border/60 bg-background/90 p-5 shadow-sm transition-shadow hover:shadow-md"
                   >
                     <div className="mb-3 flex items-center gap-3">
                       <div className="inline-flex items-center justify-center rounded-lg border border-border/60 bg-gradient-to-b from-violet-500/10 to-cyan-500/5 p-2.5 text-violet-600">
-                        {value.icon}
+                        <Icon className="h-7 w-7" />
                       </div>
                       <h3 className="text-lg font-semibold leading-snug">{value.title}</h3>
                     </div>
                     <p className="text-sm leading-6 text-muted-foreground">{value.description}</p>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </section>
@@ -299,35 +269,14 @@ const About = () => {
           <section className="grid gap-8 md:gap-10">
             <div className="mx-auto w-full max-w-screen-xl">
               <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-                Research Focus Areas
+                Research Tracks
               </h2>
               <div className="mt-3 h-px w-full bg-gradient-to-r from-transparent via-border/70 to-transparent" />
 
               <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {[
-                  {
-                    title: "Embodied Intelligence",
-                    description:
-                      "Integrating perception, reasoning, and action to enable intelligent agents that interact with the physical world.",
-                  },
-                  {
-                    title: "AI-Generated Content (AIGC)",
-                    description:
-                      "Pioneering generative AI models for text, image, and video creation across multimodal creative applications.",
-                  },
-                  {
-                    title: "3D Rendering & Graphics",
-                    description:
-                      "Advancing real-time neural rendering, Gaussian splatting, and immersive 3D experiences for next-generation visual computing.",
-                  },
-                  {
-                    title: "Video Understanding",
-                    description:
-                      "Developing models for temporal segmentation, object tracking, and multimodal video analysis to unlock insights from dynamic visual data.",
-                  },
-                ].map((area, index) => (
+                {researchTracks.map((area) => (
                   <Card
-                    key={index}
+                    key={area.name}
                     className="border-border/60 bg-background/90 shadow-sm transition-shadow hover:shadow-md"
                   >
                     <CardHeader className="pb-3">

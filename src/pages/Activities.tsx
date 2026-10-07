@@ -27,6 +27,8 @@ type ReadingVideo = {
   publishedAt: string | null;
 };
 
+const videos: ReadingVideo[] = readingClub.videos;
+
 type NewsItem = {
   id: string;
   title: string;
@@ -45,7 +47,12 @@ function formatDate(iso: string | null) {
   if (!iso) return "—";
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return "—";
-  return d.toLocaleDateString();
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(d);
 }
 
 function sourceLabel(source?: string) {
@@ -91,10 +98,10 @@ const Activities = () => {
 
         const arr = Array.isArray(data?.news) ? data.news : [];
         setNewsList(arr);
-      } catch (e: any) {
+      } catch (e: unknown) {
         if (cancelled) return;
         setNewsList([]);
-        setNewsError(e?.message || "Failed to load news");
+        setNewsError(e instanceof Error ? e.message : "Failed to load news");
       } finally {
         if (!cancelled) setLoadingNews(false);
       }
@@ -136,8 +143,6 @@ const Activities = () => {
   // ----------------------
   // Reading Club (static JSON)
   // ----------------------
-  const videos: ReadingVideo[] = (readingClub as any)?.videos || [];
-
   const [videoQuery, setVideoQuery] = useState("");
   const [activeVideo, setActiveVideo] = useState<ReadingVideo | null>(null);
 
@@ -148,17 +153,18 @@ const Activities = () => {
     const q = videoQuery.trim().toLowerCase();
     return videos.filter((v) => {
       if (!q) return true;
-      return (
-        (v.title || "").toLowerCase().includes(q) ||
-        (v.description || "").toLowerCase().includes(q)
-      );
+      return (v.title || "").toLowerCase().includes(q);
+    }).sort((a, b) => {
+      const aTime = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+      const bTime = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+      return bTime - aTime;
     });
-  }, [videos, videoQuery]);
+  }, [videoQuery]);
 
   // Reset to page 1 when search changes / data changes
   useEffect(() => {
     setPage(1);
-  }, [videoQuery, videos.length]);
+  }, [videoQuery]);
 
   const totalPages = useMemo(() => {
     return Math.max(1, Math.ceil(filteredVideos.length / PAGE_SIZE));
@@ -181,7 +187,7 @@ const Activities = () => {
     }
     const half = Math.floor(maxButtons / 2);
     let start = Math.max(1, page - half);
-    let end = Math.min(totalPages, start + maxButtons - 1);
+    const end = Math.min(totalPages, start + maxButtons - 1);
     start = Math.max(1, end - maxButtons + 1);
     const nums: number[] = [];
     for (let i = start; i <= end; i++) nums.push(i);
@@ -203,7 +209,7 @@ const Activities = () => {
           Updates
         </h1>
         <p className="text-muted-foreground md:text-xl">
-          Stay updated with the latest news, events, and academic activities in our research group.
+          Follow the latest news, events, and academic activities from VPX.
         </p>
       </section>
 
@@ -253,7 +259,7 @@ const Activities = () => {
 
                 <h2 className="mb-2 text-2xl font-bold sm:text-3xl">{getNewsTitle(selectedNews)}</h2>
                 <p className="text-sm text-muted-foreground mb-4">
-                  {new Date(selectedNews.date).toLocaleDateString()}
+                  {formatDate(selectedNews.date)}
                 </p>
                 {(() => {
                   const hasVideos =
@@ -304,7 +310,7 @@ const Activities = () => {
                                 >
                                   <img
                                     src={url}
-                                    alt={`${selectedNews.title} - ${idx + 1}`}
+                                    alt={`${getNewsTitle(selectedNews)} — image ${idx + 1}`}
                                     className="w-full h-auto rounded-lg border bg-muted object-cover hover:opacity-95 transition"
                                     loading="lazy"
                                   />
@@ -326,11 +332,7 @@ const Activities = () => {
                 })()}
 
                 <div className="prose dark:prose-invert max-w-none space-y-4">
-                  {selectedNews.description ? (
-                    <p>{selectedNews.description}</p>
-                  ) : (
-                    <p className="text-muted-foreground">—</p>
-                  )}
+                  {selectedNews.description ? <p>{selectedNews.description}</p> : null}
 
                   {selectedNews.source_url ? (
                     <p>
@@ -360,7 +362,7 @@ const Activities = () => {
                         }`}
                         onClick={() => setNewsFilter(filter)}
                       >
-                        {filter.charAt(0).toUpperCase() + filter.slice(1)}
+                        {{ all: "All", recent: "Past 3 Months", older: "Earlier" }[filter]}
                       </button>
                     ))}
                   </div>
@@ -388,7 +390,7 @@ const Activities = () => {
                       <div className="p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="text-xs text-muted-foreground">
-                            {new Date(item.date).toLocaleDateString()}
+                            {formatDate(item.date)}
                           </span>
                         </div>
 
@@ -403,7 +405,7 @@ const Activities = () => {
                         ) : null}
 
                         <div className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-violet-600">
-                          Open
+                          View update
                         </div>
                       </div>
                     </button>
@@ -449,7 +451,7 @@ const Activities = () => {
               <input
                 value={videoQuery}
                 onChange={(e) => setVideoQuery(e.target.value)}
-                placeholder="Search title / description..."
+                placeholder="Search video titles…"
                 className="h-9 w-full rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring lg:w-80"
               />
             </div>
@@ -484,11 +486,13 @@ const Activities = () => {
                     </CardDescription>
                   </CardHeader>
 
-                  <CardContent className="p-4 pt-0">
-                    <p className="text-sm text-muted-foreground line-clamp-3">
-                      {v.description || "—"}
-                    </p>
-                  </CardContent>
+                  {v.description ? (
+                    <CardContent className="p-4 pt-0">
+                      <p className="text-sm text-muted-foreground line-clamp-3">
+                        {v.description}
+                      </p>
+                    </CardContent>
+                  ) : null}
                 </Card>
               ))}
             </div>
@@ -587,6 +591,7 @@ const Activities = () => {
 
                     <div className="aspect-video w-full overflow-hidden rounded-md bg-muted">
                       <iframe
+                        title={`${activeVideo.title} video player`}
                         src={`https://player.bilibili.com/player.html?bvid=${activeVideo.bvid}&page=1&high_quality=1&danmaku=0`}
                         allowFullScreen
                         className="h-full w-full"

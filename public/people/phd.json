@@ -1,7 +1,7 @@
 [
   {
     "name": "Xiangyi Wei",
-    "title": "PhD Candidate",
+    "title": "PhD Student",
     "bio": "Working on embodied intelligence.",
     "image": "/people/people_image/thumbs/phd/wxy.jpg",
     "email": "52285901014@stu.ecnu.edu.cn",
@@ -12,13 +12,13 @@
       }
     ],
     "research": [
-      "Multi-modal",
+      "Multimodal",
       "VLA"
     ]
   },
   {
     "name": "Junwei Shu",
-    "title": "PhD Candidate",
+    "title": "PhD Student",
     "bio": "Exploring diffusion models and computer graphics.",
     "image": "/people/people_image/thumbs/phd/sjw.jpg",
     "email": "51265901091@stu.ecnu.edu.cn",
@@ -29,24 +29,24 @@
       }
     ],
     "research": [
-      "diffusion",
-      "computer graphics"
+      "Diffusion Models",
+      "Computer Graphics"
     ]
   },
   {
     "name": "Mingjie Han",
-    "title": "PhD Candidate",
+    "title": "PhD Student",
     "bio": "Exploring multimodal large language models and spatial intelligence.",
     "image": "/people/people_image/thumbs/phd/hmj.jpg",
     "email": "mingjiehan@stu.ecnu.edu.cn",
     "research": [
-      "MLLM",
-      "spatial intelligence"
+      "Multimodal LLMs",
+      "Spatial Intelligence"
     ]
   },
   {
     "name": "Xiaoyuan Wang",
-    "title": "PhD Candidate",
+    "title": "PhD Student",
     "bio": "Exploring natural human–object interaction understanding and generation.",
     "image": "/people/people_image/thumbs/phd/xiaoyuanwang.jpg",
     "email": "xiaoyuan.wang@irisa.fr",

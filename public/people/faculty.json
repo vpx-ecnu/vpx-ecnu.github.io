@@ -1,16 +1,16 @@
 [
   {
     "name": "Yang Li",
-    "title": "Associate Professor of Computer Science and Technology",
-    "bio": "Leads the lab's research in visual perception, embodied AI, AIGC, 3D graphics, and video understanding.",
+    "title": "Associate Professor of Computer Science and Technology at the School of Intelligent Interaction, East China Normal University",
+    "bio": "Leads the VPX Group's work on visual perception across temporal, spatial, generative, and physical AI, contributing to human-centered AGI.",
     "image": "/people/people_image/thumbs/liyang.png",
     "email": "yli@cs.ecnu.edu.cn",
     "website": "https://ihpdep.github.io/",
     "research": [
-      "Embodied Intelligence",
-      "AI-Generated Content (AIGC)",
-      "3D Rendering & Graphics",
-      "Video Understanding"
+      "Temporal AI",
+      "Spatial AI",
+      "Generative AI",
+      "Physical AI"
     ]
   }
 ]

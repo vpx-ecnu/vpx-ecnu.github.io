@@ -26,7 +26,7 @@ export function Navbar() {
           <Link to="/" className="flex items-center space-x-2">
             <img 
               src="/vpx-assets/c1c1ffb3-a447-43bc-b8cb-b2bba2dad10f.png" 
-              alt="VPX Lab Logo" 
+              alt="VPX Group logo"
               className="h-9 w-auto sm:h-10"
             />
           </Link>

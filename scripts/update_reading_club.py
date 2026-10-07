@@ -45,6 +45,8 @@ def safe_filename(name: str) -> str:
 def clean_title(title: str) -> str:
     # 统一去掉标题中的“研讨会”
     t = (title or "").replace("研讨会", "")
+    # 修正来源标题中已知的拼写错误；不补写被来源截断的论文标题。
+    t = t.replace("Inteactive", "Interactive")
     # 清理多余空白，避免出现连续空格
     t = re.sub(r"\s{2,}", " ", t).strip()
     return t
@@ -186,7 +188,9 @@ def main():
         desc = v.get("description", "") or ""
         cover_remote = normalize_cover(v.get("pic", ""))
 
-        cover_local = download_cover(cover_remote, bvid, title)
+        # Keep the cover filename stable when only a display-title typo is corrected.
+        cover_title = re.sub(r"\s{2,}", " ", (v.get("title", "") or "").replace("研讨会", "")).strip()
+        cover_local = download_cover(cover_remote, bvid, cover_title)
 
         videos.append({
             "bvid": bvid,

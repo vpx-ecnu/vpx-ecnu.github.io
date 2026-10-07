@@ -42,7 +42,7 @@ const getProfileAvatarClassName = (member: Person) =>
 
 const ALUMNI_GROUPS = [
   { key: "phd", label: "PhD" },
-  { key: "master", label: "Master" },
+  { key: "master", label: "Master’s" },
   { key: "undergraduate", label: "Undergraduate" },
   { key: "part-time", label: "Part-Time" },
 ] as const;
@@ -82,7 +82,7 @@ const renderCoSupervisionNote = (person: Person) => {
 
   return (
     <>
-      <span>Cosupervised with </span>
+      <span>Co-supervised by </span>
       {person.coSupervisors.map((supervisor, index) => {
         const name = getCoSupervisorName(supervisor);
         const url = getCoSupervisorUrl(supervisor);
@@ -230,7 +230,7 @@ useEffect(() => {
             </div>
           </Group>
 
-          <Group id="grad" title="Graduate Students">
+          <Group id="grad" title="Master’s Students">
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3 md:grid-cols-3 lg:grid-cols-4">
               {gradList.map((m, i) => (
                 <div
@@ -272,7 +272,7 @@ useEffect(() => {
             </div>
           </Group>
 
-          <Group id="alumni" title="Alumni" subtitle="Compact list of alumni placements.">
+          <Group id="alumni" title="Alumni" subtitle="Where our alumni have gone next.">
             <AlumniColumns data={alumniList} />
           </Group>
         </div>
@@ -527,7 +527,7 @@ const AlumniColumns = ({ data }: { data: Person[] }) => {
 
             <div className="hidden grid-cols-12 gap-3 pb-2 text-xs font-medium text-muted-foreground lg:grid">
               <div className="col-span-3">Name</div>
-              <div className="col-span-2">Graduation Years</div>
+              <div className="col-span-2">Graduation Year</div>
               <div className="col-span-7">Placement</div>
             </div>
 
@@ -539,9 +539,9 @@ const AlumniColumns = ({ data }: { data: Person[] }) => {
                   </div>
 
                   <div className="lg:col-span-2">
-                    <div className="text-xs text-muted-foreground lg:hidden">Graduation Years</div>
+                    <div className="text-xs text-muted-foreground lg:hidden">Graduation Year</div>
                     <div className="text-sm leading-snug text-muted-foreground">
-                      {person.graduationYear || "2020"}
+                      {person.graduationYear || "—"}
                     </div>
                   </div>
 

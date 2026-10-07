@@ -2,11 +2,18 @@ export type LabLifeItem = {
   id: string;
   image: string;
   title: string;
-  date: string;
+  date?: string;
+  imageFit?: "cover" | "contain";
   link?: string;
 };
 
 export const labLifeData: LabLifeItem[] = [
+  {
+    id: "life-022",
+    image: "/vpx-assets/about/lab-life/web/22.jpg",
+    title: "VPX members at a lab birthday gathering",
+    imageFit: "contain",
+  },
   {
     id: "life-001",
     image: "/vpx-assets/about/lab-life/web/13.jpg",

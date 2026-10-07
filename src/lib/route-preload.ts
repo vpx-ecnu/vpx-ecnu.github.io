@@ -6,7 +6,6 @@ const routeLoaders = {
   "/activities": () => import("@/pages/Activities"),
   "/join": () => import("@/pages/Join"),
   "/intranet": () => import("@/pages/Intranet"),
-  "/studio/news": () => import("@/pages/StudioNews"),
 } as const;
 
 const routeCache = new Map<string, Promise<unknown>>();
@@ -31,7 +30,6 @@ export const routeModuleLoaders = {
   activities: routeLoaders["/activities"],
   join: routeLoaders["/join"],
   intranet: routeLoaders["/intranet"],
-  studioNews: routeLoaders["/studio/news"],
 };
 
 export function preloadRoute(to: string) {

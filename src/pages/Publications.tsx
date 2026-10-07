@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { FileText } from "lucide-react";
+import { formatPublicationVenue } from "@/lib/publication-venue";
 
 type Publication = {
   title: string;
@@ -84,7 +85,7 @@ const Publications = () => {
           Publications
         </h1>
         <p className="text-muted-foreground md:text-xl">
-          Our research outputs in peer-reviewed journals and conference proceedings.
+          Explore our journal articles, conference papers, and preprints.
         </p>
       </section>
 
@@ -142,7 +143,11 @@ const Publications = () => {
       {loading ? (
         <div className="text-sm text-muted-foreground">Loading...</div>
       ) : filteredPublications.length === 0 ? (
-        <div className="text-sm text-muted-foreground">No publications found.</div>
+        <div className="text-sm text-muted-foreground">
+          {publications.length === 0
+            ? "No publications are available at the moment."
+            : "No publications match your search or selected year."}
+        </div>
       ) : (
         <section className="space-y-3">
           {filteredPublications.map((pub, index) => (
@@ -170,7 +175,7 @@ const Publications = () => {
                       </p>
                       {pub.journal ? (
                         <Badge className="bg-violet-500/15 text-violet-700 border border-violet-500/20">
-                          {pub.journal}
+                          {formatPublicationVenue(pub.journal)}
                         </Badge>
                       ) : (
                         <Badge variant="secondary">Unknown Venue</Badge>

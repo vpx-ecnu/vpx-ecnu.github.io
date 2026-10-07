@@ -2,7 +2,7 @@
   {
     "title": "Embodied Intelligence for Automated Chemical Titration",
     "description": "An automated titration framework that combines robotic liquid handling and real-time pH feedback to deliver accurate, repeatable, and safe chemical experiments.",
-    "details": "## Overview\nThis project presents an embodied intelligence–based approach to automated acid–base titration, replacing traditional burettes with low-cost droppers precisely controlled by a robotic platform. The method achieves high-precision titration performance comparable to trained laboratory personnel while significantly simplifying experimental procedures.\n## Key Contributions\nThe robot performs stable and repeatable liquid dispensing with real-time pH sensing, enabling accurate titration curve generation and reliable equivalence-point detection. By minimizing human intervention, the approach reduces operational errors and enhances laboratory safety, offering a cost-effective and scalable solution for scientific research and education.",
+    "details": "## Overview\nThis project investigates an embodied intelligence–based approach to automated acid–base titration, using robot-controlled droppers and real-time pH sensing in place of manual dispensing.\n## Key Contributions\nThe system combines repeatable liquid dispensing with pH feedback to generate titration curves and identify equivalence points. It explores how robotic assistance can reduce routine manual steps and support safer, more reproducible experiments in research and education.",
     "lead": "Xiangyi Wei",
     "tags": [
       "AI/ML",
@@ -24,8 +24,8 @@
   },
   {
     "title": "AI-Powered Virtual Human Video Generation",
-    "description": "Automatically generating expressive, speaker-driven presentation videos from portraits, slides, scripts, and backgrounds, enabling fast, scalable, and personalized content creation.",
-    "details": "## Overview\nThis project explores an AI-driven approach to virtual human video creation, transforming simple inputs such as portrait images, presentation slides, and written scripts into expressive, speaker-led videos with synchronized audio and visuals.\n## Impact\nBy eliminating the need for professional filming and complex production pipelines, the approach enables fast, scalable, and personalized video creation, making high-quality presentation videos as accessible and efficient as preparing slides.",
+    "description": "Generating speaker-led presentation videos from portraits, slides, scripts, and backgrounds, with an emphasis on expressive and synchronized content.",
+    "details": "## Overview\nThis project explores an AI-driven approach to virtual human video creation, combining portrait images, presentation slides, and written scripts to generate speaker-led videos with synchronized audio and visuals.\n## Impact\nThe approach aims to streamline the production of personalized presentation videos when conventional filming or editing resources are limited.",
     "lead": "Yu Zhang",
     "tags": [
       "AIGC",
@@ -46,8 +46,8 @@
   },
   {
     "title": "Intelligent Virtual Production with Camera and Lighting Co-Design",
-    "description": "A next-generation virtual production platform that tightly synchronizes real and virtual cameras, and enables intelligent camera movement and adaptive lighting through real-time capture and AI-assisted control.",
-    "details": "## Overview\nThis project focuses on building an intelligent virtual production system for smart studios, integrating real-time optical motion capture, precise virtual–physical alignment, automated camera control, and adaptive lighting.\n\nBy capturing the real camera’s pose using a multi-camera motion capture setup and synchronizing it with the virtual camera, the system ensures strict consistency in viewpoint, motion, and spatial relationships between real footage and virtual scenes.\n\nOn the lighting side, the system adopts a hybrid background–foreground lighting architecture, combining LED walls for environmental illumination with programmable LED and DMX-controlled lights for foreground and character lighting. An intelligent lighting control model analyzes virtual scene illumination and dynamically adjusts real foreground lighting to achieve real-time relighting of performers.\n\nIn addition, the project explores AI-driven camera movement generation, where natural language shot instructions are parsed into cinematic camera trajectories that can be directly executed by a high-precision robotic camera arm.\n## Impact\nBy enabling automatic coordination between camera motion, lighting, and virtual environments, this system significantly reduces manual setup and operational complexity in virtual production. It paves the way toward director-intent-driven filming workflows, improving efficiency, visual consistency, and creative flexibility for real-time content creation and virtual filmmaking.",
+    "description": "A virtual production system that aligns real and virtual cameras and explores AI-assisted camera movement and adaptive lighting.",
+    "details": "## Overview\nThis project develops a virtual production system for smart studios, integrating optical motion capture, virtual–physical alignment, camera control, and adaptive lighting.\n\nA multi-camera motion capture setup tracks the real camera’s pose and aligns it with a virtual camera, helping maintain consistent viewpoints and spatial relationships between real footage and virtual scenes.\n\nFor lighting, the system combines LED walls for environmental illumination with programmable LED and DMX-controlled lights for performers and foreground objects. A lighting control model analyzes the virtual scene and adjusts real foreground lighting accordingly.\n\nThe project also explores how natural-language shot instructions can be translated into camera trajectories for a robotic camera arm.\n## Impact\nCoordinating camera motion, lighting, and virtual environments may reduce manual setup and give filmmakers more flexible control over virtual production workflows.",
     "lead": "Yijing Wa",
     "tags": [
       "Virtual Production",
@@ -72,8 +72,8 @@
   },
   {
     "title": "Intelligent Sandplay for Psychological Assessment",
-    "description": "Leveraging comprehensive data capture and AI-driven analysis to enhance the reliability, scalability, and safety of sandplay-based psychological evaluation in educational settings.",
-    "details": "## Overview\nThis project addresses key limitations of traditional psychological sandplay assessment, including incomplete data recording, subjective analysis, and privacy concerns, by introducing an intelligent, data-driven workflow aligned with mental health and AI initiatives.\n## Outcomes\nThrough comprehensive data capture and AI-assisted analysis, the project supports human–machine collaborative diagnosis, providing counselors with reliable decision support and students with personalized psychological assessment, significantly improving the quality and efficiency of psychological intervention.",
+    "description": "Exploring structured data capture and AI-assisted analysis to support counselor-led interpretation of sandplay sessions in educational settings.",
+    "details": "## Overview\nThis project explores a structured workflow for recording and reviewing sandplay sessions in educational settings, with attention to data privacy and the limits of AI-assisted interpretation.\n## Research Aim\nBy organizing session data and surfacing patterns for review, the system aims to support counselors’ professional judgment. It is not intended to provide a standalone psychological diagnosis.",
     "lead": "Chenxi Shao",
     "tags": [
       "MLLM",

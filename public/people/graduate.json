@@ -2,7 +2,7 @@
   {
     "name": "Zehui Guo",
     "title": "Master's Student",
-    "bio": "Exploring diffusion.",
+    "bio": "Exploring diffusion models for image editing.",
     "image": "/people/people_image/thumbs/master/gzh.jpg",
     "email": "1360733921@qq.com",
     "coSupervisors": [
@@ -16,7 +16,7 @@
       }
     ],
     "research": [
-      "image editing",
+      "Image Editing",
       "AIGC"
     ]
   },
@@ -44,14 +44,14 @@
     "image": "/people/people_image/thumbs/master/wyj.jpg",
     "email": "748628335@qq.com",
     "research": [
-      "relighting",
-      "virtual shooting"
+      "Relighting",
+      "Virtual Shooting"
     ]
   },
   {
     "name": "Zhichao Huang",
     "title": "Master's Student",
-    "bio": "Exploring wearable device and Human–Computer Interaction.",
+    "bio": "Exploring wearable devices and human–computer interaction.",
     "image": "/people/people_image/thumbs/master/hzc.jpg",
     "email": "51275901117@stu.ecnu.edu.cn",
     "coSupervisors": [
@@ -61,7 +61,7 @@
       }
     ],
     "research": [
-      "Wearable device",
+      "Wearable Devices",
       "Human–Computer Interaction"
     ]
   },
@@ -79,7 +79,7 @@
   {
     "name": "Wenzhi He",
     "title": "Master's Student",
-    "bio": "Focusing on bridging the Sim-to-Real gap in robotic manipulation using gaussian splatting.",
+    "bio": "Bridging the sim-to-real gap in robotic manipulation using Gaussian splatting.",
     "image": "/people/people_image/thumbs/master/hwz.jpg",
     "email": "1524186933@qq.com",
     "research": [
@@ -107,7 +107,7 @@
   {
     "name": "Kaiyuan Shen",
     "title": "Master's Student",
-    "bio": "Exploring 3D Gaussian splatting-based virtual human.",
+    "bio": "Exploring virtual humans based on 3D Gaussian splatting.",
     "image": "/people/people_image/thumbs/master/sky.jpg",
     "email": "zjut_sky@163.com",
     "research": [
@@ -132,7 +132,7 @@
       }
     ],
     "research": [
-      "diffusion"
+      "Diffusion Models"
     ]
   },
   {
@@ -189,7 +189,7 @@
   {
     "name": "Tieshi Zhong",
     "title": "Master's Student",
-    "bio": "Exploring 3D Reconstruction.",
+    "bio": "Exploring 3D reconstruction.",
     "image": "/people/people_image/thumbs/master/zts.jpg",
     "email": "h528014081@163.com",
     "coSupervisors": [
