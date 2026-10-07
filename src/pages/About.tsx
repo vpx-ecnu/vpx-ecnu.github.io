@@ -1,13 +1,45 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { labLifeData, type LabLifeItem } from "@/data/labLife";
 import { coreValues, researchTracks } from "@/data/researchIdentity";
-import { ArrowDown, GraduationCap, Heart, Sparkles, Target } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowLeftRight,
+  ArrowRight,
+  ArrowUp,
+  GraduationCap,
+  Heart,
+  Sparkles,
+  Target,
+} from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLocale } from "@/i18n/locale";
 
 const surfaceClassName =
   "rounded-2xl border border-border/60 bg-background/85 shadow-[0_22px_70px_-52px_rgba(0,0,0,0.32)] overflow-hidden";
 const coreValueIcons = [Sparkles, Target, Heart] as const;
+const missionDirections = [
+  {
+    track: researchTracks[0],
+    position: "col-start-3 row-start-1",
+    theme: "border-violet-500/30 bg-violet-500/10 text-violet-950 dark:text-violet-100",
+  },
+  {
+    track: researchTracks[1],
+    position: "col-start-5 row-start-3",
+    theme: "border-cyan-500/30 bg-cyan-500/10 text-cyan-950 dark:text-cyan-100",
+  },
+  {
+    track: researchTracks[2],
+    position: "col-start-3 row-start-5",
+    theme: "border-fuchsia-500/30 bg-fuchsia-500/10 text-fuchsia-950 dark:text-fuchsia-100",
+  },
+  {
+    track: researchTracks[3],
+    position: "col-start-1 row-start-3",
+    theme: "border-emerald-500/30 bg-emerald-500/10 text-emerald-950 dark:text-emerald-100",
+  },
+] as const;
 
 const tileStyle: CSSProperties = {
   contain: "layout paint style",
@@ -105,9 +137,6 @@ const LabLifeTile = ({ item, index, scrollRoot, isZh }: LabLifeTileProps) => {
 const About = () => {
   const [labLifeScrollRoot, setLabLifeScrollRoot] = useState<HTMLDivElement | null>(null);
   const { isZh } = useLocale();
-  const missionFlow = isZh
-    ? ["时序智能", "空间智能", "生成式智能", "物理智能", "以人为本的 AGI"]
-    : ["Temporal AI", "Spatial AI", "Generative AI", "Physical AI", "Human-centered AGI"];
   const workPrinciples = isZh
     ? [
         "提出原创问题，深入思考底层机制。",
@@ -244,32 +273,69 @@ const About = () => {
                     <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-violet-500/15 blur-3xl" />
                     <div className="pointer-events-none absolute -bottom-20 -left-12 h-48 w-48 rounded-full bg-cyan-400/15 blur-3xl" />
                     <div className="relative">
-                      <p className="mb-5 text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                        {isZh ? "从感知走向有益于人的智能" : "From perception to intelligence that serves people"}
+                      <p className="mb-6 text-center text-xs font-semibold text-muted-foreground sm:text-sm">
+                        {isZh
+                          ? "四个研究方向彼此促进，共同指向以人为本的 AGI"
+                          : "Four mutually reinforcing directions, one human-centered goal"}
                       </p>
-                      <div className="flex flex-col items-stretch">
-                        {missionFlow.map((step, index) => {
-                          const isDestination = index === missionFlow.length - 1;
-                          return (
-                            <div key={step} className="flex flex-col items-center">
-                              <div
-                                className={`w-full rounded-xl border px-4 py-3 text-center text-sm font-semibold shadow-sm sm:text-base ${
-                                  isDestination
-                                    ? "border-transparent bg-gradient-to-r from-violet-600 to-cyan-500 text-white shadow-violet-500/20"
-                                    : "border-border/70 bg-background/85 text-foreground"
-                                }`}
-                              >
-                                {step}
-                              </div>
-                              {!isDestination ? (
-                                <ArrowDown
-                                  className="my-1.5 h-4 w-4 text-violet-500"
-                                  aria-hidden="true"
-                                />
-                              ) : null}
-                            </div>
-                          );
-                        })}
+                      <p className="sr-only">
+                        {isZh
+                          ? "时序智能、空间智能、生成式智能与物理智能彼此促进，并分别为以人为本的通用人工智能贡献关键能力。"
+                          : "Temporal, spatial, generative, and physical AI reinforce one another while each contributes essential capabilities toward human-centered AGI."}
+                      </p>
+                      <div className="grid w-full grid-cols-[minmax(0,1fr)_1.25rem_minmax(0,1.15fr)_1.25rem_minmax(0,1fr)] grid-rows-[auto_1.5rem_auto_1.5rem_auto] items-center">
+                        {missionDirections.map(({ track, position, theme }) => (
+                          <div
+                            key={track.name}
+                            className={`${position} ${theme} flex min-h-16 items-center justify-center rounded-xl border px-1.5 py-2 text-center text-[0.68rem] font-semibold leading-tight shadow-sm sm:min-h-20 sm:px-3 sm:text-sm`}
+                          >
+                            {isZh ? track.nameZh : track.name}
+                          </div>
+                        ))}
+
+                        <ArrowDown
+                          className="col-start-3 row-start-2 h-4 w-4 place-self-center text-violet-500"
+                          aria-hidden="true"
+                        />
+                        <ArrowLeft
+                          className="col-start-4 row-start-3 h-4 w-4 place-self-center text-cyan-500"
+                          aria-hidden="true"
+                        />
+                        <ArrowUp
+                          className="col-start-3 row-start-4 h-4 w-4 place-self-center text-fuchsia-500"
+                          aria-hidden="true"
+                        />
+                        <ArrowRight
+                          className="col-start-2 row-start-3 h-4 w-4 place-self-center text-emerald-500"
+                          aria-hidden="true"
+                        />
+
+                        <ArrowLeftRight
+                          className="col-start-4 row-start-2 h-4 w-4 rotate-45 place-self-center text-muted-foreground/80"
+                          aria-hidden="true"
+                        />
+                        <ArrowLeftRight
+                          className="col-start-4 row-start-4 h-4 w-4 -rotate-45 place-self-center text-muted-foreground/80"
+                          aria-hidden="true"
+                        />
+                        <ArrowLeftRight
+                          className="col-start-2 row-start-4 h-4 w-4 rotate-45 place-self-center text-muted-foreground/80"
+                          aria-hidden="true"
+                        />
+                        <ArrowLeftRight
+                          className="col-start-2 row-start-2 h-4 w-4 -rotate-45 place-self-center text-muted-foreground/80"
+                          aria-hidden="true"
+                        />
+
+                        <div className="col-start-3 row-start-3 flex min-h-24 flex-col items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 to-cyan-500 px-2 py-3 text-center text-white shadow-lg shadow-violet-500/20 sm:min-h-28 sm:px-3">
+                          <Heart className="mb-1.5 h-5 w-5" aria-hidden="true" />
+                          <span className="text-xs font-bold leading-tight sm:text-sm">
+                            {isZh ? "以人为本的 AGI" : "Human-centered AGI"}
+                          </span>
+                          <span className="mt-1 hidden text-[0.65rem] leading-tight text-white/80 sm:block">
+                            {isZh ? "造福人类与社会" : "Benefiting people and society"}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>

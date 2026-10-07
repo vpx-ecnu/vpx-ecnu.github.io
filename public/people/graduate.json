@@ -313,5 +313,41 @@
       "机器人学",
       "空间感知"
     ]
+  },
+  {
+    "name": "Shuohan You",
+    "title": "Master's Student",
+    "titleZh": "硕士研究生",
+    "bio": "Exploring the intersection of games and AI.",
+    "bioZh": "探索游戏与人工智能的交叉融合。",
+    "image": "/people/people_image/thumbs/master/ysh.jpg",
+    "imagePosition": "center 70%",
+    "email": "",
+    "research": [
+      "AIGC",
+      "Computer Graphics"
+    ],
+    "researchZh": [
+      "AIGC",
+      "计算机图形学"
+    ]
+  },
+  {
+    "name": "Jie Gao",
+    "title": "Master's Student",
+    "titleZh": "硕士研究生",
+    "bio": "Exploring LLM agents that interact with and control physical devices such as smartphones and televisions.",
+    "bioZh": "研究能够与手机、电视等物理设备交互并进行控制的大语言模型智能体。",
+    "image": "/people/people_image/thumbs/master/gj.jpg",
+    "imagePosition": "center 35%",
+    "email": "",
+    "research": [
+      "LLM Agents",
+      "Device Interaction"
+    ],
+    "researchZh": [
+      "大语言模型智能体",
+      "设备交互"
+    ]
   }
 ]

@@ -20,6 +20,8 @@ type Person = {
   name: string;
   title: string;
   titleZh?: string;
+  titleParts?: Array<{ text: string; url?: string }>;
+  titlePartsZh?: Array<{ text: string; url?: string }>;
   graduationYear?: string;
   bio: string;
   bioZh?: string;
@@ -68,6 +70,27 @@ const getGraduationYearValue = (person: Person) => {
 };
 
 const getWebsite = (p: Person) => p.personalWebsite || p.website;
+
+const renderLinkedTitle = (person: Person, isZh: boolean) => {
+  const parts = isZh ? person.titlePartsZh : person.titleParts;
+  if (!parts?.length) return isZh && person.titleZh ? person.titleZh : person.title;
+
+  return parts.map((part, index) =>
+    part.url ? (
+      <a
+        key={`${part.text}-${index}`}
+        href={part.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline decoration-muted-foreground/50 underline-offset-2 transition-colors hover:text-foreground"
+      >
+        {part.text}
+      </a>
+    ) : (
+      <React.Fragment key={`${part.text}-${index}`}>{part.text}</React.Fragment>
+    ),
+  );
+};
 
 const getCoSupervisorName = (supervisor: string | { name: string; url?: string }) =>
   typeof supervisor === "string" ? supervisor : supervisor.name;
@@ -357,7 +380,7 @@ const ProfileRow = ({ member, isZh }: { member: Person; isZh: boolean }) => {
           <div className="min-w-0">
             <h3 className="text-xl font-semibold leading-tight md:text-2xl">{member.name}</h3>
             <p className="mt-1 text-sm text-muted-foreground md:text-base">
-              {isZh && member.titleZh ? member.titleZh : member.title}
+              {renderLinkedTitle(member, isZh)}
             </p>
           </div>
         </div>

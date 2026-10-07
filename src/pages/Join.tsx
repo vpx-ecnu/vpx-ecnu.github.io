@@ -31,8 +31,8 @@ const APPLICATION_SUBJECT =
 const APPLICATION_MAILTO = `mailto:${APPLICATION_EMAIL}?subject=${encodeURIComponent(
   APPLICATION_SUBJECT,
 )}`;
-const LAST_UPDATED = "September 2026";
-const LAST_UPDATED_ZH = "2026年9月";
+const LAST_UPDATED = "October 2026";
+const LAST_UPDATED_ZH = "2026年10月";
 const ZULIP_INVITE =
   "https://vpx-ecnu.zulipchat.com/join/hskqkiyqkq4z537uzxcfhbqp/";
 const LAB_ADDRESS =

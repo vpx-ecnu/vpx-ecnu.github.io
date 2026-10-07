@@ -1,8 +1,51 @@
 [
   {
     "name": "Yang Li",
-    "title": "Associate Professor of Computer Science and Technology at the School of Intelligent Interaction, East China Normal University",
-    "titleZh": "华东师范大学智能交互学院计算机科学与技术副教授",
+    "title": "Associate Professor at the School of Computer Science and Technology, East China Normal University, and an Affiliate at its School of Intelligent Interaction",
+    "titleZh": "华东师范大学计算机科学与技术学院副教授、智能交互学院兼职导师",
+    "titleParts": [
+      {
+        "text": "Associate Professor at the "
+      },
+      {
+        "text": "School of Computer Science and Technology",
+        "url": "https://www.cs.ecnu.edu.cn/main.htm"
+      },
+      {
+        "text": ", "
+      },
+      {
+        "text": "East China Normal University",
+        "url": "https://english.ecnu.edu.cn/"
+      },
+      {
+        "text": ", and an Affiliate at its "
+      },
+      {
+        "text": "School of Intelligent Interaction",
+        "url": "https://sii.ecnu.edu.cn/"
+      }
+    ],
+    "titlePartsZh": [
+      {
+        "text": "华东师范大学",
+        "url": "https://www.ecnu.edu.cn/"
+      },
+      {
+        "text": "计算机科学与技术学院",
+        "url": "https://www.cs.ecnu.edu.cn/main.htm"
+      },
+      {
+        "text": "副教授、"
+      },
+      {
+        "text": "智能交互学院",
+        "url": "https://sii.ecnu.edu.cn/"
+      },
+      {
+        "text": "兼职导师"
+      }
+    ],
     "bio": "Leads the VPX Group's work on visual perception across temporal, spatial, generative, and physical AI, contributing to human-centered AGI.",
     "bioZh": "带领 VPX Group 开展时序、空间、生成与物理智能方向的视觉感知研究，推动以人为本的通用人工智能发展。",
     "image": "/people/people_image/thumbs/liyang.png",

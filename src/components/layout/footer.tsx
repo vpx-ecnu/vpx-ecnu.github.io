@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Mail } from "lucide-react";
 import { PreloadLink as Link } from "@/components/preload-link";
 import { useLocale } from "@/i18n/locale";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { VisitorMapWidget } from "./visitor-map-widget";
 
 export function Footer() {
+  const [showDouyinQr, setShowDouyinQr] = useState(false);
   const year = new Date().getFullYear();
   const { isZh, localize } = useLocale();
 
@@ -61,6 +64,21 @@ export function Footer() {
               >
                 GitHub
               </a>
+              <a
+                href="https://www.xiaohongshu.com/user/profile/63428cc7000000001901f9a4"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-foreground"
+              >
+                {isZh ? "小红书" : "Xiaohongshu"}
+              </a>
+              <button
+                type="button"
+                className="transition-colors hover:text-foreground"
+                onClick={() => setShowDouyinQr(true)}
+              >
+                {isZh ? "抖音" : "Douyin"}
+              </button>
             </div>
           </div>
         </div>
@@ -73,6 +91,24 @@ export function Footer() {
       <div className="mt-6 text-center text-xs text-muted-foreground">
         © {year} VPX Group. {isZh ? "版权所有。" : "All rights reserved."}
       </div>
+
+      <Dialog open={showDouyinQr} onOpenChange={setShowDouyinQr}>
+        <DialogContent
+          className="sm:max-w-md"
+          closeLabel={isZh ? "关闭" : "Close"}
+        >
+          <DialogTitle className="sr-only">
+            {isZh ? "VPX 抖音二维码" : "VPX Douyin QR Code"}
+          </DialogTitle>
+          <div className="rounded-md border bg-muted p-2">
+            <img
+              src="/抖音.jpg"
+              alt={isZh ? "VPX 抖音二维码" : "VPX Douyin QR Code"}
+              className="mx-auto max-h-[70vh] w-auto rounded bg-white"
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
     </footer>
   );
 }
