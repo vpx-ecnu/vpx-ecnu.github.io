@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { labLifeData, type LabLifeItem } from "@/data/labLife";
 import { coreValues, researchTracks } from "@/data/researchIdentity";
-import { GraduationCap, Heart, Sparkles, Target } from "lucide-react";
+import { ArrowDown, GraduationCap, Heart, Sparkles, Target } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useLocale } from "@/i18n/locale";
 
 const surfaceClassName =
   "rounded-2xl border border-border/60 bg-background/85 shadow-[0_22px_70px_-52px_rgba(0,0,0,0.32)] overflow-hidden";
@@ -23,9 +24,10 @@ type LabLifeTileProps = {
   item: LabLifeItem;
   index: number;
   scrollRoot: HTMLDivElement | null;
+  isZh: boolean;
 };
 
-const LabLifeTile = ({ item, index, scrollRoot }: LabLifeTileProps) => {
+const LabLifeTile = ({ item, index, scrollRoot, isZh }: LabLifeTileProps) => {
   const [shouldLoad, setShouldLoad] = useState(index < 6);
   const [isLoaded, setIsLoaded] = useState(false);
   const frameRef = useRef<HTMLDivElement | null>(null);
@@ -77,7 +79,7 @@ const LabLifeTile = ({ item, index, scrollRoot }: LabLifeTileProps) => {
             ) : null}
             <img
               src={resolveLabLifeImageSrc(item.image)}
-              alt={item.title || "Lab life"}
+              alt={isZh ? "VPX 实验室生活" : item.title || "Lab life"}
               loading={index < 6 ? "eager" : "lazy"}
               decoding="async"
               fetchPriority={index < 3 ? "high" : "auto"}
@@ -102,6 +104,25 @@ const LabLifeTile = ({ item, index, scrollRoot }: LabLifeTileProps) => {
 
 const About = () => {
   const [labLifeScrollRoot, setLabLifeScrollRoot] = useState<HTMLDivElement | null>(null);
+  const { isZh } = useLocale();
+  const missionFlow = isZh
+    ? ["时序智能", "空间智能", "生成式智能", "物理智能", "以人为本的 AGI"]
+    : ["Temporal AI", "Spatial AI", "Generative AI", "Physical AI", "Human-centered AGI"];
+  const workPrinciples = isZh
+    ? [
+        "提出原创问题，深入思考底层机制。",
+        "设计严谨的实验，以证据检验研究结论。",
+        "将有潜力的想法发展为完整、可复现的研究。",
+        "清晰沟通，欢迎建设性的批评与讨论。",
+        "共同建设健康、包容且可持续的实验室文化。",
+      ]
+    : [
+        "Ask original questions and examine underlying mechanisms.",
+        "Design rigorous experiments and evaluate claims against evidence.",
+        "Turn promising ideas into complete, reproducible research.",
+        "Communicate clearly and welcome constructive critique.",
+        "Build a healthy, inclusive, and sustainable lab culture.",
+      ];
 
   return (
     <div className="relative w-full overflow-hidden bg-background text-foreground">
@@ -119,7 +140,7 @@ const About = () => {
             <div className="mx-auto max-w-screen-xl">
               <div className="mb-8 md:mb-10">
                 <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-                  About VPX Group
+                  {isZh ? "关于 VPX Group" : "About VPX Group"}
                 </h1>
                 <div className="mt-3 h-px w-full bg-gradient-to-r from-transparent via-border/70 to-transparent" />
               </div>
@@ -129,34 +150,36 @@ const About = () => {
                   <div className="rounded-2xl border border-border/60 bg-background/90 p-6 shadow-[0_22px_70px_-48px_rgba(0,0,0,0.28)] md:p-8">
                     <div className="space-y-5 text-base leading-relaxed text-muted-foreground md:text-lg">
                       <p>
-                        Based at{" "}
+                        {isZh ? "依托" : "Based at"}{" "}
                         <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                          East China Normal University
+                          {isZh ? "华东师范大学" : "East China Normal University"}
                         </span>
-                        , the{" "}
+                        {isZh ? "，" : ", the "}
                         <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                          Visual Perception + X (VPX) Group
-                        </span>{" "}
-                        takes visual perception as its foundation and connects it
-                        with other disciplines to advance{" "}
+                          {isZh ? "视觉感知 + X（VPX）研究组" : "Visual Perception + X (VPX) Group"}
+                        </span>
+                        {isZh
+                          ? "以视觉感知为基础，与其他学科交叉融合，推动"
+                          : " takes visual perception as its foundation and connects it with other disciplines to advance "}
                         <span className="bg-gradient-to-r from-violet-500 via-cyan-400 to-sky-400 bg-clip-text font-semibold text-transparent">
-                          human-centered AGI
-                        </span>.
+                          {isZh ? "以人为本的通用人工智能" : "human-centered AGI"}
+                        </span>
+                        {isZh ? "的发展。" : "."}
                       </p>
 
                       <p>
-                        We study how intelligent systems perceive and model dynamic
-                        environments, generate controllable content, and act in the
-                        physical world. Our work connects four research directions:
+                        {isZh
+                          ? "我们研究智能系统如何感知并建模动态环境、生成可控内容，以及在物理世界中行动。我们的工作连接四个研究方向："
+                          : "We study how intelligent systems perceive and model dynamic environments, generate controllable content, and act in the physical world. Our work connects four research directions:"}
                       </p>
 
                       <ul className="space-y-2.5 border-l border-border/70 pl-5">
                         {researchTracks.map((track) => (
                           <li key={track.name}>
                             <span className="font-semibold text-foreground">
-                              {track.name}
+                              {isZh ? track.nameZh : track.name}
                             </span>{" "}
-                            — {track.shortDescription}
+                            — {isZh ? track.shortDescriptionZh : track.shortDescription}
                           </li>
                         ))}
                       </ul>
@@ -188,48 +211,68 @@ const About = () => {
                   <div>
                     <div className="mb-4 flex items-center gap-3">
                       <Target className="h-6 w-6 text-violet-600" />
-                      <h2 className="text-2xl font-bold">VPX Mission</h2>
+                      <h2 className="text-2xl font-bold">
+                        {isZh ? "VPX 使命" : "VPX Mission"}
+                      </h2>
                     </div>
                     <p className="text-muted-foreground">
-                      To pursue original, rigorous research toward human-centered AGI that benefits people and society, while helping members develop independent research judgment in a supportive lab culture.
+                      {isZh
+                        ? "以原创、严谨的研究推动以人为本的通用人工智能，让技术造福人类与社会；同时在相互支持的实验室文化中，帮助每位成员建立独立的研究判断力。"
+                        : "To pursue original, rigorous research toward human-centered AGI that benefits people and society, while helping members develop independent research judgment in a supportive lab culture."}
                     </p>
                   </div>
 
                   <div>
                     <div className="mb-4 flex items-center gap-3">
                       <GraduationCap className="h-6 w-6 text-violet-600" />
-                      <h2 className="text-2xl font-bold">How We Work</h2>
+                      <h2 className="text-2xl font-bold">
+                        {isZh ? "我们的研究方式" : "How We Work"}
+                      </h2>
                     </div>
                     <ul className="list-disc space-y-2 pl-6 text-base text-muted-foreground md:text-lg">
-                      <li><span className="font-semibold">Ask original questions and examine underlying mechanisms.</span></li>
-                      <li><span className="font-semibold">Design rigorous experiments and evaluate claims against evidence.</span></li>
-                      <li><span className="font-semibold">Turn promising ideas into complete, reproducible research.</span></li>
-                      <li><span className="font-semibold">Communicate clearly and welcome constructive critique.</span></li>
-                      <li><span className="font-semibold">Build a healthy, inclusive, and sustainable lab culture.</span></li>
+                      {workPrinciples.map((principle) => (
+                        <li key={principle}>
+                          <span className="font-semibold">{principle}</span>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
 
-                <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2">
-                  {[
-                    "/vpx-assets/about/about_1.png",
-                    "/vpx-assets/about/about_2.png",
-                    "/vpx-assets/about/about_3.png",
-                    "/vpx-assets/about/about_4.png",
-                  ].map((src) => (
-                    <div
-                      key={src}
-                      className="rounded-xl border border-border/60 bg-background/92 p-2 shadow-sm"
-                    >
-                      <img
-                        src={src}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        className="h-auto w-full rounded-lg object-cover"
-                      />
+                <div className="w-full flex-1 lg:max-w-[30rem]">
+                  <div className="relative overflow-hidden rounded-2xl border border-violet-500/20 bg-gradient-to-br from-violet-500/[0.08] via-background to-cyan-500/[0.08] p-5 shadow-sm sm:p-7">
+                    <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-violet-500/15 blur-3xl" />
+                    <div className="pointer-events-none absolute -bottom-20 -left-12 h-48 w-48 rounded-full bg-cyan-400/15 blur-3xl" />
+                    <div className="relative">
+                      <p className="mb-5 text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                        {isZh ? "从感知走向有益于人的智能" : "From perception to intelligence that serves people"}
+                      </p>
+                      <div className="flex flex-col items-stretch">
+                        {missionFlow.map((step, index) => {
+                          const isDestination = index === missionFlow.length - 1;
+                          return (
+                            <div key={step} className="flex flex-col items-center">
+                              <div
+                                className={`w-full rounded-xl border px-4 py-3 text-center text-sm font-semibold shadow-sm sm:text-base ${
+                                  isDestination
+                                    ? "border-transparent bg-gradient-to-r from-violet-600 to-cyan-500 text-white shadow-violet-500/20"
+                                    : "border-border/70 bg-background/85 text-foreground"
+                                }`}
+                              >
+                                {step}
+                              </div>
+                              {!isDestination ? (
+                                <ArrowDown
+                                  className="my-1.5 h-4 w-4 text-violet-500"
+                                  aria-hidden="true"
+                                />
+                              ) : null}
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
-                  ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -238,9 +281,13 @@ const About = () => {
           <section className="py-2">
             <div className="mx-auto max-w-screen-xl">
               <div className="mb-8 text-center">
-                <h2 className="text-3xl font-bold tracking-tight">Our Core Values</h2>
+                <h2 className="text-3xl font-bold tracking-tight">
+                  {isZh ? "我们的核心价值观" : "Our Core Values"}
+                </h2>
                 <p className="mt-2 text-muted-foreground">
-                  These principles guide how we select, mentor, and grow our members.
+                  {isZh
+                    ? "这些原则贯穿我们对成员的选拔、培养与共同成长。"
+                    : "These principles guide how we select, mentor, and grow our members."}
                 </p>
               </div>
 
@@ -256,9 +303,13 @@ const About = () => {
                       <div className="inline-flex items-center justify-center rounded-lg border border-border/60 bg-gradient-to-b from-violet-500/10 to-cyan-500/5 p-2.5 text-violet-600">
                         <Icon className="h-7 w-7" />
                       </div>
-                      <h3 className="text-lg font-semibold leading-snug">{value.title}</h3>
+                      <h3 className="text-lg font-semibold leading-snug">
+                        {isZh ? value.titleZh : value.title}
+                      </h3>
                     </div>
-                    <p className="text-sm leading-6 text-muted-foreground">{value.description}</p>
+                    <p className="text-sm leading-6 text-muted-foreground">
+                      {isZh ? value.descriptionZh : value.description}
+                    </p>
                   </div>
                   );
                 })}
@@ -269,7 +320,7 @@ const About = () => {
           <section className="grid gap-8 md:gap-10">
             <div className="mx-auto w-full max-w-screen-xl">
               <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-                Research Tracks
+                {isZh ? "研究方向" : "Research Tracks"}
               </h2>
               <div className="mt-3 h-px w-full bg-gradient-to-r from-transparent via-border/70 to-transparent" />
 
@@ -280,11 +331,13 @@ const About = () => {
                     className="border-border/60 bg-background/90 shadow-sm transition-shadow hover:shadow-md"
                   >
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-lg">{area.title}</CardTitle>
+                      <CardTitle className="text-lg">
+                        {isZh ? area.titleZh : area.title}
+                      </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
                       <CardDescription className="leading-relaxed">
-                        {area.description}
+                        {isZh ? area.descriptionZh : area.description}
                       </CardDescription>
                     </CardContent>
                   </Card>
@@ -298,10 +351,12 @@ const About = () => {
               <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
                 <div className="space-y-2">
                   <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-                    Lab Life
+                    {isZh ? "实验室生活" : "Lab Life"}
                   </h2>
                   <p className="text-muted-foreground md:text-lg">
-                    Moments from our daily research, demos, meetings, and events.
+                    {isZh
+                      ? "记录我们的日常研究、演示、组会与活动。"
+                      : "Moments from our daily research, demos, meetings, and events."}
                   </p>
                 </div>
               </div>
@@ -321,6 +376,7 @@ const About = () => {
                         item={item}
                         index={index}
                         scrollRoot={labLifeScrollRoot}
+                        isZh={isZh}
                       />
                     ))}
                   </div>

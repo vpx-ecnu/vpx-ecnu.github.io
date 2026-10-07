@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocale } from "@/i18n/locale";
 
 interface DelayedRouteFallbackProps {
   delayMs?: number;
@@ -7,6 +8,7 @@ interface DelayedRouteFallbackProps {
 export function DelayedRouteFallback({
   delayMs = 120,
 }: DelayedRouteFallbackProps) {
+  const { isZh } = useLocale();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -29,7 +31,7 @@ export function DelayedRouteFallback({
         <div className="h-4 w-5/6 animate-pulse rounded-md bg-muted/80" />
         <div className="h-36 animate-pulse rounded-2xl bg-muted/60" />
       </div>
-      <span className="sr-only">Loading page</span>
+      <span className="sr-only">{isZh ? "正在加载页面" : "Loading page"}</span>
     </div>
   );
 }

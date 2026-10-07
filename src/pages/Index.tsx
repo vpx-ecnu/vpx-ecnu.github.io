@@ -8,6 +8,7 @@ import { Navigation } from "swiper/modules";
 import { useEffect, useMemo, useState } from "react";
 import { formatPublicationVenue } from "@/lib/publication-venue";
 import { researchTracks } from "@/data/researchIdentity";
+import { useLocale } from "@/i18n/locale";
 
 type NewsItem = {
   id: string;
@@ -33,7 +34,9 @@ type RecentPublication = {
 
 type OngoingResearchProject = {
   title: string;
+  titleZh?: string;
   description?: string;
+  descriptionZh?: string;
   thumbnail?: string;
   images?: string[];
   image?: string;
@@ -57,6 +60,7 @@ const researchTrackLeaders = [
 ] as const;
 
 const Index = () => {
+  const { isZh, localize } = useLocale();
   // ----------------------
   // News (API based) - for home page latest 6
   // ----------------------
@@ -229,24 +233,16 @@ const Index = () => {
     [ongoingResearchProjects]
   );
 
-  const sourceLabel = (source?: string) => {
-    const s = (source || "").toLowerCase();
-    if (s.includes("xiaohongshu") || s === "xhs") return "Xiaohongshu";
-    if (s.includes("bilibili") || s === "bili") return "Bilibili";
-    if (s.includes("twitter") || s.includes("x.com") || s === "twitter") return "Twitter / X";
-    return source || "Website";
-  };
-
   const getNewsTitle = (item: NewsItem) => {
     const primary = item.title?.trim() || item.sub_title?.trim();
     if (primary) return primary;
-    return "VPX Update";
+    return isZh ? "VPX 动态" : "VPX Update";
   };
 
   const formatNewsDate = (date: string) => {
     const parsed = new Date(date);
     if (Number.isNaN(parsed.getTime())) return "—";
-    return new Intl.DateTimeFormat("en-US", {
+    return new Intl.DateTimeFormat(isZh ? "zh-CN" : "en-US", {
       year: "numeric",
       month: "short",
       day: "numeric",
@@ -314,11 +310,11 @@ const Index = () => {
 
       <div className="mt-4 space-y-4 sm:mt-5">
         <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-6xl">
-          Welcome to{" "}
+          {isZh ? "欢迎来到" : "Welcome to"}{" "}
           <span className="bg-gradient-to-r from-violet-200 via-white to-cyan-200 bg-clip-text text-transparent">
             VPX Group
           </span>{" "}
-          at ECNU
+          {isZh ? "@ 华东师范大学" : "at ECNU"}
         </h1>
 
         {/* <p className="mx-auto max-w-3xl text-base md:text-xl leading-relaxed text-white/80">
@@ -339,25 +335,33 @@ const Index = () => {
 
         <p>
           <span className="font-semibold text-white">
-            The Visual Perception + X (VPX) Group at East China Normal University
+            {isZh
+              ? "华东师范大学视觉感知 + X（VPX）研究组"
+              : "The Visual Perception + X (VPX) Group at East China Normal University"}
           </span>{" "}
-          takes visual perception as its foundation and connects it with other
-          disciplines to advance{" "}
+          {isZh
+            ? "以视觉感知为基础，与其他学科交叉融合，推动"
+            : "takes visual perception as its foundation and connects it with other disciplines to advance"}{" "}
           <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
-            human-centered AGI
-          </span>.
+            {isZh ? "以人为本的通用人工智能" : "human-centered AGI"}
+          </span>
+          {isZh ? "。" : "."}
         </p>
 
         <p>
-          We study how intelligent systems perceive and model dynamic environments,
-          generate controllable content, and act in the physical world.
+          {isZh
+            ? "我们研究智能系统如何感知并建模动态环境、生成可控内容，以及在物理世界中行动。"
+            : "We study how intelligent systems perceive and model dynamic environments, generate controllable content, and act in the physical world."}
         </p>
 
         <p>
-          Our research connects four directions:{" "}
+          {isZh ? "我们的研究连接四个方向：" : "Our research connects four directions:"}{" "}
           <span className="font-semibold bg-gradient-to-r from-violet-300 via-cyan-300 to-sky-300 bg-clip-text text-transparent">
-            Temporal AI, Spatial AI, Generative AI, and Physical AI
-          </span>.
+            {isZh
+              ? "时序智能、空间智能、生成式智能与物理智能"
+              : "Temporal AI, Spatial AI, Generative AI, and Physical AI"}
+          </span>
+          {isZh ? "。" : "."}
         </p>
 
       </div>
@@ -373,7 +377,7 @@ const Index = () => {
           className="w-full px-5 py-4 text-base text-white shadow-lg shadow-violet-600/25 sm:w-auto sm:px-8 sm:text-lg md:px-9 md:py-7 md:text-xl
                      bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500"
         >
-          <Link to="/about">Learn About Us</Link>
+          <Link to={localize("/about")}>{isZh ? "了解我们" : "Learn About Us"}</Link>
         </Button>
 
         <Button
@@ -382,7 +386,7 @@ const Index = () => {
           className="w-full px-5 py-4 text-base text-white sm:w-auto sm:px-8 sm:text-lg md:px-9 md:py-7 md:text-xl
                      border-white/30 bg-white/5 hover:bg-white/10 hover:border-white/40"
         >
-          <Link to="/projects">View Our Projects</Link>
+          <Link to={localize("/projects")}>{isZh ? "查看项目" : "View Our Projects"}</Link>
         </Button>
       </div>
     </div>
@@ -401,18 +405,24 @@ const Index = () => {
               className="relative container"
             >
               {featuredOngoingProjects.map((project) => {
-                const projectLink = `/projects?project=${slugifyProjectTitle(project.title)}`;
+                const projectLink = localize(`/projects?project=${slugifyProjectTitle(project.title)}`);
                 const projectImage = getProjectThumbnail(project);
+                const projectTitle = isZh && project.titleZh ? project.titleZh : project.title;
+                const projectDescription =
+                  isZh && project.descriptionZh ? project.descriptionZh : project.description;
 
                 return (
                   <SwiperSlide key={project.title}>
                     <div className="flex flex-col items-center gap-4 sm:gap-5 lg:gap-8 lg:flex-row">
                       <div className="max-w-3xl flex-1">
                         <h2 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:mb-5 md:text-4xl lg:text-5xl">
-                          {project.title}
+                          {projectTitle}
                         </h2>
                         <p className="mb-4 text-base text-muted-foreground sm:text-lg md:mb-6 md:text-xl">
-                          {project.description || "Explore one of our ongoing research projects."}
+                          {projectDescription ||
+                            (isZh
+                              ? "探索我们正在开展的研究项目。"
+                              : "Explore one of our ongoing research projects.")}
                         </p>
                         <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3">
                           <Button
@@ -421,7 +431,8 @@ const Index = () => {
                             className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-600/30 transition-all hover:from-violet-500 hover:to-fuchsia-500 sm:w-auto"
                           >
                             <Link to={projectLink}>
-                              Explore Project <ArrowRight className="ml-2 h-4 w-4" />
+                              {isZh ? "探索项目" : "Explore Project"}{" "}
+                              <ArrowRight className="ml-2 h-4 w-4" />
                             </Link>
                           </Button>
                         </div>
@@ -429,7 +440,7 @@ const Index = () => {
                       <div className="w-full flex-1">
                         <img
                           src={projectImage}
-                          alt={project.title}
+                          alt={projectTitle}
                           className="h-auto max-h-[240px] w-full rounded-lg object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02] sm:max-h-[320px] lg:max-h-none"
                           loading="lazy"
                           decoding="async"
@@ -449,9 +460,13 @@ const Index = () => {
   <div className="container px-4 md:px-6">
     <div className="grid gap-8 md:gap-12">
       <div className="flex flex-col gap-2 md:gap-4">
-        <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Research Tracks</h2>
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">
+          {isZh ? "研究方向" : "Research Tracks"}
+        </h2>
         <p className="text-muted-foreground md:text-lg">
-          Four connected directions link visual understanding, world modeling, generation, and embodied action.
+          {isZh
+            ? "四个相互连接的方向，贯通视觉理解、世界建模、内容生成与具身行动。"
+            : "Four connected directions link visual understanding, world modeling, generation, and embodied action."}
         </p>
       </div>
 
@@ -461,13 +476,17 @@ const Index = () => {
             key={i}
             className="flex flex-col rounded-lg border bg-card p-6 transition-shadow hover:shadow-md"
           >
-            <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-            <p className="text-muted-foreground flex-1">{item.description}</p>
+            <h3 className="text-xl font-semibold mb-2">
+              {isZh ? item.titleZh : item.title}
+            </h3>
+            <p className="text-muted-foreground flex-1">
+              {isZh ? item.descriptionZh : item.description}
+            </p>
 
             <div className="mt-4 ml-auto text-sm text-muted-foreground">
-              Leader:{" "}
+              {isZh ? "方向负责人：" : "Leader:"}{" "}
               <Link
-                to={`/people#${researchTrackLeaders[i].id}`}
+                to={localize(`/people#${researchTrackLeaders[i].id}`)}
                 className="font-medium text-violet-600 hover:text-violet-700 transition-colors"
               >
                 {researchTrackLeaders[i].name}
@@ -482,7 +501,7 @@ const Index = () => {
 
       {/* Key Statistics */}
       <section className="mx-0 my-[3px] rounded-none bg-muted px-4 py-[21px] sm:px-6 md:px-[36px]">
-        <h2 className="sr-only">VPX at a Glance</h2>
+        <h2 className="sr-only">{isZh ? "VPX 概览" : "VPX at a Glance"}</h2>
         <div className="container px-4 md:px-6">
           <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
             <div className="space-y-2">
@@ -490,21 +509,21 @@ const Index = () => {
                 <BookOpen className="h-8 w-8 text-primary" />
               </div>
               <p className="text-3xl font-bold">{publicationCount ?? "..."}</p>
-              <p className="text-muted-foreground">Publications</p>
+              <p className="text-muted-foreground">{isZh ? "论文" : "Publications"}</p>
             </div>
             <div className="space-y-2">
               <div className="flex justify-center">
                 <Users className="h-8 w-8 text-primary" />
               </div>
               <p className="text-3xl font-bold">{researcherCount ?? "..."}</p>
-              <p className="text-muted-foreground">Current Members</p>
+              <p className="text-muted-foreground">{isZh ? "在组成员" : "Current Members"}</p>
             </div>
             <div className="space-y-2">
               <div className="flex justify-center">
                 <Clock className="h-8 w-8 text-primary" />
               </div>
               <p className="text-3xl font-bold">{yearsOfResearch}</p>
-              <p className="text-muted-foreground">Years of Research</p>
+              <p className="text-muted-foreground">{isZh ? "研究历程（年）" : "Years of Research"}</p>
             </div>
           </div>
         </div>
@@ -515,12 +534,16 @@ const Index = () => {
         <div className="container px-4 md:px-6">
           <div className="flex items-end justify-between gap-6 mb-6">
             <div className="space-y-2">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">Recent Publications</h2>
-              <p className="text-muted-foreground md:text-lg">Selected recent publications from VPX.</p>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
+                {isZh ? "近期论文" : "Recent Publications"}
+              </h2>
+              <p className="text-muted-foreground md:text-lg">
+                {isZh ? "VPX 近期代表性论文。" : "Selected recent publications from VPX."}
+              </p>
             </div>
             <Button asChild variant="outline" className="hidden sm:inline-flex">
-              <Link to="/projects?tab=publications">
-                View All <ArrowRight className="h-4 w-4" />
+              <Link to={localize("/projects?tab=publications")}>
+                {isZh ? "查看全部" : "View All"} <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
           </div>
@@ -566,7 +589,7 @@ const Index = () => {
                     {pub.title}
                   </h3>
                   <div className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-violet-600">
-                    View publication <ArrowRight className="h-4 w-4" />
+                    {isZh ? "查看论文" : "View publication"} <ArrowRight className="h-4 w-4" />
                   </div>
                 </div>
               </a>
@@ -580,32 +603,40 @@ const Index = () => {
         <div className="container px-4 md:px-6">
           <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
             <div className="space-y-2">
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">Latest News & Activities</h2>
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tighter">
+                {isZh ? "最新动态与活动" : "Latest News & Activities"}
+              </h2>
               <p className="text-sm text-muted-foreground/80 md:text-base">
-                Recent updates from VPX.
+                {isZh ? "来自 VPX 的近期动态。" : "Recent updates from VPX."}
               </p>
             </div>
             <Link
-              to="/activities"
+              to={localize("/activities")}
               className="inline-flex items-center gap-2 text-sm font-medium text-violet-600 transition-colors hover:text-violet-700"
             >
-              View all <ArrowRight className="h-4 w-4" />
+              {isZh ? "查看全部" : "View all"} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
           {newsError ? (
             <div className="rounded-lg border p-4 text-sm text-muted-foreground">
-              <div className="mb-1 font-medium text-foreground">Failed to load news</div>
-              <div className="break-words">{newsError}</div>
+              <div className="mb-1 font-medium text-foreground">
+                {isZh ? "动态加载失败" : "Failed to load news"}
+              </div>
+              <div className="break-words">{isZh ? "请稍后重试。" : newsError}</div>
             </div>
           ) : null}
 
           {loadingNews ? (
-            <div className="text-sm text-muted-foreground">Loading news…</div>
+            <div className="text-sm text-muted-foreground">
+              {isZh ? "正在加载动态…" : "Loading news…"}
+            </div>
           ) : null}
 
           {!loadingNews && !newsError && latest8News.length === 0 ? (
-            <div className="text-sm text-muted-foreground">No news found.</div>
+            <div className="text-sm text-muted-foreground">
+              {isZh ? "暂无动态。" : "No news found."}
+            </div>
           ) : null}
 
           {!loadingNews && !newsError && latest8News.length > 0 ? (
@@ -613,7 +644,7 @@ const Index = () => {
               {latest8News.map((item, index) => (
                 <Link
                   key={item.id}
-                  to={`/activities?newsId=${encodeURIComponent(String(item.id || ""))}`}
+                  to={localize(`/activities?newsId=${encodeURIComponent(String(item.id || ""))}`)}
                   className={`group relative overflow-hidden rounded-2xl border bg-slate-900 ${getMosaicClassName(index)}`}
                 >
                   {item.image ? (

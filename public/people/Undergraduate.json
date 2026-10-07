@@ -2,12 +2,18 @@
   {
     "name": "Zhongliang Liu",
     "title": "Undergraduate Student",
+    "titleZh": "本科生",
     "bio": "Exploring neural rendering and 3D editing.",
+    "bioZh": "研究神经渲染与三维编辑。",
     "image": "/people/people_image/thumbs/undergraduate/lzl.jpg",
     "email": "lozical@qq.com",
     "research": [
       "Stylization",
       "3DGS"
+    ],
+    "researchZh": [
+      "风格化",
+      "3D Gaussian Splatting"
     ]
   }
 ]

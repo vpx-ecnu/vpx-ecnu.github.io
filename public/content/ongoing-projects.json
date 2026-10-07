@@ -1,14 +1,23 @@
 [
   {
     "title": "Embodied Intelligence for Automated Chemical Titration",
+    "titleZh": "面向自动化化学滴定的具身智能",
     "description": "An automated titration framework that combines robotic liquid handling and real-time pH feedback to deliver accurate, repeatable, and safe chemical experiments.",
+    "descriptionZh": "一个结合机器人液体操作与实时 pH 反馈的自动滴定框架，旨在实现准确、可重复且安全的化学实验。",
     "details": "## Overview\nThis project investigates an embodied intelligence–based approach to automated acid–base titration, using robot-controlled droppers and real-time pH sensing in place of manual dispensing.\n## Key Contributions\nThe system combines repeatable liquid dispensing with pH feedback to generate titration curves and identify equivalence points. It explores how robotic assistance can reduce routine manual steps and support safer, more reproducible experiments in research and education.",
+    "detailsZh": "## 项目概述\n本项目探索一种基于具身智能的酸碱自动滴定方法，以机器人控制的滴管和实时 pH 感知替代人工加液。\n## 主要贡献\n系统将可重复的液体分配与 pH 反馈相结合，用于生成滴定曲线并识别等当点。项目进一步研究机器人辅助如何减少重复性的人工操作，为科研与教学提供更安全、更具可重复性的实验流程。",
     "lead": "Xiangyi Wei",
     "tags": [
       "AI/ML",
       "RL",
       "Embodied Intelligence",
       "Robotics"
+    ],
+    "tagsZh": [
+      "人工智能与机器学习",
+      "强化学习",
+      "具身智能",
+      "机器人学"
     ],
     "timeframe": "2023–2026",
     "status": "Active",
@@ -24,14 +33,23 @@
   },
   {
     "title": "AI-Powered Virtual Human Video Generation",
+    "titleZh": "AI 驱动的虚拟人视频生成",
     "description": "Generating speaker-led presentation videos from portraits, slides, scripts, and backgrounds, with an emphasis on expressive and synchronized content.",
+    "descriptionZh": "从人像、幻灯片、讲稿与背景生成虚拟人讲解视频，重点提升内容表现力与音画同步效果。",
     "details": "## Overview\nThis project explores an AI-driven approach to virtual human video creation, combining portrait images, presentation slides, and written scripts to generate speaker-led videos with synchronized audio and visuals.\n## Impact\nThe approach aims to streamline the production of personalized presentation videos when conventional filming or editing resources are limited.",
+    "detailsZh": "## 项目概述\n本项目探索一种 AI 驱动的虚拟人视频创作方法，将人像、演示文稿与文字讲稿结合起来，生成音画同步的虚拟人讲解视频。\n## 项目价值\n当传统拍摄或剪辑资源有限时，该方法能够简化个性化演示视频的制作流程。",
     "lead": "Yu Zhang",
     "tags": [
       "AIGC",
       "Diffusion",
       "Video Generation",
       "Digital Human"
+    ],
+    "tagsZh": [
+      "AIGC",
+      "扩散模型",
+      "视频生成",
+      "数字人"
     ],
     "timeframe": "2023–2026",
     "status": "Active",
@@ -46,8 +64,11 @@
   },
   {
     "title": "Intelligent Virtual Production with Camera and Lighting Co-Design",
+    "titleZh": "相机与灯光协同设计的智能虚拟制作",
     "description": "A virtual production system that aligns real and virtual cameras and explores AI-assisted camera movement and adaptive lighting.",
+    "descriptionZh": "一个实现真实与虚拟相机对齐，并探索 AI 辅助运镜和自适应灯光的虚拟制作系统。",
     "details": "## Overview\nThis project develops a virtual production system for smart studios, integrating optical motion capture, virtual–physical alignment, camera control, and adaptive lighting.\n\nA multi-camera motion capture setup tracks the real camera’s pose and aligns it with a virtual camera, helping maintain consistent viewpoints and spatial relationships between real footage and virtual scenes.\n\nFor lighting, the system combines LED walls for environmental illumination with programmable LED and DMX-controlled lights for performers and foreground objects. A lighting control model analyzes the virtual scene and adjusts real foreground lighting accordingly.\n\nThe project also explores how natural-language shot instructions can be translated into camera trajectories for a robotic camera arm.\n## Impact\nCoordinating camera motion, lighting, and virtual environments may reduce manual setup and give filmmakers more flexible control over virtual production workflows.",
+    "detailsZh": "## 项目概述\n本项目面向智能影棚开发虚拟制作系统，集成光学动作捕捉、虚实对齐、相机控制与自适应灯光。\n\n多相机动作捕捉装置用于追踪真实相机的姿态并与虚拟相机对齐，从而维持真实影像与虚拟场景之间一致的视点和空间关系。\n\n在灯光方面，系统结合用于环境照明的 LED 屏幕，以及面向演员和前景物体的可编程 LED 灯与 DMX 控制灯具。灯光控制模型分析虚拟场景，并据此调整真实前景的照明。\n\n项目还探索如何将自然语言的镜头指令转化为机器人相机臂的运动轨迹。\n## 项目价值\n相机运动、灯光和虚拟环境的协同能够减少人工设置工作，并为创作者提供更灵活的虚拟制作控制方式。",
     "lead": "Yijing Wa",
     "tags": [
       "Virtual Production",
@@ -55,6 +76,13 @@
       "Camera Control",
       "Adaptive Lighting",
       "Motion Capture"
+    ],
+    "tagsZh": [
+      "虚拟制作",
+      "智能影视制作",
+      "相机控制",
+      "自适应灯光",
+      "动作捕捉"
     ],
     "timeframe": "2024–2026",
     "status": "Active",
@@ -72,14 +100,23 @@
   },
   {
     "title": "Intelligent Sandplay for Psychological Assessment",
+    "titleZh": "面向心理评估的智能沙盘",
     "description": "Exploring structured data capture and AI-assisted analysis to support counselor-led interpretation of sandplay sessions in educational settings.",
+    "descriptionZh": "探索结构化数据采集与 AI 辅助分析，为教育场景中由心理咨询师主导的沙盘活动解读提供支持。",
     "details": "## Overview\nThis project explores a structured workflow for recording and reviewing sandplay sessions in educational settings, with attention to data privacy and the limits of AI-assisted interpretation.\n## Research Aim\nBy organizing session data and surfacing patterns for review, the system aims to support counselors’ professional judgment. It is not intended to provide a standalone psychological diagnosis.",
+    "detailsZh": "## 项目概述\n本项目探索一种用于记录与回顾教育场景中沙盘活动的结构化流程，同时关注数据隐私以及 AI 辅助解读的能力边界。\n## 研究目标\n系统通过组织活动数据并呈现可供复核的模式，为心理咨询师的专业判断提供支持，而非独立作出心理诊断。",
     "lead": "Chenxi Shao",
     "tags": [
       "MLLM",
       "Tracking",
       "Video Analysis",
       "Mental Health"
+    ],
+    "tagsZh": [
+      "多模态大语言模型",
+      "目标跟踪",
+      "视频分析",
+      "心理健康"
     ],
     "timeframe": "2023–2026",
     "status": "Active",

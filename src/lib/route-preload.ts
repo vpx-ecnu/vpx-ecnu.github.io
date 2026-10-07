@@ -13,7 +13,13 @@ const routeCache = new Map<string, Promise<unknown>>();
 const normalizeRoutePath = (to: string) => {
   const [pathWithoutHash] = to.split("#");
   const [pathWithoutSearch] = pathWithoutHash.split("?");
-  const normalizedPath = pathWithoutSearch || "/";
+  const localizedPath = pathWithoutSearch || "/";
+  const normalizedPath =
+    localizedPath === "/zh"
+      ? "/"
+      : localizedPath.startsWith("/zh/")
+        ? localizedPath.slice(3)
+        : localizedPath;
 
   if (normalizedPath.length > 1 && normalizedPath.endsWith("/")) {
     return normalizedPath.slice(0, -1);

@@ -2,7 +2,9 @@
   {
     "name": "Xiangyi Wei",
     "title": "PhD Student",
+    "titleZh": "博士研究生",
     "bio": "Working on embodied intelligence.",
+    "bioZh": "研究具身智能。",
     "image": "/people/people_image/thumbs/phd/wxy.jpg",
     "email": "52285901014@stu.ecnu.edu.cn",
     "coSupervisors": [
@@ -14,12 +16,18 @@
     "research": [
       "Multimodal",
       "VLA"
+    ],
+    "researchZh": [
+      "多模态学习",
+      "视觉-语言-动作模型"
     ]
   },
   {
     "name": "Junwei Shu",
     "title": "PhD Student",
+    "titleZh": "博士研究生",
     "bio": "Exploring diffusion models and computer graphics.",
+    "bioZh": "研究扩散模型与计算机图形学。",
     "image": "/people/people_image/thumbs/phd/sjw.jpg",
     "email": "51265901091@stu.ecnu.edu.cn",
     "coSupervisors": [
@@ -31,23 +39,35 @@
     "research": [
       "Diffusion Models",
       "Computer Graphics"
+    ],
+    "researchZh": [
+      "扩散模型",
+      "计算机图形学"
     ]
   },
   {
     "name": "Mingjie Han",
     "title": "PhD Student",
+    "titleZh": "博士研究生",
     "bio": "Exploring multimodal large language models and spatial intelligence.",
+    "bioZh": "研究多模态大语言模型与空间智能。",
     "image": "/people/people_image/thumbs/phd/hmj.jpg",
     "email": "mingjiehan@stu.ecnu.edu.cn",
     "research": [
       "Multimodal LLMs",
       "Spatial Intelligence"
+    ],
+    "researchZh": [
+      "多模态大语言模型",
+      "空间智能"
     ]
   },
   {
     "name": "Xiaoyuan Wang",
     "title": "PhD Student",
+    "titleZh": "博士研究生",
     "bio": "Exploring natural human–object interaction understanding and generation.",
+    "bioZh": "研究自然人-物交互的理解与生成。",
     "image": "/people/people_image/thumbs/phd/xiaoyuanwang.jpg",
     "email": "xiaoyuan.wang@irisa.fr",
     "coSupervisors": [
@@ -63,6 +83,10 @@
     "research": [
       "Human–Object Interaction",
       "Spatial Intelligence"
+    ],
+    "researchZh": [
+      "人-物交互",
+      "空间智能"
     ]
   }
 ]

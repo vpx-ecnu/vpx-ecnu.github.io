@@ -1,13 +1,21 @@
 [
   {
     "title": "Intelligent Tennis Video Analysis",
+    "titleZh": "智能网球视频分析",
     "description": "An intelligent tennis video analysis method that integrates action recognition and AR-based visualization to reveal ball trajectories and match insights in real time.",
+    "descriptionZh": "一种融合动作识别与增强现实可视化的智能网球视频分析方法，用于实时呈现球的轨迹与比赛信息。",
     "details": "## Overview\nThis project focuses on intelligent tennis video analysis by combining action recognition and match understanding to automatically extract key gameplay information from broadcast and recorded tennis videos.\n## Key Features\nThe approach enables accurate ball detection, tracking, and trajectory analysis, while automatically deriving match statistics such as shot counts and outcomes. By integrating augmented reality techniques, the project provides real-time visualization of ball trajectories, landing positions, and scores, enhancing both match analysis and viewing experience.",
+    "detailsZh": "## 项目概述\n本项目聚焦智能网球视频分析，通过结合动作识别与比赛理解，从转播和录制的网球视频中自动提取关键比赛信息。\n## 主要功能\n该方法能够准确完成球的检测、跟踪和轨迹分析，并自动统计击球次数与比赛结果等数据。通过融入增强现实技术，项目可以实时可视化球的运动轨迹、落点和比分，同时提升比赛分析与观看体验。",
     "lead": "Ling You",
     "tags": [
       "AI/ML",
       "Sports Analysis",
       "Tennis"
+    ],
+    "tagsZh": [
+      "人工智能与机器学习",
+      "体育分析",
+      "网球"
     ],
     "timeframe": "2023–2024",
     "status": "Completed",

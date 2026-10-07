@@ -23,6 +23,14 @@ The `/studio/news` operator interface is available only in local development; it
 
 This is a static website project. Most content is loaded from structured data in `src/data/`, `public/content/`, `public/people/`, `public/publications/`, and other static assets under `public/`.
 
+### Language Routes
+
+- English remains the default at the existing routes, such as `/about` and `/join`.
+- Chinese pages use the `/zh` prefix, such as `/zh/about` and `/zh/join`.
+- Shared navigation keeps the current page, query string, and hash when switching languages.
+- Site-authored copy is maintained in both languages. Project and people JSON use optional `*Zh` fields alongside the existing English fields.
+- Publication metadata, news/update payloads, and Reading Club material remain in their original language; only the surrounding website interface is translated.
+
 ## Tech Stack
 
 - Vite

@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useLocale } from "@/i18n/locale";
 import { formatPublicationVenue } from "@/lib/publication-venue";
 
 type ProjectVideo =
@@ -23,12 +24,16 @@ type ProjectVideo =
 
 type Project = {
   title: string;
+  titleZh?: string;
   status: string;
   timeframe?: string;
   lead?: string;
   description?: string; // 卡片摘要
+  descriptionZh?: string;
   details?: string; // 详情页正文（Markdown）
+  detailsZh?: string;
   tags?: string[];
+  tagsZh?: string[];
 
   // 图片：thumbnail 用于卡片；images 用于详情页右侧栏
   thumbnail?: string;
@@ -86,6 +91,7 @@ const normalizeProjectTab = (value: string | null): ProjectTab => {
 const Projects = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { isZh, localize } = useLocale();
   const searchParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
   const requestedProject = searchParams.get("project");
   const requestedPublication = searchParams.get("publication");
@@ -177,7 +183,30 @@ const Projects = () => {
     }
 
     const nextSearch = params.toString();
-    navigate(nextSearch ? `/projects?${nextSearch}` : "/projects", { replace: true });
+    navigate(localize(nextSearch ? `/projects?${nextSearch}` : "/projects"), {
+      replace: true,
+    });
+  };
+
+  const getProjectTitle = (project: Project) =>
+    isZh && project.titleZh ? project.titleZh : project.title;
+
+  const getProjectDescription = (project: Project) =>
+    isZh && project.descriptionZh ? project.descriptionZh : project.description;
+
+  const getProjectDetails = (project: Project) =>
+    isZh && project.detailsZh
+      ? project.detailsZh
+      : project.details || getProjectDescription(project) || "";
+
+  const getProjectTags = (project: Project) =>
+    isZh && project.tagsZh ? project.tagsZh : project.tags;
+
+  const getProjectStatus = (status: string) => {
+    if (!isZh) return status;
+    if (status === "Active") return "进行中";
+    if (status === "Completed") return "已完成";
+    return status;
   };
 
   return (
@@ -194,10 +223,13 @@ const Projects = () => {
       {/* Hero */}
       <section className="py-12 md:py-14 px-0 bg-secondary/30">
         <div className="container px-4 md:px-6">
-          <h1 className="mb-4 text-3xl font-bold sm:text-4xl">Research Projects</h1>
+          <h1 className="mb-4 text-3xl font-bold sm:text-4xl">
+            {isZh ? "研究项目" : "Research Projects"}
+          </h1>
           <p className="text-lg max-w-3xl text-muted-foreground">
-            Explore the questions, methods, and applications behind our ongoing
-            and completed research projects.
+            {isZh
+              ? "了解我们正在推进与已经完成的研究项目，以及其背后的问题、方法与应用。"
+              : "Explore the questions, methods, and applications behind our ongoing and completed research projects."}
           </p>
         </div>
       </section>
@@ -214,27 +246,29 @@ const Projects = () => {
                   updateProjectsRoute(activeTab);
                 }}
               >
-                ← Back to Projects
+                ← {isZh ? "返回项目列表" : "Back to Projects"}
               </button>
 
               {/* Title + meta */}
               <div className="mb-6">
                 <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                  <h2 className="text-3xl font-bold">{selectedProject.title}</h2>
+                  <h2 className="text-3xl font-bold">{getProjectTitle(selectedProject)}</h2>
                   {selectedProject.status && (
                     <Badge
                       variant={
                         selectedProject.status === "Active" ? "default" : "secondary"
                       }
                     >
-                      {selectedProject.status}
+                      {getProjectStatus(selectedProject.status)}
                     </Badge>
                   )}
                 </div>
                 <p className="text-muted-foreground mt-2 text-sm">
                   {selectedProject.timeframe ? selectedProject.timeframe : null}
                   {selectedProject.timeframe && selectedProject.lead ? " • " : null}
-                  {selectedProject.lead ? `Lead: ${selectedProject.lead}` : null}
+                  {selectedProject.lead
+                    ? `${isZh ? "负责人" : "Lead"}: ${selectedProject.lead}`
+                    : null}
                 </p>
               </div>
 
@@ -264,14 +298,16 @@ const Projects = () => {
       li: ({ node, ...props }) => <li className="text-muted-foreground" {...props} />,
     }}
   >
-    {selectedProject.details || selectedProject.description || ""}
+    {getProjectDetails(selectedProject)}
   </ReactMarkdown>
                   </div>
 
                   {/* 视频（可选） */}
                   {selectedProject.video?.embedUrl ? (
                     <div className="mt-8">
-                      <h3 className="text-lg font-semibold mb-3">Demo Video</h3>
+                      <h3 className="text-lg font-semibold mb-3">
+                        {isZh ? "演示视频" : "Demo Video"}
+                      </h3>
 
                       {/* iframe 容器：16:9 */}
                       <div className="relative w-full overflow-hidden border bg-card">
@@ -283,7 +319,7 @@ const Projects = () => {
                             allowFullScreen
                             loading="lazy"
                             referrerPolicy="no-referrer"
-                            title={`${selectedProject.title} video`}
+                            title={`${getProjectTitle(selectedProject)} ${isZh ? "视频" : "video"}`}
                           />
                         </div>
                       </div>
@@ -291,14 +327,14 @@ const Projects = () => {
                       {selectedProject.video.type === "bilibili" &&
                       getBilibiliVideoUrl(selectedProject.video.embedUrl) ? (
                         <p className="mt-2 text-xs text-muted-foreground">
-                          Video not loading here?{" "}
+                          {isZh ? "视频未能加载？" : "Video not loading here?"}{" "}
                           <a
                             href={getBilibiliVideoUrl(selectedProject.video.embedUrl) ?? undefined}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-violet-600 hover:underline"
                           >
-                            Watch on Bilibili
+                            {isZh ? "前往哔哩哔哩观看" : "Watch on Bilibili"}
                           </a>
                           .
                         </p>
@@ -307,11 +343,11 @@ const Projects = () => {
                   ) : null}
 
                   {/* Tags */}
-                  {selectedProject.tags?.length ? (
+                  {getProjectTags(selectedProject)?.length ? (
                     <div className="mt-8">
                       {/* <h4 className="font-medium text-sm mb-2">Tags</h4> */}
                       <div className="flex flex-wrap gap-2">
-                        {selectedProject.tags.map((tag, i) => (
+                        {getProjectTags(selectedProject)?.map((tag, i) => (
                           <Badge key={i} variant="outline">
                             {tag}
                           </Badge>
@@ -328,7 +364,7 @@ const Projects = () => {
                       <img
                         key={idx}
                         src={src}
-                        alt={`${selectedProject.title} image ${idx + 1}`}
+                        alt={`${getProjectTitle(selectedProject)}${isZh ? ` 图片 ${idx + 1}` : ` image ${idx + 1}`}`}
                         className="w-full rounded-xl object-cover"
                         loading="lazy"
                       />
@@ -352,19 +388,19 @@ const Projects = () => {
                   value="ongoing"
                   className="min-h-10 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
                 >
-                  Ongoing Projects
+                  {isZh ? "进行中的项目" : "Ongoing Projects"}
                 </TabsTrigger>
                 <TabsTrigger
                   value="completed"
                   className="min-h-10 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
                 >
-                  Completed Projects
+                  {isZh ? "已完成的项目" : "Completed Projects"}
                 </TabsTrigger>
                 <TabsTrigger
                   value="publications"
                   className="min-h-10 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
                 >
-                  Featured Publications
+                  {isZh ? "精选论文" : "Featured Publications"}
                 </TabsTrigger>
               </TabsList>
 
@@ -384,7 +420,7 @@ const Projects = () => {
                           <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
                             <img
                               src={thumb}
-                              alt={project.title}
+                              alt={getProjectTitle(project)}
                               className="h-full w-full object-cover"
                               loading="lazy"
                               decoding="async"
@@ -400,7 +436,7 @@ const Projects = () => {
                                   }
                                   className="border border-white/10"
                                 >
-                                  {project.status}
+                                  {getProjectStatus(project.status)}
                                 </Badge>
                               </div>
                             ) : null}
@@ -409,7 +445,7 @@ const Projects = () => {
 
                         <CardHeader>
                           <CardTitle className="text-lg leading-snug">
-                            {project.title}
+                            {getProjectTitle(project)}
                           </CardTitle>
                           {project.timeframe ? (
                             <CardDescription>{project.timeframe}</CardDescription>
@@ -417,15 +453,17 @@ const Projects = () => {
                         </CardHeader>
 
                         <CardContent>
-                          {project.description ? (
+                          {getProjectDescription(project) ? (
                             <p className="text-sm text-muted-foreground line-clamp-3">
-                              {project.description}
+                              {getProjectDescription(project)}
                             </p>
                           ) : null}
 
                           {project.lead ? (
                             <div className="mt-4">
-                              <p className="text-sm font-medium">Lead Researcher</p>
+                              <p className="text-sm font-medium">
+                                {isZh ? "项目负责人" : "Lead Researcher"}
+                              </p>
                               <p className="text-sm text-muted-foreground">
                                 {project.lead}
                               </p>
@@ -433,10 +471,10 @@ const Projects = () => {
                           ) : null}
                         </CardContent>
 
-                        {project.tags?.length ? (
+                        {getProjectTags(project)?.length ? (
                           <CardFooter>
                             <div className="flex flex-wrap gap-2">
-                              {project.tags.map((tag, i) => (
+                              {getProjectTags(project)?.map((tag, i) => (
                                 <Badge key={i} variant="outline">
                                   {tag}
                                 </Badge>
@@ -466,7 +504,7 @@ const Projects = () => {
                           <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
                             <img
                               src={thumb}
-                              alt={project.title}
+                              alt={getProjectTitle(project)}
                               className="h-full w-full object-cover"
                               loading="lazy"
                               decoding="async"
@@ -474,7 +512,7 @@ const Projects = () => {
                             {project.status ? (
                               <div className="absolute top-3 left-3">
                                 <Badge variant="secondary" className="border border-white/10">
-                                  {project.status}
+                                  {getProjectStatus(project.status)}
                                 </Badge>
                               </div>
                             ) : null}
@@ -483,7 +521,7 @@ const Projects = () => {
 
                         <CardHeader>
                           <CardTitle className="text-lg leading-snug">
-                            {project.title}
+                            {getProjectTitle(project)}
                           </CardTitle>
                           {project.timeframe ? (
                             <CardDescription>{project.timeframe}</CardDescription>
@@ -491,9 +529,9 @@ const Projects = () => {
                         </CardHeader>
 
                         <CardContent>
-                          {project.description ? (
+                          {getProjectDescription(project) ? (
                             <p className="text-sm text-muted-foreground line-clamp-3">
-                              {project.description}
+                              {getProjectDescription(project)}
                             </p>
                           ) : null}
 
@@ -505,13 +543,15 @@ const Projects = () => {
                               className="inline-block mt-3 text-sm text-violet-600 hover:underline"
                               onClick={(e) => e.stopPropagation()} // 避免点链接触发选中
                             >
-                              View Project →
+                              {isZh ? "查看项目" : "View Project"} →
                             </a>
                           ) : null}
 
                           {project.lead ? (
                             <div className="mt-4">
-                              <p className="text-sm font-medium">Lead Researcher</p>
+                              <p className="text-sm font-medium">
+                                {isZh ? "项目负责人" : "Lead Researcher"}
+                              </p>
                               <p className="text-sm text-muted-foreground">
                                 {project.lead}
                               </p>
@@ -519,10 +559,10 @@ const Projects = () => {
                           ) : null}
                         </CardContent>
 
-                        {project.tags?.length ? (
+                        {getProjectTags(project)?.length ? (
                           <CardFooter>
                             <div className="flex flex-wrap gap-2">
-                              {project.tags.map((tag, i) => (
+                              {getProjectTags(project)?.map((tag, i) => (
                                 <Badge key={i} variant="outline">
                                   {tag}
                                 </Badge>
@@ -540,7 +580,7 @@ const Projects = () => {
               <TabsContent value="publications" className="mt-6">
                 {projectPublications.length === 0 ? (
                   <div className="text-sm text-muted-foreground">
-                    No featured publications are available at the moment.
+                    {isZh ? "目前暂无精选论文。" : "No featured publications are available at the moment."}
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -579,7 +619,11 @@ const Projects = () => {
                           )}
                           <div className="absolute top-3 left-3">
                             <span className="px-3 py-1 text-xs font-medium bg-black/70 text-white backdrop-blur-sm border border-white/10">
-                              {pub.venue ? formatPublicationVenue(pub.venue) : "Unknown Venue"}
+                              {pub.venue
+                                ? formatPublicationVenue(pub.venue)
+                                : isZh
+                                  ? "未知发表信息"
+                                  : "Unknown Venue"}
                             </span>
                           </div>
                         </div>
@@ -588,7 +632,7 @@ const Projects = () => {
                             {pub.title}
                           </h3>
                           <div className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-violet-600">
-                            View project page →
+                            {isZh ? "查看项目页面" : "View project page"} →
                           </div>
                         </div>
                       </a>

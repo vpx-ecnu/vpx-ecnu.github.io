@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { FileText } from "lucide-react";
 import { formatPublicationVenue } from "@/lib/publication-venue";
+import { useLocale } from "@/i18n/locale";
 
 type Publication = {
   title: string;
@@ -15,6 +16,7 @@ type Publication = {
 };
 
 const Publications = () => {
+  const { isZh } = useLocale();
   const [publications, setPublications] = useState<Publication[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
@@ -82,10 +84,12 @@ const Publications = () => {
       {/* Header */}
       <section className="mx-auto mb-12 max-w-3xl space-y-4 text-center">
         <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">
-          Publications
+          {isZh ? "论文发表" : "Publications"}
         </h1>
         <p className="text-muted-foreground md:text-xl">
-          Explore our journal articles, conference papers, and preprints.
+          {isZh
+            ? "浏览研究组发表的期刊论文、会议论文与预印本。论文信息保留其官方原文。"
+            : "Explore our journal articles, conference papers, and preprints."}
         </p>
       </section>
 
@@ -98,14 +102,17 @@ const Publications = () => {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search by title / authors / venue..."
+              placeholder={isZh ? "按标题、作者或会议/期刊搜索…" : "Search by title / authors / venue..."}
+              aria-label={isZh ? "搜索论文" : "Search publications"}
               className="w-full h-10 px-3 border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-violet-500/30"
             />
           </div>
 
           {/* Year buttons */}
           <div className="flex flex-wrap items-center gap-2 lg:justify-end">
-            <span className="text-sm font-medium text-muted-foreground">Year:</span>
+            <span className="text-sm font-medium text-muted-foreground">
+              {isZh ? "年份：" : "Year:"}
+            </span>
 
             <Button
               variant={selectedYear === null ? "default" : "outline"}
@@ -117,7 +124,7 @@ const Publications = () => {
                   : "border-white/15 hover:bg-white/5"
               }
             >
-              All
+              {isZh ? "全部" : "All"}
             </Button>
 
             {years.map((year) => (
@@ -141,12 +148,14 @@ const Publications = () => {
 
       {/* List */}
       {loading ? (
-        <div className="text-sm text-muted-foreground">Loading...</div>
+        <div className="text-sm text-muted-foreground">
+          {isZh ? "正在加载…" : "Loading..."}
+        </div>
       ) : filteredPublications.length === 0 ? (
         <div className="text-sm text-muted-foreground">
           {publications.length === 0
-            ? "No publications are available at the moment."
-            : "No publications match your search or selected year."}
+            ? isZh ? "目前暂无可显示的论文。" : "No publications are available at the moment."
+            : isZh ? "没有符合搜索条件或所选年份的论文。" : "No publications match your search or selected year."}
         </div>
       ) : (
         <section className="space-y-3">
@@ -178,7 +187,9 @@ const Publications = () => {
                           {formatPublicationVenue(pub.journal)}
                         </Badge>
                       ) : (
-                        <Badge variant="secondary">Unknown Venue</Badge>
+                        <Badge variant="secondary">
+                          {isZh ? "未知发表信息" : "Unknown Venue"}
+                        </Badge>
                       )}
                     </div>
                   </div>
@@ -193,7 +204,7 @@ const Publications = () => {
                       disabled={!pub.doi}
                     >
                       <FileText className="h-4 w-4 mr-2" />
-                      Paper
+                      {isZh ? "论文" : "Paper"}
                     </Button>
                   </div>
 

@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/dialog";
 
 import readingClub from "@/data/readingClub.json";
+import { useLocale } from "@/i18n/locale";
 
 type ReadingVideo = {
   bvid: string;
@@ -43,11 +44,11 @@ type NewsItem = {
   source_url?: string;
 };
 
-function formatDate(iso: string | null) {
+function formatDate(iso: string | null, isZh = false) {
   if (!iso) return "—";
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return "—";
-  return new Intl.DateTimeFormat("en-US", {
+  return new Intl.DateTimeFormat(isZh ? "zh-CN" : "en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -55,24 +56,28 @@ function formatDate(iso: string | null) {
   }).format(d);
 }
 
-function sourceLabel(source?: string) {
+function sourceLabel(source?: string, isZh = false) {
   const s = (source || "").toLowerCase();
-  if (s.includes("xiaohongshu") || s === "xhs") return "Xiaohongshu";
-  if (s.includes("bilibili") || s === "bili") return "Bilibili";
+  if (s.includes("xiaohongshu") || s === "xhs") return isZh ? "小红书" : "Xiaohongshu";
+  if (s.includes("bilibili") || s === "bili") return isZh ? "哔哩哔哩" : "Bilibili";
   if (s.includes("twitter") || s.includes("x.com") || s === "twitter") return "Twitter / X";
-  return source || "Website";
+  return source || (isZh ? "网站" : "Website");
 }
 
-function getNewsTitle(item: NewsItem) {
+function getNewsTitle(item: NewsItem, isZh: boolean) {
   const primary = item.title?.trim() || item.sub_title?.trim();
   if (primary) return primary;
-  return item.source ? `${sourceLabel(item.source)} Update` : "VPX Update";
+  if (!item.source) return isZh ? "VPX 动态" : "VPX Update";
+  return isZh
+    ? `${sourceLabel(item.source, true)}动态`
+    : `${sourceLabel(item.source)} Update`;
 }
 
 const PAGE_SIZE = 20;
 
 const Activities = () => {
   const location = useLocation();
+  const { isZh } = useLocale();
   // ----------------------
   // News states (API based)
   // ----------------------
@@ -206,10 +211,12 @@ const Activities = () => {
       {/* Header */}
       <section className="relative mx-auto max-w-3xl space-y-4 text-center">
         <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">
-          Updates
+          {isZh ? "最新动态" : "Updates"}
         </h1>
         <p className="text-muted-foreground md:text-xl">
-          Follow the latest news, events, and academic activities from VPX.
+          {isZh
+            ? "了解 VPX 的最新消息、活动与学术交流。动态与分享内容保留发布时的原文。"
+            : "Follow the latest news, events, and academic activities from VPX."}
         </p>
       </section>
 
@@ -222,14 +229,14 @@ const Activities = () => {
               className="flex min-h-10 items-center gap-2 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
             >
               <Cpu className="h-4 w-4" />
-              News & Activities
+              {isZh ? "新闻与活动" : "News & Activities"}
             </TabsTrigger>
             <TabsTrigger
               value="seminars"
               className="flex min-h-10 items-center gap-2 whitespace-normal border bg-muted/60 px-3 py-2 text-center leading-snug data-[state=active]:border-border data-[state=active]:bg-background"
             >
               <GraduationCap className="h-4 w-4" />
-              VPX Reading Club
+              {isZh ? "VPX 论文研讨会" : "VPX Reading Club"}
             </TabsTrigger>
           </TabsList>
 
@@ -238,14 +245,18 @@ const Activities = () => {
             {newsError ? (
               <div className="rounded-md border p-4 text-sm text-muted-foreground">
                 <div className="font-medium text-foreground mb-1">
-                  Failed to load news
+                  {isZh ? "动态加载失败" : "Failed to load news"}
                 </div>
-                <div className="break-words">{newsError}</div>
+                <div className="break-words">
+                  {isZh ? "请稍后重试。" : newsError}
+                </div>
               </div>
             ) : null}
 
             {loadingNews ? (
-              <div className="text-sm text-muted-foreground">Loading news…</div>
+              <div className="text-sm text-muted-foreground">
+                {isZh ? "正在加载动态…" : "Loading news…"}
+              </div>
             ) : null}
 
             {selectedNews ? (
@@ -254,12 +265,14 @@ const Activities = () => {
                   className="mb-6 px-4 py-2 rounded text-white shadow-lg shadow-violet-600/25 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 transition-colors"
                   onClick={() => setSelectedNews(null)}
                 >
-                  ← Back to All News
+                  {isZh ? "← 返回全部动态" : "← Back to All News"}
                 </button>
 
-                <h2 className="mb-2 text-2xl font-bold sm:text-3xl">{getNewsTitle(selectedNews)}</h2>
+                <h2 className="mb-2 text-2xl font-bold sm:text-3xl">
+                  {getNewsTitle(selectedNews, isZh)}
+                </h2>
                 <p className="text-sm text-muted-foreground mb-4">
-                  {formatDate(selectedNews.date)}
+                  {formatDate(selectedNews.date, isZh)}
                 </p>
                 {(() => {
                   const hasVideos =
@@ -306,11 +319,11 @@ const Activities = () => {
                                   target="_blank"
                                   rel="noreferrer"
                                   className="mb-3 block break-inside-avoid"
-                                  title="Open image"
+                                  title={isZh ? "打开图片" : "Open image"}
                                 >
                                   <img
                                     src={url}
-                                    alt={`${getNewsTitle(selectedNews)} — image ${idx + 1}`}
+                                    alt={`${getNewsTitle(selectedNews, isZh)} — ${isZh ? "图片" : "image"} ${idx + 1}`}
                                     className="w-full h-auto rounded-lg border bg-muted object-cover hover:opacity-95 transition"
                                     loading="lazy"
                                   />
@@ -321,7 +334,7 @@ const Activities = () => {
                         ) : selectedNews.image ? (
                           <img
                             src={selectedNews.image}
-                            alt={getNewsTitle(selectedNews)}
+                            alt={getNewsTitle(selectedNews, isZh)}
                             className="w-full max-w-3xl rounded-lg shadow mb-6"
                             loading="lazy"
                           />
@@ -342,7 +355,8 @@ const Activities = () => {
                         rel="noreferrer"
                         className="text-primary underline"
                       >
-                        View on {sourceLabel(selectedNews.source)}
+                        {isZh ? "在以下平台查看" : "View on"}{" "}
+                        {sourceLabel(selectedNews.source, isZh)}
                       </a>
                     </p>
                   ) : null}
@@ -362,7 +376,9 @@ const Activities = () => {
                         }`}
                         onClick={() => setNewsFilter(filter)}
                       >
-                        {{ all: "All", recent: "Past 3 Months", older: "Earlier" }[filter]}
+                        {(isZh
+                          ? { all: "全部", recent: "近三个月", older: "更早" }
+                          : { all: "All", recent: "Past 3 Months", older: "Earlier" })[filter]}
                       </button>
                     ))}
                   </div>
@@ -380,7 +396,7 @@ const Activities = () => {
                         {item.image ? (
                           <img
                             src={item.image}
-                            alt={getNewsTitle(item)}
+                            alt={getNewsTitle(item, isZh)}
                             className="w-full h-auto object-cover"
                             loading="lazy"
                           />
@@ -390,12 +406,12 @@ const Activities = () => {
                       <div className="p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="text-xs text-muted-foreground">
-                            {formatDate(item.date)}
+                            {formatDate(item.date, isZh)}
                           </span>
                         </div>
 
                         <h3 className="text-base font-semibold leading-snug">
-                          {getNewsTitle(item)}
+                          {getNewsTitle(item, isZh)}
                         </h3>
 
                         {item.description ? (
@@ -405,7 +421,7 @@ const Activities = () => {
                         ) : null}
 
                         <div className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-violet-600">
-                          View update
+                          {isZh ? "查看动态" : "View update"}
                         </div>
                       </div>
                     </button>
@@ -413,7 +429,9 @@ const Activities = () => {
                 </div>
 
                 {!loadingNews && !newsError && filteredNews.length === 0 ? (
-                  <div className="text-sm text-muted-foreground">No news found.</div>
+                  <div className="text-sm text-muted-foreground">
+                    {isZh ? "暂无符合条件的动态。" : "No news found."}
+                  </div>
                 ) : null}
               </>
             )}
@@ -424,19 +442,19 @@ const Activities = () => {
             {/* Top controls */}
             <div className="flex flex-col justify-between gap-3 lg:flex-row lg:items-center">
               <div className="text-sm text-muted-foreground">
-                Total:{" "}
+                {isZh ? "共" : "Total:"}{" "}
                 <span className="text-foreground font-medium">
                   {filteredVideos.length}
                 </span>
                 {filteredVideos.length > 0 ? (
                   <>
                     {" "}
-                    · Page{" "}
+                    · {isZh ? "第" : "Page"}{" "}
                     <span className="text-foreground font-medium">{page}</span>/
                     <span className="text-foreground font-medium">
                       {totalPages}
                     </span>{" "}
-                    · Showing{" "}
+                    · {isZh ? "显示" : "Showing"}{" "}
                     <span className="text-foreground font-medium">
                       {(page - 1) * PAGE_SIZE + 1}
                     </span>
@@ -451,7 +469,8 @@ const Activities = () => {
               <input
                 value={videoQuery}
                 onChange={(e) => setVideoQuery(e.target.value)}
-                placeholder="Search video titles…"
+                placeholder={isZh ? "搜索视频标题…" : "Search video titles…"}
+                aria-label={isZh ? "搜索论文研讨会视频" : "Search Reading Club videos"}
                 className="h-9 w-full rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring lg:w-80"
               />
             </div>
@@ -482,7 +501,7 @@ const Activities = () => {
                     </CardTitle>
                     <CardDescription className="flex items-center gap-2">
                       <Calendar className="h-4 w-4 text-muted-foreground" />
-                      <span>{formatDate(v.publishedAt)}</span>
+                      <span>{formatDate(v.publishedAt, isZh)}</span>
                     </CardDescription>
                   </CardHeader>
 
@@ -506,7 +525,7 @@ const Activities = () => {
                     onClick={() => goToPage(page - 1)}
                     disabled={page <= 1}
                   >
-                    Prev
+                    {isZh ? "上一页" : "Prev"}
                   </button>
 
                   {pageNumbers[0] > 1 ? (
@@ -552,12 +571,12 @@ const Activities = () => {
                     onClick={() => goToPage(page + 1)}
                     disabled={page >= totalPages}
                   >
-                    Next
+                    {isZh ? "下一页" : "Next"}
                   </button>
                 </div>
 
                 <div className="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground sm:justify-start">
-                  <span>Go to</span>
+                  <span>{isZh ? "跳转到" : "Go to"}</span>
                   <input
                     value={String(page)}
                     onChange={(e) => {
@@ -574,7 +593,9 @@ const Activities = () => {
             ) : null}
 
             {filteredVideos.length === 0 ? (
-              <div className="text-sm text-muted-foreground">No videos found.</div>
+              <div className="text-sm text-muted-foreground">
+                {isZh ? "没有找到视频。" : "No videos found."}
+              </div>
             ) : null}
 
             {/* Player dialog */}
@@ -582,7 +603,10 @@ const Activities = () => {
               open={!!activeVideo}
               onOpenChange={(open) => !open && setActiveVideo(null)}
             >
-              <DialogContent className="max-w-5xl">
+              <DialogContent
+                className="max-w-5xl"
+                closeLabel={isZh ? "关闭" : "Close"}
+              >
                 {activeVideo ? (
                   <>
                     <DialogHeader>
@@ -591,7 +615,7 @@ const Activities = () => {
 
                     <div className="aspect-video w-full overflow-hidden rounded-md bg-muted">
                       <iframe
-                        title={`${activeVideo.title} video player`}
+                        title={`${activeVideo.title} ${isZh ? "视频播放器" : "video player"}`}
                         src={`https://player.bilibili.com/player.html?bvid=${activeVideo.bvid}&page=1&high_quality=1&danmaku=0`}
                         allowFullScreen
                         className="h-full w-full"
@@ -603,7 +627,7 @@ const Activities = () => {
                         <div className="flex items-start gap-2 text-sm">
                           <Users className="h-4 w-4 text-muted-foreground mt-0.5" />
                           <span className="text-muted-foreground">
-                            {formatDate(activeVideo.publishedAt)}
+                            {formatDate(activeVideo.publishedAt, isZh)}
                           </span>
                         </div>
                         <p className="text-sm text-muted-foreground leading-relaxed">

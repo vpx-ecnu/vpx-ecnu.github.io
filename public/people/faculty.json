@@ -2,7 +2,9 @@
   {
     "name": "Yang Li",
     "title": "Associate Professor of Computer Science and Technology at the School of Intelligent Interaction, East China Normal University",
+    "titleZh": "华东师范大学智能交互学院计算机科学与技术副教授",
     "bio": "Leads the VPX Group's work on visual perception across temporal, spatial, generative, and physical AI, contributing to human-centered AGI.",
+    "bioZh": "带领 VPX Group 开展时序、空间、生成与物理智能方向的视觉感知研究，推动以人为本的通用人工智能发展。",
     "image": "/people/people_image/thumbs/liyang.png",
     "email": "yli@cs.ecnu.edu.cn",
     "website": "https://ihpdep.github.io/",
@@ -11,6 +13,12 @@
       "Spatial AI",
       "Generative AI",
       "Physical AI"
+    ],
+    "researchZh": [
+      "时序智能",
+      "空间智能",
+      "生成式人工智能",
+      "物理智能"
     ]
   }
 ]

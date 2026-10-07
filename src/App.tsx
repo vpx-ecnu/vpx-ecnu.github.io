@@ -38,6 +38,14 @@ const App = () => (
           <Route path="/activities" element={<Activities />} />
           <Route path="/join" element={<Join />} />
           <Route path="/intranet" element={<Intranet />} />
+          <Route path="/zh" element={<Index />} />
+          <Route path="/zh/about" element={<About />} />
+          <Route path="/zh/projects" element={<Projects />} />
+          <Route path="/zh/publications" element={<Publications />} />
+          <Route path="/zh/people" element={<People />} />
+          <Route path="/zh/activities" element={<Activities />} />
+          <Route path="/zh/join" element={<Join />} />
+          <Route path="/zh/intranet" element={<Intranet />} />
           {StudioNews ? (
             <Route path="/studio/news" element={<StudioNews />} />
           ) : null}

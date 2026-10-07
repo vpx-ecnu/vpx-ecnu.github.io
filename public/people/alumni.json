@@ -2,44 +2,58 @@
     {
       "name": "Libing Yang",
       "title": "Former Master's Student",
+      "titleZh": "往届硕士生",
       "graduationYear": "2025",
       "bio": "Graduated in 2025, now working on LLMs for robotics.",
+      "bioZh": "2025 年毕业，现从事面向机器人的大语言模型研究。",
       "image": "/placeholder.svg",
       "email": "",
-      "research": ["Huawei"]
+      "research": ["Huawei"],
+      "researchZh": ["华为"]
     },
     {
       "name": "Sardor Mamarasulov",
       "title": "Former PhD Student",
+      "titleZh": "往届博士生",
       "graduationYear": "2025",
       "bio": "Graduated in 2025, now working as a Postdoctoral Researcher at Shenzhen University.",
+      "bioZh": "2025 年毕业，现为深圳大学博士后研究员。",
       "image": "/placeholder.svg",
       "email": "mamarasulovsardor@gmail.com",
-      "research": ["Postdoctoral Researcher, Shenzhen University"]
+      "research": ["Postdoctoral Researcher, Shenzhen University"],
+      "researchZh": ["深圳大学博士后研究员"]
     },
     {
         "name": "Xiaoyan Yang",
         "title": "Former Master's Student",
+        "titleZh": "往届硕士生",
         "graduationYear": "2024",
         "bio": "Graduated in 2024, now working on AIGC.",
+        "bioZh": "2024 年毕业，现从事 AIGC 相关工作。",
         "image": "/placeholder.svg",
         "email": "",
-        "research": ["TeleAI"]
+        "research": ["TeleAI"],
+        "researchZh": ["TeleAI"]
     },
     {
         "name": "Dingbo Lu",
         "title": "Former Master's Student",
+        "titleZh": "往届硕士生",
         "graduationYear": "2024",
         "bio": "Graduated in 2024, now working on NeRF and 3DGS.",
+        "bioZh": "2024 年毕业，现从事 NeRF 与 3DGS 相关工作。",
         "image": "/placeholder.svg",
         "email": "",
-        "research": ["NIO"]
+        "research": ["NIO"],
+        "researchZh": ["蔚来"]
     },
     {
         "name": "Ziqing Li",
         "title": "Former Master's Student",
+        "titleZh": "往届硕士生",
         "graduationYear": "2024",
         "bio": "Graduated in 2024, now working on SMPL-related action research.",
+        "bioZh": "2024 年毕业，现从事 SMPL 相关的人体动作研究。",
         "image": "/placeholder.svg",
         "email": "",
         "research": []
@@ -47,44 +61,58 @@
     {
         "name": "Yiming Sun",
         "title": "Former Undergraduate",
+        "titleZh": "往届本科生",
         "graduationYear": "2024",
         "bio": "Graduated in 2024, now working on scientific LLMs.",
+        "bioZh": "2024 年毕业，现从事科学大语言模型研究。",
         "image": "/placeholder.svg",
         "email": "",
-        "research": ["Graduate Study, Fudan University"]
+        "research": ["Graduate Study, Fudan University"],
+        "researchZh": ["复旦大学攻读研究生"]
     },
     {
         "name": "Fan Yu",
         "title": "Former Undergraduate",
+        "titleZh": "往届本科生",
         "graduationYear": "2025",
         "bio": "Graduated in 2025, now working on scientific LLMs.",
+        "bioZh": "2025 年毕业，现从事科学大语言模型研究。",
         "image": "/placeholder.svg",
         "email": "",
-        "research": ["Graduate Study, Shanghai Jiao Tong University"]
+        "research": ["Graduate Study, Shanghai Jiao Tong University"],
+        "researchZh": ["上海交通大学攻读研究生"]
     },
     {
         "name": "Junwei Huang",
         "title": "Former Undergraduate",
+        "titleZh": "往届本科生",
         "graduationYear": "2025",
         "bio": "Graduated in 2025, now working on scientific LLMs.",
+        "bioZh": "2025 年毕业，现从事科学大语言模型研究。",
         "image": "/placeholder.svg",
         "email": "",
-        "research": ["Nippon Steel"]
+        "research": ["Nippon Steel"],
+        "researchZh": ["日本制铁"]
     },
     {
         "name": "Pengfei Jiang",
         "title": "Former Part-Time Student",
+        "titleZh": "往届兼职学生",
         "graduationYear": "2024",
         "bio": "Graduated in 2024, now working on scientific LLMs.",
+        "bioZh": "2024 年毕业，现从事科学大语言模型研究。",
         "image": "/placeholder.svg",
         "email": "",
-        "research": ["Huawei"]
+        "research": ["Huawei"],
+        "researchZh": ["华为"]
     },
     {
         "name": "Jincheng Weng",
         "title": "Former Part-Time Student",
+        "titleZh": "往届兼职学生",
         "graduationYear": "2024",
         "bio": "Graduated in 2024, now working on scientific LLMs. Research interests include scientific NLP and knowledge graphs.",
+        "bioZh": "2024 年毕业，现从事科学大语言模型研究，研究兴趣包括科学自然语言处理与知识图谱。",
         "image": "/placeholder.svg",
         "email": "",
         "research": []
@@ -92,17 +120,22 @@
     {
         "name": "Kaibo Yin",
         "title": "Former Undergraduate",
+        "titleZh": "往届本科生",
         "graduationYear": "2025",
         "bio": "Researching systems that enable intelligent robots to act in human environments.",
+        "bioZh": "研究使智能机器人能够在人类环境中行动的系统。",
         "image": "/people/people_image/part_time/ykb.jpg",
         "email": "a1021524866@gmail.com",
-        "research": ["Graduate Study, The University of Tokyo"]
+        "research": ["Graduate Study, The University of Tokyo"],
+        "researchZh": ["东京大学攻读研究生"]
     },
     {
         "name": "Changgu Chen",
         "title": "Former PhD Student",
+        "titleZh": "往届博士生",
         "graduationYear": "2026",
         "bio": "Graduated in 2026 after researching controllable motion generation for AIGC and joined Xiaomi.",
+        "bioZh": "2026 年毕业，研究方向为面向 AIGC 的可控动作生成，毕业后加入小米。",
         "image": "/people/people_image/thumbs/phd/ccg.jpg",
         "email": "277006597@qq.com",
         "coSupervisors": [
@@ -111,69 +144,91 @@
             "url": "https://dase.ecnu.edu.cn/37/5e/c41774a538462/page.htm"
           }
         ],
-        "research": ["Xiaomi"]
+        "research": ["Xiaomi"],
+        "researchZh": ["小米"]
     },
     {
         "name": "Wenjie Liu",
         "title": "Former Master's Student",
+        "titleZh": "往届硕士生",
         "graduationYear": "2026",
         "bio": "Graduated in 2026 after exploring neural rendering and AIGC and joined NIO.",
+        "bioZh": "2026 年毕业，研究方向为神经渲染与 AIGC，毕业后加入蔚来。",
         "image": "/people/people_image/thumbs/master/lwj.jpg",
         "email": "362449104@qq.com",
-        "research": ["NIO"]
+        "research": ["NIO"],
+        "researchZh": ["蔚来"]
     },
     {
         "name": "Ling You",
         "title": "Former Master's Student",
+        "titleZh": "往届硕士生",
         "graduationYear": "2026",
         "bio": "Graduated in 2026 after exploring MLLMs and video understanding and joined Xiaohongshu.",
+        "bioZh": "2026 年毕业，研究方向为多模态大语言模型与视频理解，毕业后加入小红书。",
         "image": "/people/people_image/thumbs/master/u0.jpg",
         "email": "51265901023@stu.ecnu.edu.cn",
-        "research": ["Xiaohongshu"]
+        "research": ["Xiaohongshu"],
+        "researchZh": ["小红书"]
     },
     {
         "name": "Yu Zhang",
         "title": "Former Undergraduate",
+        "titleZh": "往届本科生",
         "graduationYear": "2026",
         "bio": "Graduated in 2026 after researching tracking and multimodal large language models, then continued studying at Shanghai Jiao Tong University.",
+        "bioZh": "2026 年毕业，研究方向为目标跟踪与多模态大语言模型，随后前往上海交通大学继续深造。",
         "image": "/people/people_image/thumbs/undergraduate/zy.jpg",
         "email": "",
-        "research": ["Graduate Study, Shanghai Jiao Tong University"]
+        "research": ["Graduate Study, Shanghai Jiao Tong University"],
+        "researchZh": ["上海交通大学攻读研究生"]
     },
     {
         "name": "Yanjing Li",
         "title": "Former Part-Time Student",
+        "titleZh": "往届兼职学生",
         "graduationYear": "2026",
         "bio": "Graduated in 2026 after working on generative AI for talking virtual avatars and joined Digital Domain.",
+        "bioZh": "2026 年毕业，研究方向为面向会说话虚拟人的生成式人工智能，毕业后加入数字王国。",
         "image": "/people/people_image/thumbs/part_time/yj.jpg",
         "email": "71255901065@stu.ecnu.edu.cn",
-        "research": ["Digital Domain"]
+        "research": ["Digital Domain"],
+        "researchZh": ["数字王国"]
     },
     {
         "name": "Yasong Li",
         "title": "Former Part-Time Student",
+        "titleZh": "往届兼职学生",
         "graduationYear": "2026",
         "bio": "Graduated in 2026 and joined Shanghai High School.",
+        "bioZh": "2026 年毕业，毕业后加入上海中学。",
         "image": "/placeholder.svg",
         "email": "",
-        "research": ["Shanghai High School"]
+        "research": ["Shanghai High School"],
+        "researchZh": ["上海中学"]
     },
     {
         "name": "Yading Huang",
         "title": "Former Part-Time Student",
+        "titleZh": "往届兼职学生",
         "graduationYear": "2026",
         "bio": "Graduated in 2026 and joined Positec.",
+        "bioZh": "2026 年毕业，毕业后加入 Positec。",
         "image": "/placeholder.svg",
         "email": "",
-        "research": ["Positec"]
+        "research": ["Positec"],
+        "researchZh": ["Positec"]
     },
     {
         "name": "Wenxiang Xu",
         "title": "Former Part-Time Student",
+        "titleZh": "往届兼职学生",
         "graduationYear": "2026",
         "bio": "Graduated in 2026 and joined SiScan Technology.",
+        "bioZh": "2026 年毕业，毕业后加入 SiScan Technology。",
         "image": "/placeholder.svg",
         "email": "",
-        "research": ["SiScan Technology"]
+        "research": ["SiScan Technology"],
+        "researchZh": ["SiScan Technology"]
     }
   ]

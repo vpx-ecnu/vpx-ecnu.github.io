@@ -2,7 +2,9 @@
   {
     "name": "Zehui Guo",
     "title": "Master's Student",
+    "titleZh": "硕士研究生",
     "bio": "Exploring diffusion models for image editing.",
+    "bioZh": "研究面向图像编辑的扩散模型。",
     "image": "/people/people_image/thumbs/master/gzh.jpg",
     "email": "1360733921@qq.com",
     "coSupervisors": [
@@ -18,12 +20,18 @@
     "research": [
       "Image Editing",
       "AIGC"
+    ],
+    "researchZh": [
+      "图像编辑",
+      "AIGC"
     ]
   },
   {
     "name": "Yu Zhang",
     "title": "Master's Student",
+    "titleZh": "硕士研究生",
     "bio": "Exploring virtual human video generation.",
+    "bioZh": "研究虚拟人视频生成。",
     "image": "/people/people_image/thumbs/master/zy.jpg",
     "email": "51275900029@stu.ecnu.edu.cn",
     "coSupervisors": [
@@ -35,23 +43,35 @@
     "research": [
       "Virtual Avatar",
       "Diffusion"
+    ],
+    "researchZh": [
+      "虚拟人",
+      "扩散模型"
     ]
   },
   {
     "name": "Yijing Wa",
     "title": "Master's Student",
+    "titleZh": "硕士研究生",
     "bio": "Exploring relighting in virtual reality.",
+    "bioZh": "研究虚拟现实中的重光照。",
     "image": "/people/people_image/thumbs/master/wyj.jpg",
     "email": "748628335@qq.com",
     "research": [
       "Relighting",
       "Virtual Shooting"
+    ],
+    "researchZh": [
+      "重光照",
+      "虚拟拍摄"
     ]
   },
   {
     "name": "Zhichao Huang",
     "title": "Master's Student",
+    "titleZh": "硕士研究生",
     "bio": "Exploring wearable devices and human–computer interaction.",
+    "bioZh": "研究可穿戴设备与人机交互。",
     "image": "/people/people_image/thumbs/master/hzc.jpg",
     "email": "51275901117@stu.ecnu.edu.cn",
     "coSupervisors": [
@@ -63,34 +83,52 @@
     "research": [
       "Wearable Devices",
       "Human–Computer Interaction"
+    ],
+    "researchZh": [
+      "可穿戴设备",
+      "人机交互"
     ]
   },
   {
     "name": "Wenzheng Song",
     "title": "Master's Student",
+    "titleZh": "硕士研究生",
     "bio": "Exploring advanced rendering techniques.",
+    "bioZh": "研究前沿渲染技术。",
     "image": "/people/people_image/thumbs/master/swz.jpg",
     "email": "244198756@qq.com",
     "research": [
       "3DGS",
+      "VDB"
+    ],
+    "researchZh": [
+      "3D Gaussian Splatting",
       "VDB"
     ]
   },
   {
     "name": "Wenzhi He",
     "title": "Master's Student",
+    "titleZh": "硕士研究生",
     "bio": "Bridging the sim-to-real gap in robotic manipulation using Gaussian splatting.",
+    "bioZh": "利用 Gaussian Splatting 缩小机器人操作中的仿真到现实差距。",
     "image": "/people/people_image/thumbs/master/hwz.jpg",
     "email": "1524186933@qq.com",
     "research": [
       "Embodied Intelligence",
+      "Gaussian Splatting"
+    ],
+    "researchZh": [
+      "具身智能",
       "Gaussian Splatting"
     ]
   },
   {
     "name": "Chenxi Shao",
     "title": "Master's Student",
+    "titleZh": "硕士研究生",
     "bio": "Exploring multimodal video understanding.",
+    "bioZh": "研究多模态视频理解。",
     "image": "/people/people_image/thumbs/master/scx.jpg",
     "email": "2011848311@qq.com",
     "coSupervisors": [
@@ -102,23 +140,35 @@
     "research": [
       "Multimodal LLMs",
       "Video Analytics"
+    ],
+    "researchZh": [
+      "多模态大语言模型",
+      "视频分析"
     ]
   },
   {
     "name": "Kaiyuan Shen",
     "title": "Master's Student",
+    "titleZh": "硕士研究生",
     "bio": "Exploring virtual humans based on 3D Gaussian splatting.",
+    "bioZh": "研究基于 3D Gaussian Splatting 的虚拟人。",
     "image": "/people/people_image/thumbs/master/sky.jpg",
     "email": "zjut_sky@163.com",
     "research": [
       "Computer Graphics",
       "3D Vision"
+    ],
+    "researchZh": [
+      "计算机图形学",
+      "三维视觉"
     ]
   },
   {
     "name": "Mingyang Yuan",
     "title": "Master's Student",
+    "titleZh": "硕士研究生",
     "bio": "Exploring unified diffusion models for understanding and generation.",
+    "bioZh": "研究统一理解与生成的扩散模型。",
     "image": "/people/people_image/thumbs/master/ymy.jpg",
     "email": "51285900034@stu.ecnu.edu.cn",
     "coSupervisors": [
@@ -133,12 +183,17 @@
     ],
     "research": [
       "Diffusion Models"
+    ],
+    "researchZh": [
+      "扩散模型"
     ]
   },
   {
     "name": "Qijie Yu",
     "title": "Master's Student",
+    "titleZh": "硕士研究生",
     "bio": "Exploring virtual reality.",
+    "bioZh": "研究虚拟现实。",
     "image": "/people/people_image/thumbs/master/yqj.jpg",
     "email": "1753843107@qq.com",
     "coSupervisors": [
@@ -150,12 +205,18 @@
     "research": [
       "Robotic Teleoperation",
       "XR Development"
+    ],
+    "researchZh": [
+      "机器人遥操作",
+      "扩展现实开发"
     ]
   },
   {
     "name": "Mingyang Yin",
     "title": "Master's Student",
+    "titleZh": "硕士研究生",
     "bio": "Exploring vision–language navigation agents.",
+    "bioZh": "研究视觉-语言导航智能体。",
     "image": "/people/people_image/thumbs/master/mingyangyin.jpg",
     "email": "51285901113@stu.ecnu.edu.cn",
     "coSupervisors": [
@@ -167,12 +228,18 @@
     "research": [
       "VLN",
       "Embodied Intelligence"
+    ],
+    "researchZh": [
+      "视觉-语言导航",
+      "具身智能"
     ]
   },
   {
     "name": "Hanzhe Yao",
     "title": "Master's Student",
+    "titleZh": "硕士研究生",
     "bio": "Exploring multimodal in-context learning.",
+    "bioZh": "研究多模态上下文学习。",
     "image": "/people/people_image/thumbs/master/yhz.jpg",
     "email": "3061794854@qq.com",
     "coSupervisors": [
@@ -184,12 +251,18 @@
     "research": [
       "MLLMs",
       "ICL"
+    ],
+    "researchZh": [
+      "多模态大语言模型",
+      "上下文学习"
     ]
   },
   {
     "name": "Tieshi Zhong",
     "title": "Master's Student",
+    "titleZh": "硕士研究生",
     "bio": "Exploring 3D reconstruction.",
+    "bioZh": "研究三维重建。",
     "image": "/people/people_image/thumbs/master/zts.jpg",
     "email": "h528014081@163.com",
     "coSupervisors": [
@@ -201,28 +274,44 @@
     "research": [
       "Neural Rendering",
       "3D Computer Vision"
+    ],
+    "researchZh": [
+      "神经渲染",
+      "三维计算机视觉"
     ]
   },
   {
     "name": "Shaobo Wang",
     "title": "Master's Student",
+    "titleZh": "硕士研究生",
     "bio": "Exploring multimodal fusion for human pose estimation.",
+    "bioZh": "研究面向人体姿态估计的多模态融合。",
     "image": "/people/people_image/thumbs/master/sbw.jpg",
     "email": "13093278778@163.com",
     "research": [
       "Multimodal",
       "RL"
+    ],
+    "researchZh": [
+      "多模态学习",
+      "强化学习"
     ]
   },
   {
     "name": "Yidong Weng",
     "title": "Master's Student",
+    "titleZh": "硕士研究生",
     "bio": "Exploring robotics and spatial perception.",
+    "bioZh": "研究机器人与空间感知。",
     "image": "/people/people_image/thumbs/master/wyd.jpg",
     "email": "",
     "research": [
       "Robotics",
       "Spatial Perception"
+    ],
+    "researchZh": [
+      "机器人学",
+      "空间感知"
     ]
   }
 ]
