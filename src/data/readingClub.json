@@ -1,14 +1,23 @@
 {
-  "updatedAt": "2026-08-25T15:56:39.548240+00:00",
+  "updatedAt": "2026-10-09T09:24:10.602895+00:00",
   "source": {
     "mid": 487404760,
     "series_id": 3793757,
     "api": "x/series/archives",
     "ps": 50,
     "max_pages": 10,
-    "total_from_api": 60
+    "total_from_api": 61
   },
   "videos": [
+    {
+      "bvid": "BV12Lpt6LEW5",
+      "title": "VPX 61 | 【ICML 2026】Video-OPD:OEfficient Post-Training of Multimodal...论文讲解！",
+      "description": "",
+      "cover": "/reading_club_covers/BV12Lpt6LEW5_4e3e7c6d29_VPX_61_ICML_2026_Video-OPD_OEfficient_Post-Training_of_Multimodal...论文讲解.jpg",
+      "cover_remote": "http://i1.hdslb.com/bfs/archive/727890f762f5c401165d15d429d06099dadcc170.jpg",
+      "publishedAt": "2026-10-09T05:48:30+00:00",
+      "url": "https://www.bilibili.com/video/BV12Lpt6LEW5"
+    },
     {
       "bvid": "BV1qrMX6eEnv",
       "title": "VPX 60｜【ICRA 2026 Best Paper】IMR-LLM: Industrial Multi-Robot...论文简介！",
