@@ -1,14 +1,32 @@
 {
-  "updatedAt": "2026-10-09T09:24:10.602895+00:00",
+  "updatedAt": "2026-10-15T07:37:25.220000+00:00",
   "source": {
     "mid": 487404760,
     "series_id": 3793757,
     "api": "x/series/archives",
     "ps": 50,
     "max_pages": 10,
-    "total_from_api": 61
+    "total_from_api": 63
   },
   "videos": [
+    {
+      "bvid": "BV1TKp26NEBT",
+      "title": "VPX 62 | 【ECCV 2026 Best Paper】Heat Kernel Textures: the Geodesic...论文分享！",
+      "description": "",
+      "cover": "/reading_club_covers/BV1TKp26NEBT_f2ce1acf6a_VPX_62_ECCV_2026_Best_Paper_Heat_Kernel_Textures_the_Geodesic...论文分享.jpg",
+      "cover_remote": "http://i1.hdslb.com/bfs/archive/8367fd6bb604b410bcb6ccd9842455c4cf422215.jpg",
+      "publishedAt": "2026-10-14T10:34:07+00:00",
+      "url": "https://www.bilibili.com/video/BV1TKp26NEBT"
+    },
+    {
+      "bvid": "BV1bPp26iEAu",
+      "title": "VPX 63 | 【AAAI 2026 Oral】InfiGUI-G1: Advancing GUI Grounding...论文分享！",
+      "description": "",
+      "cover": "/reading_club_covers/BV1bPp26iEAu_2101a6285e_VPX_63_AAAI_2026_Oral_InfiGUI-G1_Advancing_GUI_Grounding...论文分享.jpg",
+      "cover_remote": "http://i1.hdslb.com/bfs/archive/7d25677100e92e9d98760f554d76fecb6d6e67ef.jpg",
+      "publishedAt": "2026-10-14T10:38:45+00:00",
+      "url": "https://www.bilibili.com/video/BV1bPp26iEAu"
+    },
     {
       "bvid": "BV12Lpt6LEW5",
       "title": "VPX 61 | 【ICML 2026】Video-OPD:OEfficient Post-Training of Multimodal...论文讲解！",
